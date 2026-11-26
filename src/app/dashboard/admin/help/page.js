@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import StatTiles from '@/components/ui/StatTiles';
 import { useUser } from '@/context/UserContext';
 // Using API routes instead of server actions
 import PageHeader from '@/components/ui/PageHeader';
@@ -408,38 +409,14 @@ export default function HelpDeskPage() {
       />
 
       {/* Stats cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 14, marginBottom: 28 }}>
-        {[
-          { label: 'Total', count: stats.total, color: 'var(--brand-navy)', bg: 'linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%)', iconPath: 'M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z' },
-          { label: 'Open', count: stats.open, color: '#92400E', bg: 'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)', iconPath: 'M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z' },
-          { label: 'In Progress', count: stats.in_progress, color: '#1E40AF', bg: 'linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%)', iconPath: 'M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99' },
-          { label: 'Resolved', count: stats.resolved, color: '#065F46', bg: 'linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%)', iconPath: 'M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
-          { label: 'Unassigned', count: stats.unassigned, color: '#9333EA', bg: 'linear-gradient(135deg, #F3E8FF 0%, #E9D5FF 100%)', iconPath: 'M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z' },
-          { label: 'Urgent', count: stats.urgent, color: '#DC2626', bg: 'linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%)', iconPath: 'M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z' },
-        ].map(s => (
-          <div key={s.label} style={{
-            padding: '18px 22px', borderRadius: 12, background: s.bg,
-            border: '1px solid rgba(0,0,0,0.04)', cursor: 'pointer',
-          }}
-            onClick={() => {
-              if (s.label === 'Unassigned') { setFilterAssigned('unassigned'); setFilterStatus('all'); }
-              else if (s.label === 'Urgent') { setFilterPriority('urgent'); setFilterStatus('all'); }
-              else if (s.label === 'Total') { setFilterStatus('all'); setFilterPriority('all'); setFilterAssigned('all'); setFilterCategory('all'); }
-              else { setFilterStatus(s.label.toLowerCase().replace(' ', '_')); }
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-              <div>
-                <div style={{ fontSize: 32, fontWeight: 700, color: s.color, lineHeight: 1 }}>{s.count}</div>
-                <div style={{ fontSize: 17, color: s.color, marginTop: 6, opacity: 0.8 }}>{s.label}</div>
-              </div>
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={s.color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.4 }}>
-                <path d={s.iconPath} />
-              </svg>
-            </div>
-          </div>
-        ))}
-      </div>
+      <StatTiles items={[
+        { label: 'Tickets in all', value: stats.total },
+        { label: 'Open', value: stats.open, tone: stats.open > 0 ? 'amber' : undefined },
+        { label: 'In progress', value: stats.in_progress },
+        { label: 'Resolved', value: stats.resolved, tone: 'good' },
+        { label: 'Unassigned', value: stats.unassigned },
+        { label: 'Urgent', value: stats.urgent, tone: stats.urgent > 0 ? 'warn' : undefined },
+      ]} />
 
       {/* Two column: ticket list + sidebar */}
       <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>

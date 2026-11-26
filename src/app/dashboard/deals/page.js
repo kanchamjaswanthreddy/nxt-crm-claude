@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import StatTiles from '@/components/ui/StatTiles';
 import { useRouter } from 'next/navigation';
 import { fetchDealsPageData } from '@/app/actions/deals-data';
 import { useUser } from '@/context/UserContext';
@@ -332,33 +333,12 @@ export default function DealsPage() {
       />
 
       {/* Stats Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '24px' }}>
-        <StatCard
-          label="Total Premium"
-          value={formatCurrency(stats.totalPremium)}
-          icon={<svg width="20" height="20" fill="none" stroke="var(--brand-navy)" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-          accent="var(--brand-navy)"
-        />
-        <StatCard
-          label="Active Deals"
-          value={stats.activeDeals}
-          icon={<svg width="20" height="20" fill="none" stroke="#1B2A4E" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-          accent="#1B2A4E"
-        />
-        <StatCard
-          label="Approved This Month"
-          value={stats.approvedThisMonth}
-          subtitle={stats.approvedLastMonth > 0 ? `${stats.approvedLastMonth} last month` : null}
-          icon={<svg width="20" height="20" fill="none" stroke="#2FA84F" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-          accent="#2FA84F"
-        />
-        <StatCard
-          label="Pending Review"
-          value={stats.pendingReview}
-          icon={<svg width="20" height="20" fill="none" stroke="#E08E2B" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-          accent="#E08E2B"
-        />
-      </div>
+      <StatTiles items={[
+        { label: 'Total premium submitted', value: formatCurrency(stats.totalPremium) },
+        { label: 'Active deals', value: stats.activeDeals },
+        { label: 'Approved this month', value: stats.approvedThisMonth, tone: 'good', note: stats.approvedLastMonth > 0 ? `${stats.approvedLastMonth} last month` : undefined },
+        { label: 'Waiting for review', value: stats.pendingReview, tone: stats.pendingReview > 0 ? 'amber' : undefined },
+      ]} />
 
       {/* Status Tabs */}
       <div style={{ display: 'flex', gap: '4px', marginBottom: '16px', borderBottom: '1px solid #E7E3DA', paddingBottom: '0' }}>

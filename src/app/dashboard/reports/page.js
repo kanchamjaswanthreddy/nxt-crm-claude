@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
+import StatTiles from '@/components/ui/StatTiles';
 import { useUser } from '@/context/UserContext';
 import { fetchReportData } from '@/app/actions/reports';
 import Card from '@/components/ui/Card';
@@ -246,47 +247,15 @@ export default function ReportsHub() {
       />
 
       {/* KPI Cards */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '16px',
-        marginBottom: '28px',
-      }}>
-        {loading ? Array.from({ length: 4 }).map((_, i) => (
-          <Card key={i}><div style={{ padding: '4px 0' }}><SkeletonBlock height={80} /></div></Card>
-        )) : kpiCards.map((kpi) => (
-          <Card key={kpi.label}>
-            <div style={{ padding: '4px 0' }}>
-              <p style={{
-                margin: 0,
-                fontSize: '14px',
-                fontWeight: 600,
-                color: 'var(--text-secondary)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.6px',
-              }}>
-                {kpi.label}
-              </p>
-              <p style={{
-                margin: '8px 0 4px',
-                fontSize: '28px',
-                fontWeight: 700,
-                color: 'var(--brand-navy)',
-                lineHeight: 1,
-              }}>
-                {kpi.value}
-              </p>
-              <p style={{
-                margin: 0,
-                fontSize: '14px',
-                color: 'var(--text-secondary)',
-              }}>
-                {kpi.sub}
-              </p>
-            </div>
-          </Card>
-        ))}
-      </div>
+      {loading ? (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '28px' }}>
+          {Array.from({ length: 4 }).map((_, i) => (
+            <Card key={i}><div style={{ padding: '4px 0' }}><SkeletonBlock height={80} /></div></Card>
+          ))}
+        </div>
+      ) : (
+        <StatTiles items={kpiCards.map(k => ({ label: k.label, value: k.value, note: k.sub }))} />
+      )}
 
       {/* Row 1: Area chart + Pie chart */}
       <div style={{

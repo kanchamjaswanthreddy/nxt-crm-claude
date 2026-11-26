@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import StatTiles from '@/components/ui/StatTiles';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@/context/UserContext';
 import { fetchTasks, updateTaskStatus, updateTaskDetails, deleteTask } from '@/app/actions/tasks';
@@ -366,23 +367,11 @@ export default function TasksPage() {
       ) : (
       <>
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-2)', marginBottom: 'var(--space-3)' }}>
-        <Card style={{ padding: 'var(--space-2) var(--space-3)', cursor: 'pointer', border: statusFilter === 'open' ? '2px solid var(--brand-navy)' : undefined }}
-          onClick={() => setStatusFilter('open')}>
-          <p style={{ margin: '0 0 4px 0', fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase' }}>Open</p>
-          <p style={{ margin: 0, fontSize: '24px', fontWeight: '700', color: 'var(--brand-navy)' }}>{openCount}</p>
-        </Card>
-        <Card style={{ padding: 'var(--space-2) var(--space-3)', cursor: 'pointer', border: statusFilter === 'overdue' ? '2px solid var(--status-error)' : undefined }}
-          onClick={() => setStatusFilter(statusFilter === 'overdue' ? 'open' : 'overdue')}>
-          <p style={{ margin: '0 0 4px 0', fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase' }}>Overdue</p>
-          <p style={{ margin: 0, fontSize: '24px', fontWeight: '700', color: overdueCount > 0 ? 'var(--status-error)' : 'var(--brand-navy)' }}>{overdueCount}</p>
-        </Card>
-        <Card style={{ padding: 'var(--space-2) var(--space-3)', cursor: 'pointer', border: statusFilter === 'completed' ? '2px solid var(--status-success)' : undefined }}
-          onClick={() => setStatusFilter('completed')}>
-          <p style={{ margin: '0 0 4px 0', fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase' }}>Completed</p>
-          <p style={{ margin: 0, fontSize: '24px', fontWeight: '700', color: 'var(--status-success)' }}>{completedCount}</p>
-        </Card>
-      </div>
+      <StatTiles items={[
+        { label: 'Open', value: openCount, onClick: () => setStatusFilter('open'), active: statusFilter === 'open' },
+        { label: 'Overdue', value: overdueCount, tone: overdueCount > 0 ? 'warn' : undefined, onClick: () => setStatusFilter(statusFilter === 'overdue' ? 'open' : 'overdue'), active: statusFilter === 'overdue' },
+        { label: 'Completed', value: completedCount, tone: 'good', onClick: () => setStatusFilter('completed'), active: statusFilter === 'completed' },
+      ]} />
 
       {/* Filters */}
       <div style={{ display: 'flex', gap: 'var(--space-2)', marginBottom: 'var(--space-3)', flexWrap: 'wrap' }}>

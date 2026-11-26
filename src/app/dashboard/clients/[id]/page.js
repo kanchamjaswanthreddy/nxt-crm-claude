@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
+import StatTiles from '@/components/ui/StatTiles';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@/context/UserContext';
 import { getClient, updateClient, addPolicy, fetchPolicies, updatePolicy, deletePolicy, addClientNote, fetchClientNotes } from '@/app/actions/clients';
@@ -438,27 +439,12 @@ export default function ClientDetailPage({ params }) {
       </Card>
 
       {/* Stats row */}
-      <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '16px', margin: '20px 0',
-      }}>
-        {[
-          { label: 'Total Policies', value: policies.length, color: 'var(--brand-navy)' },
-          { label: 'Active Policies', value: activePolicies.length, color: '#16a34a' },
-          { label: 'Monthly Premium', value: fmt(totalPremium), color: 'var(--brand-gold)' },
-          { label: 'Total Coverage', value: fmt(totalCoverage), color: '#1B2A4E' },
-        ].map(stat => (
-          <Card key={stat.label}>
-            <div style={{ padding: '4px 0' }}>
-              <div style={{
-                fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)',
-                textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px',
-              }}>{stat.label}</div>
-              <div style={{ fontSize: '22px', fontWeight: 800, color: stat.color }}>{stat.value}</div>
-            </div>
-          </Card>
-        ))}
-      </div>
+      <StatTiles items={[
+        { label: 'Monthly premium', value: fmt(totalPremium) },
+        { label: 'Total coverage', value: fmt(totalCoverage) },
+        { label: 'Policies', value: policies.length },
+        { label: 'Active policies', value: activePolicies.length, tone: 'good', share: policies.length ? activePolicies.length / policies.length : 0 },
+      ]} />
 
       {/* Tab navigation */}
       <div style={{

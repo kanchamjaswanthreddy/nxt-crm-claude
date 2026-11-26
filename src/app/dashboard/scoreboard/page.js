@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import StatTiles from '@/components/ui/StatTiles';
 import { useUser } from '@/context/UserContext';
 import { fetchScoreboard, fetchAgentsForScoreboard } from '@/app/actions/scoreboard';
 import Card from '@/components/ui/Card';
@@ -239,25 +240,7 @@ export default function ScoreboardPage() {
       )}
 
       {/* Summary Cards */}
-      <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-        gap: 'var(--space-2)', marginBottom: 'var(--space-4)',
-      }}>
-        {summaryCards.map((card) => (
-          <Card key={card.label}>
-            <div style={{ padding: '20px' }}>
-              <div style={{
-                fontSize: '14px', fontWeight: 600, color: 'var(--text-secondary)',
-                textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px',
-              }}>{card.label}</div>
-              <div style={{
-                fontSize: card.label === 'Top Agent' ? '18px' : '26px',
-                fontWeight: 800, color: card.accent, lineHeight: 1.2,
-              }}>{card.value}</div>
-            </div>
-          </Card>
-        ))}
-      </div>
+      <StatTiles items={summaryCards.map(c => ({ label: c.label, value: c.value }))} />
 
       {/* Charts Row */}
       {sorted.length > 0 && (
