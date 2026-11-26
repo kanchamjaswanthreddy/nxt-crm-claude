@@ -1,0 +1,44 @@
+.header {
+  text-align: center;
+  margin-bottom: var(--space-4);
+}
+
+.title {
+  margin-bottom: var(--space-1);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.footer {
+  text-align: center;
+  margin-top: var(--space-4);
+  font-size: var(--text-secondary);
+}
+
+.validationList {
+  list-style: none;
+  font-size: var(--text-caption);
+  color: var(--brand-silver);
+  margin-top: -8px;
+  margin-bottom: var(--space-2);
+  padding-left: var(--space-1);
+}
+
+.validationItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.validationItem.met {
+  color: var(--status-success);
+}

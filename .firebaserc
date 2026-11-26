@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "dev": "nxt-crm-dev",
+    "staging": "nxt-crm-staging",
+    "prod": "nxt-crm-prod"
+  }
+}

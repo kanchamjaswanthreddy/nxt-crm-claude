@@ -1,0 +1,24 @@
+.card {
+  background: var(--surface-card);
+  border-radius: 20px;
+  padding: var(--space-6);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  transition: box-shadow var(--duration-normal) var(--ease-in-out),
+              transform var(--duration-normal) var(--ease-in-out);
+}
+
+.hoverable:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.compact {
+  padding: var(--space-4);
+}
+
+.flush {
+  padding: 0;
+}

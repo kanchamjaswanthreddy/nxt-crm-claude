@@ -1,0 +1,98 @@
+/* ConfirmDialog — destructive/warning/info confirmation overlay */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4, 16px);
+}
+
+/* Icon circle */
+.iconArea {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iconArea svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Variant backgrounds and icon colors */
+.iconArea[data-variant='danger'] {
+  background: #fef2f2;
+  color: var(--status-error, #dc2626);
+}
+
+.iconArea[data-variant='warning'] {
+  background: #fffbeb;
+  color: var(--status-warning, #d97706);
+}
+
+.iconArea[data-variant='info'] {
+  background: #eff6ff;
+  color: var(--status-info, #2563eb);
+}
+
+/* Title inside confirm body */
+.title {
+  font-family: var(--font-base, 'Inter', -apple-system, system-ui, sans-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Description */
+.description {
+  font-family: var(--font-base, 'Inter', -apple-system, system-ui, sans-serif);
+  font-size: 14px;
+  color: var(--text-secondary, #6b7280);
+  line-height: 1.5;
+  margin: 0;
+  max-width: 360px;
+}
+
+/* Confirm button variant overrides */
+.confirmDanger {
+  --btn-bg: var(--status-error, #dc2626);
+  --btn-hover-bg: #b91c1c;
+  --btn-text: #ffffff;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+}
+
+.confirmDanger:hover:not(:disabled) {
+  background: var(--btn-hover-bg);
+}
+
+.confirmWarning {
+  --btn-bg: var(--status-warning, #d97706);
+  --btn-hover-bg: #b45309;
+  --btn-text: #ffffff;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+}
+
+.confirmWarning:hover:not(:disabled) {
+  background: var(--btn-hover-bg);
+}
+
+.confirmInfo {
+  --btn-bg: var(--status-info, #2563eb);
+  --btn-hover-bg: #1d4ed8;
+  --btn-text: #ffffff;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+}
+
+.confirmInfo:hover:not(:disabled) {
+  background: var(--btn-hover-bg);
+}

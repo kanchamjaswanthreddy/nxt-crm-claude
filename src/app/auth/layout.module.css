@@ -1,0 +1,142 @@
+/* ── Full-viewport wrapper with single background image ── */
+.page {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: url('/login-bg.png') center / cover no-repeat;
+  display: grid;
+  grid-template-columns: 52% 48%;
+}
+
+/* ── Left column: text on the blue area ── */
+.left {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 22vh;
+  padding-left: 7vw;
+  padding-right: 40px;
+}
+
+.leftContent {
+  max-width: 520px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.eyebrowText {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+}
+
+.eyebrowLine {
+  width: 120px;
+  height: 1.5px;
+  background: var(--brand-gold);
+  flex-shrink: 0;
+}
+
+.headline {
+  font-size: clamp(40px, 4vw, 68px);
+  font-weight: 700;
+  line-height: 1.12;
+  color: #fff;
+  margin: 0;
+}
+
+.headlineGold {
+  background: linear-gradient(135deg, #F0C060, #C99A3D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tagline {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  font-size: 26px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.taglineDot {
+  font-size: 20px;
+  color: var(--brand-gold);
+  line-height: 1;
+}
+
+/* ── Right column: logo + form on the white area ── */
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px;
+}
+
+.formColumn {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  margin-bottom: 32px;
+}
+
+.logo img {
+  height: auto;
+  width: 280px;
+  object-fit: contain;
+}
+
+.formBody {
+  width: 100%;
+}
+
+.formFooter {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* ── Responsive: below 900px ── */
+@media (max-width: 900px) {
+  .page {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .left {
+    display: none;
+  }
+
+  .right {
+    flex: 1;
+    padding: 32px 24px 48px;
+  }
+
+  .logo img {
+    width: 220px;
+  }
+
+  .formFooter {
+    margin-top: 24px;
+  }
+}

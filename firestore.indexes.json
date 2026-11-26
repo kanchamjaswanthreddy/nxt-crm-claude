@@ -1,0 +1,96 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "pipelineStages",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "agencyId", "order": "ASCENDING" },
+        { "fieldPath": "order", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "pipelineStages",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "agentId", "order": "ASCENDING" },
+        { "fieldPath": "order", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "agentRequests",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "agencyId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "agentRequests",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "targetAgentId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "billingTransactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "agencyId", "order": "ASCENDING" },
+        { "fieldPath": "date", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "clients",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "agencyId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "dealStageHistory",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "dealId", "order": "ASCENDING" },
+        { "fieldPath": "changedAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "invites",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "email", "order": "ASCENDING" },
+        { "fieldPath": "created_at", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "commissionRates",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "agencyId", "order": "ASCENDING" },
+        { "fieldPath": "carrierId", "order": "ASCENDING" },
+        { "fieldPath": "policyType", "order": "ASCENDING" },
+        { "fieldPath": "agentLevel", "order": "ASCENDING" },
+        { "fieldPath": "effectiveDate", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "trackerContacts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "agencyId", "order": "ASCENDING" },
+        { "fieldPath": "createdBy", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "carrierUpdates",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "agencyId", "order": "ASCENDING" },
+        { "fieldPath": "publishedAt", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

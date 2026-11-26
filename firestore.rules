@@ -1,0 +1,329 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Function to check if user is logged in
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Function to get the user's agent document data
+    function getAgentData() {
+      return get(/databases/$(database)/documents/agents/$(request.auth.uid)).data;
+    }
+
+    match /agencies/{agencyId} {
+      // Anyone can create an agency during signup (bootstrapping)
+      allow create: if isAuthenticated();
+      // Only agents belonging to this agency can read it
+      allow read: if isAuthenticated() && getAgentData().agency_id == agencyId;
+      // Only admins can update the agency settings
+      allow update: if isAuthenticated() && getAgentData().agency_id == agencyId && getAgentData().role == 'admin';
+    }
+
+    match /agents/{agentId} {
+      // Users can read/write their own profile
+      allow read, update: if isAuthenticated() && request.auth.uid == agentId;
+      // Agents can read other agents in their own agency
+      allow read: if isAuthenticated() && getAgentData().agency_id == resource.data.agency_id;
+      // Allow creation during signup/invite acceptance
+      allow create: if isAuthenticated() && request.auth.uid == agentId;
+    }
+
+    match /invites/{inviteId} {
+      // Anyone can read an invite to validate the token
+      allow read: if true;
+      // Only admins and managers can create invites
+      allow create: if isAuthenticated() && (getAgentData().role == 'admin' || getAgentData().role == 'manager');
+      // Allow updating status to 'accepted'
+      allow update: if isAuthenticated() && request.resource.data.status == 'accepted';
+    }
+
+    match /leads/{leadId} {
+      function hasValidLeadFields(data) {
+        return data.firstName != null && data.firstName is string && data.firstName != '' 
+            && data.lastName != null && data.lastName is string && data.lastName != ''
+            && ((data.email != null && data.email is string && data.email != '') || (data.phone != null && data.phone is string && data.phone != ''));
+      }
+      
+      function canAccessLead(data, agent) {
+        return data.agencyId == agent.agency_id && (
+          data.ownerAgentId == request.auth.uid ||
+          (data.ownerHierarchyPath != null && data.ownerHierarchyPath.startsWith(agent.hierarchyPath + '/')) ||
+          (data.ownerAgentId == null && (agent.role == 'admin' || agent.role == 'manager'))
+        );
+      }
+
+      // Public web form allows creation only if owner is null and source is web_form
+      allow create: if request.resource.data.source == 'web_form'
+                    && request.resource.data.ownerAgentId == null
+                    && hasValidLeadFields(request.resource.data);
+
+      allow read: if isAuthenticated() && canAccessLead(resource.data, getAgentData());
+      
+      allow create: if isAuthenticated() 
+                    && hasValidLeadFields(request.resource.data)
+                    && canAccessLead(request.resource.data, getAgentData());
+                    
+      allow update: if isAuthenticated() 
+                    && hasValidLeadFields(request.resource.data)
+                    && canAccessLead(resource.data, getAgentData())
+                    && canAccessLead(request.resource.data, getAgentData());
+    }
+
+    match /leadNotes/{noteId} {
+      allow read: if isAuthenticated() 
+                  && canAccessLead(get(/databases/$(database)/documents/leads/$(resource.data.leadId)).data, getAgentData());
+                  
+      allow create: if isAuthenticated() 
+                    && request.resource.data.authorAgentId == request.auth.uid
+                    && canAccessLead(get(/databases/$(database)/documents/leads/$(request.resource.data.leadId)).data, getAgentData());
+    }
+    
+    // Phase 3: Pipeline Rules
+    match /pipelineStages/{stageId} {
+      // Any authenticated agent in the agency can read pipeline stages
+      allow read: if isAuthenticated() && getAgentData().agency_id == resource.data.agencyId;
+      // Only admins can create/update pipeline stages
+      allow create: if isAuthenticated() && getAgentData().agency_id == request.resource.data.agencyId && getAgentData().role == 'admin';
+      allow update: if isAuthenticated() && getAgentData().agency_id == resource.data.agencyId && getAgentData().role == 'admin';
+      allow delete: if false; // Only archive (soft-delete) is allowed via update
+    }
+
+    match /deals/{dealId} {
+      function canAccessDeal(data, agent) {
+        return data.agencyId == agent.agency_id && (
+          data.ownerAgentId == request.auth.uid ||
+          (data.ownerHierarchyPath != null && data.ownerHierarchyPath.startsWith(agent.hierarchyPath + '/')) ||
+          agent.role == 'admin' ||
+          agent.role == 'it_engineer'
+        );
+      }
+      
+      function hasValidDealFields(data) {
+        return (data.status != 'won' || (data.policyNumber != null && data.policyNumber != '')) &&
+               (data.status != 'lost' || (data.lostReason != null && data.lostReason != ''));
+      }
+
+      allow read: if isAuthenticated() && canAccessDeal(resource.data, getAgentData());
+      
+      allow create: if isAuthenticated() 
+                    && hasValidDealFields(request.resource.data)
+                    && canAccessDeal(request.resource.data, getAgentData());
+                    
+      allow update: if isAuthenticated() 
+                    && hasValidDealFields(request.resource.data)
+                    && canAccessDeal(resource.data, getAgentData())
+                    && canAccessDeal(request.resource.data, getAgentData());
+    }
+
+    match /dealStageHistory/{historyId} {
+      // Same visibility as the parent Deal
+      allow read: if isAuthenticated() 
+                  && canAccessDeal(get(/databases/$(database)/documents/deals/$(resource.data.dealId)).data, getAgentData());
+                  
+      allow create: if isAuthenticated() 
+                    && request.resource.data.changedByAgentId == request.auth.uid
+                    && canAccessDeal(get(/databases/$(database)/documents/deals/$(request.resource.data.dealId)).data, getAgentData());
+      
+      allow update, delete: if false; // Append-only
+    }
+
+    // Phase 4: Tasks Rules
+    match /stageTaskTemplates/{templateId} {
+      allow read: if isAuthenticated() && getAgentData().agency_id == resource.data.agencyId;
+      allow create: if isAuthenticated() && getAgentData().agency_id == request.resource.data.agencyId && getAgentData().role == 'admin';
+      allow update: if isAuthenticated() && getAgentData().agency_id == resource.data.agencyId && getAgentData().role == 'admin';
+      allow delete: if false; 
+    }
+
+    match /tasks/{taskId} {
+      function canAccessTask(data, agent) {
+        return data.agencyId == agent.agency_id && (
+          data.ownerAgentId == request.auth.uid ||
+          (data.ownerHierarchyPath != null && data.ownerHierarchyPath.startsWith(agent.hierarchyPath + '/')) ||
+          agent.role == 'admin' ||
+          agent.role == 'it_engineer'
+        );
+      }
+      
+      function hasValidTaskFields(data) {
+        return data.title != null && data.title != '' && data.dueAt != null;
+      }
+
+      allow read: if isAuthenticated() && canAccessTask(resource.data, getAgentData());
+      
+      allow create: if isAuthenticated() 
+                    && hasValidTaskFields(request.resource.data)
+                    && canAccessTask(request.resource.data, getAgentData());
+                    
+      allow update: if isAuthenticated() 
+                    && hasValidTaskFields(request.resource.data)
+                    && canAccessTask(resource.data, getAgentData())
+                    && canAccessTask(request.resource.data, getAgentData());
+                    
+      allow delete: if isAuthenticated() && canAccessTask(resource.data, getAgentData());
+    }
+
+    // Phase 5: Commission Tracking
+    match /carriers/{carrierId} {
+      allow read: if isAuthenticated() && getAgentData().agency_id == resource.data.agencyId;
+      allow write: if isAuthenticated() && getAgentData().agency_id == request.resource.data.agencyId && getAgentData().role == 'admin';
+    }
+
+    match /commissionRates/{rateId} {
+      allow read: if isAuthenticated() && getAgentData().agency_id == resource.data.agencyId;
+      allow write: if isAuthenticated() && getAgentData().agency_id == request.resource.data.agencyId && getAgentData().role == 'admin';
+    }
+
+    match /commissions/{commissionId} {
+      allow read: if isAuthenticated() && resource.data.agencyId == getAgentData().agency_id && (
+        resource.data.agentId == request.auth.uid ||
+        (resource.data.agentHierarchyPath != null && resource.data.agentHierarchyPath.startsWith(getAgentData().hierarchyPath + '/'))
+      );
+      // All writes come from backend (deals.js/commissions.js) EXCEPT if admin edits needs review
+      allow write: if isAuthenticated() && getAgentData().agency_id == resource.data.agencyId && getAgentData().role == 'admin';
+    }
+
+    match /commissionOverrides/{overrideId} {
+      allow read: if isAuthenticated() && resource.data.agencyId == getAgentData().agency_id && (
+        resource.data.beneficiaryAgentId == request.auth.uid ||
+        (resource.data.beneficiaryHierarchyPath != null && resource.data.beneficiaryHierarchyPath.startsWith(getAgentData().hierarchyPath + '/'))
+      );
+      allow write: if isAuthenticated() && getAgentData().agency_id == resource.data.agencyId && getAgentData().role == 'admin';
+    }
+
+    match /carrierStatements/{statementId} {
+      allow read, write: if isAuthenticated() && getAgentData().agency_id == resource.data.agencyId && getAgentData().role == 'admin';
+    }
+
+    match /carrierStatementLines/{lineId} {
+      allow read, write: if isAuthenticated() && getAgentData().role == 'admin';
+    }
+
+    // Phase 6: Reporting & Dashboards
+    match /AgentMetricsSummary/{summaryId} {
+      // Read allowed if it's the agent's own summary or they are upline
+      allow read: if isAuthenticated() && resource.data.agencyId == getAgentData().agency_id && (
+        resource.data.agentId == request.auth.uid ||
+        (resource.data.agentHierarchyPath != null && resource.data.agentHierarchyPath.startsWith(getAgentData().hierarchyPath + '/'))
+      );
+      // Strictly NO client writes permitted for metrics summary (backend only)
+      allow write: if false;
+    }
+
+    // Agent Contracts
+    match /agentContracts/{contractId} {
+      allow read: if isAuthenticated() && resource.data.agencyId == getAgentData().agency_id && (
+        resource.data.agentId == request.auth.uid ||
+        getAgentData().role == 'admin'
+      );
+      allow create, update: if isAuthenticated() && getAgentData().agency_id == request.resource.data.agencyId && getAgentData().role == 'admin';
+    }
+
+    // Learning Resources
+    match /learningResources/{resourceId} {
+      allow read: if isAuthenticated() && resource.data.agencyId == getAgentData().agency_id;
+      allow create, update, delete: if isAuthenticated() && getAgentData().agency_id == resource.data.agencyId && getAgentData().role == 'admin';
+    }
+
+    // Additional Commissions
+    match /additionalCommissions/{commissionId} {
+      allow read: if isAuthenticated() && resource.data.agencyId == getAgentData().agency_id && (
+        resource.data.agentId == request.auth.uid ||
+        getAgentData().role == 'admin'
+      );
+      allow write: if isAuthenticated() && getAgentData().agency_id == request.resource.data.agencyId && getAgentData().role == 'admin';
+    }
+
+    // Carrier Updates
+    match /carrierUpdates/{updateId} {
+      allow read: if isAuthenticated() && resource.data.agencyId == getAgentData().agency_id;
+      allow create, update, delete: if isAuthenticated() && getAgentData().agency_id == resource.data.agencyId && getAgentData().role == 'admin';
+    }
+
+    // Clients
+    match /clients/{clientId} {
+      function canAccessClient(data, agent) {
+        return data.agencyId == agent.agency_id && (
+          data.agentId == request.auth.uid ||
+          (data.agentHierarchyPath != null && data.agentHierarchyPath.startsWith(agent.hierarchyPath + '/')) ||
+          agent.role == 'admin' ||
+          agent.role == 'it_engineer'
+        );
+      }
+
+      allow read: if isAuthenticated() && canAccessClient(resource.data, getAgentData());
+      allow create: if isAuthenticated() && canAccessClient(request.resource.data, getAgentData());
+      allow update: if isAuthenticated() && canAccessClient(resource.data, getAgentData());
+
+      // Policies sub-collection
+      match /policies/{policyId} {
+        allow read, write: if isAuthenticated() && canAccessClient(
+          get(/databases/$(database)/documents/clients/$(clientId)).data, getAgentData()
+        );
+      }
+
+      // Client Notes sub-collection
+      match /clientNotes/{noteId} {
+        allow read, write: if isAuthenticated() && canAccessClient(
+          get(/databases/$(database)/documents/clients/$(clientId)).data, getAgentData()
+        );
+      }
+    }
+
+    // Agent Requests
+    match /agentRequests/{requestId} {
+      allow read: if isAuthenticated() && resource.data.agencyId == getAgentData().agency_id && (
+        resource.data.targetAgentId == request.auth.uid ||
+        getAgentData().role == 'admin' ||
+        getAgentData().role == 'it_engineer'
+      );
+      allow create: if isAuthenticated() && getAgentData().agency_id == request.resource.data.agencyId && (
+        getAgentData().role == 'admin' || getAgentData().role == 'it_engineer'
+      );
+      allow update: if isAuthenticated() && resource.data.agencyId == getAgentData().agency_id && (
+        resource.data.targetAgentId == request.auth.uid ||
+        getAgentData().role == 'admin' ||
+        getAgentData().role == 'it_engineer'
+      );
+    }
+
+    // Agent Documents (onboarding uploads)
+    match /agentDocuments/{docId} {
+      // Agent can read their own docs, admins/IT can read any agent's docs in their agency
+      allow read: if isAuthenticated() && (
+        resource.data.agentId == request.auth.uid ||
+        (getAgentData().agency_id == resource.data.agencyId && (getAgentData().role == 'admin' || getAgentData().role == 'it_engineer'))
+      );
+      allow create: if isAuthenticated() && request.resource.data.agentId == request.auth.uid;
+      allow update: if isAuthenticated() && (
+        resource.data.agentId == request.auth.uid ||
+        (getAgentData().agency_id == resource.data.agencyId && (getAgentData().role == 'admin' || getAgentData().role == 'it_engineer'))
+      );
+    }
+
+    // OIDC auth codes and access tokens (server-side only)
+    match /oidc_auth_codes/{codeId} {
+      allow read, write: if false;
+    }
+
+    match /oidc_access_tokens/{tokenId} {
+      allow read, write: if false;
+    }
+
+    // GHL OAuth tokens (server-side only)
+    match /ghl_config/{docId} {
+      allow read, write: if false;
+    }
+
+    // Phase 7: Security & Audit
+    match /AuditLog/{logId} {
+      // Only admins can read audit logs
+      allow read: if isAuthenticated() && resource.data.agencyId == getAgentData().agency_id && getAgentData().role == 'admin';
+      // Logs are written by backend server functions only (no client-side writes)
+      allow write: if false;
+    }
+
+  }
+}

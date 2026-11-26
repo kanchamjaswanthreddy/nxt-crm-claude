@@ -1,0 +1,182 @@
+/* ── Toast Notification System ── */
+
+.container {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-2);
+  pointer-events: none;
+}
+
+/* ── Single Toast ── */
+
+.toast {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  min-width: 300px;
+  max-width: 380px;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-elevated, rgba(255, 255, 255, 0.82));
+  border-radius: 18px;
+  box-shadow: var(--glass-shadow);
+  border: var(--glass-border);
+  border-left: 3px solid transparent;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  overflow: hidden;
+  pointer-events: auto;
+  animation: toastIn 300ms var(--ease-out) forwards;
+}
+
+.toast.exiting {
+  animation: toastOut 300ms var(--ease-in-out) forwards;
+}
+
+/* ── Variants ── */
+
+.success {
+  border-left-color: var(--status-success);
+}
+
+.error {
+  border-left-color: var(--status-error);
+}
+
+.info {
+  border-left-color: var(--status-info);
+}
+
+/* ── Icon ── */
+
+.icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+}
+
+.success .icon {
+  color: var(--status-success);
+}
+
+.error .icon {
+  color: var(--status-error);
+}
+
+.info .icon {
+  color: var(--status-info);
+}
+
+/* ── Text ── */
+
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-family: var(--font-base);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.message {
+  font-family: var(--font-base);
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+/* ── Close Button ── */
+
+.close {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background var(--duration-fast) var(--ease-in-out),
+              color var(--duration-fast) var(--ease-in-out);
+  padding: 0;
+}
+
+.close:hover {
+  background: var(--surface-inset);
+  color: var(--text-secondary);
+}
+
+.close svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ── Progress Bar ── */
+
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 0 0 0 var(--radius-lg);
+  transform-origin: left;
+  animation: progressShrink linear forwards;
+}
+
+.success .progress {
+  background: var(--status-success);
+}
+
+.error .progress {
+  background: var(--status-error);
+}
+
+.info .progress {
+  background: var(--status-info);
+}
+
+/* ── Keyframes ── */
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes progressShrink {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}

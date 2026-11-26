@@ -1,0 +1,99 @@
+/* ── Rich variant ── */
+
+.rich {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 48px 24px;
+  gap: 12px;
+}
+
+.iconArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full, 999px);
+  background: var(--surface-inset, #F1F3F5);
+  color: var(--text-secondary, #6B7280);
+  margin-bottom: 4px;
+}
+
+.iconArea svg {
+  width: 22px;
+  height: 22px;
+}
+
+.richTitle {
+  font-family: var(--font-base, "Inter", -apple-system, system-ui, sans-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.richDescription {
+  font-family: var(--font-base, "Inter", -apple-system, system-ui, sans-serif);
+  font-size: 13px;
+  color: var(--text-secondary, #6B7280);
+  margin: 0;
+  max-width: 320px;
+  line-height: 1.5;
+}
+
+.richAction {
+  margin-top: 4px;
+}
+
+/* ── Minimal variant ── */
+
+.minimal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+  gap: 4px;
+}
+
+.minimalText {
+  font-family: var(--font-base, "Inter", -apple-system, system-ui, sans-serif);
+  font-size: 14px;
+  color: var(--text-secondary, #6B7280);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.minimalLink {
+  font-family: var(--font-base, "Inter", -apple-system, system-ui, sans-serif);
+  font-size: 13px;
+  color: var(--brand-navy, #0F2A52);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity var(--duration-fast, 150ms) var(--ease-in-out, ease);
+}
+
+.minimalLink:hover {
+  opacity: 0.75;
+}
+
+/* ── Table row variant ── */
+
+.tableRow {
+  text-align: center;
+}
+
+.tableRowCell {
+  font-family: var(--font-base, "Inter", -apple-system, system-ui, sans-serif);
+  font-size: 14px;
+  color: var(--text-secondary, #6B7280);
+  padding: 32px;
+  line-height: 1.5;
+}

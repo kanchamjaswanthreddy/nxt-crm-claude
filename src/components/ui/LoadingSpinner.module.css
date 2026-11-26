@@ -1,0 +1,64 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-10) 0;
+}
+
+.spinner {
+  border: 2.5px solid var(--border-color);
+  border-top-color: var(--brand-navy);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.small { width: 16px; height: 16px; border-width: 2px; }
+.medium { width: 24px; height: 24px; }
+.large { width: 36px; height: 36px; border-width: 3px; }
+
+.text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.inline {
+  padding: 0;
+}
+
+/* ── Skeleton ── */
+
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-inset) 25%, #E8EAEE 50%, var(--surface-inset) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+.skeletonText {
+  composes: skeleton;
+  height: 14px;
+  width: 100%;
+}
+
+.skeletonHeading {
+  composes: skeleton;
+  height: 20px;
+  width: 60%;
+}
+
+.skeletonCircle {
+  composes: skeleton;
+  border-radius: 50%;
+}
+
+.skeletonCard {
+  composes: skeleton;
+  border-radius: var(--radius-xl);
+}
+
+.skeletonRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
