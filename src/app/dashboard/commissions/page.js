@@ -4,12 +4,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@/context/UserContext';
 import { fetchCommissions, fetchCommissionOverrides, fetchCarriers } from '@/app/actions/commissions';
-import Card from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
 import { useToast } from '@/components/ui/Toast';
 import PageHeader from '@/components/ui/PageHeader';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
-import EmptyState from '@/components/ui/EmptyState';
+import st from './commissions.module.css';
 
 export default function CommissionsHub() {
   const router = useRouter();
@@ -64,122 +62,114 @@ export default function CommissionsHub() {
   const totalPaid = commissions.filter(c => c.status === 'paid').reduce((sum, c) => sum + (c.actualPaidAmount || 0), 0) +
                     overrides.filter(o => o.status === 'paid').reduce((sum, o) => sum + (o.overrideAmount || 0), 0); // Assuming override paid matches calculated
 
-  return (
-    <div>
-      <PageHeader title="Commissions" subtitle="Track your personal sales and team overrides" />
+  // Display-only figures, built from the same totals as above.
+  const pendingBase = totalBase - commissions.filter(c => c.status === 'paid').reduce((sum, c) => sum + (c.commissionAmount || 0), 0);
+  const pendingOverride = totalOverride - overrides.filter(o => o.status === 'paid').reduce((sum, o) => sum + (o.overrideAmount || 0), 0);
+  const earned = totalBase + totalOverride;
+  const baseShare = earned > 0 ? (totalBase / earned) * 100 : 0;
+  const pendingCount = (list) => list.filter(x => x.status !== 'paid').length;
+  const StatusPill = ({ status }) => (
+    <span className={st.pill} data-paid={status === 'paid' || undefined}>{status === 'paid' ? 'Paid' : 'Pending'}</span>
+  );
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
-        <Card style={{ textAlign: 'center' }}>
-          <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-caption)', fontWeight: '600', margin: '0 0 8px 0', textTransform: 'uppercase' }}>Pending Base</p>
-          <div style={{ fontSize: 'var(--text-h1)', fontWeight: '700', color: 'var(--brand-navy)' }}>
-            {formatCurrency(totalBase - commissions.filter(c => c.status === 'paid').reduce((sum, c) => sum + (c.commissionAmount || 0), 0))}
+  return (
+    <div className={st.page}>
+      <PageHeader title="Commissions" subtitle="What you have earned from your own sales and from your team" />
+
+      <div className={st.hero}>
+        <section className={st.paid}>
+          <span className={st.paidGlow} aria-hidden="true" />
+          <p className={st.label}>Paid to you so far</p>
+          <div className={st.paidValue}>{formatCurrency(totalPaid)}</div>
+          <p className={st.mixTitle}>Everything earned, paid and pending</p>
+          <div className={st.mix} role="img" aria-label={`${Math.round(baseShare)}% of your earnings come from your own sales`}>
+            <span style={{ flexGrow: baseShare || 1 }} data-kind="base" />
+            {totalOverride > 0 && <span style={{ flexGrow: 100 - baseShare }} data-kind="over" />}
           </div>
-        </Card>
-        <Card style={{ textAlign: 'center' }}>
-          <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-caption)', fontWeight: '600', margin: '0 0 8px 0', textTransform: 'uppercase' }}>Pending Overrides</p>
-          <div style={{ fontSize: 'var(--text-h1)', fontWeight: '700', color: 'var(--brand-navy)' }}>
-            {formatCurrency(totalOverride - overrides.filter(o => o.status === 'paid').reduce((sum, o) => sum + (o.overrideAmount || 0), 0))}
+          <div className={st.mixKey}>
+            <span><i data-kind="base" />Own sales {formatCurrency(totalBase)}</span>
+            <span><i data-kind="over" />Team overrides {formatCurrency(totalOverride)}</span>
           </div>
-        </Card>
-        <Card style={{ textAlign: 'center', backgroundColor: 'var(--brand-navy)', color: 'white' }}>
-          <p style={{ color: 'var(--brand-silver)', fontSize: 'var(--text-caption)', fontWeight: '600', margin: '0 0 8px 0', textTransform: 'uppercase' }}>Total Paid (YTD)</p>
-          <div style={{ fontSize: 'var(--text-h1)', fontWeight: '700', color: 'var(--brand-gold)' }}>
-            {formatCurrency(totalPaid)}
-          </div>
-        </Card>
+        </section>
+
+        <section className={st.tile}>
+          <p className={st.label}>Waiting to be paid, own sales</p>
+          <div className={st.tileValue}>{formatCurrency(pendingBase)}</div>
+          <p className={st.tileNote}>{pendingCount(commissions)} {pendingCount(commissions) === 1 ? 'policy' : 'policies'} pending</p>
+        </section>
+
+        <section className={st.tile} data-tone="amber">
+          <p className={st.label}>Waiting to be paid, overrides</p>
+          <div className={st.tileValue}>{formatCurrency(pendingOverride)}</div>
+          <p className={st.tileNote}>{pendingCount(overrides)} from your team pending</p>
+        </section>
       </div>
 
-      <div style={{ display: 'flex', gap: 'var(--space-3)', marginBottom: 'var(--space-3)', borderBottom: '1px solid var(--border-color)' }}>
-        <div 
-          onClick={() => setActiveTab('my')}
-          style={{ padding: 'var(--space-2) 16px', cursor: 'pointer', borderBottom: activeTab === 'my' ? '2px solid var(--brand-navy)' : '2px solid transparent', fontWeight: activeTab === 'my' ? '600' : '500', color: activeTab === 'my' ? 'var(--brand-navy)' : 'var(--text-secondary)' }}
-        >
-          My Sales
-        </div>
-        <div 
-          onClick={() => setActiveTab('overrides')}
-          style={{ padding: 'var(--space-2) 16px', cursor: 'pointer', borderBottom: activeTab === 'overrides' ? '2px solid var(--brand-navy)' : '2px solid transparent', fontWeight: activeTab === 'overrides' ? '600' : '500', color: activeTab === 'overrides' ? 'var(--brand-navy)' : 'var(--text-secondary)' }}
-        >
-          My Overrides
-        </div>
+      <div className={st.tabs} role="tablist" aria-label="Commission type">
+        <button type="button" role="tab" aria-selected={activeTab === 'my'} className={st.tab} onClick={() => setActiveTab('my')}>
+          My sales <b>{commissions.length}</b>
+        </button>
+        <button type="button" role="tab" aria-selected={activeTab === 'overrides'} className={st.tab} onClick={() => setActiveTab('overrides')}>
+          My overrides <b>{overrides.length}</b>
+        </button>
       </div>
 
       {activeTab === 'my' && (
-        <Card style={{ padding: 0, overflow: 'hidden' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead>
-              <tr style={{ backgroundColor: 'rgba(0,0,0,0.02)', borderBottom: '1px solid var(--border-color)', textAlign: 'left' }}>
-                <th scope="col" style={{ padding: 'var(--space-2)', fontWeight: '600', color: 'var(--text-secondary)' }}>Carrier</th>
-                <th scope="col" style={{ padding: 'var(--space-2)', fontWeight: '600', color: 'var(--text-secondary)' }}>Premium</th>
-                <th scope="col" style={{ padding: 'var(--space-2)', fontWeight: '600', color: 'var(--text-secondary)' }}>Rate</th>
-                <th scope="col" style={{ padding: 'var(--space-2)', fontWeight: '600', color: 'var(--text-secondary)' }}>Commission</th>
-                <th scope="col" style={{ padding: 'var(--space-2)', fontWeight: '600', color: 'var(--text-secondary)' }}>Status</th>
-                <th scope="col" style={{ padding: 'var(--space-2)', fontWeight: '600', color: 'var(--text-secondary)' }}>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {commissions.length === 0 ? (
-                <EmptyState variant="tableRow" colSpan={6} title="No commissions found" />
-              ) : commissions.map(c => (
-                <tr key={c.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                  <td style={{ padding: 'var(--space-2)', fontWeight: '500' }}>{getCarrierName(c.carrierId)}</td>
-                  <td style={{ padding: 'var(--space-2)' }}>{formatCurrency(c.premiumAmount)}</td>
-                  <td style={{ padding: 'var(--space-2)' }}>{c.needsRateReview ? 'Needs Review' : `${c.commissionRatePercent}%`}</td>
-                  <td style={{ padding: 'var(--space-2)', fontWeight: '600' }}>
-                    {c.needsRateReview ? '--' : formatCurrency(c.commissionAmount)}
-                  </td>
-                  <td style={{ padding: 'var(--space-2)' }}>
-                    <span style={{ 
-                      backgroundColor: c.status === 'paid' ? 'rgba(47, 168, 79, 0.1)' : 'rgba(227, 169, 74, 0.1)', 
-                      color: c.status === 'paid' ? 'var(--status-success, #2FA84F)' : 'var(--brand-gold)', 
-                      padding: '4px 12px', borderRadius: '999px', fontSize: 'var(--text-caption)', fontWeight: '600' 
-                    }}>
-                      {c.status.toUpperCase()}
-                    </span>
-                  </td>
-                  <td style={{ padding: 'var(--space-2)' }}>
-                    <Button variant="secondary" onClick={() => router.push(`/dashboard/commissions/${c.id}`)}>View</Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Card>
+        commissions.length === 0 ? (
+          <div className={st.empty}><b>No commissions yet</b><span>When one of your deals is won, its commission appears here.</span></div>
+        ) : (
+          <ul className={st.list}>
+            {commissions.map((c, i) => (
+              <li key={c.id} style={{ animationDelay: `${Math.min(i, 10) * 45}ms` }}>
+                <button type="button" className={st.row} onClick={() => router.push(`/dashboard/commissions/${c.id}`)}>
+                  <span className={st.cellMain}>
+                    <b>{getCarrierName(c.carrierId)}</b>
+                    <small>Premium {formatCurrency(c.premiumAmount)}</small>
+                  </span>
+                  <span className={st.cellRate}>
+                    {c.needsRateReview ? (
+                      <em className={st.review}>Needs review</em>
+                    ) : (
+                      <>
+                        <span className={st.meter}><span style={{ width: `${Math.min(100, c.commissionRatePercent || 0)}%` }} /></span>
+                        <small>{c.commissionRatePercent}% rate</small>
+                      </>
+                    )}
+                  </span>
+                  <span className={st.cellAmt}>{c.needsRateReview ? '--' : formatCurrency(c.commissionAmount)}</span>
+                  <StatusPill status={c.status} />
+                  <span className={st.go}>See the split</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )
       )}
 
       {activeTab === 'overrides' && (
-        <Card style={{ padding: 0, overflow: 'hidden' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead>
-              <tr style={{ backgroundColor: 'rgba(0,0,0,0.02)', borderBottom: '1px solid var(--border-color)', textAlign: 'left' }}>
-                <th scope="col" style={{ padding: 'var(--space-2)', fontWeight: '600', color: 'var(--text-secondary)' }}>Deal / Commission</th>
-                <th scope="col" style={{ padding: 'var(--space-2)', fontWeight: '600', color: 'var(--text-secondary)' }}>Differential %</th>
-                <th scope="col" style={{ padding: 'var(--space-2)', fontWeight: '600', color: 'var(--text-secondary)' }}>Override Amount</th>
-                <th scope="col" style={{ padding: 'var(--space-2)', fontWeight: '600', color: 'var(--text-secondary)' }}>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {overrides.length === 0 ? (
-                <EmptyState variant="tableRow" colSpan={4} title="No overrides found" />
-              ) : overrides.map(o => (
-                <tr key={o.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                  <td style={{ padding: 'var(--space-2)', fontWeight: '500' }}>{o.dealId}</td>
-                  <td style={{ padding: 'var(--space-2)', fontWeight: '600', color: 'var(--brand-gold)' }}>{o.overridePercent}%</td>
-                  <td style={{ padding: 'var(--space-2)', fontWeight: '600' }}>{formatCurrency(o.overrideAmount)}</td>
-                  <td style={{ padding: 'var(--space-2)' }}>
-                    <span style={{ 
-                      backgroundColor: o.status === 'paid' ? 'rgba(47, 168, 79, 0.1)' : 'rgba(227, 169, 74, 0.1)', 
-                      color: o.status === 'paid' ? 'var(--status-success, #2FA84F)' : 'var(--brand-gold)', 
-                      padding: '4px 12px', borderRadius: '999px', fontSize: 'var(--text-caption)', fontWeight: '600' 
-                    }}>
-                      {o.status.toUpperCase()}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Card>
+        overrides.length === 0 ? (
+          <div className={st.empty}><b>No overrides yet</b><span>When someone on your team wins a deal at a lower rate than yours, your share appears here.</span></div>
+        ) : (
+          <ul className={st.list}>
+            {overrides.map((o, i) => (
+              <li key={o.id} style={{ animationDelay: `${Math.min(i, 10) * 45}ms` }}>
+                <button type="button" className={st.row} disabled={!o.originatingCommissionId} onClick={() => o.originatingCommissionId && router.push(`/dashboard/commissions/${o.originatingCommissionId}`)}>
+                  <span className={st.cellMain}>
+                    <b>Team sale</b>
+                    <small>Deal {o.dealId}</small>
+                  </span>
+                  <span className={st.cellRate}>
+                    <span className={st.meter} data-tone="amber"><span style={{ width: `${Math.min(100, o.overridePercent || 0)}%` }} /></span>
+                    <small>+{o.overridePercent}% difference</small>
+                  </span>
+                  <span className={st.cellAmt}>{formatCurrency(o.overrideAmount)}</span>
+                  <StatusPill status={o.status} />
+                  <span className={st.go}>{o.originatingCommissionId ? 'See the split' : ''}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )
       )}
     </div>
   );

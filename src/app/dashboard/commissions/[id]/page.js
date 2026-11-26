@@ -10,6 +10,7 @@ import Button from '@/components/ui/Button';
 import PageHeader from '@/components/ui/PageHeader';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
+import CommissionWaterfall from '@/components/CommissionWaterfall';
 
 const dn = (a) => [a?.first_name, a?.middle_name, a?.last_name].filter(Boolean).join(' ') || a?.full_name || a?.name || a?.email || '';
 
@@ -74,6 +75,14 @@ export default function CommissionDetail() {
       const overrideSnap = await getDocs(overrideQuery);
       let oList = [];
       overrideSnap.forEach(d => oList.push({ id: d.id, ...d.data() }));
+      // Names and levels for the split view (display only). If a profile cannot be read, the ID is shown.
+      await Promise.all(oList.map(async (o) => {
+        try {
+          const bSnap = await getDoc(doc(db, 'agents', o.beneficiaryAgentId));
+          if (bSnap.exists()) { o.beneficiaryName = dn(bSnap.data()); o.beneficiaryLevel = bSnap.data().contractLevel || null; }
+        } catch { /* keep the ID */ }
+      }));
+      oList.sort((a, b) => (b.beneficiaryHierarchyPath || '').length - (a.beneficiaryHierarchyPath || '').length);
       setOverrides(oList);
 
     } catch (err) {
@@ -167,42 +176,25 @@ export default function CommissionDetail() {
         </Card>
       </div>
 
-      <Card style={{ padding: 0, overflow: 'hidden' }}>
-        <div style={{ padding: 'var(--space-3)', borderBottom: '1px solid var(--border-color)' }}>
-          <h3 style={{ margin: 0, color: 'var(--brand-navy)', fontSize: 'var(--text-body)' }}>Override Chain</h3>
-          <p style={{ color: 'var(--text-secondary)', margin: '4px 0 0 0', fontSize: 'var(--text-secondary)' }}>Upline commission splits for this policy</p>
-        </div>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead>
-            <tr style={{ backgroundColor: 'rgba(0,0,0,0.02)', borderBottom: '1px solid var(--border-color)', textAlign: 'left' }}>
-              <th scope="col" style={{ padding: 'var(--space-2) 24px', fontWeight: '600', color: 'var(--text-secondary)' }}>Upline Agent ID</th>
-              <th scope="col" style={{ padding: 'var(--space-2) 24px', fontWeight: '600', color: 'var(--text-secondary)' }}>Differential %</th>
-              <th scope="col" style={{ padding: 'var(--space-2) 24px', fontWeight: '600', color: 'var(--text-secondary)' }}>Payout Amount</th>
-              <th scope="col" style={{ padding: 'var(--space-2) 24px', fontWeight: '600', color: 'var(--text-secondary)' }}>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {overrides.length === 0 ? (
-              <EmptyState variant="tableRow" colSpan={4} title="No upline overrides generated for this policy" />
-            ) : overrides.map(o => (
-              <tr key={o.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                <td style={{ padding: 'var(--space-2) 24px', fontWeight: '500' }}>{o.beneficiaryAgentId}</td>
-                <td style={{ padding: 'var(--space-2) 24px', fontWeight: '600', color: 'var(--brand-gold)' }}>{o.overridePercent}%</td>
-                <td style={{ padding: 'var(--space-2) 24px', fontWeight: '600' }}>{formatCurrency(o.overrideAmount)}</td>
-                <td style={{ padding: 'var(--space-2) 24px' }}>
-                  <span style={{ 
-                    backgroundColor: o.status === 'paid' ? 'rgba(47, 168, 79, 0.1)' : 'rgba(227, 169, 74, 0.1)', 
-                    color: o.status === 'paid' ? 'var(--status-success, #2FA84F)' : 'var(--brand-gold)', 
-                    padding: '4px 12px', borderRadius: '999px', fontSize: 'var(--text-caption)', fontWeight: '600' 
-                  }}>
-                    {o.status.toUpperCase()}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Card>
+      <CommissionWaterfall
+        premium={commission.premiumAmount}
+        needsReview={!!commission.needsRateReview}
+        agent={{
+          name: agent ? dn(agent) : 'Unknown',
+          level: agent?.contractLevel || null,
+          percent: commission.commissionRatePercent,
+          amount: commission.commissionAmount,
+          status: commission.status,
+        }}
+        overrides={overrides.map(o => ({
+          id: o.id,
+          name: o.beneficiaryName || o.beneficiaryAgentId,
+          level: o.beneficiaryLevel || null,
+          percent: o.overridePercent,
+          amount: o.overrideAmount,
+          status: o.status,
+        }))}
+      />
     </div>
   );
 }

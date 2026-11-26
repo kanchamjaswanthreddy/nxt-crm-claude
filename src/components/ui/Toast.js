@@ -171,7 +171,9 @@ export function ToastProvider({ children }) {
     info: (title, message) => addToast('info', title, message),
   }), [addToast]);
 
-  const contextValue = React.useMemo(() => ({ toast }), [toast]);
+  // Screens read this two ways: `const { toast } = useToast()` and `const toast = useToast()`.
+  // Offer both, so toast.error(...) works either way.
+  const contextValue = React.useMemo(() => ({ ...toast, toast }), [toast]);
 
   return (
     <ToastContext.Provider value={contextValue}>
