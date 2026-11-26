@@ -99,25 +99,20 @@ function FeaturedSparkline({ data }) {
   const max = Math.max(...data);
   const min = Math.min(...data);
   const range = max - min || 1;
-  const pts = data
-    .map((v, i) => `${(i / (data.length - 1)) * 100}%,${100 - ((v - min) / range) * 80 - 10}%`)
-    .join(' ');
+  const xy = data.map((v, i) => [(i / (data.length - 1)) * 100, 100 - ((v - min) / range) * 72 - 14]);
+  const line = xy.map(([x, y], i) => `${i ? 'L' : 'M'}${x.toFixed(2)} ${y.toFixed(2)}`).join(' ');
+  const last = xy[xy.length - 1];
   return (
-    <svg
-      className={s.featuredSparkline}
-      viewBox="0 0 100 100"
-      preserveAspectRatio="none"
-      aria-hidden="true"
-    >
-      <polyline
-        fill="none"
-        stroke="rgba(255,255,255,0.35)"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        points={pts}
-        vectorEffect="non-scaling-stroke"
-      />
+    <svg className={s.featuredSparkline} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="nxtSparkFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#E3A94A" stopOpacity="0.38" />
+          <stop offset="1" stopColor="#E3A94A" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <path d={`${line} L100 100 L0 100 Z`} fill="url(#nxtSparkFill)" />
+      <path className={s.featuredSparkLine} d={line} fill="none" stroke="#F5D9A0" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" pathLength="1" />
+      <circle className={s.featuredSparkDot} cx={last[0]} cy={last[1]} r="1.6" fill="#fff" vectorEffect="non-scaling-stroke" />
     </svg>
   );
 }
@@ -273,12 +268,14 @@ function FeaturedCard({ label, production, pending, sparkData, momPct }) {
 
   return (
     <div className={s.featured}>
+      <span className={s.featuredRing} aria-hidden="true" />
+      <span className={s.featuredGlow} aria-hidden="true" />
       <div className={s.featuredContent}>
         <div className={s.featuredMain}>
           <p className={s.featuredLabel}>{label || 'MTD Production'}</p>
-          <p className={s.featuredValue}>{fmtCurrency(production)}</p>
+          <p className={s.featuredValue}>{fmtCurrency(production).replace(/\.00$/, '')}</p>
           {hasData && pending > 0 && (
-            <p className={s.featuredSubtext}>+ {fmtCurrency(pending)} pending</p>
+            <p className={s.featuredSubtext}><span className={s.featuredChip}>+ {fmtCurrency(pending)} pending</span></p>
           )}
           {!hasData && (
             <p className={s.featuredSubtext}>Close deals to start earning commissions</p>
@@ -325,32 +322,41 @@ function PipelineSection({ data, emptyAction }) {
     );
   }
 
+  // Agents keep personal copies of the same stages; show each stage name once, in order.
+  const byName = [];
+  for (const st of data) {
+    const hit = byName.find(g => g.name === st.name);
+    if (hit) { hit.count += st.count; hit.value += st.value; }
+    else byName.push({ stageId: st.stageId, name: st.name, count: st.count, value: st.value });
+  }
+  const shown = byName.filter(g => g.count > 0 || !/closed/i.test(g.name));
+  const peak = Math.max(...shown.map(g => g.value), 1);
+
   return (
     <>
       <p className={s.pipelineSummary}>
         {total} open deal{total !== 1 ? 's' : ''} &middot; {fmtCurrency(totalValue)} in pipeline
       </p>
-      <div className={s.pipelineGrid}>
-        {data.map((stage, i) => (
-          <div
-            key={stage.stageId}
-            className={s.pipelineStage}
+      <div className={s.pipeBlocks}>
+        {shown.map((stage, i) => (
+          <button
+            type="button"
+            key={stage.name}
+            className={s.pipeCol}
             onClick={() => router.push(`/dashboard/business/pipeline?stage=${stage.stageId}`)}
-            role="button"
-            tabIndex={0}
           >
-            <p className={s.pipelineStageName}>{stage.name}</p>
-            <p className={s.pipelineStageCount}>{stage.count}</p>
-            <div className={s.pipelineStageBar}>
-              <div
-                className={s.pipelineStageFill}
-                style={{
-                  width: total > 0 ? `${Math.max((stage.count / total) * 100, stage.count > 0 ? 8 : 0)}%` : '0%',
-                  backgroundColor: PIPE_COLORS[i % PIPE_COLORS.length],
-                }}
-              />
-            </div>
-          </div>
+            <span className={s.pipeTrack}>
+              <span
+                className={s.pipeBlock}
+                data-tone={Math.min(i, 4)}
+                style={{ height: `${34 + Math.round((stage.value / peak) * 66)}%`, animationDelay: `${i * 70}ms` }}
+              >
+                <span className={s.pipeCount}>{stage.count}</span>
+                {stage.value > 0 && <span className={s.pipeValue}>{fmtCompact(stage.value)}</span>}
+              </span>
+            </span>
+            <span className={s.pipeName}>{stage.name}</span>
+          </button>
         ))}
       </div>
       {total === 0 && emptyAction && (
@@ -655,86 +661,72 @@ function AdminView({ data, onCompleteTask }) {
 
   return (
     <>
-      {/* Featured gradient card */}
-      <FeaturedCard
-        label="Agency MTD Production"
-        production={admin.agencyMtdProduction}
-        pending={kpis.mtdPending}
-        sparkData={kpis.sparkProduction}
-        momPct={admin.agencyMomPct}
-      />
+      {/* Row 1: production beside the two figures an owner checks first */}
+      <div className={s.heroRow}>
+        <FeaturedCard
+          label="Agency production, month to date"
+          production={admin.agencyMtdProduction}
+          pending={kpis.mtdPending}
+          sparkData={kpis.sparkProduction}
+          momPct={admin.agencyMomPct}
+        />
+        <button type="button" className={`${s.bigTile} ${s.bigTileWarm}`} onClick={() => router.push('/dashboard/business/pipeline')}>
+          <span className={s.bigTileLabel}>Open pipeline</span>
+          <span className={s.bigTileValue}>{fmtCompact(admin.agencyPipelineValue)}</span>
+          <span className={s.bigTileHint}>
+            {admin.openDealCount > 0 ? `${admin.openDealCount} open deal${admin.openDealCount !== 1 ? 's' : ''}` : 'No open deals'}
+          </span>
+        </button>
+        <button type="button" className={s.bigTile} onClick={() => router.push('/dashboard/team')}>
+          <span className={s.bigTileLabel}>Team</span>
+          <span className={s.bigTileFaces} aria-hidden="true">
+            {(admin.topProducers || []).slice(0, 3).map(p => <Avatar key={p.id} name={p.name} photoUrl={p.photoUrl} size={40} />)}
+          </span>
+          <span className={s.bigTileValue}>{admin.teamSize}</span>
+          <span className={s.bigTileHint}>{admin.activeCount} active &middot; {admin.onboardingCount} onboarding</span>
+        </button>
+      </div>
 
-      {/* Row 1: Pipeline (span 2) + Pending Reviews (span 2) */}
-      <div className={s.bento}>
-        <div className={`${s.card} ${s.bentoWide}`}>
+      {/* Row 2: pipeline beside what is waiting on this person */}
+      <div className={s.splitRow}>
+        <div className={s.card}>
           <div className={s.cardHeader}>
             <h3 className={s.cardHeaderTitle}>Agency Pipeline</h3>
             <button className={s.headerLink} onClick={() => router.push('/dashboard/business/pipeline')}>
-              View all
+              Open board
             </button>
           </div>
           <PipelineSection data={pipelineByStage} />
         </div>
 
-        <div className={`${s.card} ${s.bentoWide}`}>
-          <div className={s.cardHeader}>
-            <h3 className={s.cardHeaderTitle}>Pending Reviews</h3>
-            {(admin.pendingApprovals > 0 || admin.docsAwaitingReview.length > 0) && (
-              <button className={s.headerLink} onClick={() => router.push('/dashboard/admin/approvals')}>
-                View all
-              </button>
-            )}
+        <div className={s.sideStack}>
+          <div className={`${s.card} ${s.waitCard}`}>
+            <div className={s.cardHeader}>
+              <h3 className={s.cardHeaderTitle}><span className={s.waitDot} aria-hidden="true" />Waiting on you</h3>
+              {(admin.pendingApprovals > 0 || admin.docsAwaitingReview.length > 0) && (
+                <button className={s.headerLink} onClick={() => router.push('/dashboard/admin/approvals')}>
+                  View all
+                </button>
+              )}
+            </div>
+            <PendingReviews admin={admin} />
           </div>
-          <PendingReviews admin={admin} />
-        </div>
-
-        {/* Row 2: 4 KPI squares with icon chips (#2) */}
-        <div className={`${s.card} ${s.cardHover} ${s.kpiSquare}`} onClick={() => router.push('/dashboard/team')} role="button" tabIndex={0} style={{ cursor: 'pointer' }}>
-          <div className={`${s.kpiIconChip} ${s.kpiIconChipBlue}`}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          <div className={s.miniRow}>
+            <div className={s.miniTile}>
+              <span className={s.bigTileLabel}>Deals won this month</span>
+              <span className={s.miniValue}>{admin.agencyDealsWon}</span>
+              <span className={s.bigTileHint}>
+                {admin.agencyDealsWon > 0 ? fmtCurrency(admin.agencyDealsWonPremium) + ' premium' : 'None closed yet'}
+              </span>
+            </div>
+            <button type="button" className={s.miniTile} onClick={() => router.push('/dashboard/team?filter=invited')}>
+              <span className={s.bigTileLabel}>Pending invites</span>
+              <span className={s.miniValue}>{admin.pendingInvites}</span>
+              <span className={s.bigTileHint}>
+                {admin.pendingInvites > 0 && admin.oldestInviteDays > 0 ? `Oldest ${admin.oldestInviteDays}d ago` : 'All invites accepted'}
+              </span>
+            </button>
           </div>
-          <p className={s.kpiLabel}>Team Size</p>
-          <p className={s.kpiSquareValue}>{admin.teamSize}</p>
-          <p className={s.kpiHint}>
-            {admin.activeCount} active &middot; {admin.onboardingCount} onboarding
-          </p>
-        </div>
-
-        <div className={`${s.card} ${s.cardHover} ${s.kpiSquare}`}>
-          <div className={`${s.kpiIconChip} ${s.kpiIconChipGreen}`}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <p className={s.kpiLabel}>Open Pipeline Value</p>
-          <p className={s.kpiSquareValue}>{fmtCurrency(admin.agencyPipelineValue)}</p>
-          <p className={s.kpiHint}>
-            {admin.openDealCount > 0 ? `${admin.openDealCount} open deal${admin.openDealCount !== 1 ? 's' : ''}` : 'No open deals'}
-          </p>
-        </div>
-
-        <div className={`${s.card} ${s.cardHover} ${s.kpiSquare}`}>
-          <div className={`${s.kpiIconChip} ${s.kpiIconChipGold}`}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 010-5H6"/><path d="M18 9h1.5a2.5 2.5 0 000-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22h10c0-2-1-3.25-2.03-3.79A1.07 1.07 0 0114 17v-2.34"/><path d="M6 2h12v7a6 6 0 11-12 0V2z"/></svg>
-          </div>
-          <p className={s.kpiLabel}>Deals Won (Month)</p>
-          <p className={s.kpiSquareValue}>{admin.agencyDealsWon}</p>
-          <p className={s.kpiHint}>
-            {admin.agencyDealsWon > 0 ? fmtCurrency(admin.agencyDealsWonPremium) + ' premium' : 'No closed deals this month'}
-          </p>
-        </div>
-
-        <div className={`${s.card} ${s.cardHover} ${s.kpiSquare}`} onClick={() => router.push('/dashboard/team?filter=invited')} role="button" tabIndex={0} style={{ cursor: 'pointer' }}>
-          <div className={`${s.kpiIconChip} ${s.kpiIconChipRed}`}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-          </div>
-          <p className={s.kpiLabel}>Pending Invites</p>
-          <p className={s.kpiSquareValue} style={admin.pendingInvites > 0 ? { color: '#E3A94A' } : undefined}>
-            {admin.pendingInvites}
-          </p>
-          <p className={s.kpiHint}>
-            {admin.pendingInvites > 0 && admin.oldestInviteDays > 0
-              ? `Oldest ${admin.oldestInviteDays}d ago`
-              : 'All invites accepted'}
-          </p>
         </div>
       </div>
 
