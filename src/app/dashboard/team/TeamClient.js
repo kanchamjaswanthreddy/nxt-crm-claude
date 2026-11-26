@@ -132,7 +132,7 @@ function NodeCardContent({ node, isSelected, isFindMe, isDropTarget, isDragging 
         <Avatar name={dn(node)} photoUrl={node.photo_url} size={40} goldText={node.is_owner} ownerRing={node.is_owner} />
       </div>
       <div style={{
-        fontWeight: '700', color: 'var(--brand-navy)', fontSize: '13px', lineHeight: '1.3',
+        fontWeight: '700', color: 'var(--brand-navy)', fontSize: '15px', lineHeight: '1.3',
         overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
         width: '100%', textAlign: 'center',
       }}>
@@ -140,14 +140,14 @@ function NodeCardContent({ node, isSelected, isFindMe, isDropTarget, isDragging 
       </div>
       {node.is_owner ? (
         <span style={{
-          display: 'inline-block', padding: '2px 10px', borderRadius: '999px', fontSize: '10px',
+          display: 'inline-block', padding: '2px 10px', borderRadius: '999px', fontSize: '13px',
           fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A', flexShrink: 0,
         }}>
           Owner
         </span>
       ) : (
         <div style={{
-          display: 'inline-block', padding: '3px 10px', borderRadius: '999px', fontSize: '10px', fontWeight: '600',
+          display: 'inline-block', padding: '3px 10px', borderRadius: '999px', fontSize: '13px', fontWeight: '600',
           backgroundColor: 'rgba(10, 37, 64, 0.06)', color: 'var(--brand-navy)', flexShrink: 0,
           maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
         }}>
@@ -159,7 +159,7 @@ function NodeCardContent({ node, isSelected, isFindMe, isDropTarget, isDragging 
       {node._splitPercent != null ? (
         <div style={{ flexShrink: 0, textAlign: 'center', lineHeight: '1.3' }}>
           <div style={{
-            fontSize: '10px', fontWeight: '700', color: '#fff',
+            fontSize: '13px', fontWeight: '700', color: '#fff',
             background: 'linear-gradient(135deg, var(--brand-gold), #E3A94A)',
             borderRadius: '999px', padding: '2px 10px',
             display: 'inline-flex', alignItems: 'center', height: '18px',
@@ -168,13 +168,13 @@ function NodeCardContent({ node, isSelected, isFindMe, isDropTarget, isDragging 
             {node._splitPercent}% commission
           </div>
           {node._splitOthers && node._splitOthers.length > 0 && (
-            <div style={{ fontSize: '9px', color: 'var(--text-secondary)', marginTop: '2px' }}>
+            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px' }}>
               {node._splitOthers.map(o => `${o.name.split(' ')[0]} ${o.percent}%`).join(' · ')}
             </div>
           )}
         </div>
       ) : (
-        <div style={{ fontSize: '10px', color: 'var(--text-secondary)', height: '18px', flexShrink: 0, display: 'flex', alignItems: 'center', gap: '4px' }}>
+        <div style={{ fontSize: '13px', color: 'var(--text-secondary)', height: '18px', flexShrink: 0, display: 'flex', alignItems: 'center', gap: '4px' }}>
           {childCount > 0 && (
             <span>{childCount} report{childCount !== 1 ? 's' : ''}</span>
           )}
@@ -252,7 +252,7 @@ function NodeCard({ node, isSelected, onSelect, isFindMe, cardRef, collapsed, on
             width: '22px', height: '22px', borderRadius: '50%',
             border: '1.5px solid var(--border-color)', backgroundColor: 'var(--surface-card)',
             cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '10px', color: 'var(--brand-navy)', fontWeight: 700, zIndex: 2,
+            fontSize: '13px', color: 'var(--brand-navy)', fontWeight: 700, zIndex: 2,
             boxShadow: '0 1px 4px rgba(0,0,0,0.1)', transition: 'background-color 0.15s', padding: 0,
           }}
           title={collapsed ? `Expand (${childCount})` : `Collapse (${childCount})`}
@@ -350,19 +350,19 @@ function MobileTreeList({ nodes, depth, onSelect, selectedId }) {
             >
               <Avatar name={dn(node)} photoUrl={node.photo_url} size={36} goldText={node.is_owner} ownerRing={node.is_owner} />
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontWeight: 600, color: 'var(--brand-navy)', fontSize: '13px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <div style={{ fontWeight: 600, color: 'var(--brand-navy)', fontSize: '15px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {dn(node) || 'Name not set'}
                 </div>
-                <div style={{ fontSize: '11px', color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <div style={{ fontSize: '13px', color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {node.email || ''}
                 </div>
               </div>
               {node.is_owner ? (
-                <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '9px', fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A', whiteSpace: 'nowrap' }}>
+                <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '12px', fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A', whiteSpace: 'nowrap' }}>
                   Owner
                 </span>
               ) : (
-                <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '10px', fontWeight: 600, backgroundColor: 'rgba(10, 37, 64, 0.06)', color: 'var(--brand-navy)', whiteSpace: 'nowrap' }}>
+                <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: 600, backgroundColor: 'rgba(10, 37, 64, 0.06)', color: 'var(--brand-navy)', whiteSpace: 'nowrap' }}>
                   L{lvl.level}
                 </span>
               )}
@@ -1208,13 +1208,13 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               </h3>
               <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: 'var(--space-3)' }}>
                 {m.is_owner && (
-                  <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '11px', fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A' }}>Owner</span>
+                  <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '13px', fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A' }}>Owner</span>
                 )}
-                <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '11px', fontWeight: 600, backgroundColor: 'rgba(10, 37, 64, 0.06)', color: 'var(--brand-navy)' }}>
+                <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '13px', fontWeight: 600, backgroundColor: 'rgba(10, 37, 64, 0.06)', color: 'var(--brand-navy)' }}>
                   L{lvl.level} — {lvl.title}
                 </span>
                 <span style={{
-                  padding: '3px 12px', borderRadius: '999px', fontSize: '11px', fontWeight: 600,
+                  padding: '3px 12px', borderRadius: '999px', fontSize: '13px', fontWeight: 600,
                   backgroundColor: m.status === 'active' ? 'rgba(47, 168, 79, 0.1)' : 'rgba(0,0,0,0.06)',
                   color: m.status === 'active' ? 'var(--status-success)' : 'var(--text-secondary)',
                 }}>
@@ -1229,39 +1229,39 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               }}>
                 {m.email && (
                   <div style={{ gridColumn: '1 / -1' }}>
-                    <div style={{ fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '3px' }}>Email</div>
-                    <a href={`mailto:${m.email}`} style={{ color: 'var(--brand-blue-accent)', fontSize: '13px', textDecoration: 'none', wordBreak: 'break-all' }}>{m.email}</a>
+                    <div style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '3px' }}>Email</div>
+                    <a href={`mailto:${m.email}`} style={{ color: 'var(--brand-blue-accent)', fontSize: '15px', textDecoration: 'none', wordBreak: 'break-all' }}>{m.email}</a>
                   </div>
                 )}
                 {m.phone && (
                   <div>
-                    <div style={{ fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '3px' }}>Phone</div>
-                    <a href={`tel:${m.phone}`} style={{ color: 'var(--brand-blue-accent)', fontSize: '13px', textDecoration: 'none' }}>{m.phone}</a>
+                    <div style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '3px' }}>Phone</div>
+                    <a href={`tel:${m.phone}`} style={{ color: 'var(--brand-blue-accent)', fontSize: '15px', textDecoration: 'none' }}>{m.phone}</a>
                   </div>
                 )}
                 {m.nxt_id && (
                   <div>
-                    <div style={{ fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '3px' }}>NXT ID</div>
-                    <span style={{ fontSize: '13px', color: 'var(--text-primary)', fontWeight: 600 }}>{m.nxt_id}</span>
+                    <div style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '3px' }}>NXT ID</div>
+                    <span style={{ fontSize: '15px', color: 'var(--text-primary)', fontWeight: 600 }}>{m.nxt_id}</span>
                   </div>
                 )}
                 {m.date_of_birth && (
                   <div>
-                    <div style={{ fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '3px' }}>DOB</div>
-                    <span style={{ fontSize: '13px', color: 'var(--text-primary)' }}>{m.date_of_birth}</span>
+                    <div style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '3px' }}>DOB</div>
+                    <span style={{ fontSize: '15px', color: 'var(--text-primary)' }}>{m.date_of_birth}</span>
                   </div>
                 )}
                 {m.state && (
                   <div>
-                    <div style={{ fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '3px' }}>State</div>
-                    <span style={{ fontSize: '13px', color: 'var(--text-primary)' }}>{m.state}</span>
+                    <div style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '3px' }}>State</div>
+                    <span style={{ fontSize: '15px', color: 'var(--text-primary)' }}>{m.state}</span>
                   </div>
                 )}
               </div>
 
               {upline && (
                 <div style={{ marginBottom: 'var(--space-2)' }}>
-                  <div style={{ fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px' }}>Upline</div>
+                  <div style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px' }}>Upline</div>
                   <div
                     onClick={() => setSelectedMember(upline)}
                     style={{
@@ -1273,7 +1273,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                     onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.02)'}
                   >
                     <Avatar name={dn(upline)} photoUrl={upline.photo_url} size={28} goldText={false} />
-                    <span style={{ fontSize: '13px', color: 'var(--brand-navy)', fontWeight: 600 }}>
+                    <span style={{ fontSize: '15px', color: 'var(--brand-navy)', fontWeight: 600 }}>
                       {dn(upline)}
                     </span>
                   </div>
@@ -1282,7 +1282,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
 
               {downlines.length > 0 && (
                 <div style={{ marginBottom: 'var(--space-2)' }}>
-                  <div style={{ fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px' }}>
+                  <div style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px' }}>
                     Direct Reports ({downlines.length})
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -1299,7 +1299,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                         onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.02)'}
                       >
                         <Avatar name={dn(d)} photoUrl={d.photo_url} size={24} goldText={false} />
-                        <span style={{ fontSize: '12px', color: 'var(--brand-navy)', fontWeight: 500 }}>
+                        <span style={{ fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 500 }}>
                           {dn(d)}
                         </span>
                       </div>
@@ -1310,7 +1310,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
 
               {memberSplits.length > 0 && (
                 <div style={{ marginBottom: 'var(--space-2)' }}>
-                  <div style={{ fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px' }}>
+                  <div style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px' }}>
                     Commission Splits ({memberSplits.length})
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -1324,11 +1324,11 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                           border: '1px solid rgba(227, 169, 74, 0.15)',
                         }}
                       >
-                        <span style={{ fontSize: '12px', color: 'var(--brand-navy)', fontWeight: 500 }}>
+                        <span style={{ fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 500 }}>
                           {s.beneficiaryName || 'Unknown'}
                         </span>
                         <span style={{
-                          fontSize: '11px', fontWeight: 700, color: '#fff',
+                          fontSize: '13px', fontWeight: 700, color: '#fff',
                           backgroundColor: 'var(--brand-gold)', borderRadius: '999px',
                           padding: '1px 8px', display: 'inline-flex', alignItems: 'center',
                         }}>
@@ -1346,7 +1346,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                     <button
                       onClick={() => router.push(`/dashboard/team/${m.id}`)}
                       style={{
-                        flex: 1, padding: '10px', borderRadius: '10px', fontSize: '13px',
+                        flex: 1, padding: '10px', borderRadius: '10px', fontSize: '15px',
                         border: '1.5px solid var(--border-color)', backgroundColor: 'transparent',
                         cursor: 'pointer', color: 'var(--brand-navy)', fontWeight: 600,
                       }}
@@ -1357,7 +1357,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                       <button
                         onClick={() => { setSelectedMember(null); setAssignManagerAgent(m); setSelectedManagerId(m.upline_id || ''); }}
                         style={{
-                          flex: 1, padding: '10px', borderRadius: '10px', fontSize: '13px',
+                          flex: 1, padding: '10px', borderRadius: '10px', fontSize: '15px',
                           border: '1.5px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.08)',
                           cursor: 'pointer', color: 'var(--brand-navy)', fontWeight: 600,
                         }}
@@ -1372,7 +1372,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                     onClick={() => { toggleHide(selectedNodeId || m.id); setSelectedMember(null); }}
                     title="Hide this card from the hierarchy view"
                     style={{
-                      padding: '10px', borderRadius: '10px', fontSize: '13px',
+                      padding: '10px', borderRadius: '10px', fontSize: '15px',
                       border: '1.5px solid var(--border-color)', backgroundColor: 'transparent',
                       cursor: 'pointer', color: 'var(--text-secondary)', fontWeight: 600,
                       display: 'flex', alignItems: 'center', gap: '4px',
@@ -1423,13 +1423,13 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                 onChange={e => setSearchQuery(e.target.value)}
                 style={{
                   border: 'none', outline: 'none', background: 'transparent',
-                  fontSize: '12px', color: 'var(--brand-navy)', width: '100%',
+                  fontSize: '14px', color: 'var(--brand-navy)', width: '100%',
                 }}
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', fontSize: '14px', lineHeight: 1, padding: 0 }}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', fontSize: '16px', lineHeight: 1, padding: 0 }}
                 >×</button>
               )}
             </div>
@@ -1456,10 +1456,10 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                   >
                     <Avatar name={dn(a)} photoUrl={a.photo_url} size={24} goldText={false} />
                     <div style={{ minWidth: 0, flex: 1 }}>
-                      <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--brand-navy)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--brand-navy)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {dn(a)}
                       </div>
-                      <div style={{ fontSize: '10px', color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      <div style={{ fontSize: '13px', color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {a.email || ''}
                       </div>
                     </div>
@@ -1472,7 +1472,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
           <div style={{ flex: 1 }} />
 
           {/* Legend */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', fontSize: '10px', color: 'var(--text-secondary)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', fontSize: '13px', color: 'var(--text-secondary)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
               <div style={{ width: '20px', height: '2px', backgroundColor: '#C8CDD5', borderRadius: '1px' }} />
               <span>Hierarchy</span>
@@ -1495,7 +1495,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                 onClick={() => setShowHiddenPanel(p => !p)}
                 style={{
                   display: 'flex', alignItems: 'center', gap: '5px',
-                  padding: '4px 10px', borderRadius: '999px', fontSize: '11px',
+                  padding: '4px 10px', borderRadius: '999px', fontSize: '13px',
                   border: '1px solid var(--border-color)', backgroundColor: 'rgba(0,0,0,0.03)',
                   cursor: 'pointer', color: 'var(--text-secondary)', fontWeight: 600,
                 }}
@@ -1517,12 +1517,12 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                   zIndex: 200, padding: '8px',
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-color)', marginBottom: '6px' }}>
-                    <span style={{ fontSize: '11px', fontWeight: 700, color: 'var(--brand-navy)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Hidden Cards</span>
+                    <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--brand-navy)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Hidden Cards</span>
                     <button
                       onClick={restoreAll}
                       style={{
                         background: 'none', border: 'none', cursor: 'pointer',
-                        fontSize: '11px', color: 'var(--brand-blue-accent)', fontWeight: 600,
+                        fontSize: '13px', color: 'var(--brand-blue-accent)', fontWeight: 600,
                       }}
                     >
                       Restore All
@@ -1541,11 +1541,11 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                     >
                       <Avatar name={item.name} photoUrl={item.photo_url} size={24} goldText={false} />
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        <span style={{ fontSize: '12px', fontWeight: 500, color: 'var(--brand-navy)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}>
+                        <span style={{ fontSize: '14px', fontWeight: 500, color: 'var(--brand-navy)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}>
                           {item.name}
                         </span>
                         {item.label && (
-                          <span style={{ fontSize: '10px', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
+                          <span style={{ fontSize: '13px', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
                             {item.label}
                           </span>
                         )}
@@ -1554,7 +1554,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                         onClick={() => toggleHide(item.id)}
                         style={{
                           background: 'none', border: 'none', cursor: 'pointer',
-                          fontSize: '10px', color: 'var(--brand-blue-accent)', fontWeight: 600,
+                          fontSize: '13px', color: 'var(--brand-blue-accent)', fontWeight: 600,
                           padding: '2px 6px', borderRadius: '4px', flexShrink: 0,
                         }}
                       >
@@ -1570,7 +1570,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
         {/* Breadcrumb bar for scoped view */}
         {scopeId && breadcrumbs.length > 0 && (
           <div style={{
-            padding: '6px 16px', fontSize: '12px', color: 'var(--text-secondary)',
+            padding: '6px 16px', fontSize: '14px', color: 'var(--text-secondary)',
             backgroundColor: 'rgba(12, 16, 34, 0.04)', borderBottom: '1px solid var(--border-color)',
             display: 'flex', alignItems: 'center', gap: '4px', flexWrap: 'wrap',
           }}>
@@ -1578,7 +1578,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               onClick={() => setScopeId(null)}
               style={{
                 background: 'none', border: 'none', cursor: 'pointer', padding: '2px 6px',
-                borderRadius: '4px', fontSize: '12px', color: 'var(--brand-blue-accent)', fontWeight: 600,
+                borderRadius: '4px', fontSize: '14px', color: 'var(--brand-blue-accent)', fontWeight: 600,
               }}
               onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74,0.1)'}
               onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
@@ -1589,7 +1589,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               const isLast = i === breadcrumbs.length - 1;
               return (
                 <React.Fragment key={node.id}>
-                  <span style={{ color: 'var(--text-secondary)', fontSize: '11px' }}>/</span>
+                  <span style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>/</span>
                   {isLast ? (
                     <span style={{ fontWeight: 600, color: 'var(--brand-navy)', padding: '2px 6px' }}>
                       {dn(node)}
@@ -1599,7 +1599,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                       onClick={() => setScopeId(node.id)}
                       style={{
                         background: 'none', border: 'none', cursor: 'pointer', padding: '2px 6px',
-                        borderRadius: '4px', fontSize: '12px', color: 'var(--brand-blue-accent)', fontWeight: 500,
+                        borderRadius: '4px', fontSize: '14px', color: 'var(--brand-blue-accent)', fontWeight: 500,
                       }}
                       onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74,0.1)'}
                       onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
@@ -1736,7 +1736,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
           <div style={{
             padding: '8px 16px', borderRadius: '10px',
             backgroundColor: 'var(--surface-card)', border: '2px solid var(--brand-gold)',
-            boxShadow: '0 8px 24px rgba(0,0,0,0.15)', fontSize: '13px', fontWeight: 600,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.15)', fontSize: '15px', fontWeight: 600,
             color: 'var(--brand-navy)',
           }}>
             Moving {dn(activeNode)} — drop on a card
@@ -1758,25 +1758,25 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
             <h3 style={{ margin: '0 0 8px 0', color: 'var(--brand-navy)', fontSize: '16px', fontWeight: 700 }}>
               Confirm Hierarchy Change
             </h3>
-            <p style={{ margin: '0 0 var(--space-3) 0', color: 'var(--text-secondary)', fontSize: '13px', lineHeight: 1.5 }}>
+            <p style={{ margin: '0 0 var(--space-3) 0', color: 'var(--text-secondary)', fontSize: '15px', lineHeight: 1.5 }}>
               Move <strong style={{ color: 'var(--brand-navy)' }}>{dn(pendingMove.dragNode)}</strong> under <strong style={{ color: 'var(--brand-navy)' }}>{dn(pendingMove.dropNode)}</strong>?
             </p>
             <div style={{
               padding: '12px', borderRadius: '10px', backgroundColor: 'rgba(0,0,0,0.03)',
-              marginBottom: 'var(--space-3)', fontSize: '12px', color: 'var(--text-secondary)',
+              marginBottom: 'var(--space-3)', fontSize: '14px', color: 'var(--text-secondary)',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
                 <Avatar name={dn(pendingMove.dragNode)} photoUrl={pendingMove.dragNode.photo_url} size={28} goldText={false} />
                 <span style={{ fontWeight: 600, color: 'var(--brand-navy)' }}>{dn(pendingMove.dragNode)}</span>
               </div>
               <div style={{ paddingLeft: '14px', borderLeft: '2px solid var(--brand-gold)', marginLeft: '14px' }}>
-                <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '4px' }}>
+                <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '4px' }}>
                   Current upline: {(() => {
                     const cur = pendingMove.dragNode.upline_id ? agents.find(a => a.id === pendingMove.dragNode.upline_id) : null;
                     return cur ? dn(cur) : 'None (top-level)';
                   })()}
                 </div>
-                <div style={{ fontSize: '11px', color: 'var(--status-success)', fontWeight: 600 }}>
+                <div style={{ fontSize: '13px', color: 'var(--status-success)', fontWeight: 600 }}>
                   New upline: {dn(pendingMove.dropNode)}
                 </div>
               </div>
@@ -1798,19 +1798,19 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
             onClick={() => setShowLog(prev => !prev)}
             style={{
               background: 'none', border: 'none', cursor: 'pointer',
-              fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 600,
+              fontSize: '14px', color: 'var(--text-secondary)', fontWeight: 600,
               display: 'flex', alignItems: 'center', gap: '6px', padding: '4px 0',
             }}
           >
-            <span style={{ fontSize: '14px', transition: 'transform 0.2s', transform: showLog ? 'rotate(90deg)' : 'rotate(0deg)' }}>&#9654;</span>
+            <span style={{ fontSize: '16px', transition: 'transform 0.2s', transform: showLog ? 'rotate(90deg)' : 'rotate(0deg)' }}>&#9654;</span>
             Recent Hierarchy Changes
           </button>
           {showLog && (
             <Card style={{ marginTop: '8px', padding: 'var(--space-3)' }}>
               {logLoading ? (
-                <div style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '12px', padding: 'var(--space-2)' }}>Loading...</div>
+                <div style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '14px', padding: 'var(--space-2)' }}>Loading...</div>
               ) : hierarchyLog.length === 0 ? (
-                <div style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '12px', padding: 'var(--space-2)' }}>No hierarchy changes yet.</div>
+                <div style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '14px', padding: 'var(--space-2)' }}>No hierarchy changes yet.</div>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {hierarchyLog.map(log => {
@@ -1824,20 +1824,20 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                         opacity: log.undone ? 0.6 : 1,
                       }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                          <div style={{ fontSize: '12px', color: 'var(--brand-navy)', fontWeight: 600 }}>
+                          <div style={{ fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 600 }}>
                             {log.agentName}
                           </div>
-                          <div style={{ fontSize: '10px', color: 'var(--text-secondary)' }}>
+                          <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
                             {log.createdAt ? new Date(log.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : ''}
                           </div>
                         </div>
-                        <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginTop: '2px' }}>
+                        <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '2px' }}>
                           {oldParent ? dn(oldParent) : 'Top-level'}
                           {' → '}
                           {newParent ? dn(newParent) : 'Top-level'}
                           {log.descendantsUpdated > 0 && ` · ${log.descendantsUpdated} descendants`}
                         </div>
-                        <div style={{ fontSize: '10px', color: 'var(--text-secondary)', marginTop: '2px' }}>
+                        <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '2px' }}>
                           by {log.performedByName}
                           {log.undone && <span style={{ color: 'var(--status-warning)', fontWeight: 600 }}> · Undone</span>}
                         </div>
@@ -1849,7 +1849,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                               marginTop: '6px', padding: '3px 10px', borderRadius: '999px',
                               border: '1px solid var(--border-color)', backgroundColor: 'transparent',
                               cursor: undoingId === log.id ? 'wait' : 'pointer',
-                              fontSize: '10px', color: 'var(--text-secondary)', fontWeight: 600,
+                              fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 600,
                               opacity: undoingId === log.id ? 0.5 : 1,
                             }}
                           >
@@ -1885,7 +1885,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
             disabled={backfilling}
             style={{
               background: 'none', border: '1px solid var(--border-color)', cursor: backfilling ? 'wait' : 'pointer',
-              fontSize: '12px', color: 'var(--brand-navy)', fontWeight: 600,
+              fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 600,
               padding: '6px 14px', borderRadius: '8px',
               opacity: backfilling ? 0.5 : 1,
             }}
@@ -1894,7 +1894,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
           </button>
           {backfillResult && (
             <div style={{
-              marginTop: '6px', fontSize: '12px', padding: '8px 12px', borderRadius: '8px',
+              marginTop: '6px', fontSize: '14px', padding: '8px 12px', borderRadius: '8px',
               backgroundColor: backfillResult.success ? 'rgba(47,168,79,0.08)' : 'rgba(220,53,69,0.08)',
               color: backfillResult.success ? 'var(--status-success)' : 'var(--status-error)',
               border: `1px solid ${backfillResult.success ? 'rgba(47,168,79,0.2)' : 'rgba(220,53,69,0.2)'}`,
@@ -1911,7 +1911,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               value={diagEmail}
               onChange={e => setDiagEmail(e.target.value)}
               style={{
-                fontSize: '12px', padding: '6px 12px', borderRadius: '8px',
+                fontSize: '14px', padding: '6px 12px', borderRadius: '8px',
                 border: '1px solid var(--border-color)', width: '260px',
               }}
             />
@@ -1931,7 +1931,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               disabled={diagLoading || !diagEmail.trim()}
               style={{
                 background: 'none', border: '1px solid var(--border-color)', cursor: diagLoading ? 'wait' : 'pointer',
-                fontSize: '12px', color: 'var(--brand-navy)', fontWeight: 600,
+                fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 600,
                 padding: '6px 14px', borderRadius: '8px',
                 opacity: (diagLoading || !diagEmail.trim()) ? 0.5 : 1,
               }}
@@ -1941,7 +1941,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
           </div>
           {diagResult && (
             <pre style={{
-              marginTop: '8px', fontSize: '11px', padding: '10px', borderRadius: '8px',
+              marginTop: '8px', fontSize: '13px', padding: '10px', borderRadius: '8px',
               backgroundColor: 'rgba(0,0,0,0.03)', border: '1px solid var(--border-color)',
               overflow: 'auto', maxHeight: '300px', whiteSpace: 'pre-wrap',
             }}>
@@ -1964,7 +1964,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               disabled={paymentAuditLoading}
               style={{
                 background: 'none', border: '1px solid var(--border-color)', cursor: paymentAuditLoading ? 'wait' : 'pointer',
-                fontSize: '12px', color: 'var(--brand-navy)', fontWeight: 600,
+                fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 600,
                 padding: '6px 14px', borderRadius: '8px',
                 opacity: paymentAuditLoading ? 0.5 : 1,
               }}
@@ -1986,7 +1986,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               disabled={reminderLoading}
               style={{
                 background: 'none', border: '1px solid #DC3545', cursor: reminderLoading ? 'wait' : 'pointer',
-                fontSize: '12px', color: '#DC3545', fontWeight: 600,
+                fontSize: '14px', color: '#DC3545', fontWeight: 600,
                 padding: '6px 14px', borderRadius: '8px',
                 opacity: reminderLoading ? 0.5 : 1,
               }}
@@ -1996,7 +1996,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
           </div>
           {reminderResult && (
             <pre style={{
-              marginTop: '8px', fontSize: '11px', padding: '10px', borderRadius: '8px',
+              marginTop: '8px', fontSize: '13px', padding: '10px', borderRadius: '8px',
               backgroundColor: reminderResult.success ? 'rgba(47, 168, 79, 0.06)' : 'rgba(220, 53, 69, 0.06)',
               border: `1px solid ${reminderResult.success ? 'rgba(47, 168, 79, 0.2)' : 'rgba(220, 53, 69, 0.2)'}`,
               overflow: 'auto', maxHeight: '300px', whiteSpace: 'pre-wrap',
@@ -2006,7 +2006,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
           )}
           {paymentAudit && (
             <pre style={{
-              marginTop: '8px', fontSize: '11px', padding: '10px', borderRadius: '8px',
+              marginTop: '8px', fontSize: '13px', padding: '10px', borderRadius: '8px',
               backgroundColor: 'rgba(0,0,0,0.03)', border: '1px solid var(--border-color)',
               overflow: 'auto', maxHeight: '400px', whiteSpace: 'pre-wrap',
             }}>
@@ -2035,8 +2035,8 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                 </svg>
               </div>
               <div>
-                <h3 style={{ margin: 0, fontSize: '14px', fontWeight: 700, color: 'var(--brand-navy)' }}>Payment Status Tracker</h3>
-                <p style={{ margin: 0, fontSize: '12px', color: 'var(--text-secondary)' }}>
+                <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: 'var(--brand-navy)' }}>Payment Status Tracker</h3>
+                <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-secondary)' }}>
                   {paymentTrackerLoading ? 'Loading...' : paymentTracker?.success
                     ? `${paymentTracker.missing.length} missing · ${paymentTracker.withCard.length} completed`
                     : 'Failed to load'}
@@ -2056,7 +2056,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               style={{
                 background: 'none', border: '1px solid var(--border-color)',
                 cursor: paymentTrackerLoading ? 'wait' : 'pointer',
-                fontSize: '12px', color: 'var(--brand-navy)', fontWeight: 600,
+                fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 600,
                 padding: '5px 12px', borderRadius: '8px',
                 opacity: paymentTrackerLoading ? 0.5 : 1,
                 display: 'flex', alignItems: 'center', gap: '4px',
@@ -2083,7 +2083,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                   transition: 'width 0.5s ease',
                 }} />
               </div>
-              <p style={{ margin: '6px 0 0', fontSize: '11px', color: 'var(--text-secondary)' }}>
+              <p style={{ margin: '6px 0 0', fontSize: '13px', color: 'var(--text-secondary)' }}>
                 {paymentTracker.withCard.length} of {paymentTracker.withCard.length + paymentTracker.missing.length} agents have added payment
               </p>
             </div>
@@ -2092,11 +2092,11 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
           {/* Missing card table */}
           {paymentTracker?.success && paymentTracker.missing.length > 0 && (
             <div>
-              <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: '#DC3545' }}>
+              <p style={{ margin: '0 0 8px', fontSize: '14px', fontWeight: 700, color: '#DC3545' }}>
                 Still Missing ({paymentTracker.missing.length})
               </p>
               <div style={{ borderRadius: '10px', border: '1px solid rgba(220,53,69,0.15)', overflow: 'hidden' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
                   <thead>
                     <tr style={{ background: 'rgba(220,53,69,0.04)' }}>
                       <th scope="col" style={{ padding: '8px 12px', textAlign: 'left', fontWeight: 600, color: 'var(--brand-navy)', borderBottom: '1px solid rgba(220,53,69,0.1)' }}>Name</th>
@@ -2114,7 +2114,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                         <td style={{ padding: '8px 12px', textAlign: 'center' }}>
                           <span style={{
                             display: 'inline-block', padding: '2px 10px', borderRadius: '999px',
-                            fontSize: '11px', fontWeight: 600,
+                            fontSize: '13px', fontWeight: 600,
                             background: 'rgba(220,53,69,0.08)', color: '#DC3545',
                           }}>
                             Missing
@@ -2131,11 +2131,11 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
           {/* Completed card table */}
           {paymentTracker?.success && paymentTracker.withCard.length > 0 && (
             <div style={{ marginTop: '16px' }}>
-              <p style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 700, color: '#2FA84F' }}>
+              <p style={{ margin: '0 0 8px', fontSize: '14px', fontWeight: 700, color: '#2FA84F' }}>
                 Completed ({paymentTracker.withCard.length})
               </p>
               <div style={{ borderRadius: '10px', border: '1px solid rgba(47,168,79,0.15)', overflow: 'hidden' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
                   <thead>
                     <tr style={{ background: 'rgba(47,168,79,0.04)' }}>
                       <th scope="col" style={{ padding: '8px 12px', textAlign: 'left', fontWeight: 600, color: 'var(--brand-navy)', borderBottom: '1px solid rgba(47,168,79,0.1)' }}>Name</th>
@@ -2155,7 +2155,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                         <td style={{ padding: '8px 12px', textAlign: 'center' }}>
                           <span style={{
                             display: 'inline-block', padding: '2px 10px', borderRadius: '999px',
-                            fontSize: '11px', fontWeight: 600,
+                            fontSize: '13px', fontWeight: 600,
                             background: 'rgba(47,168,79,0.08)', color: '#2FA84F',
                           }}>
                             Done
@@ -2178,10 +2178,10 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: '8px' }}>
                 <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
               </svg>
-              <p style={{ margin: 0, fontSize: '14px', fontWeight: 600, color: '#2FA84F' }}>
+              <p style={{ margin: 0, fontSize: '16px', fontWeight: 600, color: '#2FA84F' }}>
                 All agents have added their payment details
               </p>
-              <p style={{ margin: '4px 0 0', fontSize: '12px', color: 'var(--text-secondary)' }}>
+              <p style={{ margin: '4px 0 0', fontSize: '14px', color: 'var(--text-secondary)' }}>
                 This tracker can be safely removed.
               </p>
             </div>
@@ -2195,7 +2195,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
           position: 'fixed', bottom: '24px', right: '24px', zIndex: 10002,
           padding: 'var(--space-2) var(--space-3)', borderRadius: '12px',
           backgroundColor: moveResult.type === 'success' ? 'var(--status-success)' : 'var(--status-error)',
-          color: '#fff', fontSize: '13px', fontWeight: 600,
+          color: '#fff', fontSize: '15px', fontWeight: 600,
           boxShadow: '0 4px 20px rgba(0,0,0,0.15)', maxWidth: '400px',
         }}>
           {moveResult.message}
@@ -2243,13 +2243,13 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                   </h3>
                   <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginTop: '8px' }}>
                     {m.is_owner && (
-                      <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '10px', fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A' }}>Owner</span>
+                      <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '13px', fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A' }}>Owner</span>
                     )}
-                    <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '10px', fontWeight: 600, backgroundColor: 'rgba(10, 37, 64, 0.06)', color: 'var(--brand-navy)' }}>
+                    <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '13px', fontWeight: 600, backgroundColor: 'rgba(10, 37, 64, 0.06)', color: 'var(--brand-navy)' }}>
                       L{lvl.level} · {lvl.title}
                     </span>
                     <span style={{
-                      padding: '3px 12px', borderRadius: '999px', fontSize: '10px', fontWeight: 600,
+                      padding: '3px 12px', borderRadius: '999px', fontSize: '13px', fontWeight: 600,
                       backgroundColor: m.status === 'active' ? 'rgba(47, 168, 79, 0.1)' : 'rgba(0,0,0,0.06)',
                       color: m.status === 'active' ? 'var(--status-success)' : 'var(--text-secondary)',
                     }}>
@@ -2280,32 +2280,32 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               }}>
                 {m.email && (
                   <div style={{ gridColumn: '1 / -1' }}>
-                    <div style={{ fontSize: '9px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '3px' }}>Email</div>
-                    <a href={`mailto:${m.email}`} style={{ color: 'var(--brand-blue-accent)', fontSize: '12px', textDecoration: 'none', wordBreak: 'break-all' }}>{m.email}</a>
+                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '3px' }}>Email</div>
+                    <a href={`mailto:${m.email}`} style={{ color: 'var(--brand-blue-accent)', fontSize: '14px', textDecoration: 'none', wordBreak: 'break-all' }}>{m.email}</a>
                   </div>
                 )}
                 {m.phone && (
                   <div>
-                    <div style={{ fontSize: '9px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '3px' }}>Phone</div>
-                    <a href={`tel:${m.phone}`} style={{ color: 'var(--brand-blue-accent)', fontSize: '12px', textDecoration: 'none' }}>{m.phone}</a>
+                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '3px' }}>Phone</div>
+                    <a href={`tel:${m.phone}`} style={{ color: 'var(--brand-blue-accent)', fontSize: '14px', textDecoration: 'none' }}>{m.phone}</a>
                   </div>
                 )}
                 {m.nxt_id && (
                   <div>
-                    <div style={{ fontSize: '9px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '3px' }}>NXT ID</div>
-                    <span style={{ fontSize: '12px', color: 'var(--text-primary)', fontWeight: 600 }}>{m.nxt_id}</span>
+                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '3px' }}>NXT ID</div>
+                    <span style={{ fontSize: '14px', color: 'var(--text-primary)', fontWeight: 600 }}>{m.nxt_id}</span>
                   </div>
                 )}
                 {m.date_of_birth && (
                   <div>
-                    <div style={{ fontSize: '9px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '3px' }}>DOB</div>
-                    <span style={{ fontSize: '12px', color: 'var(--text-primary)' }}>{m.date_of_birth}</span>
+                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '3px' }}>DOB</div>
+                    <span style={{ fontSize: '14px', color: 'var(--text-primary)' }}>{m.date_of_birth}</span>
                   </div>
                 )}
                 {m.state && (
                   <div>
-                    <div style={{ fontSize: '9px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '3px' }}>State</div>
-                    <span style={{ fontSize: '12px', color: 'var(--text-primary)' }}>{m.state}</span>
+                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '3px' }}>State</div>
+                    <span style={{ fontSize: '14px', color: 'var(--text-primary)' }}>{m.state}</span>
                   </div>
                 )}
               </div>
@@ -2313,7 +2313,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               {/* Upline */}
               {upline && (
                 <div style={{ marginBottom: '16px' }}>
-                  <div style={{ fontSize: '9px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '6px' }}>Upline</div>
+                  <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '6px' }}>Upline</div>
                   <div
                     onClick={() => setSelectedMember(upline)}
                     style={{
@@ -2326,7 +2326,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                     onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.02)'; e.currentTarget.style.borderColor = 'transparent'; }}
                   >
                     <Avatar name={dn(upline)} photoUrl={upline.photo_url} size={28} goldText={false} />
-                    <span style={{ fontSize: '13px', color: 'var(--brand-navy)', fontWeight: 600 }}>
+                    <span style={{ fontSize: '15px', color: 'var(--brand-navy)', fontWeight: 600 }}>
                       {dn(upline)}
                     </span>
                   </div>
@@ -2336,7 +2336,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               {/* Direct Reports */}
               {downlines.length > 0 && (
                 <div style={{ marginBottom: '16px' }}>
-                  <div style={{ fontSize: '9px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '6px' }}>
+                  <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '6px' }}>
                     Direct Reports ({downlines.length})
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
@@ -2353,7 +2353,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                         onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.02)'}
                       >
                         <Avatar name={dn(d)} photoUrl={d.photo_url} size={24} goldText={false} />
-                        <span style={{ fontSize: '12px', color: 'var(--brand-navy)', fontWeight: 500 }}>
+                        <span style={{ fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 500 }}>
                           {dn(d)}
                         </span>
                       </div>
@@ -2365,7 +2365,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               {/* Commission Splits */}
               {memberSplits.length > 0 && (
                 <div style={{ marginBottom: '16px' }}>
-                  <div style={{ fontSize: '9px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '6px' }}>
+                  <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '6px' }}>
                     Commission Splits ({memberSplits.length})
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -2379,11 +2379,11 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                           border: '1px solid rgba(227, 169, 74, 0.12)',
                         }}
                       >
-                        <span style={{ fontSize: '12px', color: 'var(--brand-navy)', fontWeight: 500 }}>
+                        <span style={{ fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 500 }}>
                           {s.beneficiaryName || 'Unknown'}
                         </span>
                         <span style={{
-                          fontSize: '11px', fontWeight: 700, color: '#fff',
+                          fontSize: '13px', fontWeight: 700, color: '#fff',
                           background: 'linear-gradient(135deg, var(--brand-gold), #E3A94A)',
                           borderRadius: '999px',
                           padding: '2px 10px', display: 'inline-flex', alignItems: 'center',
@@ -2410,7 +2410,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                   <button
                     onClick={() => router.push(`/dashboard/team/${m.id}`)}
                     style={{
-                      flex: 1, padding: '10px', borderRadius: '10px', fontSize: '12px',
+                      flex: 1, padding: '10px', borderRadius: '10px', fontSize: '14px',
                       border: '1.5px solid var(--border-color)', backgroundColor: 'transparent',
                       cursor: 'pointer', color: 'var(--brand-navy)', fontWeight: 600,
                       transition: 'background-color 0.15s',
@@ -2424,7 +2424,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                     <button
                       onClick={() => { setSelectedMember(null); setAssignManagerAgent(m); setSelectedManagerId(m.upline_id || ''); }}
                       style={{
-                        flex: 1, padding: '10px', borderRadius: '10px', fontSize: '12px',
+                        flex: 1, padding: '10px', borderRadius: '10px', fontSize: '14px',
                         border: '1.5px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.06)',
                         cursor: 'pointer', color: 'var(--brand-navy)', fontWeight: 600,
                         transition: 'background-color 0.15s',
@@ -2441,7 +2441,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                 <button
                   onClick={() => { setSelectedMember(null); handleScopeIn(m.id); }}
                   style={{
-                    flex: 1, padding: '10px', borderRadius: '10px', fontSize: '12px',
+                    flex: 1, padding: '10px', borderRadius: '10px', fontSize: '14px',
                     border: '1.5px solid var(--brand-blue-accent)', backgroundColor: 'rgba(227, 169, 74, 0.04)',
                     cursor: 'pointer', color: 'var(--brand-navy)', fontWeight: 600,
                     transition: 'background-color 0.15s',
@@ -2457,7 +2457,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                   onClick={() => { toggleHide(selectedNodeId || m.id); setSelectedMember(null); }}
                   title="Hide this card from the hierarchy view"
                   style={{
-                    padding: '10px', borderRadius: '10px', fontSize: '12px',
+                    padding: '10px', borderRadius: '10px', fontSize: '14px',
                     border: '1.5px solid var(--border-color)', backgroundColor: 'transparent',
                     cursor: 'pointer', color: 'var(--text-secondary)', fontWeight: 600,
                     transition: 'background-color 0.15s',
@@ -2872,7 +2872,7 @@ export default function TeamDashboard() {
                               {dn(m)}
                             </div>
                             <span style={{
-                              padding: '2px 8px', borderRadius: '999px', fontSize: '10px', fontWeight: '600',
+                              padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: '600',
                               backgroundColor: 'rgba(10, 37, 64, 0.06)', color: 'var(--brand-navy)'
                             }}>
                               L{lvl.level}
@@ -2886,7 +2886,7 @@ export default function TeamDashboard() {
                               onClick={() => router.push(`/dashboard/team/${m.id}`)}
                               style={{
                                 padding: '2px 10px', borderRadius: '999px', border: '1px solid var(--border-color)',
-                                backgroundColor: 'transparent', cursor: 'pointer', fontSize: '11px',
+                                backgroundColor: 'transparent', cursor: 'pointer', fontSize: '13px',
                                 color: 'var(--brand-navy)', fontWeight: '500'
                               }}
                             >
@@ -2924,7 +2924,7 @@ export default function TeamDashboard() {
                             {dn(m)}
                           </span>
                           <span style={{
-                            padding: '2px 8px', borderRadius: '999px', fontSize: '10px', fontWeight: '600',
+                            padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: '600',
                             backgroundColor: 'rgba(10, 37, 64, 0.06)', color: 'var(--brand-navy)'
                           }}>
                             L{lvl.level}
@@ -2936,7 +2936,7 @@ export default function TeamDashboard() {
                               onClick={() => { setAssignManagerAgent(m); setSelectedManagerId(''); }}
                               style={{
                                 padding: '2px 10px', borderRadius: '999px', border: '1px solid var(--brand-gold)',
-                                backgroundColor: 'rgba(227, 169, 74, 0.08)', cursor: 'pointer', fontSize: '11px',
+                                backgroundColor: 'rgba(227, 169, 74, 0.08)', cursor: 'pointer', fontSize: '13px',
                                 color: 'var(--brand-navy)', fontWeight: '500'
                               }}
                             >
@@ -2947,7 +2947,7 @@ export default function TeamDashboard() {
                             onClick={() => router.push(`/dashboard/team/${m.id}`)}
                             style={{
                               padding: '2px 10px', borderRadius: '999px', border: '1px solid var(--border-color)',
-                              backgroundColor: 'transparent', cursor: 'pointer', fontSize: '11px',
+                              backgroundColor: 'transparent', cursor: 'pointer', fontSize: '13px',
                               color: 'var(--brand-navy)', fontWeight: '500'
                             }}
                           >
@@ -2998,11 +2998,11 @@ export default function TeamDashboard() {
                 const lvl = AGENT_LEVELS.find(l => l.level === (mgr.agentLevel || 1)) || AGENT_LEVELS[0];
                 return (
                   <>
-                    <span style={{ fontSize: '11px', fontWeight: 700, color: '#0C1022', backgroundColor: 'rgba(12, 16, 34,0.08)', padding: '2px 8px', borderRadius: '6px', fontFamily: 'monospace', flexShrink: 0 }}>
+                    <span style={{ fontSize: '13px', fontWeight: 700, color: '#0C1022', backgroundColor: 'rgba(12, 16, 34,0.08)', padding: '2px 8px', borderRadius: '6px', fontFamily: 'monospace', flexShrink: 0 }}>
                       {mgr.nxt_id || '---'}
                     </span>
-                    <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)' }}>{dn(mgr)}</span>
-                    <span style={{ fontSize: '11px', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
+                    <span style={{ fontSize: '15px', fontWeight: 500, color: 'var(--text-primary)' }}>{dn(mgr)}</span>
+                    <span style={{ fontSize: '13px', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
                       {mgr.is_owner ? 'Owner' : mgr.role === 'it_engineer' ? 'IT Engineer' : lvl.title}
                     </span>
                   </>
@@ -3133,11 +3133,11 @@ export default function TeamDashboard() {
                                       value={linkAgentSearch}
                                       onChange={e => setLinkAgentSearch(e.target.value)}
                                       autoFocus
-                                      style={{ width: '100%', padding: '6px 10px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '12px', boxSizing: 'border-box' }}
+                                      style={{ width: '100%', padding: '6px 10px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '14px', boxSizing: 'border-box' }}
                                     />
                                     <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 100, maxHeight: '160px', overflowY: 'auto', backgroundColor: 'var(--surface-card)', border: '1px solid var(--border-color)', borderRadius: '8px', marginTop: '4px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
                                       {unlinkedAgents.length === 0 ? (
-                                        <div style={{ padding: '8px 10px', fontSize: '12px', color: 'var(--text-secondary)' }}>No unlinked agents found</div>
+                                        <div style={{ padding: '8px 10px', fontSize: '14px', color: 'var(--text-secondary)' }}>No unlinked agents found</div>
                                       ) : unlinkedAgents.map(a => (
                                         <div
                                           key={a.id}
@@ -3154,16 +3154,16 @@ export default function TeamDashboard() {
                                               setTimeout(() => setResendResult(null), 5000);
                                             }
                                           }}
-                                          style={{ padding: '8px 10px', cursor: 'pointer', fontSize: '12px', borderBottom: '1px solid rgba(0,0,0,0.04)', display: 'flex', flexDirection: 'column', gap: '2px' }}
+                                          style={{ padding: '8px 10px', cursor: 'pointer', fontSize: '14px', borderBottom: '1px solid rgba(0,0,0,0.04)', display: 'flex', flexDirection: 'column', gap: '2px' }}
                                         >
                                           <span style={{ fontWeight: '600', color: 'var(--brand-navy)' }}>{dn(a)}</span>
-                                          <span style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{a.email}</span>
+                                          <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>{a.email}</span>
                                         </div>
                                       ))}
                                     </div>
                                     <button
                                       onClick={() => { setLinkingInviteId(null); setLinkAgentSearch(''); }}
-                                      style={{ position: 'absolute', top: '6px', right: '6px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '14px', color: 'var(--text-secondary)' }}
+                                      style={{ position: 'absolute', top: '6px', right: '6px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px', color: 'var(--text-secondary)' }}
                                     >×</button>
                                   </div>
                                 );

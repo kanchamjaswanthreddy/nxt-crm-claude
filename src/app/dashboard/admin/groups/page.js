@@ -145,7 +145,7 @@ export default function GroupsDashboard() {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '4px',
-                    fontSize: '12px',
+                    fontSize: '14px',
                     fontWeight: '600',
                     color: 'var(--brand-navy)',
                     backgroundColor: 'rgba(10, 37, 64, 0.06)',
@@ -160,7 +160,7 @@ export default function GroupsDashboard() {
               <p style={{
                 margin: 0,
                 color: 'var(--text-secondary)',
-                fontSize: '13px',
+                fontSize: '15px',
                 lineHeight: 1.5,
                 display: '-webkit-box',
                 WebkitLineClamp: 3,

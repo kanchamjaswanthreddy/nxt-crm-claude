@@ -932,7 +932,7 @@ export default function OnboardingPage() {
                               display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                               width: '100%', padding: '10px 16px', border: 'none',
                               backgroundColor: 'transparent', cursor: 'pointer',
-                              fontSize: '14px', color: 'var(--text-primary)', textAlign: 'left',
+                              fontSize: '16px', color: 'var(--text-primary)', textAlign: 'left',
                               borderBottom: '1px solid rgba(0,0,0,0.05)',
                               transition: 'background-color 0.15s',
                             }}
@@ -942,7 +942,7 @@ export default function OnboardingPage() {
                             <span style={{ fontWeight: 500 }}>{agent.fullName}</span>
                             {agent.nxtId && (
                               <span style={{
-                                fontSize: '12px', fontWeight: 600, color: 'var(--brand-navy)',
+                                fontSize: '14px', fontWeight: 600, color: 'var(--brand-navy)',
                                 backgroundColor: 'rgba(12, 16, 34, 0.08)', padding: '2px 8px',
                                 borderRadius: '999px',
                               }}>
@@ -973,12 +973,12 @@ export default function OnboardingPage() {
                         border: '1px solid var(--border-color)', backgroundColor: idx === 0 ? 'rgba(227, 169, 74, 0.03)' : 'var(--surface-page)',
                       }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                          <span style={{ fontSize: '13px', fontWeight: '600', color: 'var(--brand-navy)' }}>
+                          <span style={{ fontSize: '15px', fontWeight: '600', color: 'var(--brand-navy)' }}>
                             {idx === 0 ? 'Current / Most Recent' : `Position ${idx + 1}`}
                           </span>
                           {idx > 0 && (
                             <button type="button" onClick={() => setEmploymentEntries(prev => prev.filter((_, i) => i !== idx))}
-                              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--status-error)', fontSize: '13px', fontWeight: '500' }}>
+                              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--status-error)', fontSize: '15px', fontWeight: '500' }}>
                               Remove
                             </button>
                           )}
@@ -1023,7 +1023,7 @@ export default function OnboardingPage() {
                         </div>
 
                         {idx === 0 && (
-                          <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px', fontSize: '13px', color: 'var(--text-secondary)', cursor: 'pointer' }}>
+                          <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px', fontSize: '15px', color: 'var(--text-secondary)', cursor: 'pointer' }}>
                             <input type="checkbox" checked={entry.current}
                               onChange={e => updateEntry('current', e.target.checked)}
                               style={{ accentColor: 'var(--brand-navy)' }} />
@@ -1040,7 +1040,7 @@ export default function OnboardingPage() {
                       style={{
                         width: '100%', padding: '12px', borderRadius: '10px',
                         border: '1px dashed var(--border-color)', background: 'none',
-                        cursor: 'pointer', fontSize: '13px', fontWeight: '500',
+                        cursor: 'pointer', fontSize: '15px', fontWeight: '500',
                         color: 'var(--brand-navy)', transition: 'background-color 0.2s ease',
                       }}>
                       + Add Another Position
@@ -1061,7 +1061,7 @@ export default function OnboardingPage() {
                     border: `1px solid ${validationErrors.workAuthorization ? 'var(--status-error)' : 'var(--border-color)'}`,
                     backgroundColor: qualificationForm.workAuthorization ? 'rgba(227, 169, 74, 0.03)' : 'var(--surface-page)',
                   }}>
-                    <label className={styles.fieldLabel} style={{ marginBottom: '8px', display: 'block', fontWeight: 600, fontSize: '14px', color: 'var(--brand-navy)' }}>
+                    <label className={styles.fieldLabel} style={{ marginBottom: '8px', display: 'block', fontWeight: 600, fontSize: '16px', color: 'var(--brand-navy)' }}>
                       Are you legally authorized to work in the United States? *
                     </label>
                     <select
@@ -1149,16 +1149,16 @@ export default function OnboardingPage() {
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px' }}>
                               <div style={{ flex: 1, minWidth: 0 }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
-                                  <span style={{ fontWeight: 600, fontSize: '14px', color: 'var(--brand-navy)' }}>
+                                  <span style={{ fontWeight: 600, fontSize: '16px', color: 'var(--brand-navy)' }}>
                                     {docItem.label}{!docItem.optional ? ' *' : ''}
                                   </span>
                                   {isUploaded && (
-                                    <span style={{ color: 'var(--status-success)', fontSize: '12px', fontWeight: 600 }}>
+                                    <span style={{ color: 'var(--status-success)', fontSize: '14px', fontWeight: 600 }}>
                                       Uploaded
                                     </span>
                                   )}
                                 </div>
-                                <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-secondary)' }}>
+                                <p style={{ margin: 0, fontSize: '15px', color: 'var(--text-secondary)' }}>
                                   {docItem.desc}
                                 </p>
 
@@ -1172,7 +1172,7 @@ export default function OnboardingPage() {
                                         display: 'inline-flex', alignItems: 'center', gap: '6px',
                                         padding: '6px 14px', borderRadius: '8px',
                                         border: '1px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.08)',
-                                        color: 'var(--brand-navy)', fontSize: '12px', fontWeight: 600,
+                                        color: 'var(--brand-navy)', fontSize: '14px', fontWeight: 600,
                                         textDecoration: 'none', cursor: 'pointer', transition: 'all 0.2s ease',
                                       }}
                                     >
@@ -1184,7 +1184,7 @@ export default function OnboardingPage() {
                                       Download Blank W-9
                                     </a>
                                     {docItem.helpText && (
-                                      <span style={{ fontSize: '12px', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
+                                      <span style={{ fontSize: '14px', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
                                         {docItem.helpText}
                                       </span>
                                     )}
@@ -1192,13 +1192,13 @@ export default function OnboardingPage() {
                                 )}
 
                                 {isUploaded && (
-                                  <p style={{ margin: '6px 0 0 0', fontSize: '12px', color: 'var(--text-secondary)' }}>
+                                  <p style={{ margin: '6px 0 0 0', fontSize: '14px', color: 'var(--text-secondary)' }}>
                                     {uploadedDocs[docItem.key].fileName}
                                   </p>
                                 )}
 
                                 {error && (
-                                  <p style={{ margin: '6px 0 0 0', fontSize: '12px', color: 'var(--status-error)', fontWeight: 500 }}>
+                                  <p style={{ margin: '6px 0 0 0', fontSize: '14px', color: 'var(--status-error)', fontWeight: 500 }}>
                                     {error}
                                   </p>
                                 )}
@@ -1210,7 +1210,7 @@ export default function OnboardingPage() {
                                   padding: '8px 16px', borderRadius: '999px',
                                   border: '1px solid var(--border-color)',
                                   backgroundColor: isCurrentlyUploading ? 'rgba(0,0,0,0.04)' : 'transparent',
-                                  color: 'var(--brand-navy)', fontSize: '13px', fontWeight: 600,
+                                  color: 'var(--brand-navy)', fontSize: '15px', fontWeight: 600,
                                   cursor: isCurrentlyUploading ? 'wait' : 'pointer',
                                   transition: 'all 0.2s ease',
                                   opacity: isCurrentlyUploading ? 0.6 : 1,
@@ -1291,7 +1291,7 @@ export default function OnboardingPage() {
                     <div className={styles.reviewGrid}>
                       {employmentEntries.filter(e => e.employer?.trim()).map((entry, idx) => (
                         <div key={idx} style={idx > 0 ? { marginTop: '12px', paddingTop: '12px', borderTop: '1px solid var(--border-color)' } : {}}>
-                          {idx > 0 && <span style={{ fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>Position {idx + 1}</span>}
+                          {idx > 0 && <span style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>Position {idx + 1}</span>}
                           <ReviewItem label="Employer" value={entry.employer} />
                           <ReviewItem label="Position" value={entry.position} />
                           <ReviewItem label="Work Phone" value={entry.workPhone} />

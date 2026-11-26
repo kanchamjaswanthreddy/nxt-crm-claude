@@ -219,10 +219,10 @@ export default function LeadDetailPage({ params }) {
   if (loadError || !lead) return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '40vh', gap: '12px', padding: '32px' }}>
       <h2 style={{ color: 'var(--brand-navy)', fontSize: '20px' }}>Unable to load lead</h2>
-      <p style={{ color: 'var(--text-secondary)', fontSize: '14px', textAlign: 'center', maxWidth: '400px' }}>{loadError || 'Lead not found.'}</p>
+      <p style={{ color: 'var(--text-secondary)', fontSize: '16px', textAlign: 'center', maxWidth: '400px' }}>{loadError || 'Lead not found.'}</p>
       <button onClick={() => router.push('/dashboard/leads')} style={{
         marginTop: '8px', padding: '8px 20px', borderRadius: '8px', border: '1px solid var(--border-color)',
-        background: 'var(--surface-card)', cursor: 'pointer', fontSize: '14px', fontWeight: 500, color: 'var(--brand-navy)',
+        background: 'var(--surface-card)', cursor: 'pointer', fontSize: '16px', fontWeight: 500, color: 'var(--brand-navy)',
       }}>Back to Leads</button>
     </div>
   );

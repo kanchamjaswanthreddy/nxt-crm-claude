@@ -98,12 +98,12 @@ export default function VerifyEmailPage() {
 
       <div className={styles.content}>
         {error && (
-          <p style={{ fontSize: '13px', color: 'var(--status-error)', marginBottom: '12px', textAlign: 'center' }}>
+          <p style={{ fontSize: '15px', color: 'var(--status-error)', marginBottom: '12px', textAlign: 'center' }}>
             {error}
           </p>
         )}
         {message && (
-          <p style={{ fontSize: '13px', color: '#059669', marginBottom: '12px', textAlign: 'center' }}>
+          <p style={{ fontSize: '15px', color: '#059669', marginBottom: '12px', textAlign: 'center' }}>
             {message}
           </p>
         )}
@@ -115,7 +115,7 @@ export default function VerifyEmailPage() {
         >
           {countdown > 0 ? `Resend email in ${countdown}s` : 'Resend verification email'}
         </Button>
-        <p style={{ fontSize: '12px', color: '#8A857B', marginTop: '16px', textAlign: 'center' }}>
+        <p style={{ fontSize: '14px', color: '#8A857B', marginTop: '16px', textAlign: 'center' }}>
           Don&apos;t see it? Check your spam or junk folder.
         </p>
       </div>

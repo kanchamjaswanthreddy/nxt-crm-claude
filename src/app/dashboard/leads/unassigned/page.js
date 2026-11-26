@@ -140,8 +140,8 @@ export default function UnassignedLeadsPage() {
                       placeholder="Assign to..."
                       renderItem={(agent) => (
                         <>
-                          <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)' }}>{dn(agent)}</span>
-                          <span style={{ fontSize: '11px', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
+                          <span style={{ fontSize: '15px', fontWeight: 500, color: 'var(--text-primary)' }}>{dn(agent)}</span>
+                          <span style={{ fontSize: '13px', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
                             {agent.licensedStates?.join(', ') || 'No licenses'}
                           </span>
                         </>

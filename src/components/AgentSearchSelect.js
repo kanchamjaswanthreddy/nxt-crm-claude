@@ -72,18 +72,18 @@ export default function AgentSearchSelect({
   const defaultRenderItem = (a, isSel) => (
     <>
       <span style={{
-        fontSize: '11px', fontWeight: 700, color: '#0C1022',
+        fontSize: '13px', fontWeight: 700, color: '#0C1022',
         backgroundColor: 'rgba(12, 16, 34, 0.08)',
         padding: '2px 8px', borderRadius: '6px',
         fontFamily: 'monospace', letterSpacing: '0.5px', flexShrink: 0,
       }}>
         {a.nxt_id || a.label || '---'}
       </span>
-      <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)' }}>
+      <span style={{ fontSize: '15px', fontWeight: 500, color: 'var(--text-primary)' }}>
         {dn(a)}
       </span>
       {a.role && (
-        <span style={{ fontSize: '11px', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
+        <span style={{ fontSize: '13px', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
           {a.is_owner ? 'Owner' : a.role}
         </span>
       )}
@@ -122,7 +122,7 @@ export default function AgentSearchSelect({
             border: '1px solid var(--border-color)',
             backgroundColor: disabled ? 'rgba(0,0,0,0.03)' : 'var(--surface-card)',
             fontFamily: 'var(--font-base)',
-            fontSize: '14px',
+            fontSize: '16px',
             color: 'var(--text-primary)',
             outline: 'none',
             transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
@@ -158,7 +158,7 @@ export default function AgentSearchSelect({
                 backgroundColor: !value ? 'rgba(12, 16, 34, 0.06)' : 'transparent',
                 cursor: 'pointer', textAlign: 'left',
                 fontFamily: 'var(--font-base)',
-                fontSize: '13px', color: 'var(--text-secondary)', fontStyle: 'italic',
+                fontSize: '15px', color: 'var(--text-secondary)', fontStyle: 'italic',
                 borderBottom: '1px solid rgba(0,0,0,0.05)',
               }}
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(12, 16, 34, 0.04)'}
@@ -168,7 +168,7 @@ export default function AgentSearchSelect({
             </button>
           )}
           {filtered.length === 0 ? (
-            <div style={{ padding: '14px 16px', fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center' }}>
+            <div style={{ padding: '14px 16px', fontSize: '15px', color: 'var(--text-secondary)', textAlign: 'center' }}>
               No results found
             </div>
           ) : (

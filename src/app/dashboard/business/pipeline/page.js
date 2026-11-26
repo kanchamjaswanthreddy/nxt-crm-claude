@@ -236,7 +236,7 @@ export default function BusinessPipelinePage() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
           <div>
             <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>Pipeline Tracker</h1>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '2px' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem', marginTop: '2px' }}>
               {filtered.length} contact{filtered.length !== 1 ? 's' : ''}
               {activeFilterCount > 0 && ` (${activeFilterCount} filter${activeFilterCount > 1 ? 's' : ''} active)`}
             </p>
@@ -247,7 +247,7 @@ export default function BusinessPipelinePage() {
             <div style={{ display: 'flex', background: '#F1EFEA', borderRadius: '8px', padding: '3px', gap: '2px' }}>
               {['recruiting', 'sales'].map(t => (
                 <button key={t} onClick={() => setStageType(t)} style={{
-                  padding: '6px 14px', borderRadius: '6px', border: 'none', fontSize: '0.875rem', fontWeight: 600, cursor: 'pointer',
+                  padding: '6px 14px', borderRadius: '6px', border: 'none', fontSize: '1rem', fontWeight: 600, cursor: 'pointer',
                   background: stageType === t ? '#fff' : 'transparent',
                   color: stageType === t ? 'var(--text-primary)' : 'var(--text-secondary)',
                   boxShadow: stageType === t ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
@@ -259,7 +259,7 @@ export default function BusinessPipelinePage() {
             <div style={{ display: 'flex', background: '#F1EFEA', borderRadius: '8px', padding: '3px', gap: '2px' }}>
               {[{ v: 'board', label: 'Board' }, { v: 'table', label: 'Table' }].map(({ v, label }) => (
                 <button key={v} onClick={() => setView(v)} style={{
-                  padding: '6px 14px', borderRadius: '6px', border: 'none', fontSize: '0.875rem', fontWeight: 600, cursor: 'pointer',
+                  padding: '6px 14px', borderRadius: '6px', border: 'none', fontSize: '1rem', fontWeight: 600, cursor: 'pointer',
                   background: view === v ? '#fff' : 'transparent',
                   color: view === v ? 'var(--text-primary)' : 'var(--text-secondary)',
                   boxShadow: view === v ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
@@ -269,7 +269,7 @@ export default function BusinessPipelinePage() {
 
             {/* Filter Toggle */}
             <button onClick={() => setShowFilters(!showFilters)} style={{
-              padding: '6px 14px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', fontSize: '0.8rem', fontWeight: 500, cursor: 'pointer',
+              padding: '6px 14px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', fontSize: '0.9375rem', fontWeight: 500, cursor: 'pointer',
               background: showFilters ? 'var(--brand-navy, #1B2A4A)' : '#fff',
               color: showFilters ? '#fff' : 'var(--text-secondary)',
             }}>
@@ -279,12 +279,12 @@ export default function BusinessPipelinePage() {
 
             {/* Settings */}
             <button onClick={() => setSettingsOpen(true)} style={{
-              padding: '6px 10px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', fontSize: '0.85rem', cursor: 'pointer', background: '#fff', color: 'var(--text-secondary)',
+              padding: '6px 10px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', fontSize: '1rem', cursor: 'pointer', background: '#fff', color: 'var(--text-secondary)',
             }} title="Customize stages & fields" aria-label="Pipeline settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
 
             {/* Add Contact */}
             <button onClick={() => setAddModalOpen(true)} style={{
-              padding: '8px 18px', borderRadius: '8px', border: 'none', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
+              padding: '8px 18px', borderRadius: '8px', border: 'none', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer',
               background: 'var(--brand-gold, #E3A94A)', color: '#fff',
             }}>+ Add Contact</button>
           </div>
@@ -299,7 +299,7 @@ export default function BusinessPipelinePage() {
             onChange={e => setSearchTerm(e.target.value)}
             style={{
               width: '100%', padding: '10px 16px', borderRadius: '10px', border: '1px solid rgba(0,0,0,0.12)',
-              fontSize: '0.95rem', outline: 'none', background: '#fafafa',
+              fontSize: '1.0625rem', outline: 'none', background: '#fafafa',
             }}
           />
         </div>
@@ -316,7 +316,7 @@ export default function BusinessPipelinePage() {
             <FilterSelect label="Source" value={filterSource} onChange={setFilterSource} options={SOURCES} />
             {activeFilterCount > 0 && (
               <button onClick={() => { setFilterType(''); setFilterPriority(''); setFilterState(''); setFilterSource(''); }} style={{
-                padding: '6px 12px', borderRadius: '6px', border: 'none', fontSize: '0.85rem', cursor: 'pointer',
+                padding: '6px 12px', borderRadius: '6px', border: 'none', fontSize: '1rem', cursor: 'pointer',
                 background: '#fee2e2', color: '#DC2626', fontWeight: 600, alignSelf: 'flex-end',
               }}>Clear All</button>
             )}
@@ -394,9 +394,9 @@ export default function BusinessPipelinePage() {
 function FilterSelect({ label, value, onChange, options }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-      <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{label}</span>
+      <span style={{ fontSize: '0.9375rem', fontWeight: 600, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{label}</span>
       <select value={value} onChange={e => onChange(e.target.value)} style={{
-        padding: '6px 10px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.12)', fontSize: '0.875rem', background: '#fff', minWidth: '130px', cursor: 'pointer',
+        padding: '6px 10px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.12)', fontSize: '1rem', background: '#fff', minWidth: '130px', cursor: 'pointer',
       }}>
         <option value="">All</option>
         {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -434,9 +434,9 @@ function BoardView({ stages, contacts, draggedId, dragOverStage, onDragStart, on
             {/* Column Header */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', padding: '0 4px' }}>
               <div style={{ width: 10, height: 10, borderRadius: '50%', background: stage.color, flexShrink: 0 }} />
-              <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', flex: 1 }}>{stage.name}</span>
+              <span style={{ fontSize: '1.0625rem', fontWeight: 700, color: 'var(--text-primary)', flex: 1 }}>{stage.name}</span>
               <span style={{
-                fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)',
+                fontSize: '0.9375rem', fontWeight: 700, color: 'var(--text-secondary)',
                 background: '#e2e8f0', borderRadius: '10px', padding: '2px 8px', minWidth: '22px', textAlign: 'center',
               }}>{stageContacts.length}</span>
             </div>
@@ -453,7 +453,7 @@ function BoardView({ stages, contacts, draggedId, dragOverStage, onDragStart, on
                 />
               ))}
               {stageContacts.length === 0 && (
-                <div style={{ padding: '24px 12px', textAlign: 'center', color: '#cbd5e1', fontSize: '0.85rem' }}>
+                <div style={{ padding: '24px 12px', textAlign: 'center', color: '#cbd5e1', fontSize: '1rem' }}>
                   Drop contacts here
                 </div>
               )}
@@ -492,13 +492,13 @@ function ContactCard({ contact, onDragStart, onClick, isDragging }) {
     >
       {/* Top row: name + priority */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-        <span style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-primary)' }}>{contact.fullName}</span>
+        <span style={{ fontSize: '1.0625rem', fontWeight: 600, color: 'var(--text-primary)' }}>{contact.fullName}</span>
         <span style={{ width: 8, height: 8, borderRadius: '50%', background: priorityInfo.color, flexShrink: 0 }} title={priorityInfo.label} />
       </div>
 
       {/* Type badge */}
       <span style={{
-        display: 'inline-block', fontSize: '0.8rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px',
+        display: 'inline-block', fontSize: '0.9375rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px',
         background: typeInfo.color + '18', color: typeInfo.color, textTransform: 'uppercase', letterSpacing: '0.3px',
         marginBottom: '8px',
       }}>{typeInfo.label}</span>
@@ -506,16 +506,16 @@ function ContactCard({ contact, onDragStart, onClick, isDragging }) {
       {/* Details */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
         {contact.phone && (
-          <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{contact.phone}</span>
+          <span style={{ fontSize: '1rem', color: 'var(--text-secondary)' }}>{contact.phone}</span>
         )}
         {contact.state && (
-          <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{contact.city ? `${contact.city}, ` : ''}{contact.state}</span>
+          <span style={{ fontSize: '1rem', color: 'var(--text-secondary)' }}>{contact.city ? `${contact.city}, ` : ''}{contact.state}</span>
         )}
         {contact.introducedBy && (
-          <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>via {contact.introducedBy}</span>
+          <span style={{ fontSize: '1rem', color: 'var(--text-secondary)' }}>via {contact.introducedBy}</span>
         )}
         {contact.productInterest?.length > 0 && (
-          <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+          <span style={{ fontSize: '1rem', color: 'var(--text-secondary)' }}>
             {contact.productInterest.map(p => PRODUCTS.find(pr => pr.value === p)?.label || p).join(', ')}
           </span>
         )}
@@ -525,10 +525,10 @@ function ContactCard({ contact, onDragStart, onClick, isDragging }) {
       {(contact.lastContactedAt || contact.nextFollowupAt) && (
         <div style={{ marginTop: '8px', paddingTop: '6px', borderTop: '1px solid #F1EFEA', display: 'flex', justifyContent: 'space-between' }}>
           {contact.lastContactedAt && (
-            <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>Last: {timeAgo(contact.lastContactedAt)}</span>
+            <span style={{ fontSize: '1rem', color: '#94a3b8' }}>Last: {timeAgo(contact.lastContactedAt)}</span>
           )}
           {contact.nextFollowupAt && (
-            <span style={{ fontSize: '0.85rem', color: new Date(contact.nextFollowupAt) < new Date() ? '#EF4444' : '#E3A94A', fontWeight: 600 }}>
+            <span style={{ fontSize: '1rem', color: new Date(contact.nextFollowupAt) < new Date() ? '#EF4444' : '#E3A94A', fontWeight: 600 }}>
               Follow-up: {formatDate(contact.nextFollowupAt)}
             </span>
           )}
@@ -561,13 +561,13 @@ function TableView({ contacts, stages, onRowClick }) {
   };
 
   const thStyle = {
-    padding: '10px 14px', fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px',
+    padding: '10px 14px', fontSize: '0.9375rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px',
     color: 'var(--text-secondary)', textAlign: 'left', cursor: 'pointer', whiteSpace: 'nowrap', userSelect: 'none',
     borderBottom: '2px solid #e2e8f0', position: 'sticky', top: 0, background: '#fff', zIndex: 2,
   };
 
   const tdStyle = {
-    padding: '10px 14px', fontSize: '0.9rem', color: 'var(--text-primary)', borderBottom: '1px solid #F1EFEA',
+    padding: '10px 14px', fontSize: '1.0625rem', color: 'var(--text-primary)', borderBottom: '1px solid #F1EFEA',
     whiteSpace: 'nowrap', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis',
   };
 
@@ -621,16 +621,16 @@ function TableView({ contacts, stages, onRowClick }) {
               >
                 <td style={{ ...tdStyle, fontWeight: 600 }}>{contact.fullName}</td>
                 <td style={tdStyle}>
-                  <span style={{ fontSize: '0.8rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px', background: typeInfo.color + '18', color: typeInfo.color }}>{typeInfo.label}</span>
+                  <span style={{ fontSize: '0.9375rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px', background: typeInfo.color + '18', color: typeInfo.color }}>{typeInfo.label}</span>
                 </td>
                 <td style={tdStyle}>
-                  {stageInfo && <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '0.85rem' }}>
+                  {stageInfo && <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '1rem' }}>
                     <span style={{ width: 7, height: 7, borderRadius: '50%', background: stageInfo.color }} />
                     {contact.stage}
                   </span>}
                 </td>
                 <td style={tdStyle}>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '0.85rem' }}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '1rem' }}>
                     <span style={{ width: 7, height: 7, borderRadius: '50%', background: priorityInfo.color }} />
                     {priorityInfo.label}
                   </span>
@@ -648,7 +648,7 @@ function TableView({ contacts, stages, onRowClick }) {
             );
           })}
           {sorted.length === 0 && (
-            <tr><td colSpan={11} style={{ padding: '40px', textAlign: 'center', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+            <tr><td colSpan={11} style={{ padding: '40px', textAlign: 'center', color: 'var(--text-secondary)', fontSize: '1rem' }}>
               No contacts found. Click &quot;+ Add Contact&quot; to get started.
             </td></tr>
           )}
@@ -716,9 +716,9 @@ function AddContactModal({ stageType, stages, userProfile, onClose, onCreated })
 
   const inputStyle = {
     width: '100%', padding: '9px 12px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)',
-    fontSize: '0.85rem', outline: 'none', background: '#fafafa',
+    fontSize: '1rem', outline: 'none', background: '#fafafa',
   };
-  const labelStyle = { fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '4px', display: 'block' };
+  const labelStyle = { fontSize: '1rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '4px', display: 'block' };
   const fieldStyle = { marginBottom: '12px' };
 
   return (
@@ -738,7 +738,7 @@ function AddContactModal({ stageType, stages, userProfile, onClose, onCreated })
           <div style={{ display: 'flex', gap: '4px', overflowX: 'auto', paddingBottom: '12px', borderBottom: '1px solid #F1EFEA' }}>
             {sections.map(s => (
               <button key={s.key} onClick={() => setActiveSection(s.key)} style={{
-                padding: '6px 14px', borderRadius: '6px', border: 'none', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
+                padding: '6px 14px', borderRadius: '6px', border: 'none', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
                 background: activeSection === s.key ? 'var(--brand-navy, #1B2A4A)' : '#F1EFEA',
                 color: activeSection === s.key ? '#fff' : 'var(--text-secondary)',
               }}>{s.label}</button>
@@ -801,7 +801,7 @@ function AddContactModal({ stageType, stages, userProfile, onClose, onCreated })
               <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                 {CONTACT_TYPES.map(t => (
                   <button key={t.value} onClick={() => set('type', t.value)} style={{
-                    padding: '6px 14px', borderRadius: '6px', border: '2px solid', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer',
+                    padding: '6px 14px', borderRadius: '6px', border: '2px solid', fontSize: '1rem', fontWeight: 600, cursor: 'pointer',
                     borderColor: form.type === t.value ? t.color : 'transparent',
                     background: form.type === t.value ? t.color + '18' : '#F1EFEA',
                     color: form.type === t.value ? t.color : 'var(--text-secondary)',
@@ -846,7 +846,7 @@ function AddContactModal({ stageType, stages, userProfile, onClose, onCreated })
               <div style={{ display: 'flex', gap: '6px' }}>
                 {['High', 'Medium', 'Low'].map(v => (
                   <button key={v} onClick={() => set('pace', v)} style={{
-                    padding: '6px 14px', borderRadius: '6px', border: '2px solid', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer',
+                    padding: '6px 14px', borderRadius: '6px', border: '2px solid', fontSize: '1rem', fontWeight: 600, cursor: 'pointer',
                     borderColor: form.pace === v ? '#8B5CF6' : 'transparent',
                     background: form.pace === v ? 'rgba(139,92,246,0.1)' : '#F1EFEA',
                     color: form.pace === v ? '#8B5CF6' : 'var(--text-secondary)',
@@ -866,7 +866,7 @@ function AddContactModal({ stageType, stages, userProfile, onClose, onCreated })
               <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                 {PRODUCTS.map(p => (
                   <button key={p.value} onClick={() => toggleProduct(p.value)} style={{
-                    padding: '6px 12px', borderRadius: '6px', border: '2px solid', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer',
+                    padding: '6px 12px', borderRadius: '6px', border: '2px solid', fontSize: '1rem', fontWeight: 600, cursor: 'pointer',
                     borderColor: form.productInterest.includes(p.value) ? '#16A34A' : 'transparent',
                     background: form.productInterest.includes(p.value) ? 'rgba(22,163,74,0.1)' : '#F1EFEA',
                     color: form.productInterest.includes(p.value) ? '#16A34A' : 'var(--text-secondary)',
@@ -912,7 +912,7 @@ function AddContactModal({ stageType, stages, userProfile, onClose, onCreated })
               <div style={{ display: 'flex', gap: '6px' }}>
                 {PRIORITIES.map(p => (
                   <button key={p.value} onClick={() => set('priority', p.value)} style={{
-                    padding: '6px 14px', borderRadius: '6px', border: '2px solid', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer',
+                    padding: '6px 14px', borderRadius: '6px', border: '2px solid', fontSize: '1rem', fontWeight: 600, cursor: 'pointer',
                     borderColor: form.priority === p.value ? p.color : 'transparent',
                     background: form.priority === p.value ? p.color + '18' : '#F1EFEA',
                     color: form.priority === p.value ? p.color : 'var(--text-secondary)',
@@ -935,12 +935,12 @@ function AddContactModal({ stageType, stages, userProfile, onClose, onCreated })
         <div style={{ padding: '16px 24px', borderTop: '1px solid #F1EFEA', display: 'flex', justifyContent: 'flex-end', gap: '10px', flexShrink: 0 }}>
           <button onClick={onClose} style={{
             padding: '9px 20px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff',
-            fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', color: 'var(--text-secondary)',
+            fontSize: '1rem', fontWeight: 600, cursor: 'pointer', color: 'var(--text-secondary)',
           }}>Cancel</button>
           <button onClick={handleSubmit} disabled={saving} style={{
             padding: '9px 24px', borderRadius: '8px', border: 'none',
             background: 'var(--brand-gold, #E3A94A)', color: '#fff',
-            fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.6 : 1,
+            fontSize: '1rem', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.6 : 1,
           }}>{saving ? 'Saving...' : 'Add Contact'}</button>
         </div>
       </div>
@@ -1029,9 +1029,9 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
 
   const inputStyle = {
     width: '100%', padding: '8px 10px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.12)',
-    fontSize: '0.8rem', outline: 'none', background: '#fafafa',
+    fontSize: '0.9375rem', outline: 'none', background: '#fafafa',
   };
-  const labelStyle = { fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '3px', display: 'block' };
+  const labelStyle = { fontSize: '0.9375rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '3px', display: 'block' };
 
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 1000, display: 'flex', justifyContent: 'flex-end' }} role="dialog" aria-modal="true" aria-label="Contact details">
@@ -1047,15 +1047,15 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
             <div>
               <h2 style={{ fontSize: '1.15rem', fontWeight: 700, margin: '0 0 4px' }}>{contact.fullName}</h2>
               <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-                <span style={{ fontSize: '0.85rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px', background: typeInfo.color + '18', color: typeInfo.color, textTransform: 'uppercase' }}>{typeInfo.label}</span>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', color: priorityInfo.color, fontWeight: 600 }}>
+                <span style={{ fontSize: '1rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px', background: typeInfo.color + '18', color: typeInfo.color, textTransform: 'uppercase' }}>{typeInfo.label}</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.9375rem', color: priorityInfo.color, fontWeight: 600 }}>
                   <span style={{ width: 7, height: 7, borderRadius: '50%', background: priorityInfo.color }} />{priorityInfo.label}
                 </span>
               </div>
             </div>
             <div style={{ display: 'flex', gap: '6px' }}>
               {!editing && (
-                <button onClick={() => setEditing(true)} style={{ padding: '6px 14px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', color: 'var(--text-primary)' }}>Edit</button>
+                <button onClick={() => setEditing(true)} style={{ padding: '6px 14px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', color: 'var(--text-primary)' }}>Edit</button>
               )}
               <button onClick={onClose} aria-label="Close" style={{ background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center' }}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             </div>
@@ -1099,7 +1099,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                 <div style={{ display: 'flex', gap: '6px' }}>
                   {PRIORITIES.map(p => (
                     <button key={p.value} onClick={() => set('priority', p.value)} style={{
-                      padding: '5px 12px', borderRadius: '6px', border: '2px solid', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
+                      padding: '5px 12px', borderRadius: '6px', border: '2px solid', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer',
                       borderColor: form.priority === p.value ? p.color : 'transparent',
                       background: form.priority === p.value ? p.color + '18' : '#F1EFEA',
                       color: form.priority === p.value ? p.color : 'var(--text-secondary)',
@@ -1112,7 +1112,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                 <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                   {CONTACT_TYPES.map(t => (
                     <button key={t.value} onClick={() => set('type', t.value)} style={{
-                      padding: '5px 12px', borderRadius: '6px', border: '2px solid', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
+                      padding: '5px 12px', borderRadius: '6px', border: '2px solid', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer',
                       borderColor: form.type === t.value ? t.color : 'transparent',
                       background: form.type === t.value ? t.color + '18' : '#F1EFEA',
                       color: form.type === t.value ? t.color : 'var(--text-secondary)',
@@ -1125,7 +1125,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                 <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
                   {PRODUCTS.map(p => (
                     <button key={p.value} onClick={() => toggleProduct(p.value)} style={{
-                      padding: '4px 10px', borderRadius: '5px', border: '2px solid', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
+                      padding: '4px 10px', borderRadius: '5px', border: '2px solid', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer',
                       borderColor: (form.productInterest || []).includes(p.value) ? '#16A34A' : 'transparent',
                       background: (form.productInterest || []).includes(p.value) ? 'rgba(22,163,74,0.1)' : '#F1EFEA',
                       color: (form.productInterest || []).includes(p.value) ? '#16A34A' : 'var(--text-secondary)',
@@ -1142,18 +1142,18 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                 <textarea style={{ ...inputStyle, minHeight: '60px', resize: 'vertical' }} value={form.notes} onChange={e => set('notes', e.target.value)} />
               </div>
               <div style={{ display: 'flex', gap: '10px', justifyContent: 'space-between' }}>
-                <button onClick={() => setConfirmDelete(true)} style={{ padding: '8px 16px', borderRadius: '6px', border: '1px solid #fecaca', background: '#fef2f2', color: '#DC2626', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}>Delete</button>
+                <button onClick={() => setConfirmDelete(true)} style={{ padding: '8px 16px', borderRadius: '6px', border: '1px solid #fecaca', background: '#fef2f2', color: '#DC2626', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer' }}>Delete</button>
                 <div style={{ display: 'flex', gap: '8px' }}>
-                  <button onClick={() => setEditing(false)} style={{ padding: '8px 16px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', color: 'var(--text-secondary)' }}>Cancel</button>
-                  <button onClick={handleSave} disabled={saving} style={{ padding: '8px 20px', borderRadius: '6px', border: 'none', background: 'var(--brand-gold, #E3A94A)', color: '#fff', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.6 : 1 }}>{saving ? 'Saving...' : 'Save'}</button>
+                  <button onClick={() => setEditing(false)} style={{ padding: '8px 16px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer', color: 'var(--text-secondary)' }}>Cancel</button>
+                  <button onClick={handleSave} disabled={saving} style={{ padding: '8px 20px', borderRadius: '6px', border: 'none', background: 'var(--brand-gold, #E3A94A)', color: '#fff', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.6 : 1 }}>{saving ? 'Saving...' : 'Save'}</button>
                 </div>
               </div>
               {confirmDelete && (
                 <div style={{ marginTop: '12px', padding: '12px', background: '#fef2f2', borderRadius: '8px', border: '1px solid #fecaca' }}>
-                  <p style={{ fontSize: '0.8rem', color: '#DC2626', margin: '0 0 8px', fontWeight: 600 }}>Are you sure? This cannot be undone.</p>
+                  <p style={{ fontSize: '0.9375rem', color: '#DC2626', margin: '0 0 8px', fontWeight: 600 }}>Are you sure? This cannot be undone.</p>
                   <div style={{ display: 'flex', gap: '8px' }}>
-                    <button onClick={handleDelete} style={{ padding: '6px 14px', borderRadius: '6px', border: 'none', background: '#DC2626', color: '#fff', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}>Yes, Delete</button>
-                    <button onClick={() => setConfirmDelete(false)} style={{ padding: '6px 14px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff', fontSize: '0.85rem', cursor: 'pointer' }}>Cancel</button>
+                    <button onClick={handleDelete} style={{ padding: '6px 14px', borderRadius: '6px', border: 'none', background: '#DC2626', color: '#fff', fontSize: '1rem', fontWeight: 600, cursor: 'pointer' }}>Yes, Delete</button>
+                    <button onClick={() => setConfirmDelete(false)} style={{ padding: '6px 14px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff', fontSize: '1rem', cursor: 'pointer' }}>Cancel</button>
                   </div>
                 </div>
               )}
@@ -1188,10 +1188,10 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
 
               {contact.productInterest?.length > 0 && (
                 <div style={{ marginBottom: '16px' }}>
-                  <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '6px' }}>Product Interest</span>
+                  <span style={{ fontSize: '0.9375rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: '6px' }}>Product Interest</span>
                   <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
                     {contact.productInterest.map(p => (
-                      <span key={p} style={{ padding: '3px 10px', borderRadius: '5px', background: 'rgba(22,163,74,0.1)', color: '#16A34A', fontSize: '0.8rem', fontWeight: 600 }}>
+                      <span key={p} style={{ padding: '3px 10px', borderRadius: '5px', background: 'rgba(22,163,74,0.1)', color: '#16A34A', fontSize: '0.9375rem', fontWeight: 600 }}>
                         {PRODUCTS.find(pr => pr.value === p)?.label || p}
                       </span>
                     ))}
@@ -1201,15 +1201,15 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
 
               {(contact.familyDetails || contact.relationshipNotes || contact.notes) && (
                 <div style={{ marginBottom: '20px', padding: '12px', background: '#F7F5F0', borderRadius: '8px' }}>
-                  {contact.familyDetails && <p style={{ fontSize: '0.8rem', color: 'var(--text-primary)', margin: '0 0 6px' }}><strong>Family:</strong> {contact.familyDetails}</p>}
-                  {contact.relationshipNotes && <p style={{ fontSize: '0.8rem', color: 'var(--text-primary)', margin: '0 0 6px' }}><strong>Relationship:</strong> {contact.relationshipNotes}</p>}
-                  {contact.notes && <p style={{ fontSize: '0.8rem', color: 'var(--text-primary)', margin: 0 }}><strong>Notes:</strong> {contact.notes}</p>}
+                  {contact.familyDetails && <p style={{ fontSize: '0.9375rem', color: 'var(--text-primary)', margin: '0 0 6px' }}><strong>Family:</strong> {contact.familyDetails}</p>}
+                  {contact.relationshipNotes && <p style={{ fontSize: '0.9375rem', color: 'var(--text-primary)', margin: '0 0 6px' }}><strong>Relationship:</strong> {contact.relationshipNotes}</p>}
+                  {contact.notes && <p style={{ fontSize: '0.9375rem', color: 'var(--text-primary)', margin: 0 }}><strong>Notes:</strong> {contact.notes}</p>}
                 </div>
               )}
 
               {/* ── Quick Actions (Data Continuity) ── */}
               <div style={{ marginBottom: '20px' }}>
-                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: '10px' }}>Quick Actions</span>
+                <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: '10px' }}>Quick Actions</span>
                 <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                   {(() => {
                     const nameParts = (contact.fullName || '').trim().split(' ');
@@ -1247,7 +1247,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
 
                     const actionBtnStyle = {
                       padding: '8px 14px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.1)',
-                      background: '#fff', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
+                      background: '#fff', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer',
                       color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '6px',
                       transition: 'all 0.15s ease',
                     };
@@ -1288,11 +1288,11 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
 
               {/* ── Add Activity ── */}
               <div style={{ marginBottom: '20px', padding: '14px', background: '#F7F5F0', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
-                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: '10px' }}>Log Activity</span>
+                <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: '10px' }}>Log Activity</span>
                 <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '10px' }}>
                   {ACTIVITY_TYPES.map(a => (
                     <button key={a.value} onClick={() => setActivityType(a.value)} style={{
-                      padding: '4px 10px', borderRadius: '6px', border: '2px solid', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
+                      padding: '4px 10px', borderRadius: '6px', border: '2px solid', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer',
                       borderColor: activityType === a.value ? '#E3A94A' : 'transparent',
                       background: activityType === a.value ? 'rgba(227, 169, 74,0.1)' : '#fff',
                       color: activityType === a.value ? '#E3A94A' : 'var(--text-secondary)',
@@ -1301,7 +1301,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                 </div>
                 <div style={{ display: 'flex', gap: '8px' }}>
                   <input
-                    style={{ flex: 1, padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', fontSize: '0.8rem', outline: 'none' }}
+                    style={{ flex: 1, padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', fontSize: '0.9375rem', outline: 'none' }}
                     placeholder="Add a note..."
                     value={activityNote}
                     onChange={e => setActivityNote(e.target.value)}
@@ -1309,18 +1309,18 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                   />
                   <button onClick={handleAddActivity} disabled={addingActivity} style={{
                     padding: '8px 16px', borderRadius: '8px', border: 'none', background: 'var(--brand-gold, #E3A94A)', color: '#fff',
-                    fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', opacity: addingActivity ? 0.6 : 1, whiteSpace: 'nowrap',
+                    fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer', opacity: addingActivity ? 0.6 : 1, whiteSpace: 'nowrap',
                   }}>{addingActivity ? '...' : 'Log'}</button>
                 </div>
               </div>
 
               {/* ── Activity Timeline ── */}
               <div>
-                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: '12px' }}>Activity Timeline</span>
+                <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: '12px' }}>Activity Timeline</span>
                 {loadingActivities ? (
-                  <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Loading...</p>
+                  <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)' }}>Loading...</p>
                 ) : activities.length === 0 ? (
-                  <p style={{ fontSize: '0.8rem', color: '#94a3b8' }}>No activities yet. Log your first interaction above.</p>
+                  <p style={{ fontSize: '0.9375rem', color: '#94a3b8' }}>No activities yet. Log your first interaction above.</p>
                 ) : (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1px' }}>
                     {activities.map(a => {
@@ -1330,11 +1330,11 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                           <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#E3A94A', flexShrink: 0, marginTop: '6px' }} />
                           <div style={{ flex: 1 }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2px' }}>
-                              <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)' }}>{atInfo.label}</span>
-                              <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>{timeAgo(a.createdAt)}</span>
+                              <span style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{atInfo.label}</span>
+                              <span style={{ fontSize: '1rem', color: '#94a3b8' }}>{timeAgo(a.createdAt)}</span>
                             </div>
-                            {a.note && <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: 0 }}>{a.note}</p>}
-                            {a.createdByName && <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>by {a.createdByName}</span>}
+                            {a.note && <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', margin: 0 }}>{a.note}</p>}
+                            {a.createdByName && <span style={{ fontSize: '1rem', color: '#94a3b8' }}>by {a.createdByName}</span>}
                           </div>
                         </div>
                       );
@@ -1353,17 +1353,17 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
 function InfoField({ label, value, link }) {
   if (!value) return (
     <div>
-      <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#94a3b8', display: 'block', marginBottom: '2px' }}>{label}</span>
-      <span style={{ fontSize: '0.8rem', color: '#cbd5e1' }}>—</span>
+      <span style={{ fontSize: '1rem', fontWeight: 600, color: '#94a3b8', display: 'block', marginBottom: '2px' }}>{label}</span>
+      <span style={{ fontSize: '0.9375rem', color: '#cbd5e1' }}>—</span>
     </div>
   );
   return (
     <div>
-      <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#94a3b8', display: 'block', marginBottom: '2px' }}>{label}</span>
+      <span style={{ fontSize: '1rem', fontWeight: 600, color: '#94a3b8', display: 'block', marginBottom: '2px' }}>{label}</span>
       {link ? (
-        <a href={link} style={{ fontSize: '0.8rem', color: '#E3A94A', textDecoration: 'none' }}>{value}</a>
+        <a href={link} style={{ fontSize: '0.9375rem', color: '#E3A94A', textDecoration: 'none' }}>{value}</a>
       ) : (
-        <span style={{ fontSize: '0.8rem', color: 'var(--text-primary)' }}>{value}</span>
+        <span style={{ fontSize: '0.9375rem', color: 'var(--text-primary)' }}>{value}</span>
       )}
     </div>
   );
@@ -1420,7 +1420,7 @@ function SettingsModal({ settings, agencyId, stageType, onClose, onSaved }) {
             <h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0 }}>Customize {stageType === 'recruiting' ? 'Recruiting' : 'Sales'} Stages</h2>
             <button onClick={onClose} aria-label="Close" style={{ background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center' }}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
           </div>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: '4px 0 0' }}>Add, rename, reorder, or remove stages.</p>
+          <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', margin: '4px 0 0' }}>Add, rename, reorder, or remove stages.</p>
         </div>
 
         <div style={{ flex: 1, overflowY: 'auto', padding: '16px 24px' }}>
@@ -1430,11 +1430,11 @@ function SettingsModal({ settings, agencyId, stageType, onClose, onSaved }) {
               <input
                 value={stage.name}
                 onChange={e => renameStageFn(idx, e.target.value)}
-                style={{ flex: 1, padding: '6px 10px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.1)', fontSize: '0.8rem', outline: 'none' }}
+                style={{ flex: 1, padding: '6px 10px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.1)', fontSize: '0.9375rem', outline: 'none' }}
               />
-              <button onClick={() => moveStage(idx, -1)} disabled={idx === 0} aria-label="Move stage up" style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.8rem', opacity: idx === 0 ? 0.3 : 1 }}>↑</button>
-              <button onClick={() => moveStage(idx, 1)} disabled={idx === localStages.length - 1} aria-label="Move stage down" style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.8rem', opacity: idx === localStages.length - 1 ? 0.3 : 1 }}>↓</button>
-              <button onClick={() => removeStage(idx)} aria-label="Remove stage" style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.85rem', color: '#EF4444', display: 'flex', alignItems: 'center' }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+              <button onClick={() => moveStage(idx, -1)} disabled={idx === 0} aria-label="Move stage up" style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.9375rem', opacity: idx === 0 ? 0.3 : 1 }}>↑</button>
+              <button onClick={() => moveStage(idx, 1)} disabled={idx === localStages.length - 1} aria-label="Move stage down" style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.9375rem', opacity: idx === localStages.length - 1 ? 0.3 : 1 }}>↓</button>
+              <button onClick={() => removeStage(idx)} aria-label="Remove stage" style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem', color: '#EF4444', display: 'flex', alignItems: 'center' }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             </div>
           ))}
           <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
@@ -1443,15 +1443,15 @@ function SettingsModal({ settings, agencyId, stageType, onClose, onSaved }) {
               onChange={e => setNewStageName(e.target.value)}
               onKeyDown={e => { if (e.key === 'Enter') addStage(); }}
               placeholder="New stage name..."
-              style={{ flex: 1, padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', fontSize: '0.8rem', outline: 'none' }}
+              style={{ flex: 1, padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', fontSize: '0.9375rem', outline: 'none' }}
             />
-            <button onClick={addStage} style={{ padding: '8px 16px', borderRadius: '8px', border: 'none', background: '#E3A94A', color: '#fff', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}>Add</button>
+            <button onClick={addStage} style={{ padding: '8px 16px', borderRadius: '8px', border: 'none', background: '#E3A94A', color: '#fff', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer' }}>Add</button>
           </div>
         </div>
 
         <div style={{ padding: '16px 24px', borderTop: '1px solid #F1EFEA', display: 'flex', justifyContent: 'flex-end', gap: '10px', flexShrink: 0 }}>
-          <button onClick={onClose} style={{ padding: '8px 18px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', color: 'var(--text-secondary)' }}>Cancel</button>
-          <button onClick={handleSave} disabled={saving} style={{ padding: '8px 22px', borderRadius: '8px', border: 'none', background: 'var(--brand-gold, #E3A94A)', color: '#fff', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.6 : 1 }}>{saving ? 'Saving...' : 'Save Changes'}</button>
+          <button onClick={onClose} style={{ padding: '8px 18px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer', color: 'var(--text-secondary)' }}>Cancel</button>
+          <button onClick={handleSave} disabled={saving} style={{ padding: '8px 22px', borderRadius: '8px', border: 'none', background: 'var(--brand-gold, #E3A94A)', color: '#fff', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.6 : 1 }}>{saving ? 'Saving...' : 'Save Changes'}</button>
         </div>
       </div>
     </div>

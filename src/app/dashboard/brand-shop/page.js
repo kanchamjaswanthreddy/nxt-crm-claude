@@ -126,7 +126,7 @@ export default function BrandShopPage() {
         <h1 style={{ fontSize: 28, fontWeight: 700, color: 'var(--brand-navy)', margin: 0 }}>
           NXT Brand Shop
         </h1>
-        <p style={{ color: 'var(--text-secondary)', fontSize: 15, marginTop: 6 }}>
+        <p style={{ color: 'var(--text-secondary)', fontSize: 17, marginTop: 6 }}>
           Official branded merchandise, marketing materials, and digital assets for NXT Financial Group agents.
         </p>
       </div>
@@ -144,7 +144,7 @@ export default function BrandShopPage() {
               key={cat.value}
               onClick={() => setActiveCategory(cat.value)}
               style={{
-                padding: '8px 16px', fontSize: 13, fontWeight: activeCategory === cat.value ? 600 : 500,
+                padding: '8px 16px', fontSize: 15, fontWeight: activeCategory === cat.value ? 600 : 500,
                 color: activeCategory === cat.value ? '#fff' : 'var(--text-secondary)',
                 background: activeCategory === cat.value ? 'var(--brand-navy)' : 'transparent',
                 border: 'none', cursor: 'pointer',
@@ -162,7 +162,7 @@ export default function BrandShopPage() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           style={{
-            marginLeft: 'auto', padding: '8px 14px', fontSize: 14,
+            marginLeft: 'auto', padding: '8px 14px', fontSize: 16,
             border: '1px solid var(--border-color)', borderRadius: 8,
             background: 'var(--surface-card)', color: 'var(--text-primary)',
             width: 240, outline: 'none',
@@ -199,7 +199,7 @@ export default function BrandShopPage() {
                 <div style={{ position: 'absolute', top: 10, right: 10, display: 'flex', gap: 6 }}>
                   {item.tags.map(tag => (
                     <span key={tag} style={{
-                      padding: '3px 10px', borderRadius: 20, fontSize: 11, fontWeight: 700,
+                      padding: '3px 10px', borderRadius: 20, fontSize: 13, fontWeight: 700,
                       background: tag === 'New' ? 'var(--brand-gold)' : 'rgba(255,255,255,0.2)',
                       color: tag === 'New' ? 'var(--brand-navy)' : '#fff',
                     }}>
@@ -213,16 +213,16 @@ export default function BrandShopPage() {
             {/* Content */}
             <div style={{ padding: 16 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
-                <h3 style={{ fontSize: 15, fontWeight: 600, color: 'var(--brand-navy)', margin: 0 }}>
+                <h3 style={{ fontSize: 17, fontWeight: 600, color: 'var(--brand-navy)', margin: 0 }}>
                   {item.name}
                 </h3>
               </div>
-              <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.5, margin: 0 }}>
+              <p style={{ fontSize: 15, color: 'var(--text-secondary)', lineHeight: 1.5, margin: 0 }}>
                 {item.description}
               </p>
               <div style={{ marginTop: 12 }}>
                 <span style={{
-                  display: 'inline-block', padding: '4px 10px', borderRadius: 6, fontSize: 11,
+                  display: 'inline-block', padding: '4px 10px', borderRadius: 6, fontSize: 13,
                   fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px',
                   background: 'var(--surface-inset)', color: 'var(--text-secondary)',
                 }}>
@@ -242,7 +242,7 @@ export default function BrandShopPage() {
             <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z M3 6h18 M16 10a4 4 0 01-8 0" />
           </svg>
           <p style={{ fontSize: 16, fontWeight: 500 }}>No items found</p>
-          <p style={{ fontSize: 14 }}>Try a different category or search term.</p>
+          <p style={{ fontSize: 16 }}>Try a different category or search term.</p>
         </div>
       )}
 
@@ -252,10 +252,10 @@ export default function BrandShopPage() {
         background: 'linear-gradient(135deg, #F0F4FF 0%, #E8F0FE 100%)',
         border: '1px solid #C7D6F0',
       }}>
-        <p style={{ fontSize: 14, color: 'var(--brand-navy)', fontWeight: 600, margin: '0 0 4px' }}>
+        <p style={{ fontSize: 16, color: 'var(--brand-navy)', fontWeight: 600, margin: '0 0 4px' }}>
           Need something custom?
         </p>
-        <p style={{ fontSize: 13, color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
+        <p style={{ fontSize: 15, color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
           Contact your agency admin or raise a request through NXT Help for custom branded materials, event-specific merchandise, or bulk orders.
         </p>
       </div>

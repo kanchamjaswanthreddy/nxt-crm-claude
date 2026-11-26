@@ -120,7 +120,7 @@ export default function AddClientPage() {
         onClick={() => router.push('/dashboard/clients')}
         style={{
           background: 'none', border: 'none', color: 'var(--text-secondary)',
-          cursor: 'pointer', fontSize: '14px', display: 'flex', alignItems: 'center',
+          cursor: 'pointer', fontSize: '16px', display: 'flex', alignItems: 'center',
           gap: '6px', marginBottom: '20px', padding: 0,
         }}
         onMouseEnter={(e) => e.currentTarget.style.color = 'var(--brand-navy)'}
@@ -135,7 +135,7 @@ export default function AddClientPage() {
         <div style={{
           backgroundColor: 'rgba(227, 169, 74,0.06)', color: '#1d4ed8',
           padding: '12px 16px', borderRadius: '10px', marginBottom: '20px',
-          fontSize: '14px', border: '1px solid rgba(227, 169, 74,0.15)',
+          fontSize: '16px', border: '1px solid rgba(227, 169, 74,0.15)',
           display: 'flex', alignItems: 'center', gap: '8px',
         }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
@@ -147,7 +147,7 @@ export default function AddClientPage() {
         <div style={{
           backgroundColor: 'rgba(220,38,38,0.06)', color: '#dc2626',
           padding: '12px 16px', borderRadius: '10px', marginBottom: '20px',
-          fontSize: '14px', border: '1px solid rgba(220,38,38,0.15)',
+          fontSize: '16px', border: '1px solid rgba(220,38,38,0.15)',
         }}>
           {error}
         </div>
@@ -159,8 +159,8 @@ export default function AddClientPage() {
           padding: '16px', borderRadius: '10px', marginBottom: '20px',
           border: '1px solid rgba(202,138,4,0.2)',
         }}>
-          <div style={{ fontWeight: 700, marginBottom: '6px', fontSize: '14px' }}>Duplicate Detected</div>
-          <p style={{ margin: '0 0 12px', fontSize: '14px' }}>
+          <div style={{ fontWeight: 700, marginBottom: '6px', fontSize: '16px' }}>Duplicate Detected</div>
+          <p style={{ margin: '0 0 12px', fontSize: '16px' }}>
             A client named <strong>{duplicateMatch.name}</strong> already exists with this email.
           </p>
           <Button variant="secondary" onClick={() => router.push(`/dashboard/clients/${duplicateMatch.id}`)}>
@@ -185,7 +185,7 @@ export default function AddClientPage() {
             <Input id="email" label="Email" type="email" value={form.email} onChange={(e) => update('email', e.target.value)} />
             <Input id="phone" label="Phone" type="tel" value={form.phone} onChange={(e) => update('phone', e.target.value)} />
           </div>
-          <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '14px', marginTop: 0 }}>
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '14px', marginTop: 0 }}>
             * At least one of Email or Phone is required.
           </p>
 
@@ -289,7 +289,7 @@ const sectionTitle = {
 
 const labelStyle = {
   display: 'block',
-  fontSize: '13px',
+  fontSize: '15px',
   color: 'var(--text-secondary)',
   marginBottom: '6px',
   fontWeight: '500',
@@ -300,7 +300,7 @@ const selectStyle = {
   padding: '10px 12px',
   borderRadius: '8px',
   border: '1px solid var(--border-color)',
-  fontSize: '14px',
+  fontSize: '16px',
   backgroundColor: '#fff',
   color: 'var(--text-primary)',
 };

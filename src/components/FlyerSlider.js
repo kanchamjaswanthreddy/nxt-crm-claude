@@ -118,7 +118,7 @@ export default function FlyerSlider({ onComplete }) {
           color: '#fff',
           padding: '8px 20px',
           borderRadius: '999px',
-          fontSize: '14px',
+          fontSize: '16px',
           fontWeight: 600,
           cursor: 'pointer',
           transition: 'all 0.2s',
@@ -136,7 +136,7 @@ export default function FlyerSlider({ onComplete }) {
         top: 24,
         left: 24,
         color: 'rgba(255,255,255,0.6)',
-        fontSize: '14px',
+        fontSize: '16px',
         fontWeight: 600,
       }}>
         {current + 1} / {total}

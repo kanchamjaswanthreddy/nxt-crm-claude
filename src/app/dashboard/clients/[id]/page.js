@@ -16,7 +16,7 @@ function CarrierCombobox({ value, onChange, carriers }) {
 
   return (
     <div style={{ position: 'relative' }}>
-      <label style={{ display: 'block', fontFamily: 'var(--font-base)', fontSize: '15px', color: 'var(--text-primary)', marginBottom: '8px', fontWeight: '500' }}>Carrier *</label>
+      <label style={{ display: 'block', fontFamily: 'var(--font-base)', fontSize: '17px', color: 'var(--text-primary)', marginBottom: '8px', fontWeight: '500' }}>Carrier *</label>
       <input
         value={value}
         onChange={(e) => { onChange(e.target.value); setOpen(true); }}
@@ -26,7 +26,7 @@ function CarrierCombobox({ value, onChange, carriers }) {
         autoComplete="off"
         style={{
           width: '100%', padding: '16px 16px', borderRadius: '12px',
-          border: '1px solid var(--border-color)', fontSize: '15px',
+          border: '1px solid var(--border-color)', fontSize: '17px',
           fontFamily: 'var(--font-base)', backgroundColor: 'var(--surface-card)',
           color: 'var(--text-primary)', outline: 'none', boxSizing: 'border-box',
         }}
@@ -43,7 +43,7 @@ function CarrierCombobox({ value, onChange, carriers }) {
               key={name}
               onMouseDown={(e) => { e.preventDefault(); onChange(name); setOpen(false); }}
               style={{
-                padding: '12px 16px', cursor: 'pointer', fontSize: '14px',
+                padding: '12px 16px', cursor: 'pointer', fontSize: '16px',
                 borderBottom: '1px solid rgba(0,0,0,0.04)',
               }}
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(12, 16, 34,0.05)'}
@@ -349,7 +349,7 @@ export default function ClientDetailPage({ params }) {
             borderTopColor: 'transparent', borderRadius: '50%',
             animation: 'spin 0.8s linear infinite',
           }} />
-          <span style={{ color: 'var(--text-secondary)', fontSize: '15px' }}>Loading client...</span>
+          <span style={{ color: 'var(--text-secondary)', fontSize: '17px' }}>Loading client...</span>
         </div>
         <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
       </div>
@@ -369,7 +369,7 @@ export default function ClientDetailPage({ params }) {
         onClick={() => router.push('/dashboard/clients')}
         style={{
           background: 'none', border: 'none', color: 'var(--text-secondary)',
-          cursor: 'pointer', fontSize: '14px', display: 'flex', alignItems: 'center',
+          cursor: 'pointer', fontSize: '16px', display: 'flex', alignItems: 'center',
           gap: '6px', marginBottom: '20px', padding: 0,
         }}
         onMouseEnter={(e) => e.currentTarget.style.color = 'var(--brand-navy)'}
@@ -400,7 +400,7 @@ export default function ClientDetailPage({ params }) {
             <h1 style={{ margin: '0 0 6px', color: 'var(--brand-navy)', fontSize: '24px', fontWeight: 800 }}>
               {client.firstName} {client.lastName}
             </h1>
-            <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', fontSize: '14px', color: 'var(--text-secondary)' }}>
+            <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', fontSize: '16px', color: 'var(--text-secondary)' }}>
               {client.email && (
                 <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.6 }}><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> {client.email}
@@ -451,7 +451,7 @@ export default function ClientDetailPage({ params }) {
           <Card key={stat.label}>
             <div style={{ padding: '4px 0' }}>
               <div style={{
-                fontSize: '11px', fontWeight: 600, color: 'var(--text-secondary)',
+                fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)',
                 textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px',
               }}>{stat.label}</div>
               <div style={{ fontSize: '22px', fontWeight: 800, color: stat.color }}>{stat.value}</div>
@@ -471,7 +471,7 @@ export default function ClientDetailPage({ params }) {
             onClick={() => setActiveTab(tab)}
             style={{
               padding: '12px 24px', border: 'none', background: 'none',
-              fontSize: '14px', fontWeight: 600, cursor: 'pointer',
+              fontSize: '16px', fontWeight: 600, cursor: 'pointer',
               color: activeTab === tab ? 'var(--brand-navy)' : 'var(--text-secondary)',
               borderBottom: activeTab === tab ? '2px solid var(--brand-navy)' : '2px solid transparent',
               marginBottom: '-2px', textTransform: 'capitalize',
@@ -501,7 +501,7 @@ export default function ClientDetailPage({ params }) {
                 <Input label="Employer" value={editForm.employer} onChange={(e) => setEditForm({ ...editForm, employer: e.target.value })} />
                 <Input label="Occupation" value={editForm.occupation} onChange={(e) => setEditForm({ ...editForm, occupation: e.target.value })} />
                 <Input label="Annual Income" type="number" value={editForm.annualIncome} onChange={(e) => setEditForm({ ...editForm, annualIncome: e.target.value })} />
-                {editError && <p style={{ color: 'var(--status-error, #D33F3F)', fontSize: '13px', margin: 0 }}>{editError}</p>}
+                {editError && <p style={{ color: 'var(--status-error, #D33F3F)', fontSize: '15px', margin: 0 }}>{editError}</p>}
                 <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '8px' }}>
                   <Button variant="secondary" onClick={() => setIsEditing(false)} disabled={isSavingEdit}>Cancel</Button>
                   <Button onClick={handleSaveEdit} isLoading={isSavingEdit}>Save Changes</Button>
@@ -530,7 +530,7 @@ export default function ClientDetailPage({ params }) {
                 <DetailRow label="Annual Income" value={client.annualIncome ? fmt(client.annualIncome) : null} />
               </div>
               {!client.employer && !client.occupation && !client.annualIncome && (
-                <p style={{ color: 'var(--text-secondary)', fontSize: '13px', margin: 0, fontStyle: 'italic' }}>No employment info on file</p>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '15px', margin: 0, fontStyle: 'italic' }}>No employment info on file</p>
               )}
             </Card>
 
@@ -544,7 +544,7 @@ export default function ClientDetailPage({ params }) {
                   <DetailRow label="ZIP" value={client.address?.zip} />
                 </div>
               ) : (
-                <p style={{ color: 'var(--text-secondary)', fontSize: '13px', margin: 0, fontStyle: 'italic' }}>No address on file</p>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '15px', margin: 0, fontStyle: 'italic' }}>No address on file</p>
               )}
             </Card>
           </div>
@@ -559,7 +559,7 @@ export default function ClientDetailPage({ params }) {
               <div style={{ textAlign: 'center', padding: '48px 24px' }}>
                 <div style={{ marginBottom: '16px', opacity: 0.4, display: 'flex', justifyContent: 'center', color: 'var(--brand-navy)' }}><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
                 <h3 style={{ margin: '0 0 8px', color: 'var(--brand-navy)', fontSize: '18px' }}>No policies yet</h3>
-                <p style={{ color: 'var(--text-secondary)', margin: '0 0 24px', fontSize: '14px' }}>
+                <p style={{ color: 'var(--text-secondary)', margin: '0 0 24px', fontSize: '16px' }}>
                   Add this client&apos;s first insurance policy to start tracking coverage.
                 </p>
                 <Button onClick={openAddPolicy}>+ Add First Policy</Button>
@@ -587,7 +587,7 @@ export default function ClientDetailPage({ params }) {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px', flexWrap: 'wrap' }}>
                           <span style={{ fontWeight: 700, color: 'var(--brand-navy)', fontSize: '16px' }}>{policy.type}</span>
                           <span style={{
-                            padding: '3px 10px', borderRadius: '999px', fontSize: '11px',
+                            padding: '3px 10px', borderRadius: '999px', fontSize: '13px',
                             fontWeight: 700, color: statusObj.color, backgroundColor: statusObj.bg,
                             textTransform: 'uppercase', letterSpacing: '0.3px',
                           }}>
@@ -596,7 +596,7 @@ export default function ClientDetailPage({ params }) {
                         </div>
                         <div style={{
                           display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-                          gap: '12px', fontSize: '13px',
+                          gap: '12px', fontSize: '15px',
                         }}>
                           <PolicyDetail label="Carrier" value={policy.carrier} />
                           <PolicyDetail label="Policy #" value={policy.policyNumber} />
@@ -606,7 +606,7 @@ export default function ClientDetailPage({ params }) {
                           {policy.expiryDate && <PolicyDetail label="Expires" value={policy.expiryDate} />}
                         </div>
                         {policy.beneficiaries?.length > 0 && (
-                          <div style={{ marginTop: '10px', fontSize: '12px', color: 'var(--text-secondary)' }}>
+                          <div style={{ marginTop: '10px', fontSize: '14px', color: 'var(--text-secondary)' }}>
                             <span style={{ fontWeight: 600 }}>Beneficiaries:</span>{' '}
                             {policy.beneficiaries.map((b) => `${b.name} (${b.percentage}%)`).join(', ')}
                           </div>
@@ -640,7 +640,7 @@ export default function ClientDetailPage({ params }) {
                   width: '100%', padding: '14px 16px', borderRadius: '12px',
                   border: '1px solid var(--border-color)', backgroundColor: 'var(--surface-page)',
                   fontFamily: 'inherit', minHeight: '100px', resize: 'vertical',
-                  marginBottom: '12px', fontSize: '14px', lineHeight: '1.6',
+                  marginBottom: '12px', fontSize: '16px', lineHeight: '1.6',
                 }}
               />
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -655,10 +655,10 @@ export default function ClientDetailPage({ params }) {
                       padding: '16px', backgroundColor: 'var(--surface-page)',
                       borderRadius: '12px', borderLeft: '3px solid var(--brand-gold)',
                     }}>
-                      <p style={{ margin: '0 0 10px', fontSize: '14px', lineHeight: '1.6', color: 'var(--text-primary)' }}>
+                      <p style={{ margin: '0 0 10px', fontSize: '16px', lineHeight: '1.6', color: 'var(--text-primary)' }}>
                         {note.body}
                       </p>
-                      <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+                      <div style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>
                         {note.createdAt ? new Date(note.createdAt).toLocaleString() : 'Just now'}
                       </div>
                     </div>
@@ -667,7 +667,7 @@ export default function ClientDetailPage({ params }) {
               </div>
             )}
             {notes.length === 0 && (
-              <div style={{ textAlign: 'center', padding: '32px 0', color: 'var(--text-secondary)', fontSize: '14px' }}>
+              <div style={{ textAlign: 'center', padding: '32px 0', color: 'var(--text-secondary)', fontSize: '16px' }}>
                 No notes yet. Add the first note above.
               </div>
             )}
@@ -766,12 +766,12 @@ export default function ClientDetailPage({ params }) {
                   {policyForm.beneficiaries.map((b, i) => (
                     <div key={i} style={{
                       display: 'flex', alignItems: 'center', gap: '8px',
-                      padding: '8px 12px', fontSize: '13px',
+                      padding: '8px 12px', fontSize: '15px',
                       backgroundColor: 'var(--surface-page)', borderRadius: '8px',
                       marginBottom: '6px',
                     }}>
                       <span style={{ flex: 1 }}>{b.name} — {b.relationship} ({b.percentage}%)</span>
-                      <button onClick={() => removeBeneficiary(i)} style={{ ...actionBtnStyle, color: 'var(--status-error)', fontSize: '12px' }}>Remove</button>
+                      <button onClick={() => removeBeneficiary(i)} style={{ ...actionBtnStyle, color: 'var(--status-error)', fontSize: '14px' }}>Remove</button>
                     </div>
                   ))}
                 </div>
@@ -793,7 +793,7 @@ export default function ClientDetailPage({ params }) {
               </div>
             </div>
 
-            {policyError && <p style={{ color: 'var(--status-error, #D33F3F)', fontSize: '13px', margin: '0 0 12px' }}>{policyError}</p>}
+            {policyError && <p style={{ color: 'var(--status-error, #D33F3F)', fontSize: '15px', margin: '0 0 12px' }}>{policyError}</p>}
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', borderTop: '1px solid var(--border-color)', paddingTop: '20px' }}>
               <Button variant="secondary" onClick={() => setIsPolicyModalOpen(false)} disabled={isSavingPolicy}>Cancel</Button>
               <Button onClick={handleSavePolicy} isLoading={isSavingPolicy} disabled={!policyForm.carrier || !policyForm.policyNumber}>
@@ -824,9 +824,9 @@ function DetailRow({ label, value, capitalize }) {
       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
       padding: '10px 0', borderBottom: '1px solid rgba(0,0,0,0.04)',
     }}>
-      <span style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 500 }}>{label}</span>
+      <span style={{ fontSize: '15px', color: 'var(--text-secondary)', fontWeight: 500 }}>{label}</span>
       <span style={{
-        fontSize: '14px', fontWeight: 600, color: 'var(--text-primary)',
+        fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)',
         textTransform: capitalize ? 'capitalize' : 'none',
       }}>{value}</span>
     </div>
@@ -837,20 +837,20 @@ function PolicyDetail({ label, value }) {
   if (!value) return null;
   return (
     <div>
-      <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.3px', marginBottom: '2px' }}>{label}</div>
-      <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-primary)' }}>{value}</div>
+      <div style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.3px', marginBottom: '2px' }}>{label}</div>
+      <div style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)' }}>{value}</div>
     </div>
   );
 }
 
 const fieldLabelStyle = {
-  display: 'block', fontFamily: 'var(--font-base)', fontSize: '15px',
+  display: 'block', fontFamily: 'var(--font-base)', fontSize: '17px',
   color: 'var(--text-primary)', marginBottom: '8px', fontWeight: '500',
 };
 
 const fieldInputStyle = {
   width: '100%', padding: '16px 16px', borderRadius: '12px',
-  border: '1px solid var(--border-color)', fontSize: '15px',
+  border: '1px solid var(--border-color)', fontSize: '17px',
   fontFamily: 'var(--font-base)', backgroundColor: 'var(--surface-card)',
   color: 'var(--text-primary)', outline: 'none', boxSizing: 'border-box',
   transition: 'all 0.2s ease-in-out', WebkitAppearance: 'none',
@@ -858,7 +858,7 @@ const fieldInputStyle = {
 
 const actionBtnStyle = {
   background: 'none', border: 'none', color: 'var(--brand-blue-accent)',
-  cursor: 'pointer', fontSize: '13px', fontWeight: '600',
+  cursor: 'pointer', fontSize: '15px', fontWeight: '600',
   padding: '6px 12px', borderRadius: '6px',
   transition: 'background-color 0.15s',
 };

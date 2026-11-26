@@ -109,7 +109,7 @@ export default function CommissionSplitBar({
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#fff',
-                fontSize: '11px',
+                fontSize: '13px',
                 fontWeight: 600,
                 overflow: 'hidden',
                 whiteSpace: 'nowrap',
@@ -131,7 +131,7 @@ export default function CommissionSplitBar({
               alignItems: 'center',
               justifyContent: 'center',
               color: '#0C1022',
-              fontSize: '11px',
+              fontSize: '13px',
               fontWeight: 600,
               overflow: 'hidden',
               whiteSpace: 'nowrap',
@@ -163,11 +163,11 @@ export default function CommissionSplitBar({
                 backgroundColor: COLORS[i % COLORS.length],
                 flexShrink: 0,
               }} />
-              <span style={{ flex: 1, fontSize: '14px', fontWeight: 500, color: '#0C1022' }}>
+              <span style={{ flex: 1, fontSize: '16px', fontWeight: 500, color: '#0C1022' }}>
                 {o.beneficiaryName || 'Unknown'}
               </span>
               {readOnly ? (
-                <span style={{ fontSize: '14px', fontWeight: 600, color: '#0C1022' }}>{o.percent}%</span>
+                <span style={{ fontSize: '16px', fontWeight: 600, color: '#0C1022' }}>{o.percent}%</span>
               ) : (
                 <>
                   <input
@@ -183,12 +183,12 @@ export default function CommissionSplitBar({
                       padding: '4px 8px',
                       border: '1px solid rgba(0,0,0,0.15)',
                       borderRadius: '6px',
-                      fontSize: '14px',
+                      fontSize: '16px',
                       fontWeight: 600,
                       textAlign: 'center',
                     }}
                   />
-                  <span style={{ fontSize: '14px', color: '#5F5C56' }}>%</span>
+                  <span style={{ fontSize: '16px', color: '#5F5C56' }}>%</span>
                   <button
                     onClick={() => handleRemove(i)}
                     style={{
@@ -215,7 +215,7 @@ export default function CommissionSplitBar({
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
-        fontSize: '13px',
+        fontSize: '15px',
         color: '#5F5C56',
         marginBottom: '12px',
         padding: '0 4px',
@@ -257,7 +257,7 @@ export default function CommissionSplitBar({
                   padding: '8px',
                   border: '1px solid rgba(0,0,0,0.15)',
                   borderRadius: '6px',
-                  fontSize: '14px',
+                  fontSize: '16px',
                   textAlign: 'center',
                 }}
               />
@@ -270,7 +270,7 @@ export default function CommissionSplitBar({
                   color: '#fff',
                   border: 'none',
                   borderRadius: '6px',
-                  fontSize: '13px',
+                  fontSize: '15px',
                   fontWeight: 600,
                   cursor: newBeneficiary && newPercent ? 'pointer' : 'not-allowed',
                   opacity: newBeneficiary && newPercent ? 1 : 0.5,
@@ -285,7 +285,7 @@ export default function CommissionSplitBar({
                   border: 'none',
                   color: '#5F5C56',
                   cursor: 'pointer',
-                  fontSize: '13px',
+                  fontSize: '15px',
                 }}
               >
                 Cancel
@@ -304,7 +304,7 @@ export default function CommissionSplitBar({
                 border: '1px dashed rgba(0,0,0,0.2)',
                 borderRadius: '8px',
                 color: '#0C1022',
-                fontSize: '13px',
+                fontSize: '15px',
                 fontWeight: 500,
                 cursor: totalOverride >= 100 ? 'not-allowed' : 'pointer',
                 opacity: totalOverride >= 100 ? 0.5 : 1,

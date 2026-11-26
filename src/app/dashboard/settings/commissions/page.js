@@ -265,7 +265,7 @@ export default function CommissionsSettings() {
                   placeholder="Search carriers..."
                   value={carrierSearchQuery}
                   onChange={e => setCarrierSearchQuery(e.target.value)}
-                  style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--border-color)', boxSizing: 'border-box', fontFamily: 'inherit', fontSize: '14px', marginBottom: '6px', outline: 'none' }}
+                  style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--border-color)', boxSizing: 'border-box', fontFamily: 'inherit', fontSize: '16px', marginBottom: '6px', outline: 'none' }}
                 />
                 <div style={{ maxHeight: '160px', overflowY: 'auto', border: '1px solid var(--border-color)', borderRadius: '10px', backgroundColor: 'var(--surface-card)' }}>
                   {carriers
@@ -275,7 +275,7 @@ export default function CommissionsSettings() {
                         key={c.id}
                         onClick={() => { setEditingCarrier(c); setCarrierName(c.name); setCarrierActive(c.active); }}
                         style={{
-                          padding: '10px 14px', cursor: 'pointer', fontSize: '14px',
+                          padding: '10px 14px', cursor: 'pointer', fontSize: '16px',
                           borderBottom: '1px solid rgba(0,0,0,0.04)',
                           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                           backgroundColor: editingCarrier?.id === c.id ? 'rgba(227, 169, 74, 0.12)' : 'transparent',
@@ -283,7 +283,7 @@ export default function CommissionsSettings() {
                       >
                         <span style={{ fontWeight: '500' }}>{c.name}</span>
                         <span style={{
-                          fontSize: '11px', fontWeight: '600', padding: '2px 10px', borderRadius: '999px',
+                          fontSize: '13px', fontWeight: '600', padding: '2px 10px', borderRadius: '999px',
                           backgroundColor: c.active ? 'rgba(47, 168, 79, 0.1)' : 'rgba(0,0,0,0.06)',
                           color: c.active ? 'var(--status-success, #2FA84F)' : 'var(--text-secondary)',
                         }}>
@@ -292,7 +292,7 @@ export default function CommissionsSettings() {
                       </div>
                     ))}
                   {carriers.filter(c => c.name.toLowerCase().includes(carrierSearchQuery.toLowerCase())).length === 0 && (
-                    <div style={{ padding: '10px 14px', color: 'var(--text-secondary)', fontSize: '13px' }}>No matching carriers</div>
+                    <div style={{ padding: '10px 14px', color: 'var(--text-secondary)', fontSize: '15px' }}>No matching carriers</div>
                   )}
                 </div>
               </div>
@@ -302,7 +302,7 @@ export default function CommissionsSettings() {
             {carriers.length > 0 && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: 'var(--space-2)' }}>
                 <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
-                <span style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '500' }}>{editingCarrier ? 'editing' : 'or create new'}</span>
+                <span style={{ fontSize: '14px', color: 'var(--text-secondary)', fontWeight: '500' }}>{editingCarrier ? 'editing' : 'or create new'}</span>
                 <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
               </div>
             )}
@@ -317,7 +317,7 @@ export default function CommissionsSettings() {
               />
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                 <input type="checkbox" checked={carrierActive} onChange={e => setCarrierActive(e.target.checked)} style={{ width: '18px', height: '18px', accentColor: 'var(--brand-gold)' }} />
-                <span style={{ fontSize: '14px', fontWeight: '500' }}>Active</span>
+                <span style={{ fontSize: '16px', fontWeight: '500' }}>Active</span>
               </label>
 
               <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-1)' }}>
@@ -370,7 +370,7 @@ export default function CommissionsSettings() {
                       padding: '10px 14px', borderRadius: '10px',
                       backgroundColor: 'rgba(47, 168, 79, 0.08)',
                       border: '1px solid rgba(47, 168, 79, 0.2)',
-                      fontSize: '14px', color: 'var(--brand-navy)',
+                      fontSize: '16px', color: 'var(--brand-navy)',
                     }}>
                       <span style={{ fontWeight: '600' }}>{selected.name}</span>
                       <button
@@ -387,7 +387,7 @@ export default function CommissionsSettings() {
                       placeholder="Search carriers..."
                       value={carrierSearch}
                       onChange={e => setCarrierSearch(e.target.value)}
-                      style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--border-color)', boxSizing: 'border-box', fontFamily: 'inherit', fontSize: '14px', marginBottom: '6px', outline: 'none' }}
+                      style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--border-color)', boxSizing: 'border-box', fontFamily: 'inherit', fontSize: '16px', marginBottom: '6px', outline: 'none' }}
                     />
                     <div style={{ maxHeight: '140px', overflowY: 'auto', border: '1px solid var(--border-color)', borderRadius: '10px', backgroundColor: 'var(--surface-card)' }}>
                       {carriers
@@ -397,7 +397,7 @@ export default function CommissionsSettings() {
                             key={c.id}
                             onClick={() => { setRateCarrierId(c.id); setCarrierSearch(c.name); }}
                             style={{
-                              padding: '10px 14px', cursor: 'pointer', fontSize: '14px',
+                              padding: '10px 14px', cursor: 'pointer', fontSize: '16px',
                               borderBottom: '1px solid rgba(0,0,0,0.04)',
                               fontWeight: '500',
                             }}
@@ -406,7 +406,7 @@ export default function CommissionsSettings() {
                           </div>
                         ))}
                       {carriers.filter(c => c.name.toLowerCase().includes(carrierSearch.toLowerCase())).length === 0 && (
-                        <div style={{ padding: '10px 14px', color: 'var(--text-secondary)', fontSize: '13px' }}>No carriers found — add one in the Carriers tab first</div>
+                        <div style={{ padding: '10px 14px', color: 'var(--text-secondary)', fontSize: '15px' }}>No carriers found — add one in the Carriers tab first</div>
                       )}
                     </div>
                   </>
@@ -420,7 +420,7 @@ export default function CommissionsSettings() {
                   value={ratePolicyType}
                   onChange={e => setRatePolicyType(e.target.value)}
                   required
-                  style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--border-color)', backgroundColor: 'var(--surface-card)', fontFamily: 'inherit', fontSize: '14px', color: 'var(--text-primary)', boxSizing: 'border-box' }}
+                  style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--border-color)', backgroundColor: 'var(--surface-card)', fontFamily: 'inherit', fontSize: '16px', color: 'var(--text-primary)', boxSizing: 'border-box' }}
                 >
                   <option value="life">Life</option>
                   <option value="health">Health</option>
@@ -439,7 +439,7 @@ export default function CommissionsSettings() {
                   value={rateAgentLevel}
                   onChange={e => setRateAgentLevel(e.target.value)}
                   required
-                  style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--border-color)', backgroundColor: 'var(--surface-card)', fontFamily: 'inherit', fontSize: '14px', color: 'var(--text-primary)', boxSizing: 'border-box' }}
+                  style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--border-color)', backgroundColor: 'var(--surface-card)', fontFamily: 'inherit', fontSize: '16px', color: 'var(--text-primary)', boxSizing: 'border-box' }}
                 >
                   <option value="">Select Level</option>
                   {AGENT_LEVELS.map(lvl => (

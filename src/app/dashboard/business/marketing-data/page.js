@@ -198,7 +198,7 @@ export default function MarketingDataPage() {
             style={{
               width: '100%', padding: '10px 14px 10px 38px',
               borderRadius: '10px', border: '1px solid rgba(0,0,0,0.1)',
-              fontSize: '0.875rem', outline: 'none', background: '#fff',
+              fontSize: '1rem', outline: 'none', background: '#fff',
             }}
           />
         </div>
@@ -231,7 +231,7 @@ export default function MarketingDataPage() {
           style={{
             padding: '8px 14px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.1)',
             background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px',
-            fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)',
+            fontSize: '0.9375rem', fontWeight: 600, color: 'var(--text-secondary)',
             opacity: isLoading ? 0.5 : 1,
           }}
         >
@@ -246,7 +246,7 @@ export default function MarketingDataPage() {
           style={{
             padding: '8px 14px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.1)',
             background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px',
-            fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)', textDecoration: 'none',
+            fontSize: '0.9375rem', fontWeight: 600, color: 'var(--text-secondary)', textDecoration: 'none',
           }}
         >
           <ExternalLinkIcon /> Open in Drive
@@ -257,7 +257,7 @@ export default function MarketingDataPage() {
       {breadcrumbs.length > 0 && (
         <div style={{
           display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '16px',
-          fontSize: '0.85rem', flexWrap: 'wrap',
+          fontSize: '1rem', flexWrap: 'wrap',
         }}>
           {breadcrumbs.map((crumb, i) => (
             <React.Fragment key={crumb.id}>
@@ -266,7 +266,7 @@ export default function MarketingDataPage() {
                 onClick={() => navigateToFolder(crumb.id)}
                 style={{
                   background: 'none', border: 'none', cursor: 'pointer', padding: '4px 8px',
-                  borderRadius: '6px', fontSize: '0.85rem', fontWeight: i === breadcrumbs.length - 1 ? 700 : 500,
+                  borderRadius: '6px', fontSize: '1rem', fontWeight: i === breadcrumbs.length - 1 ? 700 : 500,
                   color: i === breadcrumbs.length - 1 ? 'var(--text-primary)' : 'var(--text-secondary)',
                 }}
                 onMouseEnter={(e) => { if (i < breadcrumbs.length - 1) e.currentTarget.style.background = 'rgba(0,0,0,0.04)'; }}
@@ -284,10 +284,10 @@ export default function MarketingDataPage() {
         <div style={{
           padding: '16px 20px', borderRadius: '12px', marginBottom: '20px',
           background: 'rgba(220,38,38,0.06)', border: '1px solid rgba(220,38,38,0.15)',
-          color: '#DC2626', fontSize: '0.875rem',
+          color: '#DC2626', fontSize: '1rem',
         }}>
           <strong>Error:</strong> {error}
-          <div style={{ marginTop: '8px', fontSize: '0.8rem', color: '#8A857B' }}>
+          <div style={{ marginTop: '8px', fontSize: '0.9375rem', color: '#8A857B' }}>
             Make sure the Google Drive folder is shared with the Firebase service account email.
           </div>
         </div>
@@ -314,7 +314,7 @@ export default function MarketingDataPage() {
           {/* Folders */}
           {filteredFolders.length > 0 && (
             <div style={{ marginBottom: '24px' }}>
-              <h3 style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px', margin: '0 0 12px', paddingLeft: '4px' }}>
+              <h3 style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px', margin: '0 0 12px', paddingLeft: '4px' }}>
                 Folders ({filteredFolders.length})
               </h3>
               {viewMode === 'grid' ? (
@@ -334,7 +334,7 @@ export default function MarketingDataPage() {
                     >
                       <FolderIcon size={24} />
                       <span style={{
-                        fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)',
+                        fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)',
                         overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                       }}>{folder.name}</span>
                     </button>
@@ -355,8 +355,8 @@ export default function MarketingDataPage() {
                       onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                     >
                       <FolderIcon size={20} />
-                      <span style={{ flex: 1, fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)' }}>{folder.name}</span>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{timeAgo(folder.modifiedTime)}</span>
+                      <span style={{ flex: 1, fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{folder.name}</span>
+                      <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>{timeAgo(folder.modifiedTime)}</span>
                     </button>
                   ))}
                 </div>
@@ -367,7 +367,7 @@ export default function MarketingDataPage() {
           {/* Files */}
           {filteredFiles.length > 0 && (
             <div>
-              <h3 style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px', margin: '0 0 12px', paddingLeft: '4px' }}>
+              <h3 style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px', margin: '0 0 12px', paddingLeft: '4px' }}>
                 Files ({filteredFiles.length})
               </h3>
               {viewMode === 'grid' ? (
@@ -402,11 +402,11 @@ export default function MarketingDataPage() {
                         </div>
                       </div>
                       <div style={{
-                        fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)',
+                        fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)',
                         overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                         marginBottom: '4px',
                       }}>{file.name}</div>
-                      <div style={{ display: 'flex', gap: '8px', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                      <div style={{ display: 'flex', gap: '8px', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
                         <span>{getFileTypeLabel(file.mimeType)}</span>
                         {file.size && <span>{formatFileSize(file.size)}</span>}
                         <span>{timeAgo(file.modifiedTime)}</span>
@@ -424,7 +424,7 @@ export default function MarketingDataPage() {
                   <div style={{
                     display: 'grid', gridTemplateColumns: '1fr 100px 100px 120px',
                     padding: '10px 16px', borderBottom: '1px solid rgba(0,0,0,0.06)',
-                    fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-secondary)',
+                    fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-secondary)',
                     textTransform: 'uppercase', letterSpacing: '0.3px',
                   }}>
                     <span>Name</span>
@@ -447,13 +447,13 @@ export default function MarketingDataPage() {
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', overflow: 'hidden' }}>
                         <FileIcon mimeType={file.mimeType} size={18} />
                         <span style={{
-                          fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-primary)',
+                          fontSize: '1rem', fontWeight: 500, color: 'var(--text-primary)',
                           overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                         }}>{file.name}</span>
                       </div>
-                      <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{getFileTypeLabel(file.mimeType)}</span>
-                      <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{formatFileSize(file.size)}</span>
-                      <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{timeAgo(file.modifiedTime)}</span>
+                      <span style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)' }}>{getFileTypeLabel(file.mimeType)}</span>
+                      <span style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)' }}>{formatFileSize(file.size)}</span>
+                      <span style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)' }}>{timeAgo(file.modifiedTime)}</span>
                     </div>
                   ))}
                 </div>
@@ -482,10 +482,10 @@ export default function MarketingDataPage() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', overflow: 'hidden' }}>
                 <FileIcon mimeType={previewFile.mimeType} size={22} />
                 <div style={{ overflow: 'hidden' }}>
-                  <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <div style={{ fontSize: '1.0625rem', fontWeight: 700, color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {previewFile.name}
                   </div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', gap: '8px' }}>
+                  <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', display: 'flex', gap: '8px' }}>
                     <span>{getFileTypeLabel(previewFile.mimeType)}</span>
                     {previewFile.size && <span>{formatFileSize(previewFile.size)}</span>}
                     <span>{timeAgo(previewFile.modifiedTime)}</span>
@@ -513,7 +513,7 @@ export default function MarketingDataPage() {
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '48px', background: '#F7F5F0' }}>
                   <FileIcon mimeType={previewFile.mimeType} size={64} />
-                  <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '16px', textAlign: 'center' }}>
+                  <p style={{ fontSize: '1.0625rem', color: 'var(--text-secondary)', marginTop: '16px', textAlign: 'center' }}>
                     Open this file in Google Drive to view its full contents.
                   </p>
                 </div>
@@ -532,7 +532,7 @@ export default function MarketingDataPage() {
                   rel="noopener noreferrer"
                   style={{
                     padding: '8px 16px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.1)',
-                    background: '#fff', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)',
+                    background: '#fff', fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)',
                     textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px',
                   }}
                 >
@@ -546,7 +546,7 @@ export default function MarketingDataPage() {
                   rel="noopener noreferrer"
                   style={{
                     padding: '8px 16px', borderRadius: '8px', border: 'none',
-                    background: 'var(--brand-gold, #E3A94A)', fontSize: '0.85rem', fontWeight: 600,
+                    background: 'var(--brand-gold, #E3A94A)', fontSize: '1rem', fontWeight: 600,
                     color: '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px',
                   }}
                 >

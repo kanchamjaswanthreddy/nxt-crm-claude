@@ -49,7 +49,7 @@ function Badge({ style: s, children }) {
   return (
     <span style={{
       display: 'inline-block', padding: '2px 10px', borderRadius: '999px',
-      fontSize: '13px', fontWeight: 600, backgroundColor: s.bg, color: s.color,
+      fontSize: '15px', fontWeight: 600, backgroundColor: s.bg, color: s.color,
       border: s.border || 'none',
     }}>
       {children}
@@ -176,7 +176,7 @@ export default function HelpDeskPage() {
           <path d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
         </svg>
         <h2 style={{ color: 'var(--brand-navy)', fontSize: 20, margin: '0 0 8px' }}>Access Denied</h2>
-        <p style={{ color: 'var(--text-secondary)', fontSize: 14 }}>You need to be a Help Desk member or admin to access this page.</p>
+        <p style={{ color: 'var(--text-secondary)', fontSize: 16 }}>You need to be a Help Desk member or admin to access this page.</p>
       </div>
     );
   }
@@ -224,7 +224,7 @@ export default function HelpDeskPage() {
       <div>
         <button onClick={() => setSelectedTicket(null)} style={{
           background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)',
-          fontSize: 14, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 4,
+          fontSize: 16, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 4,
         }}>
           ← Back to all tickets
         </button>
@@ -238,7 +238,7 @@ export default function HelpDeskPage() {
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, flexWrap: 'wrap' }}>
                 <div>
-                  <span style={{ color: 'var(--text-secondary)', fontSize: 13 }}>{selectedTicket.ticketNumber}</span>
+                  <span style={{ color: 'var(--text-secondary)', fontSize: 15 }}>{selectedTicket.ticketNumber}</span>
                   <h2 style={{ margin: '4px 0 8px', fontSize: 20, color: 'var(--brand-navy)' }}>{selectedTicket.subject}</h2>
                 </div>
                 <div style={{ display: 'flex', gap: 8 }}>
@@ -247,11 +247,11 @@ export default function HelpDeskPage() {
                 </div>
               </div>
 
-              <p style={{ color: 'var(--text-primary)', fontSize: 14, lineHeight: 1.6, whiteSpace: 'pre-wrap', margin: '12px 0' }}>
+              <p style={{ color: 'var(--text-primary)', fontSize: 16, lineHeight: 1.6, whiteSpace: 'pre-wrap', margin: '12px 0' }}>
                 {selectedTicket.description}
               </p>
 
-              <div style={{ fontSize: 13, color: 'var(--text-secondary)', borderTop: '1px solid var(--border-color)', paddingTop: 12, marginTop: 12 }}>
+              <div style={{ fontSize: 15, color: 'var(--text-secondary)', borderTop: '1px solid var(--border-color)', paddingTop: 12, marginTop: 12 }}>
                 <div>Submitted by: <strong>{selectedTicket.createdByName}</strong> ({selectedTicket.createdByEmail})</div>
                 <div>Created: {new Date(selectedTicket.createdAt).toLocaleString()}</div>
                 <div>Category: {CATEGORIES.find(c => c.value === selectedTicket.category)?.label || selectedTicket.category}</div>
@@ -267,7 +267,7 @@ export default function HelpDeskPage() {
               </h3>
 
               {(selectedTicket.comments || []).length === 0 && (
-                <p style={{ color: 'var(--text-secondary)', fontSize: 14 }}>No comments yet.</p>
+                <p style={{ color: 'var(--text-secondary)', fontSize: 16 }}>No comments yet.</p>
               )}
 
               {(selectedTicket.comments || []).map((c, i) => (
@@ -275,10 +275,10 @@ export default function HelpDeskPage() {
                   padding: '12px 0', borderBottom: i < (selectedTicket.comments.length - 1) ? '1px solid var(--border-color)' : 'none',
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                    <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--brand-navy)' }}>{c.name}</span>
-                    <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{new Date(c.createdAt).toLocaleString()}</span>
+                    <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--brand-navy)' }}>{c.name}</span>
+                    <span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>{new Date(c.createdAt).toLocaleString()}</span>
                   </div>
-                  <p style={{ fontSize: 14, color: 'var(--text-primary)', margin: 0, whiteSpace: 'pre-wrap' }}>{c.text}</p>
+                  <p style={{ fontSize: 16, color: 'var(--text-primary)', margin: 0, whiteSpace: 'pre-wrap' }}>{c.text}</p>
                 </div>
               ))}
 
@@ -290,12 +290,12 @@ export default function HelpDeskPage() {
                   onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleAddComment(); } }}
                   style={{
                     flex: 1, padding: '8px 12px', border: '1px solid var(--border-color)',
-                    borderRadius: 6, fontSize: 14, outline: 'none',
+                    borderRadius: 6, fontSize: 16, outline: 'none',
                   }}
                 />
                 <button onClick={handleAddComment} disabled={commentLoading || !commentText.trim()} style={{
                   padding: '8px 16px', backgroundColor: 'var(--brand-gold)', color: 'var(--brand-navy)',
-                  border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: 13,
+                  border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: 15,
                   opacity: commentLoading || !commentText.trim() ? 0.5 : 1,
                 }}>
                   {commentLoading ? 'Sending...' : 'Send'}
@@ -309,16 +309,16 @@ export default function HelpDeskPage() {
             <div style={{
               backgroundColor: '#fff', borderRadius: 12, border: '1px solid var(--border-color)', padding: 20, marginBottom: 16,
             }}>
-              <h4 style={{ fontSize: 14, color: 'var(--brand-navy)', margin: '0 0 16px', fontWeight: 600 }}>Manage Ticket</h4>
+              <h4 style={{ fontSize: 16, color: 'var(--brand-navy)', margin: '0 0 16px', fontWeight: 600 }}>Manage Ticket</h4>
 
               <div style={{ marginBottom: 16 }}>
-                <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)', marginBottom: 4 }}>Status</label>
+                <label style={{ display: 'block', fontSize: 14, fontWeight: 600, color: 'var(--text-secondary)', marginBottom: 4 }}>Status</label>
                 <select
                   value={selectedTicket.status}
                   onChange={e => handleStatusChange(selectedTicket.id, e.target.value)}
                   style={{
                     width: '100%', padding: '10px 12px', border: '1px solid var(--border-color)',
-                    borderRadius: 8, fontSize: 13, outline: 'none', backgroundColor: '#fff',
+                    borderRadius: 8, fontSize: 15, outline: 'none', backgroundColor: '#fff',
                   }}
                 >
                   {STATUS_OPTIONS.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
@@ -326,13 +326,13 @@ export default function HelpDeskPage() {
               </div>
 
               <div style={{ marginBottom: 16 }}>
-                <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)', marginBottom: 4 }}>Assign To</label>
+                <label style={{ display: 'block', fontSize: 14, fontWeight: 600, color: 'var(--text-secondary)', marginBottom: 4 }}>Assign To</label>
                 <select
                   value={selectedTicket.assignedTo || ''}
                   onChange={e => handleAssign(selectedTicket.id, e.target.value)}
                   style={{
                     width: '100%', padding: '10px 12px', border: '1px solid var(--border-color)',
-                    borderRadius: 8, fontSize: 13, outline: 'none', backgroundColor: '#fff',
+                    borderRadius: 8, fontSize: 15, outline: 'none', backgroundColor: '#fff',
                   }}
                 >
                   <option value="">Unassigned</option>
@@ -346,7 +346,7 @@ export default function HelpDeskPage() {
                   const style = STATUS_STYLES[s.value];
                   return (
                     <button key={s.value} onClick={() => handleStatusChange(selectedTicket.id, s.value)} style={{
-                      padding: '5px 12px', borderRadius: 6, fontSize: 12, fontWeight: 600,
+                      padding: '5px 12px', borderRadius: 6, fontSize: 14, fontWeight: 600,
                       backgroundColor: style.bg, color: style.color, border: 'none', cursor: 'pointer',
                     }}>
                       Mark {s.label}
@@ -359,12 +359,12 @@ export default function HelpDeskPage() {
             <div style={{
               backgroundColor: '#fff', borderRadius: 12, border: '1px solid var(--border-color)', padding: 20,
             }}>
-              <h4 style={{ fontSize: 14, color: 'var(--brand-navy)', margin: '0 0 12px', fontWeight: 600 }}>Ticket Info</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 13 }}>
+              <h4 style={{ fontSize: 16, color: 'var(--brand-navy)', margin: '0 0 12px', fontWeight: 600 }}>Ticket Info</h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 15 }}>
                 <div>
                   <span style={{ color: 'var(--text-secondary)', display: 'block', marginBottom: 2 }}>Submitted By</span>
                   <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>{selectedTicket.createdByName}</span>
-                  <span style={{ color: 'var(--text-secondary)', display: 'block', fontSize: 12 }}>{selectedTicket.createdByEmail}</span>
+                  <span style={{ color: 'var(--text-secondary)', display: 'block', fontSize: 14 }}>{selectedTicket.createdByEmail}</span>
                 </div>
                 <div>
                   <span style={{ color: 'var(--text-secondary)', display: 'block', marginBottom: 2 }}>Category</span>
@@ -404,7 +404,7 @@ export default function HelpDeskPage() {
       <PageHeader
         title="Help Desk"
         subtitle="Manage and resolve agent support tickets"
-        actions={<div style={{ display: 'flex', gap: '8px' }}><span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>{members.length} team member{members.length !== 1 ? 's' : ''}</span></div>}
+        actions={<div style={{ display: 'flex', gap: '8px' }}><span style={{ fontSize: 16, color: 'var(--text-secondary)' }}>{members.length} team member{members.length !== 1 ? 's' : ''}</span></div>}
       />
 
       {/* Stats cards */}
@@ -431,7 +431,7 @@ export default function HelpDeskPage() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
                 <div style={{ fontSize: 32, fontWeight: 700, color: s.color, lineHeight: 1 }}>{s.count}</div>
-                <div style={{ fontSize: 15, color: s.color, marginTop: 6, opacity: 0.8 }}>{s.label}</div>
+                <div style={{ fontSize: 17, color: s.color, marginTop: 6, opacity: 0.8 }}>{s.label}</div>
               </div>
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={s.color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.4 }}>
                 <path d={s.iconPath} />
@@ -457,30 +457,30 @@ export default function HelpDeskPage() {
                 placeholder="Search tickets by number, subject, or name..."
                 style={{
                   width: '100%', padding: '10px 14px 10px 36px', border: '1px solid var(--border-color)',
-                  borderRadius: 8, fontSize: 14, outline: 'none', boxSizing: 'border-box',
+                  borderRadius: 8, fontSize: 16, outline: 'none', boxSizing: 'border-box',
                 }}
               />
             </div>
             <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} style={{
-              padding: '10px 12px', border: '1px solid var(--border-color)', borderRadius: 8, fontSize: 14, outline: 'none', backgroundColor: '#fff',
+              padding: '10px 12px', border: '1px solid var(--border-color)', borderRadius: 8, fontSize: 16, outline: 'none', backgroundColor: '#fff',
             }}>
               <option value="all">All Statuses</option>
               {STATUS_OPTIONS.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
             </select>
             <select value={filterCategory} onChange={e => setFilterCategory(e.target.value)} style={{
-              padding: '10px 12px', border: '1px solid var(--border-color)', borderRadius: 8, fontSize: 14, outline: 'none', backgroundColor: '#fff',
+              padding: '10px 12px', border: '1px solid var(--border-color)', borderRadius: 8, fontSize: 16, outline: 'none', backgroundColor: '#fff',
             }}>
               <option value="all">All Categories</option>
               {CATEGORIES.map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
             </select>
             <select value={filterPriority} onChange={e => setFilterPriority(e.target.value)} style={{
-              padding: '10px 12px', border: '1px solid var(--border-color)', borderRadius: 8, fontSize: 14, outline: 'none', backgroundColor: '#fff',
+              padding: '10px 12px', border: '1px solid var(--border-color)', borderRadius: 8, fontSize: 16, outline: 'none', backgroundColor: '#fff',
             }}>
               <option value="all">All Priorities</option>
               {PRIORITY_OPTIONS.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
             </select>
             <select value={filterAssigned} onChange={e => setFilterAssigned(e.target.value)} style={{
-              padding: '10px 12px', border: '1px solid var(--border-color)', borderRadius: 8, fontSize: 14, outline: 'none', backgroundColor: '#fff',
+              padding: '10px 12px', border: '1px solid var(--border-color)', borderRadius: 8, fontSize: 16, outline: 'none', backgroundColor: '#fff',
             }}>
               <option value="all">All Assignees</option>
               <option value="unassigned">Unassigned</option>
@@ -492,9 +492,9 @@ export default function HelpDeskPage() {
           {/* Active filters indicator */}
           {(filterStatus !== 'all' || filterCategory !== 'all' || filterPriority !== 'all' || filterAssigned !== 'all' || searchQuery.trim()) && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12, flexWrap: 'wrap' }}>
-              <span style={{ fontSize: 14, color: 'var(--text-secondary)' }}>Showing {filtered.length} of {tickets.length} tickets</span>
+              <span style={{ fontSize: 16, color: 'var(--text-secondary)' }}>Showing {filtered.length} of {tickets.length} tickets</span>
               <button onClick={() => { setFilterStatus('all'); setFilterCategory('all'); setFilterPriority('all'); setFilterAssigned('all'); setSearchQuery(''); }} style={{
-                padding: '4px 12px', borderRadius: 999, fontSize: 13, backgroundColor: '#FEE2E2', color: '#991B1B',
+                padding: '4px 12px', borderRadius: 999, fontSize: 15, backgroundColor: '#FEE2E2', color: '#991B1B',
                 border: 'none', cursor: 'pointer', fontWeight: 600,
               }}>
                 Clear Filters
@@ -513,7 +513,7 @@ export default function HelpDeskPage() {
             <div style={{
               backgroundColor: '#fff', borderRadius: 12, border: '1px solid var(--border-color)', overflow: 'hidden',
             }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 16 }}>
                 <thead>
                   <tr style={{ borderBottom: '1px solid var(--border-color)', backgroundColor: '#FAFAFA' }}>
                     <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontWeight: 600, color: 'var(--text-secondary)' }}>Ticket</th>
@@ -571,9 +571,9 @@ export default function HelpDeskPage() {
                     border: filterCategory === cat.value ? '1px solid rgba(227, 169, 74,0.3)' : '1px solid transparent',
                   }}
                 >
-                  <span style={{ fontSize: 14, color: 'var(--text-primary)', fontWeight: 500 }}>{cat.label}</span>
+                  <span style={{ fontSize: 16, color: 'var(--text-primary)', fontWeight: 500 }}>{cat.label}</span>
                   <span style={{
-                    fontSize: 13, fontWeight: 600, padding: '2px 9px', borderRadius: 999,
+                    fontSize: 15, fontWeight: 600, padding: '2px 9px', borderRadius: 999,
                     backgroundColor: cat.count > 0 ? 'rgba(227, 169, 74,0.15)' : '#F0EDE6',
                     color: cat.count > 0 ? 'var(--brand-navy)' : 'var(--text-secondary)',
                   }}>{cat.count}</span>
@@ -589,7 +589,7 @@ export default function HelpDeskPage() {
           }}>
             <h4 style={{ fontSize: 16, color: 'var(--brand-navy)', margin: '0 0 14px', fontWeight: 600 }}>Help Desk Team</h4>
             {members.length === 0 ? (
-              <p style={{ fontSize: 14, color: 'var(--text-secondary)', margin: 0 }}>No members yet. Add members via Groups.</p>
+              <p style={{ fontSize: 16, color: 'var(--text-secondary)', margin: 0 }}>No members yet. Add members via Groups.</p>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {members.map(m => {
@@ -603,9 +603,9 @@ export default function HelpDeskPage() {
                         backgroundColor: filterAssigned === m.id ? 'rgba(227, 169, 74,0.1)' : 'transparent',
                       }}
                     >
-                      <span style={{ fontSize: 14, color: 'var(--text-primary)' }}>{m.name}</span>
+                      <span style={{ fontSize: 16, color: 'var(--text-primary)' }}>{m.name}</span>
                       <span style={{
-                        fontSize: 12, fontWeight: 600, padding: '2px 8px', borderRadius: 999,
+                        fontSize: 14, fontWeight: 600, padding: '2px 8px', borderRadius: 999,
                         backgroundColor: assignedCount > 0 ? '#DBEAFE' : '#F0EDE6',
                         color: assignedCount > 0 ? '#1E40AF' : 'var(--text-secondary)',
                       }}>{assignedCount}</span>
@@ -628,12 +628,12 @@ export default function HelpDeskPage() {
                   .filter(t => t.priority === 'urgent' && t.status !== 'closed' && t.status !== 'resolved')
                   .slice(0, 5)
                   .map(t => (
-                    <div key={t.id} role="button" tabIndex={0} onClick={() => setSelectedTicket(t)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedTicket(t); } }} style={{ cursor: 'pointer', fontSize: 14 }}>
+                    <div key={t.id} role="button" tabIndex={0} onClick={() => setSelectedTicket(t)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedTicket(t); } }} style={{ cursor: 'pointer', fontSize: 16 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <span style={{ color: '#991B1B', fontWeight: 600 }}>{t.ticketNumber}</span>
                         <Badge style={STATUS_STYLES[t.status]}>{STATUS_STYLES[t.status]?.label}</Badge>
                       </div>
-                      <div style={{ color: 'var(--text-secondary)', fontSize: 13, marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t.subject}</div>
+                      <div style={{ color: 'var(--text-secondary)', fontSize: 15, marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t.subject}</div>
                     </div>
                   ))}
               </div>

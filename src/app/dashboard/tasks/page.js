@@ -48,9 +48,9 @@ function CalendarView({ tasks, month, onMonthChange, onTaskClick, getPriorityCol
       {/* Calendar header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-3)' }}>
         <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
-          <button onClick={prevMonth} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '4px 10px', cursor: 'pointer', color: 'var(--text-primary)', fontSize: '14px' }}>&larr;</button>
+          <button onClick={prevMonth} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '4px 10px', cursor: 'pointer', color: 'var(--text-primary)', fontSize: '16px' }}>&larr;</button>
           <h3 style={{ margin: 0, color: 'var(--brand-navy)', fontSize: 'var(--text-body)', fontWeight: '600', minWidth: '180px', textAlign: 'center' }}>{monthLabel}</h3>
-          <button onClick={nextMonth} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '4px 10px', cursor: 'pointer', color: 'var(--text-primary)', fontSize: '14px' }}>&rarr;</button>
+          <button onClick={nextMonth} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '4px 10px', cursor: 'pointer', color: 'var(--text-primary)', fontSize: '16px' }}>&rarr;</button>
         </div>
         <button onClick={goToday} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '4px 14px', cursor: 'pointer', color: 'var(--brand-navy)', fontSize: 'var(--text-caption)', fontWeight: '500' }}>Today</button>
       </div>
@@ -99,7 +99,7 @@ function CalendarView({ tasks, month, onMonthChange, onTaskClick, getPriorityCol
                           display: 'block',
                           width: '100%',
                           padding: '2px 4px',
-                          fontSize: '10px',
+                          fontSize: '13px',
                           lineHeight: '1.3',
                           fontWeight: '500',
                           color: t.status === 'completed' ? 'var(--text-tertiary)' : 'var(--text-primary)',
@@ -123,7 +123,7 @@ function CalendarView({ tasks, month, onMonthChange, onTaskClick, getPriorityCol
                       </button>
                     ))}
                     {dayTasks.length > 3 && (
-                      <span style={{ fontSize: '10px', color: 'var(--text-tertiary)', paddingLeft: '4px' }}>+{dayTasks.length - 3} more</span>
+                      <span style={{ fontSize: '13px', color: 'var(--text-tertiary)', paddingLeft: '4px' }}>+{dayTasks.length - 3} more</span>
                     )}
                   </div>
                 </>

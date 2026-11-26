@@ -237,7 +237,7 @@ export default function TaskQuickAddModal({ isOpen, onClose, userProfile, prefil
                     <button
                       type="button"
                       onClick={() => { setForm({ ...form, assigneeId: '' }); setAgentSearch(''); }}
-                      style={{ marginLeft: 'auto', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', fontSize: '14px' }}
+                      style={{ marginLeft: 'auto', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', fontSize: '16px' }}
                     >
                       ×
                     </button>

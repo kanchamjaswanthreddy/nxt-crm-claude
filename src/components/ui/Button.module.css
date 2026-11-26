@@ -123,3 +123,12 @@
   border: 2px solid rgba(0, 0, 0, 0.15);
   border-top-color: var(--text-secondary);
 }
+
+/* 2026 redesign */
+.btn { border-radius: 999px; font-size: 16px; font-weight: 600; transition: transform 0.5s var(--ease-out-expo), background-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease; }
+.btn:hover:not(:disabled) { transform: translateY(-2px); }
+.btn:active:not(:disabled) { transform: translateY(0); }
+.primary { box-shadow: 0 14px 26px -16px rgba(12, 16, 34, 0.8); }
+.secondary { border: 0; box-shadow: inset 0 0 0 1.5px var(--border-color); }
+.secondary:hover:not(:disabled) { box-shadow: inset 0 0 0 1.5px var(--brand-navy); }
+.gold { background: var(--brand-gold); box-shadow: 0 14px 26px -16px rgba(227, 169, 74, 0.9); }

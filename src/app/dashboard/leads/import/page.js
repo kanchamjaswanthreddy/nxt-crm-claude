@@ -186,7 +186,7 @@ export default function ImportLeadsPage() {
                         }}
                         style={{
                           padding: '2px 6px', border: 'none', background: 'none',
-                          color: 'var(--text-tertiary)', cursor: 'pointer', fontSize: '14px',
+                          color: 'var(--text-tertiary)', cursor: 'pointer', fontSize: '16px',
                         }}
                         aria-label={`Remove template ${tpl.name}`}
                       >

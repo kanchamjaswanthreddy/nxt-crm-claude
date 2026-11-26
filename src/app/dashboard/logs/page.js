@@ -132,7 +132,7 @@ export default function LogsPage() {
             padding: '8px 12px',
             borderRadius: '8px',
             border: '1px solid rgba(0,0,0,0.15)',
-            fontSize: '0.875rem',
+            fontSize: '1rem',
             backgroundColor: '#fff',
             minWidth: '160px',
           }}
@@ -151,7 +151,7 @@ export default function LogsPage() {
             padding: '8px 12px',
             borderRadius: '8px',
             border: '1px solid rgba(0,0,0,0.15)',
-            fontSize: '0.875rem',
+            fontSize: '1rem',
             flex: 1,
             minWidth: '200px',
             maxWidth: '400px',
@@ -166,7 +166,7 @@ export default function LogsPage() {
             border: '1px solid rgba(0,0,0,0.15)',
             backgroundColor: '#fff',
             cursor: 'pointer',
-            fontSize: '0.875rem',
+            fontSize: '1rem',
             fontWeight: '500',
           }}
         >
@@ -184,11 +184,11 @@ export default function LogsPage() {
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
             <tr style={{ backgroundColor: 'var(--brand-navy)', color: '#fff' }}>
-              <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.8rem', fontWeight: '600' }}>Time</th>
-              <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.8rem', fontWeight: '600' }}>Category</th>
-              <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.8rem', fontWeight: '600' }}>Action</th>
-              <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.8rem', fontWeight: '600' }}>Actor</th>
-              <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.8rem', fontWeight: '600' }}>Description</th>
+              <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.9375rem', fontWeight: '600' }}>Time</th>
+              <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.9375rem', fontWeight: '600' }}>Category</th>
+              <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.9375rem', fontWeight: '600' }}>Action</th>
+              <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.9375rem', fontWeight: '600' }}>Actor</th>
+              <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.9375rem', fontWeight: '600' }}>Description</th>
             </tr>
           </thead>
           <tbody>
@@ -203,14 +203,14 @@ export default function LogsPage() {
               const catStyle = CATEGORY_COLORS[log.category] || { bg: '#f0f0f0', color: '#333' };
               return (
                 <tr key={log.id || i} style={{ borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
-                  <td style={{ padding: '10px 16px', fontSize: '0.8rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
+                  <td style={{ padding: '10px 16px', fontSize: '0.9375rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
                     {formatTimestamp(log.timestamp)}
                   </td>
                   <td style={{ padding: '10px 16px' }}>
                     <span style={{
                       padding: '2px 8px',
                       borderRadius: '4px',
-                      fontSize: '0.7rem',
+                      fontSize: '0.8125rem',
                       fontWeight: '600',
                       textTransform: 'uppercase',
                       backgroundColor: catStyle.bg,
@@ -219,16 +219,16 @@ export default function LogsPage() {
                       {log.category}
                     </span>
                   </td>
-                  <td style={{ padding: '10px 16px', fontSize: '0.8rem', fontWeight: '500' }}>
+                  <td style={{ padding: '10px 16px', fontSize: '0.9375rem', fontWeight: '500' }}>
                     {(log.action || '').replace(/_/g, ' ')}
                   </td>
-                  <td style={{ padding: '10px 16px', fontSize: '0.8rem' }}>
+                  <td style={{ padding: '10px 16px', fontSize: '0.9375rem' }}>
                     <div>{log.actorName || '—'}</div>
                     {log.actorNxtId && (
-                      <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>{log.actorNxtId}</div>
+                      <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>{log.actorNxtId}</div>
                     )}
                   </td>
-                  <td style={{ padding: '10px 16px', fontSize: '0.8rem', color: 'var(--text-secondary)', maxWidth: '400px' }}>
+                  <td style={{ padding: '10px 16px', fontSize: '0.9375rem', color: 'var(--text-secondary)', maxWidth: '400px' }}>
                     {log.description}
                     {log.targetName && (
                       <span style={{ fontWeight: '500', color: 'var(--brand-navy)' }}> — {log.targetName}</span>
@@ -252,7 +252,7 @@ export default function LogsPage() {
               border: '1px solid rgba(0,0,0,0.15)',
               backgroundColor: '#fff',
               cursor: 'pointer',
-              fontSize: '0.875rem',
+              fontSize: '1rem',
             }}
           >
             Load More

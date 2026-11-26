@@ -46,19 +46,19 @@ export default function TrailCommissionsPage() {
         <Card>
           <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
             <div style={{ fontSize: '28px', fontWeight: '700', color: 'var(--brand-navy)' }}>${totalTrail.toLocaleString()}</div>
-            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Total Trail</div>
+            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Total Trail</div>
           </div>
         </Card>
         <Card>
           <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
             <div style={{ fontSize: '28px', fontWeight: '700', color: '#2FA84F' }}>${paidTrail.toLocaleString()}</div>
-            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Paid</div>
+            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Paid</div>
           </div>
         </Card>
         <Card>
           <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
             <div style={{ fontSize: '28px', fontWeight: '700', color: '#E08E2B' }}>${pendingTrail.toLocaleString()}</div>
-            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Pending</div>
+            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Pending</div>
           </div>
         </Card>
       </div>
@@ -91,7 +91,7 @@ export default function TrailCommissionsPage() {
                   <td style={{ ...tdStyle, fontWeight: '600', color: 'var(--brand-navy)' }}>${(c.commissionAmount || 0).toLocaleString()}</td>
                   <td style={tdStyle}>
                     <span style={{
-                      padding: '3px 10px', borderRadius: '999px', fontSize: '12px', fontWeight: '600',
+                      padding: '3px 10px', borderRadius: '999px', fontSize: '14px', fontWeight: '600',
                       backgroundColor: c.status === 'paid' ? 'rgba(47,168,79,0.1)' : 'rgba(224,142,43,0.1)',
                       color: c.status === 'paid' ? '#2FA84F' : '#E08E2B',
                     }}>{c.status}</span>
@@ -107,5 +107,5 @@ export default function TrailCommissionsPage() {
   );
 }
 
-const thStyle = { padding: '10px 12px', textAlign: 'left', fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '600' };
-const tdStyle = { padding: '10px 12px', fontSize: '14px', color: 'var(--text-primary)' };
+const thStyle = { padding: '10px 12px', textAlign: 'left', fontSize: '14px', color: 'var(--text-secondary)', fontWeight: '600' };
+const tdStyle = { padding: '10px 12px', fontSize: '16px', color: 'var(--text-primary)' };

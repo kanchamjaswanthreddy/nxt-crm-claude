@@ -83,32 +83,32 @@ export default function AnnuitiesPage() {
         title="Annuities"
         subtitle="All annuity product deals"
         breadcrumbs={[{ label: 'All Deals', href: '/dashboard/deals' }, { label: 'Annuities' }]}
-        actions={<button onClick={loadData} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '6px 14px', fontSize: '13px', cursor: 'pointer', color: 'var(--text-secondary)' }}>Refresh</button>}
+        actions={<button onClick={loadData} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '6px 14px', fontSize: '15px', cursor: 'pointer', color: 'var(--text-secondary)' }}>Refresh</button>}
       />
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
         <Card>
           <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
             <div style={{ fontSize: '28px', fontWeight: '700', color: 'var(--brand-navy)' }}>{deals.length}</div>
-            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Total Deals</div>
+            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Total Deals</div>
           </div>
         </Card>
         <Card>
           <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
             <div style={{ fontSize: '28px', fontWeight: '700', color: '#1B2A4E' }}>{openCount}</div>
-            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Open</div>
+            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Open</div>
           </div>
         </Card>
         <Card>
           <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
             <div style={{ fontSize: '28px', fontWeight: '700', color: '#2FA84F' }}>{wonCount}</div>
-            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Completed</div>
+            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Completed</div>
           </div>
         </Card>
         <Card>
           <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
             <div style={{ fontSize: '28px', fontWeight: '700', color: 'var(--brand-gold)' }}>${totalPremium.toLocaleString()}</div>
-            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Total Premium</div>
+            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Total Premium</div>
           </div>
         </Card>
       </div>
@@ -120,14 +120,14 @@ export default function AnnuitiesPage() {
               padding: '6px 16px', borderRadius: '999px', border: '1px solid var(--border-color)',
               backgroundColor: statusFilter === s ? 'var(--brand-navy)' : 'transparent',
               color: statusFilter === s ? '#fff' : 'var(--text-secondary)',
-              fontSize: '13px', fontWeight: '500', cursor: 'pointer'
+              fontSize: '15px', fontWeight: '500', cursor: 'pointer'
             }}>{s === 'All' ? 'All' : (STATUS_STYLES[s]?.label || s)}</button>
           ))}
         </div>
         <input
           type="text" placeholder="Search deals..." value={searchTerm}
           onChange={e => setSearchTerm(e.target.value)}
-          style={{ padding: '8px 16px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '14px', width: '240px' }}
+          style={{ padding: '8px 16px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '16px', width: '240px' }}
         />
       </div>
 
@@ -163,7 +163,7 @@ export default function AnnuitiesPage() {
                       <td style={{ ...tdStyle, fontWeight: '600' }}>${(deal.premiumAmount || 0).toLocaleString()}</td>
                       <td style={tdStyle}>{deal.policyNumber || '—'}</td>
                       <td style={tdStyle}>
-                        <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '12px', fontWeight: '600', backgroundColor: st.bg, color: st.text }}>{st.label}</span>
+                        <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '14px', fontWeight: '600', backgroundColor: st.bg, color: st.text }}>{st.label}</span>
                       </td>
                       <td style={tdStyle}>{deal.expectedCloseDate || '—'}</td>
                       <td style={tdStyle}>{deal.createdAt ? new Date(deal.createdAt).toLocaleDateString('en-US') : '—'}</td>
@@ -176,12 +176,12 @@ export default function AnnuitiesPage() {
         </Card>
       )}
 
-      <div style={{ marginTop: 'var(--space-2)', fontSize: '12px', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
+      <div style={{ marginTop: 'var(--space-2)', fontSize: '14px', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
         Showing {filtered.length} of {deals.length} annuity deals
       </div>
     </div>
   );
 }
 
-const thStyle = { padding: '10px 12px', textAlign: 'left', fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '600' };
-const tdStyle = { padding: '10px 12px', fontSize: '14px', color: 'var(--text-primary)' };
+const thStyle = { padding: '10px 12px', textAlign: 'left', fontSize: '14px', color: 'var(--text-secondary)', fontWeight: '600' };
+const tdStyle = { padding: '10px 12px', fontSize: '16px', color: 'var(--text-primary)' };

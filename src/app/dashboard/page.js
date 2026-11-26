@@ -581,39 +581,32 @@ function AgentView({ data, onCompleteTask }) {
   const { kpis, pipelineByStage, tasks } = data;
   return (
     <>
-      <div className={s.kpiRow}>
-        <KpiPill
-          label="Open Pipeline"
-          value={fmtCurrency(kpis.pipelineValue)}
-          hint={kpis.pipelineValue === 0
-            ? 'Add deals to build pipeline'
-            : `Across ${pipelineByStage.reduce((t, st) => t + st.count, 0)} deals`}
-          sparkColor="#0C1022"
+      {/* Row 1: this month's production beside pipeline and tasks */}
+      <div className={s.heroRow}>
+        <FeaturedCard
+          label="Your production, month to date"
+          production={kpis.mtdProduction}
+          pending={kpis.mtdPending}
+          sparkData={kpis.sparkProduction}
+          momPct={kpis.momPct}
         />
-        <KpiPill
-          label="Deals Won"
-          value={String(kpis.dealsWonMonth)}
-          hint="This month"
-          sparkData={kpis.sparkDeals}
-          sparkColor="#2FA84F"
-        />
-        <KpiPill
-          label="Overdue Tasks"
-          value={String(kpis.overdueTaskCount)}
-          hint={kpis.overdueTaskCount > 0 ? 'Needs your attention' : 'All on track'}
-          sparkColor={kpis.overdueTaskCount > 0 ? '#D33F3F' : '#A9ACB1'}
-        />
+        <button type="button" className={`${s.bigTile} ${s.bigTileWarm}`} onClick={() => router.push('/dashboard/business/pipeline')}>
+          <span className={s.bigTileLabel}>Open pipeline</span>
+          <span className={s.bigTileValue}>{fmtCompact(kpis.pipelineValue)}</span>
+          <span className={s.bigTileHint}>
+            {kpis.pipelineValue === 0 ? 'Add deals to build pipeline' : `Across ${pipelineByStage.reduce((t, st) => t + st.count, 0)} deals`}
+          </span>
+        </button>
+        <button type="button" className={s.bigTile} onClick={() => router.push('/dashboard/tasks')}>
+          <span className={s.bigTileLabel}>Deals won this month</span>
+          <span className={s.bigTileValue}>{kpis.dealsWonMonth}</span>
+          <span className={s.bigTileHint} data-alert={kpis.overdueTaskCount > 0 || undefined}>
+            {kpis.overdueTaskCount > 0 ? `${kpis.overdueTaskCount} overdue task${kpis.overdueTaskCount !== 1 ? 's' : ''}` : 'All tasks on track'}
+          </span>
+        </button>
       </div>
 
-      <FeaturedCard
-        label="MTD Production"
-        production={kpis.mtdProduction}
-        pending={kpis.mtdPending}
-        sparkData={kpis.sparkProduction}
-        momPct={kpis.momPct}
-      />
-
-      <div className={s.columns}>
+      <div className={s.splitRow}>
         <div className={s.card}>
           <div className={s.cardHeader}>
             <h3 className={s.cardHeaderTitle}>Your Pipeline</h3>
@@ -870,12 +863,12 @@ export default function DashboardV2Page() {
   if (loadError || !data) return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: 16, padding: 32 }}>
       <h2 style={{ fontSize: 20, fontWeight: 600, color: '#1a1a2e' }}>Unable to load dashboard</h2>
-      <p style={{ fontSize: 14, color: '#5F5C56', textAlign: 'center', maxWidth: 400 }}>
+      <p style={{ fontSize: 16, color: '#5F5C56', textAlign: 'center', maxWidth: 400 }}>
         {loadError || 'No data returned from server.'}
       </p>
       <button
         onClick={() => loadData(userProfile)}
-        style={{ marginTop: 8, padding: '10px 24px', background: '#1a1a2e', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontSize: 14, fontWeight: 500 }}
+        style={{ marginTop: 8, padding: '10px 24px', background: '#1a1a2e', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontSize: 16, fontWeight: 500 }}
       >
         Retry
       </button>

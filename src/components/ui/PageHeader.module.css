@@ -34,7 +34,7 @@
 
 .breadcrumbSep {
   color: var(--border-color);
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .breadcrumbCurrent {
@@ -73,3 +73,9 @@
     justify-content: flex-start;
   }
 }
+
+/* 2026 redesign */
+.header { margin-bottom: 28px; }
+.title { font-size: clamp(30px, 3vw, 42px); font-weight: 400; letter-spacing: -0.045em; line-height: 1.05; }
+.title::after { content: "."; color: var(--brand-gold); }
+.subtitle, .description { font-size: 17px; color: var(--text-secondary); }

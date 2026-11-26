@@ -155,7 +155,7 @@ function JoinPageInner() {
               <h1 style={{ fontSize: '22px', fontWeight: '700', color: '#fff', margin: '0 0 6px', letterSpacing: '-0.02em' }}>
                 Join NXT Financial Group
               </h1>
-              <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: '1.5' }}>
+              <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: '1.5' }}>
                 Create your account to start your journey as an independent agent
               </p>
               {referrer && (
@@ -168,7 +168,7 @@ function JoinPageInner() {
                     <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" />
                     <path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
                   </svg>
-                  <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.8)', fontWeight: '500' }}>
+                  <span style={{ fontSize: '15px', color: 'rgba(255,255,255,0.8)', fontWeight: '500' }}>
                     Referred by <strong style={{ color: '#E3A94A' }}>{referrer.name}</strong>
                   </span>
                 </div>
@@ -181,7 +181,7 @@ function JoinPageInner() {
                 <div style={{
                   background: 'rgba(211, 63, 63, 0.06)', borderLeft: '3px solid var(--status-error)',
                   padding: '12px 16px', borderRadius: '8px', marginBottom: '16px',
-                  fontSize: '13px', color: 'var(--status-error)',
+                  fontSize: '15px', color: 'var(--status-error)',
                 }}>
                   {error}
                 </div>
@@ -214,7 +214,7 @@ function JoinPageInner() {
                       [hasSymbol, 'Symbol'],
                     ].map(([met, label]) => (
                       <span key={label} style={{
-                        fontSize: '11px', fontWeight: '500', padding: '3px 10px',
+                        fontSize: '13px', fontWeight: '500', padding: '3px 10px',
                         borderRadius: '999px', transition: 'all 0.2s ease',
                         color: met ? '#059669' : '#8A857B',
                         background: met ? 'rgba(5, 150, 105, 0.08)' : '#F0EDE6',
@@ -242,12 +242,12 @@ function JoinPageInner() {
                 </Button>
               </form>
 
-              <div style={{ textAlign: 'center', marginTop: '20px', fontSize: '13px', color: 'var(--text-secondary)' }}>
+              <div style={{ textAlign: 'center', marginTop: '20px', fontSize: '15px', color: 'var(--text-secondary)' }}>
                 Already have an account?{' '}
                 <Link href="/auth/login" style={{ fontWeight: '600', color: 'var(--brand-navy)' }}>Sign in</Link>
               </div>
 
-              <p style={{ textAlign: 'center', fontSize: '12px', color: '#8A857B', margin: '16px 0 0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <p style={{ textAlign: 'center', fontSize: '14px', color: '#8A857B', margin: '16px 0 0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '6px' }}>
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
                 </svg>

@@ -31,7 +31,7 @@ export default function SureLCPage() {
           animation: 'spin 0.8s linear infinite',
           margin: '0 auto 12px',
         }} />
-        <p style={{ color: '#5F5C56', fontSize: '14px', margin: 0 }}>
+        <p style={{ color: '#5F5C56', fontSize: '16px', margin: 0 }}>
           Connecting to SureLC...
         </p>
       </div>

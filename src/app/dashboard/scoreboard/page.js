@@ -16,7 +16,7 @@ function SimpleBarChart({ data, colors }) {
     <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px', height: 220, padding: '0 4px' }}>
       {data.map((d, i) => (
         <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', minWidth: 0 }}>
-          <span style={{ fontSize: '11px', color: '#5F5C56', fontWeight: 600 }}>
+          <span style={{ fontSize: '13px', color: '#5F5C56', fontWeight: 600 }}>
             ${d.premium >= 1000 ? Math.round(d.premium / 1000) + 'k' : d.premium}
           </span>
           <div style={{
@@ -26,7 +26,7 @@ function SimpleBarChart({ data, colors }) {
             borderRadius: '6px 6px 0 0',
             transition: 'height 0.3s ease',
           }} />
-          <span style={{ fontSize: '11px', color: '#5F5C56', textAlign: 'center', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '100%' }}>
+          <span style={{ fontSize: '13px', color: '#5F5C56', textAlign: 'center', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '100%' }}>
             {d.name}
           </span>
         </div>
@@ -45,9 +45,9 @@ function SimplePieChart({ data, colors }) {
             width: '12px', height: '12px', borderRadius: '50%',
             backgroundColor: colors[i % colors.length], flexShrink: 0,
           }} />
-          <span style={{ flex: 1, fontSize: '13px', color: 'var(--text-primary)' }}>{d.name}</span>
-          <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--brand-navy)' }}>{d.value} deals</span>
-          <span style={{ fontSize: '12px', color: '#5F5C56', minWidth: '40px', textAlign: 'right' }}>
+          <span style={{ flex: 1, fontSize: '15px', color: 'var(--text-primary)' }}>{d.name}</span>
+          <span style={{ fontSize: '15px', fontWeight: 600, color: 'var(--brand-navy)' }}>{d.value} deals</span>
+          <span style={{ fontSize: '14px', color: '#5F5C56', minWidth: '40px', textAlign: 'right' }}>
             {Math.round((d.value / total) * 100)}%
           </span>
         </div>
@@ -171,7 +171,7 @@ export default function ScoreboardPage() {
                       padding: '8px 14px', border: 'none',
                       backgroundColor: viewMode === mode ? 'var(--brand-navy)' : '#fff',
                       color: viewMode === mode ? '#fff' : 'var(--text-secondary)',
-                      fontSize: '14px', fontWeight: 600, cursor: 'pointer',
+                      fontSize: '16px', fontWeight: 600, cursor: 'pointer',
                       textTransform: 'capitalize',
                     }}
                   >
@@ -185,7 +185,7 @@ export default function ScoreboardPage() {
               onChange={(e) => setPeriod(e.target.value)}
               style={{
                 padding: '8px 14px', borderRadius: '8px', border: '1px solid var(--border-color)',
-                fontSize: '14px', backgroundColor: '#fff', fontWeight: 500, cursor: 'pointer',
+                fontSize: '16px', backgroundColor: '#fff', fontWeight: 500, cursor: 'pointer',
                 color: 'var(--text-primary)',
               }}
             >
@@ -196,7 +196,7 @@ export default function ScoreboardPage() {
               onChange={(e) => setRankBy(e.target.value)}
               style={{
                 padding: '8px 14px', borderRadius: '8px', border: '1px solid var(--border-color)',
-                fontSize: '14px', backgroundColor: '#fff', fontWeight: 500, cursor: 'pointer',
+                fontSize: '16px', backgroundColor: '#fff', fontWeight: 500, cursor: 'pointer',
                 color: 'var(--text-primary)',
               }}
             >
@@ -231,7 +231,7 @@ export default function ScoreboardPage() {
             fontSize: '26px', fontWeight: 800, color: 'var(--brand-gold)',
             lineHeight: 1,
           }}>#{myRank}</span>
-          <span style={{ color: 'var(--text-primary)', fontWeight: 500, fontSize: '15px' }}>Your current rank</span>
+          <span style={{ color: 'var(--text-primary)', fontWeight: 500, fontSize: '17px' }}>Your current rank</span>
           <span style={{
             marginLeft: 'auto', color: 'var(--brand-navy)', fontWeight: 700, fontSize: '17px',
           }}>{formatValue(sorted[myRank - 1]?.[rankBy], rankBy)}</span>
@@ -247,7 +247,7 @@ export default function ScoreboardPage() {
           <Card key={card.label}>
             <div style={{ padding: '20px' }}>
               <div style={{
-                fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)',
+                fontSize: '14px', fontWeight: 600, color: 'var(--text-secondary)',
                 textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px',
               }}>{card.label}</div>
               <div style={{
@@ -267,13 +267,13 @@ export default function ScoreboardPage() {
         }}>
           <Card>
             <div style={{ padding: '20px' }}>
-              <h3 style={{ margin: '0 0 16px', fontSize: '15px', fontWeight: 700, color: 'var(--brand-navy)' }}>Premium by Agent</h3>
+              <h3 style={{ margin: '0 0 16px', fontSize: '17px', fontWeight: 700, color: 'var(--brand-navy)' }}>Premium by Agent</h3>
               <SimpleBarChart data={barData} colors={CHART_COLORS} />
             </div>
           </Card>
           <Card>
             <div style={{ padding: '20px' }}>
-              <h3 style={{ margin: '0 0 16px', fontSize: '15px', fontWeight: 700, color: 'var(--brand-navy)' }}>Deals Distribution</h3>
+              <h3 style={{ margin: '0 0 16px', fontSize: '17px', fontWeight: 700, color: 'var(--brand-navy)' }}>Deals Distribution</h3>
               <SimplePieChart data={pieData} colors={CHART_COLORS} />
             </div>
           </Card>
@@ -307,7 +307,7 @@ export default function ScoreboardPage() {
                     {isMe && (
                       <span style={{
                         position: 'absolute', top: '8px', right: '8px',
-                        fontSize: '10px', fontWeight: 600, color: 'var(--brand-gold)',
+                        fontSize: '13px', fontWeight: 600, color: 'var(--brand-gold)',
                         backgroundColor: 'rgba(227, 169, 74,0.1)', padding: '2px 8px',
                         borderRadius: '4px',
                       }}>YOU</span>
@@ -316,14 +316,14 @@ export default function ScoreboardPage() {
                       width: '44px', height: '44px', borderRadius: '50%',
                       backgroundColor: PODIUM_COLORS[i], color: '#fff',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontWeight: 800, fontSize: '15px',
+                      fontWeight: 800, fontSize: '17px',
                       boxShadow: i === 0 ? '0 4px 14px rgba(227, 169, 74,0.35)' : 'none',
                     }}>
                       {PODIUM_LABELS[i]}
                     </div>
                     <div style={{
                       fontWeight: 700, color: 'var(--brand-navy)',
-                      textAlign: 'center', fontSize: '15px', lineHeight: 1.3,
+                      textAlign: 'center', fontSize: '17px', lineHeight: 1.3,
                     }}>
                       {agent.agentName}
                     </div>
@@ -333,11 +333,11 @@ export default function ScoreboardPage() {
                       {formatValue(agent[rankBy], rankBy)}
                     </div>
                     <div style={{
-                      fontSize: '11px', color: 'var(--text-secondary)',
+                      fontSize: '13px', color: 'var(--text-secondary)',
                       textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600,
                     }}>{metricLabel}</div>
                     <div style={{
-                      fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px',
+                      fontSize: '14px', color: 'var(--text-secondary)', marginTop: '2px',
                     }}>
                       {agent.dealsWonCount || 0} deals | ${((agent.commissionPaid || 0) / 1000).toFixed(1)}k comm.
                     </div>
@@ -368,19 +368,19 @@ export default function ScoreboardPage() {
 
         return (
           <div style={{ marginBottom: 'var(--space-4)', display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-            <h3 style={{ margin: 0, fontSize: '15px', fontWeight: 700, color: 'var(--brand-navy)' }}>Team Performance</h3>
+            <h3 style={{ margin: 0, fontSize: '17px', fontWeight: 700, color: 'var(--brand-navy)' }}>Team Performance</h3>
             {teamGroups.map(({ manager: mgr, members, totals }) => (
               <Card key={mgr.id}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-2)' }}>
                   <div>
-                    <div style={{ fontWeight: 700, color: 'var(--brand-navy)', fontSize: '15px' }}>
+                    <div style={{ fontWeight: 700, color: 'var(--brand-navy)', fontSize: '17px' }}>
                       {dn(mgr)}
-                      <span style={{ marginLeft: '8px', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)' }}>
+                      <span style={{ marginLeft: '8px', fontSize: '14px', fontWeight: 500, color: 'var(--text-secondary)' }}>
                         ({mgr.is_owner ? 'Owner' : mgr.role}) · {members.length} member{members.length !== 1 ? 's' : ''}
                       </span>
                     </div>
                   </div>
-                  <div style={{ display: 'flex', gap: 'var(--space-3)', fontSize: '13px' }}>
+                  <div style={{ display: 'flex', gap: 'var(--space-3)', fontSize: '15px' }}>
                     <span>Premium: <strong style={{ color: 'var(--brand-gold)' }}>${totals.premium.toLocaleString()}</strong></span>
                     <span>Deals: <strong style={{ color: 'var(--brand-navy)' }}>{totals.deals}</strong></span>
                     <span>Commission: <strong style={{ color: 'var(--status-success)' }}>${totals.commission.toLocaleString()}</strong></span>
@@ -422,7 +422,7 @@ export default function ScoreboardPage() {
         <Card>
           <div style={{ padding: '20px 0 0' }}>
             <h3 style={{
-              margin: '0 0 16px', padding: '0 20px', fontSize: '15px',
+              margin: '0 0 16px', padding: '0 20px', fontSize: '17px',
               fontWeight: 700, color: 'var(--brand-navy)',
             }}>Full Rankings</h3>
             <div style={{ overflowX: 'auto' }}>
@@ -456,7 +456,7 @@ export default function ScoreboardPage() {
                           </span>
                           {isMe && (
                             <span style={{
-                              color: 'var(--brand-gold)', fontSize: '11px', fontWeight: 600,
+                              color: 'var(--brand-gold)', fontSize: '13px', fontWeight: 600,
                               marginLeft: '6px',
                             }}>(You)</span>
                           )}
@@ -484,7 +484,7 @@ export default function ScoreboardPage() {
 const thStyle = {
   padding: '10px 16px',
   textAlign: 'right',
-  fontSize: '11px',
+  fontSize: '13px',
   color: '#5F5C56',
   fontWeight: 700,
   textTransform: 'uppercase',
@@ -494,5 +494,5 @@ const thStyle = {
 const tdStyle = {
   padding: '12px 16px',
   textAlign: 'right',
-  fontSize: '14px',
+  fontSize: '16px',
 };

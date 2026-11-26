@@ -148,3 +148,6 @@
     max-height: 60vh;
   }
 }
+
+/* 2026 redesign */
+.modal, .dialog, .content { border-radius: 28px; }

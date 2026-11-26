@@ -192,7 +192,7 @@ export default function DocumentsManagerPage() {
         title="Documents Manager"
         actions={
           <>
-            <button onClick={loadDocuments} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '6px 14px', fontSize: '13px', cursor: 'pointer', color: 'var(--text-secondary)' }}>Refresh</button>
+            <button onClick={loadDocuments} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '6px 14px', fontSize: '15px', cursor: 'pointer', color: 'var(--text-secondary)' }}>Refresh</button>
             <Button onClick={() => { setShowUpload(true); setUploadError(''); setUploadSuccess(''); }}>+ Upload Document</Button>
           </>
         }
@@ -203,19 +203,19 @@ export default function DocumentsManagerPage() {
         <Card>
           <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
             <div style={{ fontSize: '28px', fontWeight: '700', color: '#2FA84F' }}>{approvedCount}</div>
-            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Approved</div>
+            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Approved</div>
           </div>
         </Card>
         <Card>
           <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
             <div style={{ fontSize: '28px', fontWeight: '700', color: '#E08E2B' }}>{pendingCount}</div>
-            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Pending Review</div>
+            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Pending Review</div>
           </div>
         </Card>
         <Card>
           <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
             <div style={{ fontSize: '28px', fontWeight: '700', color: '#D33F3F' }}>{rejectedCount}</div>
-            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Rejected</div>
+            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Rejected</div>
           </div>
         </Card>
       </div>
@@ -225,7 +225,7 @@ export default function DocumentsManagerPage() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-3)' }}>
           <div>
             <h2 style={{ margin: 0, fontSize: '18px', fontWeight: 600, color: 'var(--brand-navy)' }}>Tax Forms</h2>
-            <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: 'var(--text-secondary)' }}>
+            <p style={{ margin: '4px 0 0 0', fontSize: '15px', color: 'var(--text-secondary)' }}>
               IRS W-9 is required for all agents. Download the blank form, complete it, and upload.
             </p>
           </div>
@@ -236,7 +236,7 @@ export default function DocumentsManagerPage() {
               display: 'inline-flex', alignItems: 'center', gap: '6px',
               padding: '8px 16px', borderRadius: '999px',
               border: '1.5px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.08)',
-              color: 'var(--brand-navy)', fontSize: '13px', fontWeight: 600,
+              color: 'var(--brand-navy)', fontSize: '15px', fontWeight: 600,
               textDecoration: 'none', cursor: 'pointer', transition: 'all 0.2s ease',
             }}
           >
@@ -255,10 +255,10 @@ export default function DocumentsManagerPage() {
             border: '1px dashed var(--status-warning)',
             backgroundColor: 'rgba(224, 142, 43, 0.04)', textAlign: 'center',
           }}>
-            <p style={{ margin: 0, fontSize: '14px', fontWeight: 500, color: 'var(--status-warning)' }}>
+            <p style={{ margin: 0, fontSize: '16px', fontWeight: 500, color: 'var(--status-warning)' }}>
               No W-9 uploaded yet
             </p>
-            <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: 'var(--text-secondary)' }}>
+            <p style={{ margin: '4px 0 0 0', fontSize: '15px', color: 'var(--text-secondary)' }}>
               Download the blank form above, fill it out, then click &quot;Upload Document&quot; to submit.
             </p>
           </div>
@@ -280,12 +280,12 @@ export default function DocumentsManagerPage() {
                     <td style={{ ...tdStyle, fontWeight: '500' }}>{getDocTypeLabel(d.docType)}</td>
                     <td style={tdStyle}>
                       <button onClick={() => handleViewDocument(d)}
-                        style={{ background: 'none', border: 'none', padding: 0, color: 'var(--brand-blue-accent)', cursor: 'pointer', textDecoration: 'underline', fontSize: '14px' }}>
+                        style={{ background: 'none', border: 'none', padding: 0, color: 'var(--brand-blue-accent)', cursor: 'pointer', textDecoration: 'underline', fontSize: '16px' }}>
                         {d.fileName || 'View'}
                       </button>
                     </td>
                     <td style={tdStyle}>
-                      <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '12px', fontWeight: '600', backgroundColor: st.bg, color: st.text }}>
+                      <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '14px', fontWeight: '600', backgroundColor: st.bg, color: st.text }}>
                         {st.label}
                       </span>
                     </td>
@@ -325,20 +325,20 @@ export default function DocumentsManagerPage() {
                     <td style={tdStyle}>
                       <button
                         onClick={() => handleViewDocument(d)}
-                        style={{ background: 'none', border: 'none', padding: 0, color: 'var(--brand-blue-accent)', cursor: 'pointer', textDecoration: 'underline', fontSize: '14px' }}
+                        style={{ background: 'none', border: 'none', padding: 0, color: 'var(--brand-blue-accent)', cursor: 'pointer', textDecoration: 'underline', fontSize: '16px' }}
                       >
                         {d.fileName || 'View'}
                       </button>
                     </td>
                     <td style={tdStyle}>
-                      <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '12px', fontWeight: '600', backgroundColor: st.bg, color: st.text }}>
+                      <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '14px', fontWeight: '600', backgroundColor: st.bg, color: st.text }}>
                         {st.label}
                       </span>
                     </td>
                     <td style={tdStyle}>{d.uploadedAt ? new Date(d.uploadedAt).toLocaleDateString('en-US') : '—'}</td>
                     <td style={{ ...tdStyle, maxWidth: '200px' }}>
                       {d.status === 'rejected' && d.rejectionReason ? (
-                        <span style={{ color: '#D33F3F', fontSize: '13px' }}>{d.rejectionReason}</span>
+                        <span style={{ color: '#D33F3F', fontSize: '15px' }}>{d.rejectionReason}</span>
                       ) : '—'}
                     </td>
                   </tr>
@@ -374,14 +374,14 @@ export default function DocumentsManagerPage() {
 
               {/* Error message */}
               {uploadError && (
-                <div style={{ marginTop: 'var(--space-2)', padding: '8px 12px', borderRadius: '8px', backgroundColor: 'rgba(211,63,63,0.08)', color: '#D33F3F', fontSize: '13px' }}>
+                <div style={{ marginTop: 'var(--space-2)', padding: '8px 12px', borderRadius: '8px', backgroundColor: 'rgba(211,63,63,0.08)', color: '#D33F3F', fontSize: '15px' }}>
                   {uploadError}
                 </div>
               )}
 
               {/* Success message */}
               {uploadSuccess && (
-                <div style={{ marginTop: 'var(--space-2)', padding: '8px 12px', borderRadius: '8px', backgroundColor: 'rgba(47,168,79,0.08)', color: '#2FA84F', fontSize: '13px' }}>
+                <div style={{ marginTop: 'var(--space-2)', padding: '8px 12px', borderRadius: '8px', backgroundColor: 'rgba(47,168,79,0.08)', color: '#2FA84F', fontSize: '15px' }}>
                   {uploadSuccess}
                 </div>
               )}
@@ -389,7 +389,7 @@ export default function DocumentsManagerPage() {
               {/* Progress bar */}
               {isUploading && (
                 <div style={{ marginTop: 'var(--space-2)' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '4px' }}>
                     <span>{uploadProgress < 100 ? 'Uploading...' : 'Saving record...'}</span>
                     <span>{uploadProgress}%</span>
                   </div>
@@ -418,7 +418,7 @@ export default function DocumentsManagerPage() {
   );
 }
 
-const thStyle = { padding: '10px 12px', textAlign: 'left', fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '600' };
-const tdStyle = { padding: '10px 12px', fontSize: '14px', color: 'var(--text-primary)' };
-const labelStyle = { display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '13px', fontWeight: '500', color: 'var(--text-secondary)' };
-const inputStyle = { padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '14px', color: 'var(--text-primary)' };
+const thStyle = { padding: '10px 12px', textAlign: 'left', fontSize: '14px', color: 'var(--text-secondary)', fontWeight: '600' };
+const tdStyle = { padding: '10px 12px', fontSize: '16px', color: 'var(--text-primary)' };
+const labelStyle = { display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '15px', fontWeight: '500', color: 'var(--text-secondary)' };
+const inputStyle = { padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '16px', color: 'var(--text-primary)' };

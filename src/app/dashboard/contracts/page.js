@@ -173,7 +173,7 @@ export default function ContractsPage() {
       {/* Filters */}
       <div style={{ display: 'flex', gap: 'var(--space-2)', marginBottom: 'var(--space-3)', flexWrap: 'wrap' }}>
         <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)}
-          style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '14px', backgroundColor: '#fff' }}>
+          style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '16px', backgroundColor: '#fff' }}>
           <option value="all">All Statuses</option>
           <option value="active">Active</option>
           <option value="pending">Pending</option>
@@ -181,7 +181,7 @@ export default function ContractsPage() {
           <option value="suspended">Suspended</option>
         </select>
         <select value={filterCarrier} onChange={e => setFilterCarrier(e.target.value)}
-          style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '14px', backgroundColor: '#fff' }}>
+          style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '16px', backgroundColor: '#fff' }}>
           <option value="all">All Carriers</option>
           {Object.entries(carriers).map(([id, name]) => (
             <option key={id} value={id}>{name}</option>
@@ -220,7 +220,7 @@ export default function ContractsPage() {
                     <td style={tdStyle}>{c.contractNumber || '--'}</td>
                     <td style={tdStyle}>{c.contractLevel || '--'}</td>
                     <td style={tdStyle}>
-                      <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '12px', fontWeight: '600', backgroundColor: sc.bg, color: sc.text }}>
+                      <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '14px', fontWeight: '600', backgroundColor: sc.bg, color: sc.text }}>
                         {c.status}
                       </span>
                     </td>
@@ -228,7 +228,7 @@ export default function ContractsPage() {
                     <td style={tdStyle}>{(c.productLines || []).join(', ') || '--'}</td>
                     {isAdmin && (
                       <td style={tdStyle}>
-                        <button onClick={() => openEdit(c)} style={{ background: 'none', border: 'none', color: 'var(--brand-blue-accent)', cursor: 'pointer', fontSize: '13px', fontWeight: '500' }}>Edit</button>
+                        <button onClick={() => openEdit(c)} style={{ background: 'none', border: 'none', color: 'var(--brand-blue-accent)', cursor: 'pointer', fontSize: '15px', fontWeight: '500' }}>Edit</button>
                       </td>
                     )}
                   </tr>
@@ -259,7 +259,7 @@ export default function ContractsPage() {
                     placeholder="Search agent..."
                     displayValue={(item) => item.label}
                     renderItem={(item) => (
-                      <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)' }}>{item.label}</span>
+                      <span style={{ fontSize: '15px', fontWeight: 500, color: 'var(--text-primary)' }}>{item.label}</span>
                     )}
                     searchFields={(item) => [item.label]}
                   />
@@ -330,7 +330,7 @@ export default function ContractsPage() {
   );
 }
 
-const thStyle = { padding: '10px 12px', textAlign: 'left', fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '600' };
-const tdStyle = { padding: '10px 12px', fontSize: '14px', color: 'var(--text-primary)' };
-const labelStyle = { display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '13px', fontWeight: '500', color: 'var(--text-secondary)' };
-const inputStyle = { padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '14px', color: 'var(--text-primary)' };
+const thStyle = { padding: '10px 12px', textAlign: 'left', fontSize: '14px', color: 'var(--text-secondary)', fontWeight: '600' };
+const tdStyle = { padding: '10px 12px', fontSize: '16px', color: 'var(--text-primary)' };
+const labelStyle = { display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '15px', fontWeight: '500', color: 'var(--text-secondary)' };
+const inputStyle = { padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '16px', color: 'var(--text-primary)' };

@@ -868,7 +868,7 @@ export default function AgentDetailPage() {
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
                     <span style={{ fontWeight: 600, fontSize: 'var(--text-secondary)', color: 'var(--brand-navy)' }}>E&O Insurance</span>
                     <span style={{
-                      padding: '2px 8px', borderRadius: '999px', fontSize: '11px', fontWeight: 600,
+                      padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: 600,
                       backgroundColor: hasEO ? 'rgba(47, 168, 79, 0.1)' : 'rgba(227, 169, 74, 0.1)',
                       color: hasEO ? 'var(--status-success)' : 'var(--brand-gold)',
                     }}>
@@ -891,7 +891,7 @@ export default function AgentDetailPage() {
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
                     <span style={{ fontWeight: 600, fontSize: 'var(--text-secondary)', color: 'var(--brand-navy)' }}>AML Certification</span>
                     <span style={{
-                      padding: '2px 8px', borderRadius: '999px', fontSize: '11px', fontWeight: 600,
+                      padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: 600,
                       backgroundColor: hasAML ? 'rgba(47, 168, 79, 0.1)' : 'rgba(227, 169, 74, 0.1)',
                       color: hasAML ? 'var(--status-success)' : 'var(--brand-gold)',
                     }}>
@@ -1019,7 +1019,7 @@ export default function AgentDetailPage() {
                         {getSharedDocTypeLabel(adoc.docType)}
                       </span>
                       <span style={{
-                        padding: '2px 8px', borderRadius: '999px', fontSize: '11px', fontWeight: 600,
+                        padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: 600,
                         backgroundColor: sc.bg, color: sc.color,
                       }}>
                         {sc.label}
@@ -1206,47 +1206,47 @@ export default function AgentDetailPage() {
                 {/* ICA */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
                   <div>
-                    <div style={{ fontWeight: 600, fontSize: '13px', color: 'var(--brand-navy)' }}>ICA (Independent Contractor Agreement)</div>
-                    <div style={{ fontSize: '12px', color: agent.agreement.ica.signatureName ? 'var(--status-success)' : 'var(--text-secondary)', marginTop: '2px' }}>
+                    <div style={{ fontWeight: 600, fontSize: '15px', color: 'var(--brand-navy)' }}>ICA (Independent Contractor Agreement)</div>
+                    <div style={{ fontSize: '14px', color: agent.agreement.ica.signatureName ? 'var(--status-success)' : 'var(--text-secondary)', marginTop: '2px' }}>
                       {agent.agreement.ica.signatureName ? `Signed by ${agent.agreement.ica.signatureName}` : 'Not signed'}
                       {agent.agreement.ica.signed_at && ` · ${new Date(agent.agreement.ica.signed_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`}
                     </div>
                     {agent.agreement.ica.entityName && (
-                      <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px' }}>Entity: {agent.agreement.ica.entityName}{agent.agreement.ica.entityTitle ? ` — ${agent.agreement.ica.entityTitle}` : ''}</div>
+                      <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginTop: '2px' }}>Entity: {agent.agreement.ica.entityName}{agent.agreement.ica.entityTitle ? ` — ${agent.agreement.ica.entityTitle}` : ''}</div>
                     )}
                   </div>
-                  <a href={`/api/documents/filled?agentId=${id}&doc=ica`} target="_blank" rel="noopener noreferrer" style={{ padding: '4px 12px', borderRadius: '999px', border: '1px solid var(--border-color)', fontSize: '12px', color: 'var(--brand-navy)', fontWeight: 500, textDecoration: 'none' }}>View PDF</a>
+                  <a href={`/api/documents/filled?agentId=${id}&doc=ica`} target="_blank" rel="noopener noreferrer" style={{ padding: '4px 12px', borderRadius: '999px', border: '1px solid var(--border-color)', fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 500, textDecoration: 'none' }}>View PDF</a>
                 </div>
 
                 {/* AOA */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
                   <div>
-                    <div style={{ fontWeight: 600, fontSize: '13px', color: 'var(--brand-navy)' }}>AOA (Agent Ownership Agreement)</div>
-                    <div style={{ fontSize: '12px', color: agent.agreement.aoa?.signatureName ? 'var(--status-success)' : 'var(--text-secondary)', marginTop: '2px' }}>
+                    <div style={{ fontWeight: 600, fontSize: '15px', color: 'var(--brand-navy)' }}>AOA (Agent Ownership Agreement)</div>
+                    <div style={{ fontSize: '14px', color: agent.agreement.aoa?.signatureName ? 'var(--status-success)' : 'var(--text-secondary)', marginTop: '2px' }}>
                       {agent.agreement.aoa?.signatureName ? `Signed by ${agent.agreement.aoa.signatureName}` : 'Not signed'}
                       {agent.agreement.aoa?.signed_at && ` · ${new Date(agent.agreement.aoa.signed_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`}
                     </div>
                     {agent.agreement.aoa?.assignedLevel && (
-                      <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px' }}>Assigned Level: Level {agent.agreement.aoa.assignedLevel}</div>
+                      <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginTop: '2px' }}>Assigned Level: Level {agent.agreement.aoa.assignedLevel}</div>
                     )}
                   </div>
-                  <a href={`/api/documents/filled?agentId=${id}&doc=aoa`} target="_blank" rel="noopener noreferrer" style={{ padding: '4px 12px', borderRadius: '999px', border: '1px solid var(--border-color)', fontSize: '12px', color: 'var(--brand-navy)', fontWeight: 500, textDecoration: 'none' }}>View PDF</a>
+                  <a href={`/api/documents/filled?agentId=${id}&doc=aoa`} target="_blank" rel="noopener noreferrer" style={{ padding: '4px 12px', borderRadius: '999px', border: '1px solid var(--border-color)', fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 500, textDecoration: 'none' }}>View PDF</a>
                 </div>
 
                 {/* Business Standards */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
                   <div>
-                    <div style={{ fontWeight: 600, fontSize: '13px', color: 'var(--brand-navy)' }}>Business Standards</div>
-                    <div style={{ fontSize: '12px', color: agent.agreement.businessStandards?.signatureName ? 'var(--status-success)' : 'var(--text-secondary)', marginTop: '2px' }}>
+                    <div style={{ fontWeight: 600, fontSize: '15px', color: 'var(--brand-navy)' }}>Business Standards</div>
+                    <div style={{ fontSize: '14px', color: agent.agreement.businessStandards?.signatureName ? 'var(--status-success)' : 'var(--text-secondary)', marginTop: '2px' }}>
                       {agent.agreement.businessStandards?.signatureName ? `Signed by ${agent.agreement.businessStandards.signatureName}` : 'Not signed'}
                       {agent.agreement.businessStandards?.signed_at && ` · ${new Date(agent.agreement.businessStandards.signed_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`}
                     </div>
                   </div>
-                  <a href={`/api/documents/filled?agentId=${id}&doc=businessStandards`} target="_blank" rel="noopener noreferrer" style={{ padding: '4px 12px', borderRadius: '999px', border: '1px solid var(--border-color)', fontSize: '12px', color: 'var(--brand-navy)', fontWeight: 500, textDecoration: 'none' }}>View PDF</a>
+                  <a href={`/api/documents/filled?agentId=${id}&doc=businessStandards`} target="_blank" rel="noopener noreferrer" style={{ padding: '4px 12px', borderRadius: '999px', border: '1px solid var(--border-color)', fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 500, textDecoration: 'none' }}>View PDF</a>
                 </div>
 
                 {/* Summary row */}
-                <div style={{ display: 'flex', gap: '16px', padding: '8px 14px', fontSize: '12px', color: 'var(--text-secondary)' }}>
+                <div style={{ display: 'flex', gap: '16px', padding: '8px 14px', fontSize: '14px', color: 'var(--text-secondary)' }}>
                   {agent.agreement.all_signed_at && <span>All signed: {new Date(agent.agreement.all_signed_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>}
                   {agent.agreement.esign_consent && <span style={{ color: 'var(--status-success)', fontWeight: 600 }}>ESIGN Consent Granted</span>}
                 </div>
@@ -1262,9 +1262,9 @@ export default function AgentDetailPage() {
                   <InfoRow label="Signed At" value={agent.agreement.signed_at ? new Date(agent.agreement.signed_at).toLocaleString() : '—'} />
                 </div>
                 <div style={{ display: 'flex', gap: '12px', marginTop: '4px', flexWrap: 'wrap' }}>
-                  <a href="/documents/NXT_Independent_Contractor_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>View ICA PDF</a>
-                  <a href="/documents/NXT_Agent_Ownership_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>View AOA PDF</a>
-                  <a href="/documents/NXT_Business_Standards_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>View Standards PDF</a>
+                  <a href="/documents/NXT_Independent_Contractor_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>View ICA PDF</a>
+                  <a href="/documents/NXT_Agent_Ownership_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>View AOA PDF</a>
+                  <a href="/documents/NXT_Business_Standards_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>View Standards PDF</a>
                 </div>
               </>
             )}
@@ -1455,23 +1455,23 @@ export default function AgentDetailPage() {
                       <div style={{ flex: 1 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
                           <span style={{
-                            padding: '2px 8px', borderRadius: '999px', fontSize: '11px', fontWeight: 600,
+                            padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: 600,
                             backgroundColor: 'rgba(227, 169, 74, 0.1)', color: '#1B2A4E',
                           }}>
                             {typeLabels[req.requestType] || req.requestType}
                           </span>
                           <span style={{
-                            padding: '2px 8px', borderRadius: '999px', fontSize: '11px', fontWeight: 600,
+                            padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: 600,
                             backgroundColor: st.bg, color: st.color,
                           }}>
                             {st.label}
                           </span>
                         </div>
-                        <div style={{ fontWeight: 600, fontSize: '14px', color: 'var(--brand-navy)' }}>{req.title}</div>
+                        <div style={{ fontWeight: 600, fontSize: '16px', color: 'var(--brand-navy)' }}>{req.title}</div>
                         {req.description && (
-                          <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '2px' }}>{req.description}</div>
+                          <div style={{ fontSize: '15px', color: 'var(--text-secondary)', marginTop: '2px' }}>{req.description}</div>
                         )}
-                        <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '4px' }}>
+                        <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginTop: '4px' }}>
                           Sent {req.createdAt ? new Date(req.createdAt).toLocaleDateString('en-US') : ''}
                           {req.completedAt && ` · Completed ${new Date(req.completedAt).toLocaleDateString('en-US')}`}
                         </div>
@@ -1481,7 +1481,7 @@ export default function AgentDetailPage() {
                           onClick={() => handleDismissRequest(req.id)}
                           style={{
                             background: 'none', border: 'none', color: 'var(--text-secondary)',
-                            cursor: 'pointer', fontSize: '12px', flexShrink: 0,
+                            cursor: 'pointer', fontSize: '14px', flexShrink: 0,
                           }}
                         >
                           Dismiss
@@ -1514,12 +1514,12 @@ export default function AgentDetailPage() {
               The agent will see this request on their dashboard and can act on it.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-              <label style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '13px', fontWeight: 500, color: 'var(--text-secondary)' }}>
+              <label style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '15px', fontWeight: 500, color: 'var(--text-secondary)' }}>
                 Request Type
                 <select
                   value={requestType}
                   onChange={e => setRequestType(e.target.value)}
-                  style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '14px', color: 'var(--text-primary)' }}
+                  style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '16px', color: 'var(--text-primary)' }}
                 >
                   <option value="upload_document">Upload Document</option>
                   <option value="provide_info">Provide Information</option>
@@ -1528,23 +1528,23 @@ export default function AgentDetailPage() {
                   <option value="other">Other</option>
                 </select>
               </label>
-              <label style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '13px', fontWeight: 500, color: 'var(--text-secondary)' }}>
+              <label style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '15px', fontWeight: 500, color: 'var(--text-secondary)' }}>
                 Title
                 <input
                   value={requestTitle}
                   onChange={e => setRequestTitle(e.target.value)}
                   placeholder="e.g. Upload your E&O Certificate"
-                  style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '14px', color: 'var(--text-primary)' }}
+                  style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '16px', color: 'var(--text-primary)' }}
                 />
               </label>
-              <label style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '13px', fontWeight: 500, color: 'var(--text-secondary)' }}>
+              <label style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '15px', fontWeight: 500, color: 'var(--text-secondary)' }}>
                 Description (optional)
                 <textarea
                   value={requestDesc}
                   onChange={e => setRequestDesc(e.target.value)}
                   placeholder="Additional details or instructions..."
                   rows={3}
-                  style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '14px', color: 'var(--text-primary)', resize: 'vertical', fontFamily: 'inherit' }}
+                  style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '16px', color: 'var(--text-primary)', resize: 'vertical', fontFamily: 'inherit' }}
                 />
               </label>
             </div>
@@ -1583,11 +1583,11 @@ export default function AgentDetailPage() {
               emptyLabel="— No Upline —"
               renderItem={(mgr) => (
                 <>
-                  <span style={{ fontSize: '11px', fontWeight: 700, color: '#0C1022', backgroundColor: 'rgba(12, 16, 34,0.08)', padding: '2px 8px', borderRadius: '6px', fontFamily: 'monospace', flexShrink: 0 }}>
+                  <span style={{ fontSize: '13px', fontWeight: 700, color: '#0C1022', backgroundColor: 'rgba(12, 16, 34,0.08)', padding: '2px 8px', borderRadius: '6px', fontFamily: 'monospace', flexShrink: 0 }}>
                     {mgr.nxt_id || '---'}
                   </span>
-                  <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)' }}>{dn(mgr)}</span>
-                  <span style={{ fontSize: '11px', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
+                  <span style={{ fontSize: '15px', fontWeight: 500, color: 'var(--text-primary)' }}>{dn(mgr)}</span>
+                  <span style={{ fontSize: '13px', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
                     {mgr.is_owner ? 'Owner' : mgr.role === 'it_engineer' ? 'IT Engineer' : mgr.role}
                   </span>
                 </>

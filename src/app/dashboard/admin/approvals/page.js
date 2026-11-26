@@ -104,7 +104,7 @@ export default function AdminApprovalsPage() {
           backgroundColor: message.type === 'success' ? 'rgba(47, 168, 79, 0.08)' : 'rgba(211, 63, 63, 0.08)',
           border: `1px solid ${message.type === 'success' ? 'rgba(47, 168, 79, 0.2)' : 'rgba(211, 63, 63, 0.2)'}`,
           color: message.type === 'success' ? 'var(--status-success)' : 'var(--status-error)',
-          fontSize: '14px', fontWeight: '500',
+          fontSize: '16px', fontWeight: '500',
         }}>
           {message.text}
         </div>
@@ -129,9 +129,9 @@ export default function AdminApprovalsPage() {
                       <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '600', color: 'var(--brand-navy)' }}>
                         {dn(agent)}
                       </h3>
-                      <p style={{ margin: '2px 0 0 0', fontSize: '13px', color: 'var(--text-secondary)' }}>
+                      <p style={{ margin: '2px 0 0 0', fontSize: '15px', color: 'var(--text-secondary)' }}>
                         {agent.email} &middot; {agent.role === 'it_engineer' ? 'IT Engineer' : agent.role?.charAt(0).toUpperCase() + agent.role?.slice(1)}
-                        {agent.nxt_id && <span style={{ marginLeft: '8px', fontFamily: 'monospace', backgroundColor: 'rgba(10,37,64,0.06)', padding: '1px 6px', borderRadius: '4px', fontSize: '12px' }}>{agent.nxt_id}</span>}
+                        {agent.nxt_id && <span style={{ marginLeft: '8px', fontFamily: 'monospace', backgroundColor: 'rgba(10,37,64,0.06)', padding: '1px 6px', borderRadius: '4px', fontSize: '14px' }}>{agent.nxt_id}</span>}
                       </p>
                     </div>
                   </div>
@@ -142,7 +142,7 @@ export default function AdminApprovalsPage() {
                       style={{
                         background: 'none', border: '1px solid var(--border-color)',
                         borderRadius: '8px', padding: '6px 14px', cursor: 'pointer',
-                        fontSize: '13px', color: 'var(--brand-navy)', fontWeight: '500',
+                        fontSize: '15px', color: 'var(--brand-navy)', fontWeight: '500',
                       }}
                     >
                       {expandedAgent === agent.id ? 'Hide Details' : 'View Details'}
@@ -155,7 +155,7 @@ export default function AdminApprovalsPage() {
                           style={{
                             background: 'none', border: '1px solid rgba(211, 63, 63, 0.3)',
                             borderRadius: '8px', padding: '6px 14px', cursor: 'pointer',
-                            fontSize: '13px', color: '#D33F3F', fontWeight: '600',
+                            fontSize: '15px', color: '#D33F3F', fontWeight: '600',
                             opacity: actionLoading === agent.id ? 0.5 : 1,
                           }}
                         >
@@ -164,7 +164,7 @@ export default function AdminApprovalsPage() {
                         <Button
                           onClick={() => handleApprove(agent.id)}
                           isLoading={actionLoading === agent.id}
-                          style={{ fontSize: '13px', padding: '6px 20px' }}
+                          style={{ fontSize: '15px', padding: '6px 20px' }}
                         >
                           Approve
                         </Button>
@@ -179,7 +179,7 @@ export default function AdminApprovalsPage() {
                     marginTop: '12px', padding: '16px', borderRadius: '10px',
                     backgroundColor: 'rgba(211, 63, 63, 0.04)', border: '1px solid rgba(211, 63, 63, 0.15)',
                   }}>
-                    <p style={{ margin: '0 0 8px 0', fontSize: '13px', fontWeight: '600', color: '#D33F3F' }}>Rejection Reason</p>
+                    <p style={{ margin: '0 0 8px 0', fontSize: '15px', fontWeight: '600', color: '#D33F3F' }}>Rejection Reason</p>
                     <textarea
                       value={rejectReason}
                       onChange={e => setRejectReason(e.target.value)}
@@ -187,7 +187,7 @@ export default function AdminApprovalsPage() {
                       rows={2}
                       style={{
                         width: '100%', padding: '10px 12px', borderRadius: '8px',
-                        border: '1px solid var(--border-color)', fontSize: '14px',
+                        border: '1px solid var(--border-color)', fontSize: '16px',
                         resize: 'vertical', fontFamily: 'inherit',
                       }}
                     />
@@ -197,7 +197,7 @@ export default function AdminApprovalsPage() {
                         style={{
                           background: 'none', border: '1px solid var(--border-color)',
                           borderRadius: '8px', padding: '6px 14px', cursor: 'pointer',
-                          fontSize: '13px', color: 'var(--text-secondary)',
+                          fontSize: '15px', color: 'var(--text-secondary)',
                         }}
                       >
                         Cancel
@@ -208,7 +208,7 @@ export default function AdminApprovalsPage() {
                         style={{
                           background: '#D33F3F', border: 'none', color: '#fff',
                           borderRadius: '8px', padding: '6px 18px', cursor: 'pointer',
-                          fontSize: '13px', fontWeight: '600',
+                          fontSize: '15px', fontWeight: '600',
                           opacity: actionLoading === agent.id ? 0.5 : 1,
                         }}
                       >
@@ -326,25 +326,25 @@ export default function AdminApprovalsPage() {
                         <div style={{ display: 'flex', gap: '12px', marginTop: '8px', flexWrap: 'wrap' }}>
                           {agent.agreement?.ica ? (
                             <>
-                              <a href={`/api/documents/filled?agentId=${agent.id}&doc=ica`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
+                              <a href={`/api/documents/filled?agentId=${agent.id}&doc=ica`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
                                 View Signed ICA
                               </a>
-                              <a href={`/api/documents/filled?agentId=${agent.id}&doc=aoa`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
+                              <a href={`/api/documents/filled?agentId=${agent.id}&doc=aoa`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
                                 View Signed AOA
                               </a>
-                              <a href={`/api/documents/filled?agentId=${agent.id}&doc=businessStandards`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
+                              <a href={`/api/documents/filled?agentId=${agent.id}&doc=businessStandards`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
                                 View Signed Standards
                               </a>
                             </>
                           ) : (
                             <>
-                              <a href="/documents/NXT_Independent_Contractor_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
+                              <a href="/documents/NXT_Independent_Contractor_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
                                 View ICA PDF
                               </a>
-                              <a href="/documents/NXT_Agent_Ownership_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
+                              <a href="/documents/NXT_Agent_Ownership_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
                                 View AOA PDF
                               </a>
-                              <a href="/documents/NXT_Business_Standards_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
+                              <a href="/documents/NXT_Business_Standards_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
                                 View Standards PDF
                               </a>
                             </>
@@ -370,7 +370,7 @@ export default function AdminApprovalsPage() {
 
                 {/* Submitted time */}
                 {agent.onboarding_completed_at && (
-                  <p style={{ margin: '12px 0 0 0', fontSize: '12px', color: 'var(--text-secondary)' }}>
+                  <p style={{ margin: '12px 0 0 0', fontSize: '14px', color: 'var(--text-secondary)' }}>
                     Submitted {timeAgo(agent.onboarding_completed_at)}
                   </p>
                 )}
@@ -386,7 +386,7 @@ export default function AdminApprovalsPage() {
 function DetailSection({ title, children }) {
   return (
     <div>
-      <h4 style={{ fontSize: '13px', fontWeight: '700', color: 'var(--brand-navy)', margin: '0 0 10px 0', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+      <h4 style={{ fontSize: '15px', fontWeight: '700', color: 'var(--brand-navy)', margin: '0 0 10px 0', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
         {title}
       </h4>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -398,7 +398,7 @@ function DetailSection({ title, children }) {
 
 function DetailRow({ label, value, good }) {
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px' }}>
+    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '15px' }}>
       <span style={{ color: 'var(--text-secondary)' }}>{label}</span>
       <span style={{
         fontWeight: '500',

@@ -238,7 +238,7 @@ export default function LeadsPage() {
             disabled={bulkLoading}
             style={{
               padding: '6px 10px', borderRadius: '6px', border: '1px solid var(--border-color)',
-              fontSize: '13px', cursor: 'pointer',
+              fontSize: '15px', cursor: 'pointer',
             }}
           >
             <option value="">Change status...</option>

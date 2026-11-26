@@ -332,7 +332,7 @@ export default function AnnuityCalculator() {
                 </tfoot>
               </table>
             </div>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '11px', lineHeight: 1.5, margin: 'var(--space-2) 0 0 0', fontStyle: 'italic' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: 1.5, margin: 'var(--space-2) 0 0 0', fontStyle: 'italic' }}>
               This is an example only and will be different based on product and company. Factor percentages may vary. Internal use only.
             </p>
           </Card>
@@ -347,8 +347,8 @@ export default function AnnuityCalculator() {
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={barData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-                  <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#666' }} />
-                  <YAxis tick={{ fontSize: 12, fill: '#666' }} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
+                  <XAxis dataKey="name" tick={{ fontSize: 14, fill: '#666' }} />
+                  <YAxis tick={{ fontSize: 14, fill: '#666' }} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
                   <Tooltip formatter={(value, name) => name.includes('$') ? fmt(value) : value + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
                   <Legend />
                   <Bar dataKey="Commission $" fill="#0C1022" radius={[4, 4, 0, 0]} />
@@ -383,7 +383,7 @@ export default function AnnuityCalculator() {
                     ))}
                   </Pie>
                   <Tooltip formatter={(value) => fmt(value)} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
-                  <Legend verticalAlign="bottom" iconType="circle" wrapperStyle={{ fontSize: '13px', paddingTop: '12px' }} />
+                  <Legend verticalAlign="bottom" iconType="circle" wrapperStyle={{ fontSize: '15px', paddingTop: '12px' }} />
                 </PieChart>
               </ResponsiveContainer>
             </Card>
@@ -399,8 +399,8 @@ export default function AnnuityCalculator() {
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={genBarData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-                  <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#666' }} />
-                  <YAxis tick={{ fontSize: 12, fill: '#666' }} tickFormatter={(v) => `$${v}`} />
+                  <XAxis dataKey="name" tick={{ fontSize: 14, fill: '#666' }} />
+                  <YAxis tick={{ fontSize: 14, fill: '#666' }} tickFormatter={(v) => `$${v}`} />
                   <Tooltip formatter={(value, name) => name.includes('$') ? fmt(value) : value + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
                   <Bar dataKey="Override $" fill="#E3A94A" radius={[4, 4, 0, 0]} />
                 </BarChart>
@@ -415,8 +415,8 @@ export default function AnnuityCalculator() {
               <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={lineData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-                  <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#666' }} />
-                  <YAxis tick={{ fontSize: 12, fill: '#666' }} tickFormatter={(v) => v + '%'} />
+                  <XAxis dataKey="name" tick={{ fontSize: 14, fill: '#666' }} />
+                  <YAxis tick={{ fontSize: 14, fill: '#666' }} tickFormatter={(v) => v + '%'} />
                   <Tooltip formatter={(value) => value + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
                   <Legend />
                   <Line type="monotone" dataKey="Commission %" stroke="#0C1022" strokeWidth={3} dot={{ r: 5, fill: '#0C1022' }} />

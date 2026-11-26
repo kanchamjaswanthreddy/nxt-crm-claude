@@ -269,8 +269,8 @@ export default function CommissionCalculatorPage() {
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={barData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-              <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#666' }} />
-              <YAxis tick={{ fontSize: 12, fill: '#666' }} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
+              <XAxis dataKey="name" tick={{ fontSize: 14, fill: '#666' }} />
+              <YAxis tick={{ fontSize: 14, fill: '#666' }} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
               <Tooltip formatter={(value) => fmt(value)} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
               <Legend />
               <Bar dataKey="Total Income" fill="#0C1022" radius={[4, 4, 0, 0]} />
@@ -307,7 +307,7 @@ export default function CommissionCalculatorPage() {
                 ))}
               </Pie>
               <Tooltip formatter={(value) => fmt(value)} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
-              <Legend verticalAlign="bottom" iconType="circle" wrapperStyle={{ fontSize: '13px', paddingTop: '12px' }} />
+              <Legend verticalAlign="bottom" iconType="circle" wrapperStyle={{ fontSize: '15px', paddingTop: '12px' }} />
             </PieChart>
           </ResponsiveContainer>
         </Card>
@@ -323,8 +323,8 @@ export default function CommissionCalculatorPage() {
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={genBarData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-              <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#666' }} />
-              <YAxis tick={{ fontSize: 12, fill: '#666' }} tickFormatter={(v) => `$${v}`} />
+              <XAxis dataKey="name" tick={{ fontSize: 14, fill: '#666' }} />
+              <YAxis tick={{ fontSize: 14, fill: '#666' }} tickFormatter={(v) => `$${v}`} />
               <Tooltip formatter={(value, name) => name === 'Income' ? fmt(value) : value + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
               <Bar dataKey="Income" fill="#E3A94A" radius={[4, 4, 0, 0]} />
             </BarChart>
@@ -339,8 +339,8 @@ export default function CommissionCalculatorPage() {
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={growthData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-              <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#666' }} />
-              <YAxis tick={{ fontSize: 12, fill: '#666' }} tickFormatter={(v) => v + '%'} />
+              <XAxis dataKey="name" tick={{ fontSize: 14, fill: '#666' }} />
+              <YAxis tick={{ fontSize: 14, fill: '#666' }} tickFormatter={(v) => v + '%'} />
               <Tooltip formatter={(value) => value.toFixed(1) + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
               <Legend />
               <Line type="monotone" dataKey="Commission %" stroke="#0C1022" strokeWidth={3} dot={{ r: 5, fill: '#0C1022' }} />

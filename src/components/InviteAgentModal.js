@@ -181,7 +181,7 @@ ${inviterName}`
                   value={referralLink || 'Loading...'}
                   style={{
                     flex: 1, border: 'none', background: 'transparent',
-                    fontFamily: 'var(--font-base)', fontSize: '13px',
+                    fontFamily: 'var(--font-base)', fontSize: '15px',
                     color: 'var(--text-primary)', outline: 'none',
                     overflow: 'hidden', textOverflow: 'ellipsis'
                   }}
@@ -193,7 +193,7 @@ ${inviterName}`
                     padding: '7px 16px', borderRadius: '8px',
                     border: 'none', cursor: referralLink ? 'pointer' : 'default',
                     backgroundColor: linkCopied ? 'var(--status-success)' : 'var(--brand-navy)',
-                    color: '#fff', fontSize: '12px', fontWeight: '600',
+                    color: '#fff', fontSize: '14px', fontWeight: '600',
                     transition: 'background-color 0.2s ease', whiteSpace: 'nowrap',
                     opacity: referralLink ? 1 : 0.5,
                   }}
@@ -228,7 +228,7 @@ ${inviterName}`
                 Send via Email
               </a>
 
-              <p style={{ margin: '8px 0 0 0', fontSize: '11px', color: 'var(--text-secondary)', textAlign: 'center' }}>
+              <p style={{ margin: '8px 0 0 0', fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center' }}>
                 Anyone with this link can join your agency as an agent
               </p>
             </div>
@@ -239,7 +239,7 @@ ${inviterName}`
               margin: '4px 0 16px',
             }}>
               <div style={{ flex: 1, height: '1px', background: 'var(--border-color)' }} />
-              <span style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '500' }}>or send a personalized invite</span>
+              <span style={{ fontSize: '14px', color: 'var(--text-secondary)', fontWeight: '500' }}>or send a personalized invite</span>
               <div style={{ flex: 1, height: '1px', background: 'var(--border-color)' }} />
             </div>
 
@@ -395,7 +395,7 @@ ${inviterName}`
                 value={result.link}
                 style={{
                   flex: 1, border: 'none', background: 'transparent',
-                  fontFamily: 'var(--font-base)', fontSize: '13px',
+                  fontFamily: 'var(--font-base)', fontSize: '15px',
                   color: 'var(--text-primary)', outline: 'none',
                   overflow: 'hidden', textOverflow: 'ellipsis'
                 }}
@@ -406,7 +406,7 @@ ${inviterName}`
                   padding: '7px 16px', borderRadius: '8px',
                   border: 'none', cursor: 'pointer',
                   backgroundColor: copied ? 'var(--status-success)' : 'var(--brand-navy)',
-                  color: '#fff', fontSize: '12px', fontWeight: '600',
+                  color: '#fff', fontSize: '14px', fontWeight: '600',
                   transition: 'background-color 0.2s ease', whiteSpace: 'nowrap'
                 }}
               >

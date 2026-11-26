@@ -151,7 +151,7 @@ function PaymentFormInner({
 
       {/* Stripe Card Element */}
       <div>
-        <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '6px' }}>
+        <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '6px' }}>
           Card Details *
         </label>
         <div style={{
@@ -168,7 +168,7 @@ function PaymentFormInner({
                 border: '2px solid var(--brand-blue-accent)', borderTopColor: 'transparent',
                 borderRadius: '50%', animation: 'spin 0.8s linear infinite',
               }} />
-              <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>Initializing secure payment...</span>
+              <span style={{ fontSize: '16px', color: 'var(--text-secondary)' }}>Initializing secure payment...</span>
               <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
             </div>
           ) : (
@@ -182,10 +182,10 @@ function PaymentFormInner({
           )}
         </div>
         {cardError && (
-          <span style={{ fontSize: '12px', color: 'var(--status-error)', marginTop: '4px', display: 'block' }}>{cardError}</span>
+          <span style={{ fontSize: '14px', color: 'var(--status-error)', marginTop: '4px', display: 'block' }}>{cardError}</span>
         )}
         {validationErrors?.card && (
-          <span style={{ fontSize: '12px', color: 'var(--status-error)', marginTop: '4px', display: 'block' }}>{validationErrors.card}</span>
+          <span style={{ fontSize: '14px', color: 'var(--status-error)', marginTop: '4px', display: 'block' }}>{validationErrors.card}</span>
         )}
       </div>
 
@@ -194,7 +194,7 @@ function PaymentFormInner({
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
         </svg>
-        <span style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
+        <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
           Secured by <strong>Stripe</strong> — your card details are never stored on our servers
         </span>
       </div>
@@ -218,7 +218,7 @@ function PaymentFormInner({
         </span>
       </label>
       {validationErrors?.consent && (
-        <span style={{ fontSize: '12px', color: 'var(--status-error)', marginTop: '-8px' }}>{validationErrors.consent}</span>
+        <span style={{ fontSize: '14px', color: 'var(--status-error)', marginTop: '-8px' }}>{validationErrors.consent}</span>
       )}
     </div>
   );

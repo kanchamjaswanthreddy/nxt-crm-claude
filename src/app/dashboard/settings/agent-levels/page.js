@@ -102,7 +102,7 @@ export default function AgentLevelsSettings() {
                         width: '18px', height: '18px', borderRadius: '50%',
                         backgroundColor: 'var(--brand-navy)', color: '#fff',
                         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: '10px', fontWeight: '700'
+                        fontSize: '13px', fontWeight: '700'
                       }}>
                         {levelInfo.level}
                       </span>

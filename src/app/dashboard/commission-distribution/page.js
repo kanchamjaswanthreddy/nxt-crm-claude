@@ -323,11 +323,11 @@ export default function CommissionDistributionPage() {
               placeholder="Search agent by name or NXT ID..."
               renderItem={(a) => (
                 <>
-                  <span style={{ fontSize: '11px', fontWeight: 700, color: '#0C1022', backgroundColor: 'rgba(12, 16, 34,0.08)', padding: '2px 8px', borderRadius: '6px', fontFamily: 'monospace', flexShrink: 0 }}>
+                  <span style={{ fontSize: '13px', fontWeight: 700, color: '#0C1022', backgroundColor: 'rgba(12, 16, 34,0.08)', padding: '2px 8px', borderRadius: '6px', fontFamily: 'monospace', flexShrink: 0 }}>
                     {a.nxt_id || '---'}
                   </span>
-                  <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)' }}>{dn(a)}</span>
-                  <span style={{ fontSize: '11px', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
+                  <span style={{ fontSize: '15px', fontWeight: 500, color: 'var(--text-primary)' }}>{dn(a)}</span>
+                  <span style={{ fontSize: '13px', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
                     {a.contractLevel || 'Unlicensed'}
                   </span>
                 </>
@@ -415,7 +415,7 @@ export default function CommissionDistributionPage() {
               <p style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--brand-navy)', margin: 0 }}>
                 {fmt(distribution.totalDistributed)}
               </p>
-              <p style={{ fontSize: '11px', color: 'var(--text-secondary)', margin: '2px 0 0 0' }}>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: '2px 0 0 0' }}>
                 {distribution.totalPct.toFixed(4)}% of premium
               </p>
             </Card>
@@ -446,7 +446,7 @@ export default function CommissionDistributionPage() {
                     </td>
                     <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>{distribution.selling.nxtId}</td>
                     <td style={{ padding: '12px' }}>
-                      <span style={{ display: 'inline-block', padding: '2px 10px', borderRadius: '20px', backgroundColor: 'var(--brand-gold)', color: '#fff', fontSize: '11px', fontWeight: 700 }}>
+                      <span style={{ display: 'inline-block', padding: '2px 10px', borderRadius: '20px', backgroundColor: 'var(--brand-gold)', color: '#fff', fontSize: '13px', fontWeight: 700 }}>
                         Selling Agent
                       </span>
                     </td>
@@ -458,7 +458,7 @@ export default function CommissionDistributionPage() {
                   {distribution.hasSplits && (
                     <>
                       <tr style={{ backgroundColor: 'rgba(227, 169, 74, 0.04)' }}>
-                        <td colSpan={6} style={{ padding: '8px 12px', fontSize: '11px', fontWeight: 700, color: 'var(--brand-gold)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                        <td colSpan={6} style={{ padding: '8px 12px', fontSize: '13px', fontWeight: 700, color: 'var(--brand-gold)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                           Commission Split Breakdown — {distribution.selling.name}&apos;s {fmt(distribution.selling.dollar)} splits as:
                         </td>
                       </tr>
@@ -469,7 +469,7 @@ export default function CommissionDistributionPage() {
                         </td>
                         <td style={{ padding: '10px 12px', color: 'var(--text-secondary)' }}>{distribution.selling.nxtId}</td>
                         <td style={{ padding: '10px 12px' }}>
-                          <span style={{ display: 'inline-block', padding: '2px 10px', borderRadius: '20px', backgroundColor: 'rgba(227, 169, 74, 0.15)', color: 'var(--brand-gold)', fontSize: '11px', fontWeight: 600 }}>
+                          <span style={{ display: 'inline-block', padding: '2px 10px', borderRadius: '20px', backgroundColor: 'rgba(227, 169, 74, 0.15)', color: 'var(--brand-gold)', fontSize: '13px', fontWeight: 600 }}>
                             Keeps {distribution.selling.keepPct}%
                           </span>
                         </td>
@@ -485,7 +485,7 @@ export default function CommissionDistributionPage() {
                           </td>
                           <td style={{ padding: '10px 12px', color: 'var(--text-secondary)' }}>{row.nxtId}</td>
                           <td style={{ padding: '10px 12px' }}>
-                            <span style={{ display: 'inline-block', padding: '2px 10px', borderRadius: '20px', backgroundColor: 'rgba(227, 169, 74, 0.15)', color: 'var(--brand-gold)', fontSize: '11px', fontWeight: 600 }}>
+                            <span style={{ display: 'inline-block', padding: '2px 10px', borderRadius: '20px', backgroundColor: 'rgba(227, 169, 74, 0.15)', color: 'var(--brand-gold)', fontSize: '13px', fontWeight: 600 }}>
                               {row.role}
                             </span>
                           </td>
@@ -502,7 +502,7 @@ export default function CommissionDistributionPage() {
                       <td style={{ padding: '12px', fontWeight: 600, color: 'var(--text-primary)' }}>{row.name}</td>
                       <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>{row.nxtId}</td>
                       <td style={{ padding: '12px' }}>
-                        <span style={{ display: 'inline-block', padding: '2px 10px', borderRadius: '20px', backgroundColor: 'rgba(0, 32, 91, 0.08)', color: 'var(--brand-navy)', fontSize: '11px', fontWeight: 600 }}>
+                        <span style={{ display: 'inline-block', padding: '2px 10px', borderRadius: '20px', backgroundColor: 'rgba(0, 32, 91, 0.08)', color: 'var(--brand-navy)', fontSize: '13px', fontWeight: 600 }}>
                           {row.role}
                         </span>
                       </td>
@@ -533,8 +533,8 @@ export default function CommissionDistributionPage() {
               <ResponsiveContainer width="100%" height={280}>
                 <BarChart data={barData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#666' }} />
-                  <YAxis tick={{ fontSize: 11, fill: '#666' }} tickFormatter={(v) => `$${(v / 1000).toFixed(1)}k`} />
+                  <XAxis dataKey="name" tick={{ fontSize: 13, fill: '#666' }} />
+                  <YAxis tick={{ fontSize: 13, fill: '#666' }} tickFormatter={(v) => `$${(v / 1000).toFixed(1)}k`} />
                   <Tooltip formatter={(value, name) => name === 'amount' ? fmt(value) : value + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
                   <Legend />
                   <Bar dataKey="amount" name="Amount" fill="#0C1022" radius={[4, 4, 0, 0]} />

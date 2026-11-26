@@ -291,7 +291,7 @@ export default function DealsPage() {
                 padding: '10px 20px',
                 borderRadius: '999px',
                 fontWeight: '600',
-                fontSize: '14px',
+                fontSize: '16px',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -313,7 +313,7 @@ export default function DealsPage() {
                 padding: '12px 28px',
                 borderRadius: '999px',
                 fontWeight: '600',
-                fontSize: '14px',
+                fontSize: '16px',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -374,7 +374,7 @@ export default function DealsPage() {
             onClick={() => setStatusTab(tab.key)}
             style={{
               padding: '10px 20px',
-              fontSize: '13px',
+              fontSize: '15px',
               fontWeight: statusTab === tab.key ? '600' : '500',
               color: statusTab === tab.key ? 'var(--brand-navy)' : 'var(--text-secondary)',
               background: 'none',
@@ -390,7 +390,7 @@ export default function DealsPage() {
           >
             {tab.label}
             <span style={{
-              fontSize: '11px',
+              fontSize: '13px',
               fontWeight: '600',
               padding: '2px 8px',
               borderRadius: '999px',
@@ -420,7 +420,7 @@ export default function DealsPage() {
               padding: '9px 12px 9px 36px',
               border: '1px solid #E7E3DA',
               borderRadius: '8px',
-              fontSize: '13px',
+              fontSize: '15px',
               outline: 'none',
               transition: 'border-color 0.15s ease',
               backgroundColor: '#fff',
@@ -438,7 +438,7 @@ export default function DealsPage() {
             padding: '9px 32px 9px 12px',
             border: '1px solid #E7E3DA',
             borderRadius: '8px',
-            fontSize: '13px',
+            fontSize: '15px',
             backgroundColor: '#fff',
             cursor: 'pointer',
             outline: 'none',
@@ -459,7 +459,7 @@ export default function DealsPage() {
             padding: '9px 32px 9px 12px',
             border: '1px solid #E7E3DA',
             borderRadius: '8px',
-            fontSize: '13px',
+            fontSize: '15px',
             backgroundColor: '#fff',
             cursor: 'pointer',
             outline: 'none',
@@ -479,7 +479,7 @@ export default function DealsPage() {
             style={{
               display: 'flex', alignItems: 'center', gap: '6px',
               padding: '9px 16px', border: '1px solid #E7E3DA', borderRadius: '8px',
-              fontSize: '13px', fontWeight: '500', backgroundColor: '#fff', cursor: 'pointer',
+              fontSize: '15px', fontWeight: '500', backgroundColor: '#fff', cursor: 'pointer',
               color: 'var(--text-primary)', transition: 'border-color 0.15s ease',
             }}
             onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--brand-navy)'}
@@ -492,7 +492,7 @@ export default function DealsPage() {
       </div>
 
       {/* Showing count */}
-      <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '8px' }}>
+      <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '8px' }}>
         Showing {filteredDeals.length} of {deals.length} deals
         {selectedIds.size > 0 && <span style={{ marginLeft: '12px', color: 'var(--brand-navy)', fontWeight: '600' }}>{selectedIds.size} selected</span>}
       </div>
@@ -500,7 +500,7 @@ export default function DealsPage() {
       {/* Table */}
       <div style={{ border: '1px solid #E7E3DA', borderRadius: '12px', overflow: 'hidden', backgroundColor: '#fff', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '15px' }}>
             <thead>
               <tr style={{ backgroundColor: '#FAFAFA', borderBottom: '1px solid #E7E3DA' }}>
                 <th scope="col" style={{ padding: '12px 16px', width: '40px' }}>
@@ -535,7 +535,7 @@ export default function DealsPage() {
                         <svg width="28" height="28" fill="none" stroke="var(--brand-navy)" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                       </div>
                       <h3 style={{ fontSize: '16px', fontWeight: '600', color: 'var(--brand-navy)', margin: '0 0 6px' }}>No deals found</h3>
-                      <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: '0 0 20px', lineHeight: '1.5' }}>
+                      <p style={{ fontSize: '15px', color: 'var(--text-secondary)', margin: '0 0 20px', lineHeight: '1.5' }}>
                         {searchQuery || statusTab !== 'all' || policyType !== 'all' || dateRange !== 'all'
                           ? 'Try adjusting your filters to see more results.'
                           : 'Submit your first deal to get started.'}
@@ -545,7 +545,7 @@ export default function DealsPage() {
                           onClick={() => router.push('/dashboard/deals/new')}
                           style={{
                             background: 'var(--brand-navy)', color: '#fff', border: 'none',
-                            padding: '10px 24px', borderRadius: '999px', fontSize: '13px',
+                            padding: '10px 24px', borderRadius: '999px', fontSize: '15px',
                             fontWeight: '600', cursor: 'pointer',
                           }}
                         >
@@ -579,7 +579,7 @@ export default function DealsPage() {
                           style={{ width: '15px', height: '15px', cursor: 'pointer', accentColor: 'var(--brand-navy)' }}
                         />
                       </td>
-                      <td style={{ padding: '14px 16px', fontWeight: '600', color: 'var(--brand-navy)', fontSize: '12px', fontFamily: 'monospace' }}>
+                      <td style={{ padding: '14px 16px', fontWeight: '600', color: 'var(--brand-navy)', fontSize: '14px', fontFamily: 'monospace' }}>
                         #{deal.id.substring(0, 8).toUpperCase()}
                       </td>
                       <td style={{ padding: '14px 16px', textTransform: 'capitalize', fontWeight: '500' }}>
@@ -588,7 +588,7 @@ export default function DealsPage() {
                       <td style={{ padding: '14px 16px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <Avatar name={agents[deal.ownerAgentId]} photoUrl={agentPhotos[deal.ownerAgentId]} size={28} goldText={false} />
-                          <span style={{ fontSize: '13px', fontWeight: '500' }}>{agents[deal.ownerAgentId] || 'Unknown'}</span>
+                          <span style={{ fontSize: '15px', fontWeight: '500' }}>{agents[deal.ownerAgentId] || 'Unknown'}</span>
                         </div>
                       </td>
                       <td style={{ padding: '14px 16px', color: 'var(--text-secondary)' }}>
@@ -604,14 +604,14 @@ export default function DealsPage() {
                         <span style={{
                           display: 'inline-flex', alignItems: 'center', gap: '5px',
                           padding: '4px 10px', borderRadius: '999px',
-                          fontSize: '11px', fontWeight: '600',
+                          fontSize: '13px', fontWeight: '600',
                           color: statusInfo.color, backgroundColor: statusInfo.bg,
                         }}>
                           <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: statusInfo.color }} />
                           {statusInfo.label}
                         </span>
                       </td>
-                      <td style={{ padding: '14px 16px', color: 'var(--text-secondary)', fontSize: '12px' }}>
+                      <td style={{ padding: '14px 16px', color: 'var(--text-secondary)', fontSize: '14px' }}>
                         {formatDate(deal.createdAt)}
                       </td>
                     </tr>
@@ -640,7 +640,7 @@ export default function DealsPage() {
 
 /* ─── Sub-components ─── */
 
-const thStyle = { padding: '12px 16px', fontWeight: '600', color: 'var(--text-secondary)', fontSize: '12px', textAlign: 'left', letterSpacing: '0.02em' };
+const thStyle = { padding: '12px 16px', fontWeight: '600', color: 'var(--text-secondary)', fontSize: '14px', textAlign: 'left', letterSpacing: '0.02em' };
 
 function SortHeader({ label, field, sortField, sortDir, onSort }) {
   const isActive = sortField === field;
@@ -656,7 +656,7 @@ function SortHeader({ label, field, sortField, sortDir, onSort }) {
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
         {label}
-        <span style={{ fontSize: '10px', opacity: isActive ? 1 : 0.3 }}>
+        <span style={{ fontSize: '13px', opacity: isActive ? 1 : 0.3 }}>
           {isActive && sortDir === 'asc' ? '▲' : '▼'}
         </span>
       </div>
@@ -679,7 +679,7 @@ function StatCard({ label, value, subtitle, icon, accent }) {
       onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.04)'; e.currentTarget.style.transform = 'translateY(0)'; }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
-        <span style={{ fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)', letterSpacing: '0.02em' }}>{label}</span>
+        <span style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-secondary)', letterSpacing: '0.02em' }}>{label}</span>
         <div style={{
           width: '36px', height: '36px', borderRadius: '10px',
           backgroundColor: `${accent}10`,
@@ -689,7 +689,7 @@ function StatCard({ label, value, subtitle, icon, accent }) {
         </div>
       </div>
       <div style={{ fontSize: '28px', fontWeight: '700', color: 'var(--brand-navy)', lineHeight: 1.1 }}>{value}</div>
-      {subtitle && <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '4px' }}>{subtitle}</div>}
+      {subtitle && <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginTop: '4px' }}>{subtitle}</div>}
     </div>
   );
 }
@@ -724,7 +724,7 @@ function DealDetailPanel({ deal, agents, carriers, stages, onClose, onViewFull }
         {/* Panel Header */}
         <div style={{ padding: '20px 24px', borderBottom: '1px solid #E7E3DA', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
-            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontFamily: 'monospace', marginBottom: '2px' }}>#{deal.id.substring(0, 8).toUpperCase()}</div>
+            <div style={{ fontSize: '14px', color: 'var(--text-secondary)', fontFamily: 'monospace', marginBottom: '2px' }}>#{deal.id.substring(0, 8).toUpperCase()}</div>
             <h2 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--brand-navy)', margin: 0 }}>Deal Details</h2>
           </div>
           <button onClick={onClose} aria-label="Close" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', color: 'var(--text-secondary)' }}>
@@ -738,7 +738,7 @@ function DealDetailPanel({ deal, agents, carriers, stages, onClose, onViewFull }
           <div style={{ marginBottom: '24px' }}>
             <span style={{
               display: 'inline-flex', alignItems: 'center', gap: '6px',
-              padding: '6px 14px', borderRadius: '999px', fontSize: '13px', fontWeight: '600',
+              padding: '6px 14px', borderRadius: '999px', fontSize: '15px', fontWeight: '600',
               color: statusInfo.color, backgroundColor: statusInfo.bg,
             }}>
               <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: statusInfo.color }} />
@@ -771,7 +771,7 @@ function DealDetailPanel({ deal, agents, carriers, stages, onClose, onViewFull }
             style={{
               width: '100%', padding: '12px', borderRadius: '10px',
               background: 'var(--brand-navy)', color: '#fff', border: 'none',
-              fontSize: '14px', fontWeight: '600', cursor: 'pointer',
+              fontSize: '16px', fontWeight: '600', cursor: 'pointer',
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
               transition: 'opacity 0.15s ease',
             }}
@@ -790,9 +790,9 @@ function DealDetailPanel({ deal, agents, carriers, stages, onClose, onViewFull }
 function DetailRow({ label, value, highlight, capitalize }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: '1px solid #F0EDE6' }}>
-      <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>{label}</span>
+      <span style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>{label}</span>
       <span style={{
-        fontSize: '13px', fontWeight: highlight ? '700' : '500',
+        fontSize: '15px', fontWeight: highlight ? '700' : '500',
         color: highlight ? 'var(--brand-navy)' : 'var(--text-primary)',
         textTransform: capitalize ? 'capitalize' : 'none',
       }}>

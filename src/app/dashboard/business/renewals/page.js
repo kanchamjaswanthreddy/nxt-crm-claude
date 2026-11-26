@@ -67,26 +67,26 @@ export default function RenewalsPage() {
     <div>
       <PageHeader
         title="Renewals"
-        actions={<button onClick={loadData} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '6px 14px', fontSize: '13px', cursor: 'pointer', color: 'var(--text-secondary)' }}>Refresh</button>}
+        actions={<button onClick={loadData} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '6px 14px', fontSize: '15px', cursor: 'pointer', color: 'var(--text-secondary)' }}>Refresh</button>}
       />
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
         <Card>
           <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
             <div style={{ fontSize: '28px', fontWeight: '700', color: 'var(--brand-navy)' }}>{renewals.length}</div>
-            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Total Renewals</div>
+            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Total Renewals</div>
           </div>
         </Card>
         <Card>
           <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
             <div style={{ fontSize: '28px', fontWeight: '700', color: '#2FA84F' }}>{wonCount}</div>
-            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Renewed</div>
+            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Renewed</div>
           </div>
         </Card>
         <Card>
           <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
             <div style={{ fontSize: '28px', fontWeight: '700', color: 'var(--brand-gold)' }}>${totalPremium.toLocaleString()}</div>
-            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Total Premium</div>
+            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Total Premium</div>
           </div>
         </Card>
       </div>
@@ -119,7 +119,7 @@ export default function RenewalsPage() {
                     <td style={tdStyle}>{agents[d.ownerAgentId] || '—'}</td>
                     <td style={tdStyle}>${(d.premiumAmount || 0).toLocaleString()}</td>
                     <td style={tdStyle}>
-                      <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '12px', fontWeight: '600', backgroundColor: st.bg, color: st.text }}>{st.label}</span>
+                      <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '14px', fontWeight: '600', backgroundColor: st.bg, color: st.text }}>{st.label}</span>
                     </td>
                     <td style={tdStyle}>{d.policyNumber || '—'}</td>
                   </tr>
@@ -133,5 +133,5 @@ export default function RenewalsPage() {
   );
 }
 
-const thStyle = { padding: '10px 12px', textAlign: 'left', fontSize: '12px', color: 'var(--text-secondary)', fontWeight: '600' };
-const tdStyle = { padding: '10px 12px', fontSize: '14px', color: 'var(--text-primary)' };
+const thStyle = { padding: '10px 12px', textAlign: 'left', fontSize: '14px', color: 'var(--text-secondary)', fontWeight: '600' };
+const tdStyle = { padding: '10px 12px', fontSize: '16px', color: 'var(--text-primary)' };

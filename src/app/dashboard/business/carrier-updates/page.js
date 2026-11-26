@@ -111,7 +111,7 @@ export default function CarrierUpdatesPage() {
           <div style={{ textAlign: 'center', padding: 'var(--space-5)', color: 'var(--text-secondary)' }}>
             <div style={{ fontSize: '16px', marginBottom: 'var(--space-2)', fontWeight: '600', color: 'var(--brand-navy)' }}>No Updates</div>
             <div style={{ fontSize: '16px', fontWeight: '500' }}>No carrier updates yet</div>
-            <div style={{ fontSize: '14px', marginTop: '4px' }}>{isAdmin ? 'Post your first carrier update above.' : 'Check back later for carrier announcements.'}</div>
+            <div style={{ fontSize: '16px', marginTop: '4px' }}>{isAdmin ? 'Post your first carrier update above.' : 'Check back later for carrier announcements.'}</div>
           </div>
         </Card>
       ) : (
@@ -125,19 +125,19 @@ export default function CarrierUpdatesPage() {
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: '8px', flexWrap: 'wrap' }}>
                       {pri.icon && <span>{pri.icon}</span>}
-                      <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '12px', fontWeight: '600', backgroundColor: cat.bg, color: cat.text }}>{cat.label}</span>
+                      <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '14px', fontWeight: '600', backgroundColor: cat.bg, color: cat.text }}>{cat.label}</span>
                       {u.carrierId && carriers[u.carrierId] && (
-                        <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{carriers[u.carrierId]}</span>
+                        <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>{carriers[u.carrierId]}</span>
                       )}
-                      <span style={{ fontSize: '12px', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
+                      <span style={{ fontSize: '14px', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
                         {u.publishedAt ? new Date(u.publishedAt).toLocaleDateString('en-US') : ''}
                       </span>
                     </div>
                     <h3 style={{ margin: '0 0 8px', color: 'var(--brand-navy)', fontSize: '16px' }}>{u.title}</h3>
-                    <p style={{ margin: 0, color: 'var(--text-primary)', fontSize: '14px', lineHeight: '1.5', whiteSpace: 'pre-wrap' }}>{u.body}</p>
+                    <p style={{ margin: 0, color: 'var(--text-primary)', fontSize: '16px', lineHeight: '1.5', whiteSpace: 'pre-wrap' }}>{u.body}</p>
                   </div>
                   {isAdmin && (
-                    <button onClick={() => handleDelete(u.id)} style={{ background: 'none', border: 'none', color: '#D33F3F', cursor: 'pointer', fontSize: '13px', flexShrink: 0 }}>Delete</button>
+                    <button onClick={() => handleDelete(u.id)} style={{ background: 'none', border: 'none', color: '#D33F3F', cursor: 'pointer', fontSize: '15px', flexShrink: 0 }}>Delete</button>
                   )}
                 </div>
               </Card>
@@ -211,5 +211,5 @@ export default function CarrierUpdatesPage() {
   );
 }
 
-const labelStyle = { display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '13px', fontWeight: '500', color: 'var(--text-secondary)' };
-const inputStyle = { padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '14px', color: 'var(--text-primary)' };
+const labelStyle = { display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '15px', fontWeight: '500', color: 'var(--text-secondary)' };
+const inputStyle = { padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '16px', color: 'var(--text-primary)' };

@@ -336,7 +336,7 @@ export default function LifeCalculator() {
                 </tfoot>
               </table>
             </div>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '11px', lineHeight: 1.5, margin: 'var(--space-2) 0 0 0', fontStyle: 'italic' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: 1.5, margin: 'var(--space-2) 0 0 0', fontStyle: 'italic' }}>
               This is an example only and will be different based on product and company. Factor percentages may vary. Internal use only.
             </p>
           </Card>
@@ -351,8 +351,8 @@ export default function LifeCalculator() {
               <ResponsiveContainer width="100%" height={280}>
                 <BarChart data={barData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#666' }} />
-                  <YAxis tick={{ fontSize: 11, fill: '#666' }} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
+                  <XAxis dataKey="name" tick={{ fontSize: 13, fill: '#666' }} />
+                  <YAxis tick={{ fontSize: 13, fill: '#666' }} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
                   <Tooltip formatter={(value, name) => name.includes('$') ? fmt(value) : value + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
                   <Legend />
                   <Bar dataKey="Commission $" fill="#0C1022" radius={[4, 4, 0, 0]} />
@@ -383,8 +383,8 @@ export default function LifeCalculator() {
               <ResponsiveContainer width="100%" height={280}>
                 <BarChart data={genBarData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-                  <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#666' }} />
-                  <YAxis tick={{ fontSize: 11, fill: '#666' }} tickFormatter={(v) => `$${v}`} />
+                  <XAxis dataKey="name" tick={{ fontSize: 13, fill: '#666' }} />
+                  <YAxis tick={{ fontSize: 13, fill: '#666' }} tickFormatter={(v) => `$${v}`} />
                   <Tooltip formatter={(value, name) => name.includes('$') ? fmt(value) : value + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
                   <Legend />
                   <Bar dataKey="Override $" fill="#E3A94A" radius={[4, 4, 0, 0]} />
@@ -400,8 +400,8 @@ export default function LifeCalculator() {
               <ResponsiveContainer width="100%" height={280}>
                 <LineChart data={lineData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
-                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#666' }} />
-                  <YAxis tick={{ fontSize: 11, fill: '#666' }} tickFormatter={(v) => `${v}%`} />
+                  <XAxis dataKey="name" tick={{ fontSize: 13, fill: '#666' }} />
+                  <YAxis tick={{ fontSize: 13, fill: '#666' }} tickFormatter={(v) => `${v}%`} />
                   <Tooltip formatter={(value) => value + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
                   <Legend />
                   <Line type="monotone" dataKey="Commission %" stroke="#0C1022" strokeWidth={2} dot={{ r: 4, fill: '#0C1022' }} activeDot={{ r: 6 }} />

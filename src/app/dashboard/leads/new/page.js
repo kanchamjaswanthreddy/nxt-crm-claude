@@ -93,7 +93,7 @@ export default function AddLeadPage() {
         <div style={{
           backgroundColor: 'rgba(227, 169, 74,0.06)', color: '#1d4ed8',
           padding: '12px 16px', borderRadius: '10px', marginBottom: '16px', maxWidth: '800px',
-          fontSize: '14px', border: '1px solid rgba(227, 169, 74,0.15)',
+          fontSize: '16px', border: '1px solid rgba(227, 169, 74,0.15)',
           display: 'flex', alignItems: 'center', gap: '8px',
         }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>

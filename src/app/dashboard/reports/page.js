@@ -76,7 +76,7 @@ function EmptyChart({ message }) {
   return (
     <div style={{
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      height: '200px', color: 'var(--text-secondary)', fontSize: '14px',
+      height: '200px', color: 'var(--text-secondary)', fontSize: '16px',
       border: '1px dashed var(--border-color)', borderRadius: '8px',
     }}>
       {message}
@@ -101,7 +101,7 @@ const tooltipStyle = {
   borderRadius: '10px',
   padding: '10px 14px',
   boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
-  fontSize: '13px',
+  fontSize: '15px',
 };
 
 const selectStyle = {
@@ -111,7 +111,7 @@ const selectStyle = {
   border: '1px solid var(--border-color)',
   backgroundColor: 'var(--bg-color)',
   color: 'var(--text-primary)',
-  fontSize: '14px',
+  fontSize: '16px',
   outline: 'none',
   transition: 'border-color 200ms ease',
 };
@@ -201,7 +201,7 @@ export default function ReportsHub() {
               onChange={(e) => setPeriod(e.target.value)}
               style={{
                 padding: '8px 14px', borderRadius: '8px', border: '1px solid var(--border-color)',
-                fontSize: '14px', backgroundColor: '#fff', fontWeight: 500, cursor: 'pointer',
+                fontSize: '16px', backgroundColor: '#fff', fontWeight: 500, cursor: 'pointer',
                 color: 'var(--text-primary)',
               }}
             >
@@ -215,17 +215,17 @@ export default function ReportsHub() {
                   onChange={(e) => setCustomStart(e.target.value)}
                   style={{
                     padding: '8px 10px', borderRadius: '8px', border: '1px solid var(--border-color)',
-                    fontSize: '13px', backgroundColor: '#fff', color: 'var(--text-primary)',
+                    fontSize: '15px', backgroundColor: '#fff', color: 'var(--text-primary)',
                   }}
                 />
-                <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>to</span>
+                <span style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>to</span>
                 <input
                   type="date"
                   value={customEnd}
                   onChange={(e) => setCustomEnd(e.target.value)}
                   style={{
                     padding: '8px 10px', borderRadius: '8px', border: '1px solid var(--border-color)',
-                    fontSize: '13px', backgroundColor: '#fff', color: 'var(--text-primary)',
+                    fontSize: '15px', backgroundColor: '#fff', color: 'var(--text-primary)',
                   }}
                 />
               </>
@@ -235,7 +235,7 @@ export default function ReportsHub() {
               disabled={loading || (period === 'custom' && (!customStart || !customEnd))}
               style={{
                 padding: '8px 14px', borderRadius: '8px', border: '1px solid var(--border-color)',
-                backgroundColor: '#fff', fontSize: '14px', fontWeight: 500, cursor: 'pointer',
+                backgroundColor: '#fff', fontSize: '16px', fontWeight: 500, cursor: 'pointer',
                 color: 'var(--text-primary)', opacity: loading ? 0.5 : 1,
               }}
             >
@@ -259,7 +259,7 @@ export default function ReportsHub() {
             <div style={{ padding: '4px 0' }}>
               <p style={{
                 margin: 0,
-                fontSize: '12px',
+                fontSize: '14px',
                 fontWeight: 600,
                 color: 'var(--text-secondary)',
                 textTransform: 'uppercase',
@@ -278,7 +278,7 @@ export default function ReportsHub() {
               </p>
               <p style={{
                 margin: 0,
-                fontSize: '12px',
+                fontSize: '14px',
                 color: 'var(--text-secondary)',
               }}>
                 {kpi.sub}
@@ -308,7 +308,7 @@ export default function ReportsHub() {
             </h2>
             <p style={{
               margin: '0 0 20px',
-              fontSize: '13px',
+              fontSize: '15px',
               color: 'var(--text-secondary)',
             }}>
               Revenue trend for the selected period
@@ -327,13 +327,13 @@ export default function ReportsHub() {
                   <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" vertical={false} />
                   <XAxis
                     dataKey="month"
-                    tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+                    tick={{ fill: 'var(--text-secondary)', fontSize: 14 }}
                     axisLine={{ stroke: 'var(--border-color)' }}
                     tickLine={false}
                   />
                   <YAxis
                     tickFormatter={formatCurrency}
-                    tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+                    tick={{ fill: 'var(--text-secondary)', fontSize: 14 }}
                     axisLine={false}
                     tickLine={false}
                     width={50}
@@ -367,7 +367,7 @@ export default function ReportsHub() {
             </h2>
             <p style={{
               margin: '0 0 12px',
-              fontSize: '13px',
+              fontSize: '15px',
               color: 'var(--text-secondary)',
             }}>
               Distribution by policy type
@@ -412,7 +412,7 @@ export default function ReportsHub() {
                         display: 'inline-block',
                         flexShrink: 0,
                       }} />
-                      <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+                      <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>
                         {entry.name} {entry.value}%
                       </span>
                     </div>
@@ -437,7 +437,7 @@ export default function ReportsHub() {
           </h2>
           <p style={{
             margin: '0 0 20px',
-            fontSize: '13px',
+            fontSize: '15px',
             color: 'var(--text-secondary)',
           }}>
             Total production by agent for the selected period
@@ -450,13 +450,13 @@ export default function ReportsHub() {
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" vertical={false} />
                 <XAxis
                   dataKey="name"
-                  tick={{ fill: 'var(--text-secondary)', fontSize: 13 }}
+                  tick={{ fill: 'var(--text-secondary)', fontSize: 15 }}
                   axisLine={{ stroke: 'var(--border-color)' }}
                   tickLine={false}
                 />
                 <YAxis
                   tickFormatter={formatCurrency}
-                  tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+                  tick={{ fill: 'var(--text-secondary)', fontSize: 14 }}
                   axisLine={false}
                   tickLine={false}
                   width={55}
@@ -486,7 +486,7 @@ export default function ReportsHub() {
           </h2>
           <p style={{
             margin: '0 0 20px',
-            fontSize: '13px',
+            fontSize: '15px',
             color: 'var(--text-secondary)',
           }}>
             Pipeline progression from lead to close
@@ -528,7 +528,7 @@ export default function ReportsHub() {
                       transition: 'height 600ms cubic-bezier(0.16, 1, 0.3, 1)',
                     }} />
                     <span style={{
-                      fontSize: '11px',
+                      fontSize: '13px',
                       color: 'var(--text-secondary)',
                       marginTop: '8px',
                       textAlign: 'center',
@@ -557,7 +557,7 @@ export default function ReportsHub() {
           </h2>
           <p style={{
             margin: '0 0 20px',
-            fontSize: '13px',
+            fontSize: '15px',
             color: 'var(--text-secondary)',
           }}>
             Generate and download a CSV of your production data.
@@ -570,7 +570,7 @@ export default function ReportsHub() {
                   display: 'block',
                   marginBottom: '6px',
                   fontWeight: 600,
-                  fontSize: '13px',
+                  fontSize: '15px',
                   color: 'var(--brand-navy)',
                 }}>
                   Start Date (Optional)
@@ -586,7 +586,7 @@ export default function ReportsHub() {
                   display: 'block',
                   marginBottom: '6px',
                   fontWeight: 600,
-                  fontSize: '13px',
+                  fontSize: '15px',
                   color: 'var(--brand-navy)',
                 }}>
                   End Date (Optional)

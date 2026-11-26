@@ -74,7 +74,7 @@ export default function ClientsPage() {
           <Card key={stat.label}>
             <div style={{ padding: '4px 0' }}>
               <div style={{
-                fontSize: '11px', fontWeight: 600, color: 'var(--text-secondary)',
+                fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)',
                 textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px',
               }}>{stat.label}</div>
               <div style={{ fontSize: '28px', fontWeight: 800, color: stat.color }}>{stat.value}</div>
@@ -87,7 +87,7 @@ export default function ClientsPage() {
         <div style={{
           backgroundColor: 'rgba(220,38,38,0.06)', color: '#dc2626',
           padding: '12px 16px', borderRadius: '10px', marginBottom: '20px',
-          fontSize: '14px', border: '1px solid rgba(220,38,38,0.15)',
+          fontSize: '16px', border: '1px solid rgba(220,38,38,0.15)',
         }}>
           {error}
         </div>
@@ -109,7 +109,7 @@ export default function ClientsPage() {
               style={{
                 width: '100%', padding: '12px 16px 12px 42px',
                 borderRadius: '10px', border: '1px solid var(--border-color)',
-                fontSize: '14px', backgroundColor: 'var(--surface-page)',
+                fontSize: '16px', backgroundColor: 'var(--surface-page)',
                 transition: 'border-color 0.15s',
               }}
             />
@@ -158,18 +158,18 @@ export default function ClientsPage() {
                             width: '38px', height: '38px', borderRadius: '50%',
                             background: 'linear-gradient(135deg, var(--brand-navy) 0%, #1B2A4E 100%)',
                             display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            color: '#fff', fontSize: '13px', fontWeight: 700,
+                            color: '#fff', fontSize: '15px', fontWeight: 700,
                             flexShrink: 0, letterSpacing: '0.5px',
                           }}>
                             {initials}
                           </div>
-                          <span style={{ fontWeight: 600, color: 'var(--brand-navy)', fontSize: '14px' }}>
+                          <span style={{ fontWeight: 600, color: 'var(--brand-navy)', fontSize: '16px' }}>
                             {client.firstName} {client.lastName}
                           </span>
                         </div>
                       </td>
                       <td style={tdStyle}>
-                        <div style={{ fontSize: '13px' }}>
+                        <div style={{ fontSize: '15px' }}>
                           {client.email && <div style={{ color: 'var(--text-primary)', marginBottom: '2px' }}>{client.email}</div>}
                           {client.phone && <div style={{ color: 'var(--text-secondary)' }}>{client.phone}</div>}
                           {!client.email && !client.phone && <span style={{ color: 'var(--text-secondary)' }}>--</span>}
@@ -182,12 +182,12 @@ export default function ClientsPage() {
                           borderRadius: '999px',
                           backgroundColor: client.policyCount > 0 ? 'rgba(22,163,74,0.08)' : 'rgba(0,0,0,0.04)',
                           color: client.policyCount > 0 ? '#16a34a' : 'var(--text-secondary)',
-                          fontSize: '13px', fontWeight: 700,
+                          fontSize: '15px', fontWeight: 700,
                         }}>
                           {client.policyCount}
                         </span>
                       </td>
-                      <td style={{ ...tdStyle, color: 'var(--text-secondary)', fontSize: '13px' }}>
+                      <td style={{ ...tdStyle, color: 'var(--text-secondary)', fontSize: '15px' }}>
                         {client.createdAt ? new Date(client.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '--'}
                       </td>
                     </tr>
@@ -205,7 +205,7 @@ export default function ClientsPage() {
 const thStyle = {
   textAlign: 'left',
   padding: '12px 16px',
-  fontSize: '11px',
+  fontSize: '13px',
   color: 'var(--text-secondary)',
   fontWeight: 700,
   textTransform: 'uppercase',
@@ -214,5 +214,5 @@ const thStyle = {
 
 const tdStyle = {
   padding: '14px 16px',
-  fontSize: '14px',
+  fontSize: '16px',
 };

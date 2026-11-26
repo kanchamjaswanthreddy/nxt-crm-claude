@@ -264,3 +264,12 @@ textarea:focus-visible {
     scroll-behavior: auto !important;
   }
 }
+
+
+/* ── 2026 redesign: page headings and bare controls inside the dashboard ── */
+#main-content h1 { font-size: clamp(30px, 3vw, 42px); font-weight: 400; letter-spacing: -0.045em; line-height: 1.05; }
+#main-content table { font-size: 16px; }
+#main-content th { font-size: 14px; text-transform: none; letter-spacing: 0; }
+#main-content input:not([type="checkbox"]):not([type="radio"]), #main-content select, #main-content textarea { font-size: 16px; }
+::selection { background: var(--brand-gold-light); color: var(--brand-navy); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }

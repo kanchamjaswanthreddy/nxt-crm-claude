@@ -151,7 +151,7 @@ function PodiumCard({ recruiter, rank, total }) {
         </p>
         {recruiter.nxtId && (
           <p style={{
-            fontSize: '11px', margin: '0 0 16px 0', fontWeight: '500',
+            fontSize: '13px', margin: '0 0 16px 0', fontWeight: '500',
             color: isChamp ? 'rgba(255,255,255,0.4)' : '#8A857B',
             letterSpacing: '0.5px',
           }}>
@@ -172,7 +172,7 @@ function PodiumCard({ recruiter, rank, total }) {
           </span>
         </div>
         <p style={{
-          fontSize: '12px', fontWeight: '600', margin: '0 0 12px 0',
+          fontSize: '14px', fontWeight: '600', margin: '0 0 12px 0',
           color: isChamp ? 'rgba(255,255,255,0.4)' : '#8A857B',
           textTransform: 'uppercase', letterSpacing: '1.5px',
         }}>
@@ -205,7 +205,7 @@ function PodiumCard({ recruiter, rank, total }) {
               boxShadow: '0 0 6px rgba(47,168,79,0.4)',
             }} />
             <span style={{
-              fontSize: '12px', fontWeight: '600',
+              fontSize: '14px', fontWeight: '600',
               color: isChamp ? '#2FA84F' : '#2FA84F',
             }}>
               {recruiter.activeRecruits} active
@@ -302,7 +302,7 @@ export default function RecruitmentLeaderboardPage() {
           Recruitment Leaderboard
         </h1>
         <p style={{
-          fontSize: '15px', color: 'rgba(255,255,255,0.5)', margin: 0,
+          fontSize: '17px', color: 'rgba(255,255,255,0.5)', margin: 0,
           lineHeight: 1.6, maxWidth: '480px',
         }}>
           See who&apos;s building the strongest teams. Every recruit counts — keep climbing the ranks.
@@ -324,7 +324,7 @@ export default function RecruitmentLeaderboardPage() {
                 <p style={{ fontSize: '26px', fontWeight: '800', color: stat.color, margin: 0, lineHeight: 1 }}>
                   {stat.value}
                 </p>
-                <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', margin: '4px 0 0 0', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: '600' }}>
+                <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.35)', margin: '4px 0 0 0', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: '600' }}>
                   {stat.label}
                 </p>
               </div>
@@ -355,7 +355,7 @@ export default function RecruitmentLeaderboardPage() {
               <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#0C1022', margin: 0 }}>
                 Your Invite Link
               </h3>
-              <p style={{ fontSize: '12px', color: '#8A857B', margin: '2px 0 0' }}>
+              <p style={{ fontSize: '14px', color: '#8A857B', margin: '2px 0 0' }}>
                 Share this link to recruit new agents — they&apos;ll be automatically linked to you
               </p>
             </div>
@@ -369,7 +369,7 @@ export default function RecruitmentLeaderboardPage() {
             <div style={{
               flex: 1, minWidth: '200px',
               background: '#F7F5F0', border: '1px solid #E7E3DA', borderRadius: '12px',
-              padding: '12px 16px', fontSize: '13px', color: '#374151',
+              padding: '12px 16px', fontSize: '15px', color: '#374151',
               fontFamily: 'monospace', wordBreak: 'break-all',
               display: 'flex', alignItems: 'center',
             }}>
@@ -382,7 +382,7 @@ export default function RecruitmentLeaderboardPage() {
               style={{
                 padding: '12px 20px', borderRadius: '12px', border: 'none',
                 background: 'linear-gradient(135deg, #E3A94A, #E3A94A)', color: '#0C1022',
-                fontSize: '13px', fontWeight: '600', cursor: 'pointer',
+                fontSize: '15px', fontWeight: '600', cursor: 'pointer',
                 display: 'flex', alignItems: 'center', gap: '6px',
                 transition: 'all 150ms ease', whiteSpace: 'nowrap',
                 textDecoration: 'none',
@@ -401,7 +401,7 @@ export default function RecruitmentLeaderboardPage() {
               style={{
                 padding: '12px 20px', borderRadius: '12px', border: 'none',
                 background: copied ? '#059669' : '#0C1022', color: '#fff',
-                fontSize: '13px', fontWeight: '600', cursor: 'pointer',
+                fontSize: '15px', fontWeight: '600', cursor: 'pointer',
                 display: 'flex', alignItems: 'center', gap: '6px',
                 transition: 'all 150ms ease', whiteSpace: 'nowrap',
               }}
@@ -428,7 +428,7 @@ export default function RecruitmentLeaderboardPage() {
               style={{
                 padding: '12px 20px', borderRadius: '12px',
                 border: '1px solid #E7E3DA', background: '#fff', color: '#374151',
-                fontSize: '13px', fontWeight: '600', cursor: 'pointer',
+                fontSize: '15px', fontWeight: '600', cursor: 'pointer',
                 display: 'flex', alignItems: 'center', gap: '6px',
                 transition: 'all 150ms ease', whiteSpace: 'nowrap',
               }}
@@ -457,7 +457,7 @@ export default function RecruitmentLeaderboardPage() {
             onClick={() => setTab(t.key)}
             style={{
               padding: '10px 24px', borderRadius: '10px', border: 'none',
-              fontSize: '14px', fontWeight: tab === t.key ? '600' : '500',
+              fontSize: '16px', fontWeight: tab === t.key ? '600' : '500',
               color: tab === t.key ? '#0C1022' : '#5F5C56',
               background: tab === t.key ? '#fff' : 'transparent',
               boxShadow: tab === t.key ? '0 2px 8px rgba(0,0,0,0.06)' : 'none',
@@ -506,13 +506,13 @@ export default function RecruitmentLeaderboardPage() {
                   Full Rankings
                 </h3>
               </div>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '16px' }}>
                 <thead>
                   <tr style={{ borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
-                    <th scope="col" style={{ padding: '12px 24px', textAlign: 'left', fontWeight: '600', color: '#8A857B', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '60px' }}>Rank</th>
-                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontWeight: '600', color: '#8A857B', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px' }}>Agent</th>
-                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'center', fontWeight: '600', color: '#8A857B', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '100px' }}>Recruits</th>
-                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'center', fontWeight: '600', color: '#8A857B', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '100px' }}>Active</th>
+                    <th scope="col" style={{ padding: '12px 24px', textAlign: 'left', fontWeight: '600', color: '#8A857B', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '60px' }}>Rank</th>
+                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontWeight: '600', color: '#8A857B', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.8px' }}>Agent</th>
+                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'center', fontWeight: '600', color: '#8A857B', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '100px' }}>Recruits</th>
+                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'center', fontWeight: '600', color: '#8A857B', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '100px' }}>Active</th>
                     <th scope="col" style={{ padding: '12px 24px', width: '48px' }}></th>
                   </tr>
                 </thead>
@@ -535,7 +535,7 @@ export default function RecruitmentLeaderboardPage() {
                         >
                           <td style={{ padding: '14px 24px' }}>
                             <span style={{
-                              fontWeight: '700', color: '#D1D5DB', fontSize: '13px',
+                              fontWeight: '700', color: '#D1D5DB', fontSize: '15px',
                             }}>
                               #{rank}
                             </span>
@@ -544,9 +544,9 @@ export default function RecruitmentLeaderboardPage() {
                             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                               <Avatar name={recruiter.name} photoUrl={recruiter.photoUrl} size={36} />
                               <div>
-                                <div style={{ fontWeight: '600', color: '#0C1022', fontSize: '14px' }}>{recruiter.name}</div>
+                                <div style={{ fontWeight: '600', color: '#0C1022', fontSize: '16px' }}>{recruiter.name}</div>
                                 {recruiter.nxtId && (
-                                  <div style={{ fontSize: '11px', color: '#B0B5BC', marginTop: '1px' }}>{recruiter.nxtId}</div>
+                                  <div style={{ fontSize: '13px', color: '#B0B5BC', marginTop: '1px' }}>{recruiter.nxtId}</div>
                                 )}
                               </div>
                             </div>
@@ -563,7 +563,7 @@ export default function RecruitmentLeaderboardPage() {
                           <td style={{ padding: '14px 16px', textAlign: 'center' }}>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
                               <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#2FA84F' }} />
-                              <span style={{ fontWeight: '600', color: '#2FA84F', fontSize: '14px' }}>
+                              <span style={{ fontWeight: '600', color: '#2FA84F', fontSize: '16px' }}>
                                 {recruiter.activeRecruits}
                               </span>
                             </div>
@@ -574,7 +574,7 @@ export default function RecruitmentLeaderboardPage() {
                               width: '24px', height: '24px', borderRadius: '6px',
                               background: isExpanded ? 'rgba(12, 16, 34,0.06)' : 'transparent',
                               transition: 'all 200ms',
-                              color: '#8A857B', fontSize: '10px',
+                              color: '#8A857B', fontSize: '13px',
                               transform: isExpanded ? 'rotate(180deg)' : 'none',
                             }}>
                               &#9660;
@@ -585,7 +585,7 @@ export default function RecruitmentLeaderboardPage() {
                           <tr>
                             <td colSpan={5} style={{ padding: '0 24px 16px 84px', background: '#FAFBFC' }}>
                               <p style={{
-                                fontSize: '10px', fontWeight: '700', color: '#B0B5BC',
+                                fontSize: '13px', fontWeight: '700', color: '#B0B5BC',
                                 margin: '8px 0 10px', textTransform: 'uppercase', letterSpacing: '1px',
                               }}>
                                 Recent Recruits
@@ -594,7 +594,7 @@ export default function RecruitmentLeaderboardPage() {
                                 {recruiter.recruits.map(r => (
                                   <div key={r.id} style={{
                                     display: 'flex', alignItems: 'center', gap: '10px',
-                                    fontSize: '13px', padding: '6px 12px', borderRadius: '8px',
+                                    fontSize: '15px', padding: '6px 12px', borderRadius: '8px',
                                     background: '#fff', border: '1px solid rgba(0,0,0,0.04)',
                                   }}>
                                     <span style={{
@@ -603,9 +603,9 @@ export default function RecruitmentLeaderboardPage() {
                                       boxShadow: `0 0 4px ${STATUS_DOT[r.status] || '#8A857B'}44`,
                                     }} />
                                     <span style={{ fontWeight: '500', color: '#0C1022', flex: 1 }}>{r.name}</span>
-                                    <span style={{ color: '#B0B5BC', fontSize: '12px' }}>{formatDate(r.joinedAt)}</span>
+                                    <span style={{ color: '#B0B5BC', fontSize: '14px' }}>{formatDate(r.joinedAt)}</span>
                                     <span style={{
-                                      fontSize: '10px', padding: '2px 8px', borderRadius: '999px',
+                                      fontSize: '13px', padding: '2px 8px', borderRadius: '999px',
                                       background: r.status === 'active' ? 'rgba(47,168,79,0.08)' : 'rgba(227, 169, 74,0.08)',
                                       color: r.status === 'active' ? '#2FA84F' : '#E3A94A',
                                       fontWeight: '600', textTransform: 'capitalize',

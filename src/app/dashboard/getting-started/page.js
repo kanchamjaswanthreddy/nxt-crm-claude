@@ -21,7 +21,7 @@ const Callout = ({ variant = 'note', children }) => {
         width: '28px', height: '28px', borderRadius: '8px', flexShrink: 0,
         backgroundColor: s.accent, color: '#fff',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontSize: '12px', fontWeight: '800', marginTop: '1px',
+        fontSize: '14px', fontWeight: '800', marginTop: '1px',
       }}>{s.icon}</div>
       <div style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-secondary)', lineHeight: '1.6' }}>{children}</div>
     </div>
@@ -218,7 +218,7 @@ export default function GettingStartedPage() {
                   <span style={{
                     display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                     width: '20px', height: '20px', borderRadius: '50%',
-                    fontSize: '11px', fontWeight: '700',
+                    fontSize: '13px', fontWeight: '700',
                     backgroundColor: active ? 'var(--brand-gold)' : 'rgba(0,0,0,0.06)',
                     color: active ? 'var(--brand-navy)' : 'var(--text-secondary)',
                   }}>{i + 1}</span>
@@ -451,15 +451,15 @@ export default function GettingStartedPage() {
                 <h4 style={{ fontWeight: 'bold', color: 'var(--brand-navy)', marginBottom: '12px', fontSize: 'var(--text-body)' }}>Study Packages (60 days access)</h4>
                 <ul style={{ marginLeft: '20px', marginBottom: '12px', color: 'var(--text-secondary)', lineHeight: '2.2', fontSize: 'var(--text-secondary)' }}>
                   <li><Dot /><strong style={{ color: 'var(--brand-navy)' }}>Video Study Package — $34.99</strong> <span style={{ textDecoration: 'line-through', opacity: 0.5 }}>$219.95</span></li>
-                  <li style={{ marginLeft: '16px', listStyle: 'none', lineHeight: '1.6', marginBottom: '6px', fontSize: '13px' }}>
+                  <li style={{ marginLeft: '16px', listStyle: 'none', lineHeight: '1.6', marginBottom: '6px', fontSize: '15px' }}>
                     State-specific reading, chapter quizzes, practice exams, readiness exam with pass-or-money-back guarantee, on-demand video lectures, online flashcards, and instructor support.
                   </li>
                   <li><Dot /><strong style={{ color: 'var(--brand-navy)' }}>Live Online Study Package — $47.72</strong> <span style={{ textDecoration: 'line-through', opacity: 0.5 }}>$299.95</span></li>
-                  <li style={{ marginLeft: '16px', listStyle: 'none', lineHeight: '1.6', marginBottom: '6px', fontSize: '13px' }}>
+                  <li style={{ marginLeft: '16px', listStyle: 'none', lineHeight: '1.6', marginBottom: '6px', fontSize: '15px' }}>
                     Everything in the Video package <em>plus</em> weekly live online training review sessions with experienced instructors where you can ask questions in real time.
                   </li>
                 </ul>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: '1.6', margin: 0 }}>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '15px', lineHeight: '1.6', margin: 0 }}>
                   Available for L/H, Life only, Health only, P&amp;C, and Personal Lines. Renewals available for purchase if you need more time.
                 </p>
               </div>
@@ -498,7 +498,7 @@ export default function GettingStartedPage() {
               </p>
 
               <Callout variant="caution">
-                <strong style={{ color: 'var(--brand-navy)' }}>For managers:</strong> Track your candidates&apos; progress through <a href="http://tracking.examfx.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-navy)', fontWeight: '600', textDecoration: 'underline' }}>ExamFX Elite Analytics</a>. It uses predictive data to show whether candidates are on track to pass, measuring their performance across quizzes and practice exams. Subscribe to daily or weekly summary reports. <a href="https://info.examfx.com/ea-userguide" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-navy)', textDecoration: 'underline', fontSize: '12px' }}>Manager guide</a>
+                <strong style={{ color: 'var(--brand-navy)' }}>For managers:</strong> Track your candidates&apos; progress through <a href="http://tracking.examfx.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-navy)', fontWeight: '600', textDecoration: 'underline' }}>ExamFX Elite Analytics</a>. It uses predictive data to show whether candidates are on track to pass, measuring their performance across quizzes and practice exams. Subscribe to daily or weekly summary reports. <a href="https://info.examfx.com/ea-userguide" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-navy)', textDecoration: 'underline', fontSize: '14px' }}>Manager guide</a>
               </Callout>
 
               <h4 style={{ fontWeight: 'bold', color: 'var(--brand-navy)', marginBottom: '10px', fontSize: 'var(--text-body)' }}>Effective study habits</h4>
@@ -635,7 +635,7 @@ export default function GettingStartedPage() {
                 <a href="https://aml.surancebay.com/" target="_blank" rel="noopener noreferrer" style={{
                   display: 'inline-flex', alignItems: 'center', gap: '6px',
                   backgroundColor: 'var(--brand-navy)', color: '#fff', padding: '10px 20px',
-                  borderRadius: '8px', fontSize: '14px', fontWeight: 600, textDecoration: 'none',
+                  borderRadius: '8px', fontSize: '16px', fontWeight: 600, textDecoration: 'none',
                   transition: 'opacity 0.15s',
                 }}>
                   Start AML Certification &#x2192;

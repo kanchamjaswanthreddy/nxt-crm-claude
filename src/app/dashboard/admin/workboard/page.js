@@ -219,7 +219,7 @@ export default function WorkBoardPage() {
         <h1 style={{ color: 'var(--brand-navy)', fontSize: 'var(--text-h1)', margin: '0 0 var(--space-3)' }}>Work Board</h1>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{ width: '16px', height: '16px', border: '2px solid var(--brand-blue-accent)', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
-          <span style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Loading...</span>
+          <span style={{ color: 'var(--text-secondary)', fontSize: '16px' }}>Loading...</span>
         </div>
         <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
       </div>
@@ -232,7 +232,7 @@ export default function WorkBoardPage() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-3)', flexWrap: 'wrap', gap: '12px' }}>
         <div>
           <h1 style={{ color: 'var(--brand-navy)', fontSize: 'var(--text-h1)', margin: '0 0 4px' }}>Work Board</h1>
-          <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: '13px' }}>
+          <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: '15px' }}>
             Assign and track work between admins.
           </p>
         </div>
@@ -255,7 +255,7 @@ export default function WorkBoardPage() {
               borderRadius: '8px',
               border: 'none',
               cursor: 'pointer',
-              fontSize: '13px',
+              fontSize: '15px',
               fontWeight: tab === t.key ? 700 : 500,
               backgroundColor: tab === t.key ? '#fff' : 'transparent',
               color: tab === t.key ? 'var(--brand-navy)' : 'var(--text-secondary)',
@@ -269,7 +269,7 @@ export default function WorkBoardPage() {
                 marginLeft: '6px',
                 padding: '1px 7px',
                 borderRadius: '999px',
-                fontSize: '11px',
+                fontSize: '13px',
                 fontWeight: 700,
                 backgroundColor: tab === t.key ? 'var(--brand-navy)' : 'rgba(0,0,0,0.08)',
                 color: tab === t.key ? '#fff' : 'var(--text-secondary)',
@@ -303,7 +303,7 @@ export default function WorkBoardPage() {
                 <rect x="3" y="3" width="18" height="18" rx="2" />
                 <path d="M9 12l2 2 4-4" />
               </svg>
-              <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '14px', textAlign: 'center' }}>No tasks found</p>
+              <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '16px', textAlign: 'center' }}>No tasks found</p>
             </Card>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -330,26 +330,26 @@ export default function WorkBoardPage() {
                   >
                     {/* Top row: priority + category + status */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px', flexWrap: 'wrap' }}>
-                      <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', backgroundColor: pri.bg, color: pri.color }}>
+                      <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', backgroundColor: pri.bg, color: pri.color }}>
                         {pri.label}
                       </span>
-                      <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '10px', fontWeight: 600, backgroundColor: cat.bg, color: cat.color }}>
+                      <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: 600, backgroundColor: cat.bg, color: cat.color }}>
                         {catLabel}
                       </span>
-                      <span style={{ marginLeft: 'auto', padding: '2px 8px', borderRadius: '999px', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', backgroundColor: stat.bg, color: stat.color }}>
+                      <span style={{ marginLeft: 'auto', padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', backgroundColor: stat.bg, color: stat.color }}>
                         {stat.label}
                       </span>
                     </div>
 
                     {/* Title */}
-                    <h3 style={{ margin: '0 0 4px', fontSize: '14px', fontWeight: 600, color: 'var(--brand-navy)', lineHeight: 1.3 }}>
+                    <h3 style={{ margin: '0 0 4px', fontSize: '16px', fontWeight: 600, color: 'var(--brand-navy)', lineHeight: 1.3 }}>
                       {task.title}
                     </h3>
 
                     {/* Description preview */}
                     {task.description && (
                       <p style={{
-                        margin: '0 0 8px', fontSize: '12px', color: 'var(--text-secondary)', lineHeight: 1.4,
+                        margin: '0 0 8px', fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.4,
                         display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
                       }}>
                         {task.description}
@@ -357,7 +357,7 @@ export default function WorkBoardPage() {
                     )}
 
                     {/* Bottom row: assignee, due date, comments, attachments */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '11px', color: 'var(--text-secondary)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '13px', color: 'var(--text-secondary)' }}>
                       <span style={{ fontWeight: 500 }}>
                         {tab === 'assigned_to_me' ? `From: ${task.assignedByName?.split(' ')[0]}` : `To: ${task.assignedToName?.split(' ')[0]}`}
                       </span>
@@ -397,8 +397,8 @@ export default function WorkBoardPage() {
 
                 {/* Badges */}
                 <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '14px' }}>
-                  {(() => { const p = PRIORITIES.find(x => x.value === selectedTask.priority); return p ? <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: 700, backgroundColor: p.bg, color: p.color }}>{p.label}</span> : null; })()}
-                  {(() => { const c = CATEGORY_COLORS[selectedTask.category]; const cl = CATEGORIES.find(x => x.value === selectedTask.category); return <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: 600, backgroundColor: c?.bg, color: c?.color }}>{cl?.label}</span>; })()}
+                  {(() => { const p = PRIORITIES.find(x => x.value === selectedTask.priority); return p ? <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '13px', fontWeight: 700, backgroundColor: p.bg, color: p.color }}>{p.label}</span> : null; })()}
+                  {(() => { const c = CATEGORY_COLORS[selectedTask.category]; const cl = CATEGORIES.find(x => x.value === selectedTask.category); return <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '13px', fontWeight: 600, backgroundColor: c?.bg, color: c?.color }}>{cl?.label}</span>; })()}
                 </div>
 
                 {/* Status change */}
@@ -410,7 +410,7 @@ export default function WorkBoardPage() {
                       style={{
                         padding: '5px 14px',
                         borderRadius: '8px',
-                        fontSize: '12px',
+                        fontSize: '14px',
                         fontWeight: 600,
                         border: selectedTask.status === s.value ? `2px solid ${s.color}` : '1px solid var(--border-color)',
                         backgroundColor: selectedTask.status === s.value ? s.bg : '#fff',
@@ -427,7 +427,7 @@ export default function WorkBoardPage() {
               {/* Detail body */}
               <div style={{ padding: '20px 24px' }}>
                 {/* Meta info */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '18px', fontSize: '13px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '18px', fontSize: '15px' }}>
                   <div>
                     <span style={{ color: 'var(--text-secondary)', fontWeight: 500 }}>Assigned by</span>
                     <div style={{ fontWeight: 600, color: 'var(--brand-navy)', marginTop: '2px' }}>{selectedTask.assignedByName}</div>
@@ -455,8 +455,8 @@ export default function WorkBoardPage() {
                 {/* Description */}
                 {selectedTask.description && (
                   <div style={{ marginBottom: '18px' }}>
-                    <h4 style={{ margin: '0 0 6px', fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.3px' }}>Description</h4>
-                    <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-primary)', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
+                    <h4 style={{ margin: '0 0 6px', fontSize: '14px', fontWeight: 600, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.3px' }}>Description</h4>
+                    <p style={{ margin: 0, fontSize: '16px', color: 'var(--text-primary)', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
                       {selectedTask.description}
                     </p>
                   </div>
@@ -464,7 +464,7 @@ export default function WorkBoardPage() {
 
                 {/* Attachments */}
                 <div style={{ marginBottom: '18px' }}>
-                  <h4 style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
+                  <h4 style={{ margin: '0 0 8px', fontSize: '14px', fontWeight: 600, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
                     Attachments ({selectedTask.attachments?.length || 0})
                   </h4>
                   {selectedTask.attachments?.length > 0 && (
@@ -480,7 +480,7 @@ export default function WorkBoardPage() {
                             display: 'flex', alignItems: 'center', gap: '8px',
                             padding: '8px 12px', borderRadius: '8px',
                             backgroundColor: 'rgba(10,37,64,0.03)', border: '1px solid var(--border-color)',
-                            textDecoration: 'none', color: 'var(--brand-navy)', fontSize: '13px',
+                            textDecoration: 'none', color: 'var(--brand-navy)', fontSize: '15px',
                           }}
                         >
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -489,7 +489,7 @@ export default function WorkBoardPage() {
                             <line x1="12" y1="15" x2="12" y2="3" />
                           </svg>
                           <span style={{ flex: 1, fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{att.name}</span>
-                          {att.size > 0 && <span style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{(att.size / 1024).toFixed(0)} KB</span>}
+                          {att.size > 0 && <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>{(att.size / 1024).toFixed(0)} KB</span>}
                         </a>
                       ))}
                     </div>
@@ -506,7 +506,7 @@ export default function WorkBoardPage() {
                       onClick={() => detailFileRef.current?.click()}
                       disabled={detailUploading}
                       style={{
-                        padding: '6px 14px', borderRadius: '8px', fontSize: '12px', fontWeight: 600,
+                        padding: '6px 14px', borderRadius: '8px', fontSize: '14px', fontWeight: 600,
                         border: '1px dashed var(--border-color)', backgroundColor: 'transparent',
                         color: 'var(--brand-navy)', cursor: detailUploading ? 'wait' : 'pointer',
                       }}
@@ -518,7 +518,7 @@ export default function WorkBoardPage() {
 
                 {/* Comments */}
                 <div>
-                  <h4 style={{ margin: '0 0 8px', fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
+                  <h4 style={{ margin: '0 0 8px', fontSize: '14px', fontWeight: 600, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
                     Comments ({selectedTask.comments?.length || 0})
                   </h4>
 
@@ -531,12 +531,12 @@ export default function WorkBoardPage() {
                           borderLeft: c.authorId === currentUserId ? '3px solid var(--brand-navy)' : '3px solid var(--border-color)',
                         }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                            <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--brand-navy)' }}>{c.authorName}</span>
-                            <span style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
+                            <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--brand-navy)' }}>{c.authorName}</span>
+                            <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
                               {new Date(c.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} {new Date(c.createdAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
                             </span>
                           </div>
-                          <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-primary)', lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>{c.text}</p>
+                          <p style={{ margin: 0, fontSize: '15px', color: 'var(--text-primary)', lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>{c.text}</p>
                         </div>
                       ))}
                     </div>
@@ -551,7 +551,7 @@ export default function WorkBoardPage() {
                       onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleAddComment(); } }}
                       style={{
                         flex: 1, padding: '10px 14px', borderRadius: '10px',
-                        border: '1px solid var(--border-color)', fontSize: '13px',
+                        border: '1px solid var(--border-color)', fontSize: '15px',
                         resize: 'none', minHeight: '40px', maxHeight: '100px',
                         fontFamily: 'inherit',
                       }}
@@ -572,7 +572,7 @@ export default function WorkBoardPage() {
                 <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'flex-end' }}>
                   <button
                     onClick={() => { setConfirmState({ open: true, title: 'Delete Task', message: 'Delete this task?', variant: 'danger', onConfirm: () => handleDelete(selectedTask.id) }); }}
-                    style={{ padding: '6px 14px', borderRadius: '8px', fontSize: '12px', fontWeight: 600, border: '1px solid rgba(211,63,63,0.3)', backgroundColor: 'transparent', color: '#D33F3F', cursor: 'pointer' }}
+                    style={{ padding: '6px 14px', borderRadius: '8px', fontSize: '14px', fontWeight: 600, border: '1px solid rgba(211,63,63,0.3)', backgroundColor: 'transparent', color: '#D33F3F', cursor: 'pointer' }}
                   >
                     Delete Task
                   </button>
@@ -648,7 +648,7 @@ export default function WorkBoardPage() {
               </label>
 
               <div>
-                <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '4px', display: 'block' }}>Attachments</span>
+                <span style={{ fontSize: '15px', fontWeight: 500, color: 'var(--text-secondary)', marginBottom: '4px', display: 'block' }}>Attachments</span>
                 <input
                   type="file"
                   multiple
@@ -659,17 +659,17 @@ export default function WorkBoardPage() {
                 {formFiles.length > 0 && (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginBottom: '8px' }}>
                     {formFiles.map((f, i) => (
-                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 10px', borderRadius: '6px', backgroundColor: 'rgba(0,0,0,0.03)', fontSize: '12px' }}>
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 10px', borderRadius: '6px', backgroundColor: 'rgba(0,0,0,0.03)', fontSize: '14px' }}>
                         <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{f.name}</span>
                         <span style={{ color: 'var(--text-secondary)' }}>{(f.size / 1024).toFixed(0)} KB</span>
-                        <button onClick={() => setFormFiles(prev => prev.filter((_, j) => j !== i))} aria-label="Remove file" style={{ background: 'none', border: 'none', color: '#D33F3F', cursor: 'pointer', fontSize: '14px' }}>x</button>
+                        <button onClick={() => setFormFiles(prev => prev.filter((_, j) => j !== i))} aria-label="Remove file" style={{ background: 'none', border: 'none', color: '#D33F3F', cursor: 'pointer', fontSize: '16px' }}>x</button>
                       </div>
                     ))}
                   </div>
                 )}
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  style={{ padding: '6px 14px', borderRadius: '8px', fontSize: '12px', fontWeight: 600, border: '1px dashed var(--border-color)', backgroundColor: 'transparent', color: 'var(--brand-navy)', cursor: 'pointer' }}
+                  style={{ padding: '6px 14px', borderRadius: '8px', fontSize: '14px', fontWeight: 600, border: '1px dashed var(--border-color)', backgroundColor: 'transparent', color: 'var(--brand-navy)', cursor: 'pointer' }}
                 >
                   + Choose Files
                 </button>
@@ -699,6 +699,6 @@ export default function WorkBoardPage() {
   );
 }
 
-const selectStyle = { padding: '7px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '13px', backgroundColor: '#fff', color: 'var(--text-primary)' };
-const labelStyle = { display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '13px', fontWeight: 500, color: 'var(--text-secondary)' };
-const inputStyle = { padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '14px', color: 'var(--text-primary)' };
+const selectStyle = { padding: '7px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '15px', backgroundColor: '#fff', color: 'var(--text-primary)' };
+const labelStyle = { display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '15px', fontWeight: 500, color: 'var(--text-secondary)' };
+const inputStyle = { padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '16px', color: 'var(--text-primary)' };

@@ -179,17 +179,17 @@ export default function AdminDocumentsPage() {
         <Card style={{ padding: '16px', textAlign: 'center', cursor: 'pointer', border: statusFilter === 'pending_review' ? '2px solid var(--brand-gold)' : undefined }}
           onClick={() => setStatusFilter('pending_review')}>
           <div style={{ fontSize: '28px', fontWeight: '700', color: '#856404' }}>{pendingCount}</div>
-          <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '4px' }}>Pending Review</div>
+          <div style={{ fontSize: '15px', color: 'var(--text-secondary)', marginTop: '4px' }}>Pending Review</div>
         </Card>
         <Card style={{ padding: '16px', textAlign: 'center', cursor: 'pointer', border: statusFilter === 'approved' ? '2px solid var(--brand-gold)' : undefined }}
           onClick={() => setStatusFilter('approved')}>
           <div style={{ fontSize: '28px', fontWeight: '700', color: '#155724' }}>{approvedCount}</div>
-          <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '4px' }}>Approved</div>
+          <div style={{ fontSize: '15px', color: 'var(--text-secondary)', marginTop: '4px' }}>Approved</div>
         </Card>
         <Card style={{ padding: '16px', textAlign: 'center', cursor: 'pointer', border: statusFilter === 'rejected' ? '2px solid var(--brand-gold)' : undefined }}
           onClick={() => setStatusFilter('rejected')}>
           <div style={{ fontSize: '28px', fontWeight: '700', color: '#721C24' }}>{rejectedCount}</div>
-          <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '4px' }}>Rejected</div>
+          <div style={{ fontSize: '15px', color: 'var(--text-secondary)', marginTop: '4px' }}>Rejected</div>
         </Card>
       </div>
 
@@ -206,7 +206,7 @@ export default function AdminDocumentsPage() {
               padding: '8px 12px',
               border: '1px solid rgba(0,0,0,0.15)',
               borderRadius: '6px',
-              fontSize: '14px',
+              fontSize: '16px',
               outline: 'none',
             }}
           />
@@ -217,7 +217,7 @@ export default function AdminDocumentsPage() {
               padding: '8px 12px',
               border: '1px solid rgba(0,0,0,0.15)',
               borderRadius: '6px',
-              fontSize: '14px',
+              fontSize: '16px',
               background: '#fff',
               cursor: 'pointer',
             }}
@@ -233,7 +233,7 @@ export default function AdminDocumentsPage() {
               padding: '8px 12px',
               border: '1px solid rgba(0,0,0,0.15)',
               borderRadius: '6px',
-              fontSize: '14px',
+              fontSize: '16px',
               background: '#fff',
               cursor: 'pointer',
             }}
@@ -249,7 +249,7 @@ export default function AdminDocumentsPage() {
               padding: '8px 12px',
               border: '1px solid rgba(0,0,0,0.15)',
               borderRadius: '6px',
-              fontSize: '13px',
+              fontSize: '15px',
               background: '#fff',
               cursor: 'pointer',
               color: 'var(--text-secondary)',
@@ -268,7 +268,7 @@ export default function AdminDocumentsPage() {
           marginBottom: '16px',
           backgroundColor: message.type === 'success' ? '#D4EDDA' : '#F8D7DA',
           color: message.type === 'success' ? '#155724' : '#721C24',
-          fontSize: '14px',
+          fontSize: '16px',
         }}>
           {message.text}
         </div>
@@ -281,7 +281,7 @@ export default function AdminDocumentsPage() {
           marginBottom: '16px',
           backgroundColor: '#F8D7DA',
           color: '#721C24',
-          fontSize: '14px',
+          fontSize: '16px',
         }}>
           {error}
         </div>
@@ -297,7 +297,7 @@ export default function AdminDocumentsPage() {
       ) : (
         <Card style={{ overflow: 'hidden' }}>
           <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '16px' }}>
               <thead>
                 <tr style={{ backgroundColor: 'rgba(0,0,0,0.03)', borderBottom: '2px solid rgba(0,0,0,0.08)' }}>
                   <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontWeight: '600', color: 'var(--brand-navy)', whiteSpace: 'nowrap' }}>Agent</th>
@@ -319,7 +319,7 @@ export default function AdminDocumentsPage() {
                         <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
                           <div style={{ fontWeight: '600', color: 'var(--brand-navy)' }}>{doc.agentName}</div>
                           {doc.agentNxtId && (
-                            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px' }}>{doc.agentNxtId}</div>
+                            <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginTop: '2px' }}>{doc.agentNxtId}</div>
                           )}
                         </td>
                         <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
@@ -330,7 +330,7 @@ export default function AdminDocumentsPage() {
                             {doc.fileName}
                           </div>
                           {doc.fileSize && (
-                            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px' }}>{formatFileSize(doc.fileSize)}</div>
+                            <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginTop: '2px' }}>{formatFileSize(doc.fileSize)}</div>
                           )}
                         </td>
                         <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
@@ -338,7 +338,7 @@ export default function AdminDocumentsPage() {
                             display: 'inline-block',
                             padding: '3px 10px',
                             borderRadius: '12px',
-                            fontSize: '12px',
+                            fontSize: '14px',
                             fontWeight: '600',
                             backgroundColor: badge.bg,
                             color: badge.color,
@@ -346,7 +346,7 @@ export default function AdminDocumentsPage() {
                             {badge.label}
                           </span>
                           {doc.rejectionReason && doc.status === 'rejected' && (
-                            <div style={{ fontSize: '12px', color: '#721C24', marginTop: '4px' }}>
+                            <div style={{ fontSize: '14px', color: '#721C24', marginTop: '4px' }}>
                               Reason: {doc.rejectionReason}
                             </div>
                           )}
@@ -401,7 +401,7 @@ export default function AdminDocumentsPage() {
                                   padding: '8px 12px',
                                   border: '1px solid #dc3545',
                                   borderRadius: '6px',
-                                  fontSize: '13px',
+                                  fontSize: '15px',
                                   outline: 'none',
                                 }}
                                 onKeyDown={e => { if (e.key === 'Enter') handleReject(doc.id); }}
@@ -431,7 +431,7 @@ export default function AdminDocumentsPage() {
               </tbody>
             </table>
           </div>
-          <div style={{ padding: '12px 16px', borderTop: '1px solid rgba(0,0,0,0.06)', fontSize: '13px', color: 'var(--text-secondary)' }}>
+          <div style={{ padding: '12px 16px', borderTop: '1px solid rgba(0,0,0,0.06)', fontSize: '15px', color: 'var(--text-secondary)' }}>
             Showing {filtered.length} of {documents.length} documents
           </div>
         </Card>

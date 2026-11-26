@@ -170,7 +170,7 @@ export default function GroupDetailPage() {
         </p>
         <span style={{
           display: 'inline-flex', alignItems: 'center', gap: '4px',
-          fontSize: '12px', fontWeight: '600', color: 'var(--brand-navy)',
+          fontSize: '14px', fontWeight: '600', color: 'var(--brand-navy)',
           backgroundColor: 'rgba(10, 37, 64, 0.06)',
           padding: '4px 12px', borderRadius: '999px',
         }}>
@@ -200,7 +200,7 @@ export default function GroupDetailPage() {
 
       {/* Add member search */}
       <Card style={{ marginBottom: 'var(--space-3)', padding: '20px 24px' }}>
-        <h3 style={{ margin: '0 0 12px 0', color: 'var(--brand-navy)', fontSize: '14px', fontWeight: 700 }}>
+        <h3 style={{ margin: '0 0 12px 0', color: 'var(--brand-navy)', fontSize: '16px', fontWeight: 700 }}>
           Add Members
         </h3>
         <div ref={searchBoxRef} style={{ position: 'relative' }}>
@@ -225,7 +225,7 @@ export default function GroupDetailPage() {
           {isSearching && (
             <div style={{
               position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)',
-              color: 'var(--text-secondary)', fontSize: '12px',
+              color: 'var(--text-secondary)', fontSize: '14px',
             }}>
               Searching...
             </div>
@@ -255,10 +255,10 @@ export default function GroupDetailPage() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
                     <Avatar name={agent.name} photoUrl={agent.photo_url} size={32} />
                     <div style={{ minWidth: 0 }}>
-                      <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '13px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '15px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {agent.name}
                       </div>
-                      <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
+                      <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
                         {agent.nxtId && <span>{agent.nxtId} · </span>}
                         {agent.email}
                       </div>
@@ -272,7 +272,7 @@ export default function GroupDetailPage() {
                       border: '1.5px solid var(--brand-navy)',
                       backgroundColor: isAdding === agent.id ? 'var(--brand-navy)' : 'transparent',
                       color: isAdding === agent.id ? '#fff' : 'var(--brand-navy)',
-                      fontSize: '12px', fontWeight: 600, cursor: 'pointer',
+                      fontSize: '14px', fontWeight: 600, cursor: 'pointer',
                       transition: 'all 0.15s ease', flexShrink: 0,
                     }}
                   >
@@ -291,7 +291,7 @@ export default function GroupDetailPage() {
               border: '1px solid var(--border-color)', borderRadius: '10px',
               boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
               padding: '16px', textAlign: 'center', color: 'var(--text-secondary)',
-              fontSize: '13px', zIndex: 50,
+              fontSize: '15px', zIndex: 50,
             }}>
               No agents found matching &ldquo;{searchQuery}&rdquo;
             </div>
@@ -306,7 +306,7 @@ export default function GroupDetailPage() {
           borderBottom: '1px solid var(--border-color)',
           backgroundColor: 'rgba(0,0,0,0.015)',
         }}>
-          <h3 style={{ margin: 0, color: 'var(--brand-navy)', fontSize: '14px', fontWeight: 700 }}>
+          <h3 style={{ margin: 0, color: 'var(--brand-navy)', fontSize: '16px', fontWeight: 700 }}>
             Members ({members.length})
           </h3>
         </div>
@@ -332,10 +332,10 @@ export default function GroupDetailPage() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
                   <Avatar name={member.name} photoUrl={member.photo_url} size={36} />
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '14px' }}>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '16px' }}>
                       {member.name}
                     </div>
-                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                    <div style={{ fontSize: '14px', color: 'var(--text-secondary)', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                       {member.nxtId && <span>{member.nxtId}</span>}
                       <span>{member.email}</span>
                       {member.addedAt && (
@@ -353,7 +353,7 @@ export default function GroupDetailPage() {
                     border: '1.5px solid var(--status-error, #D33F3F)',
                     backgroundColor: 'transparent',
                     color: 'var(--status-error, #D33F3F)',
-                    fontSize: '12px', fontWeight: 600, cursor: 'pointer',
+                    fontSize: '14px', fontWeight: 600, cursor: 'pointer',
                     transition: 'all 0.15s ease', flexShrink: 0,
                     opacity: removingId === member.agentId ? 0.5 : 1,
                   }}
@@ -369,10 +369,10 @@ export default function GroupDetailPage() {
       {/* Group policies info */}
       {(group.menuLinks?.length > 0 || group.billingExempt || group.teamLeader) && (
         <Card style={{ marginTop: 'var(--space-3)', padding: '20px 24px' }}>
-          <h3 style={{ margin: '0 0 12px 0', color: 'var(--brand-navy)', fontSize: '14px', fontWeight: 700 }}>
+          <h3 style={{ margin: '0 0 12px 0', color: 'var(--brand-navy)', fontSize: '16px', fontWeight: 700 }}>
             Group Policies
           </h3>
-          <p style={{ margin: '0 0 12px 0', color: 'var(--text-secondary)', fontSize: '13px' }}>
+          <p style={{ margin: '0 0 12px 0', color: 'var(--text-secondary)', fontSize: '15px' }}>
             Members of this group get access to the following:
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -390,10 +390,10 @@ export default function GroupDetailPage() {
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                 </svg>
                 <div>
-                  <div style={{ fontWeight: 600, color: '#E3A94A', fontSize: '13px' }}>
+                  <div style={{ fontWeight: 600, color: '#E3A94A', fontSize: '15px' }}>
                     Team Leader (Sub-Admin)
                   </div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
+                  <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
                     Can approve agents, review documents, and manage their downline team
                   </div>
                 </div>
@@ -414,10 +414,10 @@ export default function GroupDetailPage() {
                   <path d="M9 12l2 2 4-4" />
                 </svg>
                 <div>
-                  <div style={{ fontWeight: 600, color: '#2FA84F', fontSize: '13px' }}>
+                  <div style={{ fontWeight: 600, color: '#2FA84F', fontSize: '15px' }}>
                     Billing Exemption
                   </div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
+                  <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
                     Members are exempt from monthly subscription charges
                   </div>
                 </div>
@@ -438,11 +438,11 @@ export default function GroupDetailPage() {
                   <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                 </svg>
                 <div>
-                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '13px' }}>
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '15px' }}>
                     {link.label}
-                    {link.external && <span style={{ marginLeft: '4px', fontSize: '11px', color: 'var(--text-secondary)' }}>↗</span>}
+                    {link.external && <span style={{ marginLeft: '4px', fontSize: '13px', color: 'var(--text-secondary)' }}>↗</span>}
                   </div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
+                  <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
                     Appears in: <strong style={{ textTransform: 'capitalize' }}>{link.menu}</strong> menu
                   </div>
                 </div>

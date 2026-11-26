@@ -119,7 +119,7 @@ export default function PendingApprovalPage() {
               </h1>
 
               <p style={{
-                fontSize: '15px', color: 'var(--text-secondary)',
+                fontSize: '17px', color: 'var(--text-secondary)',
                 lineHeight: '1.7', margin: '0 0 32px 0',
               }}>
                 {agentName ? `Thank you, ${agentName.split(' ')[0]}! ` : ''}Your onboarding is complete and your application has been submitted to the admin team for review. You&apos;ll receive an email once you&apos;re approved.
@@ -170,7 +170,7 @@ export default function PendingApprovalPage() {
                       )}
                     </div>
                     <span style={{
-                      fontSize: '14px',
+                      fontSize: '16px',
                       fontWeight: step.done || step.active ? '600' : '400',
                       color: step.done
                         ? 'var(--status-success)'
@@ -181,7 +181,7 @@ export default function PendingApprovalPage() {
                       {step.label}
                       {step.active && (
                         <span style={{
-                          fontSize: '12px', fontWeight: '500',
+                          fontSize: '14px', fontWeight: '500',
                           color: 'var(--brand-gold)', marginLeft: '8px',
                         }}>
                           In Progress
@@ -193,7 +193,7 @@ export default function PendingApprovalPage() {
               </div>
 
               <p style={{
-                fontSize: '13px', color: 'var(--text-secondary)',
+                fontSize: '15px', color: 'var(--text-secondary)',
                 lineHeight: '1.6', margin: '0 0 24px 0',
               }}>
                 This page will automatically update when your application is approved. You can also close this page and check back later — you&apos;ll receive an email notification.

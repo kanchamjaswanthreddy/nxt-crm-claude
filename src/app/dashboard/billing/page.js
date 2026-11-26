@@ -103,7 +103,7 @@ export default function BillingPage() {
     const s = map[status] || map.none;
     return (
       <span style={{
-        padding: '3px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: '700',
+        padding: '3px 10px', borderRadius: '999px', fontSize: '13px', fontWeight: '700',
         textTransform: 'uppercase', backgroundColor: s.bg, color: s.color,
       }}>
         {s.label}
@@ -125,7 +125,7 @@ export default function BillingPage() {
 
         {/* My Plan */}
         <Card>
-          <p style={{ margin: '0 0 4px 0', fontSize: '11px', color: 'var(--text-secondary)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.5px' }}>
+          <p style={{ margin: '0 0 4px 0', fontSize: '13px', color: 'var(--text-secondary)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.5px' }}>
             {isAdmin ? 'Your Plan' : 'Current Plan'}
           </p>
           <p style={{ margin: '0 0 8px 0', fontSize: '18px', fontWeight: '700', color: 'var(--brand-navy)' }}>
@@ -133,11 +133,11 @@ export default function BillingPage() {
           </p>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '2px', marginBottom: '8px' }}>
             <span style={{ fontSize: '28px', fontWeight: '800', color: 'var(--brand-navy)' }}>${isExempt ? '0' : currentLevel?.price}</span>
-            <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>/mo</span>
+            <span style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>/mo</span>
           </div>
           {statusBadge(subStatus)}
           {isExempt && (
-            <p style={{ margin: '8px 0 0 0', fontSize: '12px', color: '#2FA84F', fontWeight: '500' }}>
+            <p style={{ margin: '8px 0 0 0', fontSize: '14px', color: '#2FA84F', fontWeight: '500' }}>
               {userProfile.is_owner ? 'Owners are not charged a subscription fee.' : 'IT Engineer accounts are not charged a subscription fee.'}
             </p>
           )}
@@ -145,7 +145,7 @@ export default function BillingPage() {
 
         {/* Next Payment */}
         <Card>
-          <p style={{ margin: '0 0 4px 0', fontSize: '11px', color: 'var(--text-secondary)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.5px' }}>
+          <p style={{ margin: '0 0 4px 0', fontSize: '13px', color: 'var(--text-secondary)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.5px' }}>
             Next Payment
           </p>
           {nextCharge ? (
@@ -158,7 +158,7 @@ export default function BillingPage() {
               </p>
               {daysUntilCharge !== null && daysUntilCharge <= 7 && (
                 <span style={{
-                  padding: '3px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: '700',
+                  padding: '3px 10px', borderRadius: '999px', fontSize: '13px', fontWeight: '700',
                   backgroundColor: 'rgba(224, 142, 43, 0.1)', color: '#E08E2B',
                 }}>
                   Due in {daysUntilCharge} day{daysUntilCharge !== 1 ? 's' : ''}
@@ -166,13 +166,13 @@ export default function BillingPage() {
               )}
             </>
           ) : (
-            <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-secondary)' }}>No upcoming payment</p>
+            <p style={{ margin: 0, fontSize: '16px', color: 'var(--text-secondary)' }}>No upcoming payment</p>
           )}
         </Card>
 
         {/* Payment Method */}
         <Card>
-          <p style={{ margin: '0 0 4px 0', fontSize: '11px', color: 'var(--text-secondary)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.5px' }}>
+          <p style={{ margin: '0 0 4px 0', fontSize: '13px', color: 'var(--text-secondary)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.5px' }}>
             Payment Method
           </p>
           {cardLast4 ? (
@@ -181,10 +181,10 @@ export default function BillingPage() {
                 <svg width="24" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--brand-navy)" strokeWidth="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
                 <span style={{ fontSize: '16px', fontWeight: '600', color: 'var(--brand-navy)' }}>•••• {cardLast4}</span>
               </div>
-              <p style={{ margin: '0 0 10px 0', fontSize: '12px', color: 'var(--text-secondary)' }}>ZIP: {userProfile.payment?.billingZip || '—'}</p>
+              <p style={{ margin: '0 0 10px 0', fontSize: '14px', color: 'var(--text-secondary)' }}>ZIP: {userProfile.payment?.billingZip || '—'}</p>
             </>
           ) : (
-            <p style={{ margin: '0 0 10px 0', fontSize: '14px', color: 'var(--text-secondary)' }}>No card on file</p>
+            <p style={{ margin: '0 0 10px 0', fontSize: '16px', color: 'var(--text-secondary)' }}>No card on file</p>
           )}
           <Button variant="secondary" size="small" onClick={() => setShowUpdateCard(true)}>
             Update Card
@@ -194,13 +194,13 @@ export default function BillingPage() {
         {/* Agency Total (admin only) */}
         {isAdmin && agencySummary && (
           <Card style={{ backgroundColor: 'var(--brand-navy)', color: '#fff' }}>
-            <p style={{ margin: '0 0 4px 0', fontSize: '11px', color: 'var(--brand-silver)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.5px' }}>
+            <p style={{ margin: '0 0 4px 0', fontSize: '13px', color: 'var(--brand-silver)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.5px' }}>
               Agency Monthly Total
             </p>
             <p style={{ margin: '0 0 8px 0', fontSize: '28px', fontWeight: '800', color: 'var(--brand-gold)' }}>
               {formatCurrency(agencyMonthlyTotal)}
             </p>
-            <div style={{ display: 'flex', gap: '16px', fontSize: '12px' }}>
+            <div style={{ display: 'flex', gap: '16px', fontSize: '14px' }}>
               <span><strong style={{ color: '#fff' }}>{agencySummary.activeCount}</strong> <span style={{ color: 'var(--brand-silver)' }}>active</span></span>
               <span><strong style={{ color: '#fff' }}>{agencySummary.trialCount}</strong> <span style={{ color: 'var(--brand-silver)' }}>trial</span></span>
               <span><strong style={{ color: '#fff' }}>{agencySummary.totalAgents}</strong> <span style={{ color: 'var(--brand-silver)' }}>total</span></span>
@@ -212,7 +212,7 @@ export default function BillingPage() {
       {/* Upcoming Payment Schedule */}
       {billingSchedule.length > 0 && (
         <Card style={{ marginBottom: 'var(--space-3)' }}>
-          <h3 style={{ margin: '0 0 var(--space-2) 0', color: 'var(--brand-navy)', fontSize: '15px', fontWeight: '600' }}>
+          <h3 style={{ margin: '0 0 var(--space-2) 0', color: 'var(--brand-navy)', fontSize: '17px', fontWeight: '600' }}>
             Upcoming Payment Schedule
           </h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
@@ -224,10 +224,10 @@ export default function BillingPage() {
                 borderLeft: i === 0 ? '3px solid var(--brand-navy)' : '3px solid transparent',
               }}>
                 <div>
-                  <p style={{ margin: 0, fontSize: '14px', fontWeight: i === 0 ? '600' : '400', color: 'var(--brand-navy)' }}>
+                  <p style={{ margin: 0, fontSize: '16px', fontWeight: i === 0 ? '600' : '400', color: 'var(--brand-navy)' }}>
                     {item.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                   </p>
-                  <p style={{ margin: '2px 0 0 0', fontSize: '12px', color: 'var(--text-secondary)' }}>
+                  <p style={{ margin: '2px 0 0 0', fontSize: '14px', color: 'var(--text-secondary)' }}>
                     {currentLevel?.title} — Level {currentLevel?.level}
                   </p>
                 </div>
@@ -236,7 +236,7 @@ export default function BillingPage() {
                     {formatCurrency(item.amount)}
                   </p>
                   <span style={{
-                    fontSize: '10px', fontWeight: '700', textTransform: 'uppercase',
+                    fontSize: '13px', fontWeight: '700', textTransform: 'uppercase',
                     color: i === 0 ? '#E08E2B' : 'var(--text-secondary)',
                   }}>
                     {i === 0 ? 'Next' : 'Scheduled'}
@@ -251,7 +251,7 @@ export default function BillingPage() {
       {/* Transaction History */}
       <Card style={{ marginBottom: 'var(--space-3)', padding: 0, overflow: 'hidden' }}>
         <div style={{ padding: '16px 16px 0 16px' }}>
-          <h3 style={{ margin: '0 0 var(--space-2) 0', color: 'var(--brand-navy)', fontSize: '15px', fontWeight: '600' }}>
+          <h3 style={{ margin: '0 0 var(--space-2) 0', color: 'var(--brand-navy)', fontSize: '17px', fontWeight: '600' }}>
             Transaction History
           </h3>
         </div>
@@ -273,7 +273,7 @@ export default function BillingPage() {
                   <td style={{ ...tdStyle, fontWeight: '600' }}>{formatCurrency(t.amount)}</td>
                   <td style={tdStyle}>
                     <span style={{
-                      padding: '3px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: '600',
+                      padding: '3px 10px', borderRadius: '999px', fontSize: '13px', fontWeight: '600',
                       backgroundColor: t.status === 'paid' ? 'rgba(47, 168, 79, 0.1)' : 'rgba(211, 63, 63, 0.1)',
                       color: t.status === 'paid' ? '#2FA84F' : '#D33F3F',
                     }}>
@@ -362,10 +362,10 @@ export default function BillingPage() {
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
               <div style={{ fontSize: '24px', lineHeight: 1 }}>&#9888;</div>
               <div style={{ flex: 1 }}>
-                <h3 style={{ margin: '0 0 4px 0', color: '#D33F3F', fontSize: '15px', fontWeight: '700' }}>
+                <h3 style={{ margin: '0 0 4px 0', color: '#D33F3F', fontSize: '17px', fontWeight: '700' }}>
                   {noSub.length} Agent{noSub.length !== 1 ? 's' : ''} Without Subscription
                 </h3>
-                <p style={{ margin: '0 0 12px 0', fontSize: '13px', color: 'var(--text-secondary)' }}>
+                <p style={{ margin: '0 0 12px 0', fontSize: '15px', color: 'var(--text-secondary)' }}>
                   Create a subscription with 30-day free trial. Agents will need to add their card before the trial ends.
                 </p>
 
@@ -379,15 +379,15 @@ export default function BillingPage() {
                         padding: '8px 12px', borderRadius: '10px',
                         backgroundColor: '#fff', border: '1px solid rgba(0,0,0,0.06)',
                       }}>
-                        <span style={{ flex: 1, fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)' }}>{a.name}</span>
-                        <span style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
+                        <span style={{ flex: 1, fontSize: '15px', fontWeight: 500, color: 'var(--text-primary)' }}>{a.name}</span>
+                        <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
                           L{lvl?.level} &middot; {formatCurrency(lvl?.price)}/mo
                         </span>
                         <button
                           onClick={() => handleActivate(a.id)}
                           disabled={activatingAgentId === a.id || activateAllLoading}
                           style={{
-                            padding: '4px 12px', borderRadius: '6px', fontSize: '11px', fontWeight: 700,
+                            padding: '4px 12px', borderRadius: '6px', fontSize: '13px', fontWeight: 700,
                             border: 'none', cursor: activatingAgentId === a.id ? 'wait' : 'pointer',
                             backgroundColor: 'var(--brand-navy)', color: '#fff',
                             opacity: (activatingAgentId === a.id || activateAllLoading) ? 0.5 : 1,
@@ -408,7 +408,7 @@ export default function BillingPage() {
                       onClick={handleActivateAll}
                       isLoading={activateAllLoading}
                       disabled={!!activatingAgentId}
-                      style={{ fontSize: '12px' }}
+                      style={{ fontSize: '14px' }}
                     >
                       Activate All ({noSub.length})
                     </Button>
@@ -434,13 +434,13 @@ export default function BillingPage() {
                     }}
                     isLoading={isSendingReminders}
                     disabled={!!activatingAgentId || activateAllLoading}
-                    style={{ fontSize: '12px' }}
+                    style={{ fontSize: '14px' }}
                   >
                     Send Email Reminders Instead
                   </Button>
                   {reminderResult && (
                     <span style={{
-                      fontSize: '12px', fontWeight: 500,
+                      fontSize: '14px', fontWeight: 500,
                       color: reminderResult.type === 'success' ? '#2FA84F' : '#D33F3F',
                     }}>
                       {reminderResult.message}
@@ -457,10 +457,10 @@ export default function BillingPage() {
       {isAdmin && agencyAgents.length > 0 && (
         <Card style={{ marginBottom: 'var(--space-3)', padding: 0, overflow: 'hidden' }}>
           <div style={{ padding: '16px 16px 0 16px' }}>
-            <h3 style={{ margin: '0 0 4px 0', color: 'var(--brand-navy)', fontSize: '15px', fontWeight: '600' }}>
+            <h3 style={{ margin: '0 0 4px 0', color: 'var(--brand-navy)', fontSize: '17px', fontWeight: '600' }}>
               Team Subscriptions
             </h3>
-            <p style={{ margin: '0 0 var(--space-2) 0', fontSize: '13px', color: 'var(--text-secondary)' }}>
+            <p style={{ margin: '0 0 var(--space-2) 0', fontSize: '15px', color: 'var(--text-secondary)' }}>
               All agents in your agency and their subscription status.
             </p>
           </div>
@@ -486,20 +486,20 @@ export default function BillingPage() {
                         <div>
                           <span style={{ fontWeight: '500' }}>{agent.name}</span>
                           {agent.is_owner && (
-                            <span style={{ marginLeft: '6px', fontSize: '10px', fontWeight: '700', color: 'var(--brand-gold)' }}>OWNER</span>
+                            <span style={{ marginLeft: '6px', fontSize: '13px', fontWeight: '700', color: 'var(--brand-gold)' }}>OWNER</span>
                           )}
                           {agent.role === 'it_engineer' && (
-                            <span style={{ marginLeft: '6px', fontSize: '10px', fontWeight: '700', color: '#1B2A4E' }}>IT</span>
+                            <span style={{ marginLeft: '6px', fontSize: '13px', fontWeight: '700', color: '#1B2A4E' }}>IT</span>
                           )}
                           {agent.billingExempt && !agent.is_owner && agent.role !== 'it_engineer' && (
-                            <span style={{ marginLeft: '6px', fontSize: '10px', fontWeight: '700', color: '#2FA84F' }}>EXEMPT</span>
+                            <span style={{ marginLeft: '6px', fontSize: '13px', fontWeight: '700', color: '#2FA84F' }}>EXEMPT</span>
                           )}
-                          <div style={{ fontSize: '11px', color: 'var(--text-secondary)', textTransform: 'capitalize' }}>{agent.role === 'it_engineer' ? 'IT Engineer' : agent.role}</div>
+                          <div style={{ fontSize: '13px', color: 'var(--text-secondary)', textTransform: 'capitalize' }}>{agent.role === 'it_engineer' ? 'IT Engineer' : agent.role}</div>
                         </div>
                       </td>
                       <td style={tdStyle}>
                         <span style={{
-                          padding: '2px 8px', borderRadius: '999px', fontSize: '11px', fontWeight: '600',
+                          padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: '600',
                           backgroundColor: 'rgba(10, 37, 64, 0.06)', color: 'var(--brand-navy)',
                         }}>
                           L{lvl?.level} — {lvl?.title}
@@ -507,11 +507,11 @@ export default function BillingPage() {
                       </td>
                       <td style={{ ...tdStyle, fontWeight: '600' }}>
                         {agentExempt ? (
-                          <span style={{ color: '#2FA84F', fontSize: '12px', fontWeight: '600' }}>FREE</span>
+                          <span style={{ color: '#2FA84F', fontSize: '14px', fontWeight: '600' }}>FREE</span>
                         ) : formatCurrency(lvl?.price)}
                       </td>
                       <td style={tdStyle}>{statusBadge(agentExempt ? 'exempt' : (agent.subscriptionStatus || 'none'))}</td>
-                      <td style={{ ...tdStyle, fontSize: '13px', color: 'var(--text-secondary)' }}>
+                      <td style={{ ...tdStyle, fontSize: '15px', color: 'var(--text-secondary)' }}>
                         {(() => {
                           if (agentExempt) return '—';
                           if (agent.nextChargeDate) {
@@ -523,7 +523,7 @@ export default function BillingPage() {
                             trialEnd.setDate(trialEnd.getDate() + 30);
                             return <span style={{ fontStyle: 'italic', opacity: 0.7 }}>~{trialEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>;
                           }
-                          return <span style={{ color: 'var(--status-error, #D33F3F)', fontSize: '11px', fontWeight: 600 }}>No subscription</span>;
+                          return <span style={{ color: 'var(--status-error, #D33F3F)', fontSize: '13px', fontWeight: 600 }}>No subscription</span>;
                         })()}
                       </td>
                     </tr>
@@ -559,10 +559,10 @@ export default function BillingPage() {
 
       {/* Subscription Tiers Reference */}
       <Card>
-        <h3 style={{ margin: '0 0 4px 0', color: 'var(--brand-navy)', fontSize: '15px', fontWeight: '600' }}>
+        <h3 style={{ margin: '0 0 4px 0', color: 'var(--brand-navy)', fontSize: '17px', fontWeight: '600' }}>
           All Subscription Tiers
         </h3>
-        <p style={{ margin: '0 0 var(--space-2) 0', fontSize: '12px', color: 'var(--text-secondary)' }}>
+        <p style={{ margin: '0 0 var(--space-2) 0', fontSize: '14px', color: 'var(--text-secondary)' }}>
           {isAdmin ? 'Assign levels to agents from the Team or Agent Levels settings page.' : 'Your level is assigned by your agency admin. Contact them for changes.'}
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -581,20 +581,20 @@ export default function BillingPage() {
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     backgroundColor: isCurrent ? 'var(--brand-navy)' : 'var(--surface-sunken, #f5f5f5)',
                     color: isCurrent ? '#fff' : 'var(--text-secondary)',
-                    fontSize: '12px', fontWeight: '700',
+                    fontSize: '14px', fontWeight: '700',
                   }}>
                     {lvl.level}
                   </span>
                   <span style={{
-                    fontSize: '14px', fontWeight: isCurrent ? '600' : '400',
+                    fontSize: '16px', fontWeight: isCurrent ? '600' : '400',
                     color: isCurrent ? 'var(--brand-navy)' : 'var(--text-primary)',
                   }}>
                     {lvl.title}
-                    {isCurrent && <span style={{ marginLeft: '8px', fontSize: '10px', color: '#2FA84F', fontWeight: '700' }}>YOUR PLAN</span>}
+                    {isCurrent && <span style={{ marginLeft: '8px', fontSize: '13px', color: '#2FA84F', fontWeight: '700' }}>YOUR PLAN</span>}
                   </span>
                 </div>
                 <span style={{
-                  fontSize: '14px', fontWeight: '600',
+                  fontSize: '16px', fontWeight: '600',
                   color: isCurrent ? 'var(--brand-navy)' : 'var(--text-secondary)',
                 }}>
                   ${lvl.price}/mo
@@ -608,8 +608,8 @@ export default function BillingPage() {
   );
 }
 
-const thStyle = { padding: '10px 16px', fontWeight: '600', color: 'var(--text-secondary)', fontSize: '12px', textAlign: 'left', textTransform: 'uppercase', letterSpacing: '0.3px' };
-const tdStyle = { padding: '10px 16px', fontSize: '14px' };
+const thStyle = { padding: '10px 16px', fontWeight: '600', color: 'var(--text-secondary)', fontSize: '14px', textAlign: 'left', textTransform: 'uppercase', letterSpacing: '0.3px' };
+const tdStyle = { padding: '10px 16px', fontSize: '16px' };
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -721,7 +721,7 @@ function UpdateCardFormInner({ userProfile, onClose, onSuccess }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
       <div>
-        <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '6px' }}>
+        <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '6px' }}>
           New Card Details
         </label>
         <div style={{
@@ -737,7 +737,7 @@ function UpdateCardFormInner({ userProfile, onClose, onSuccess }) {
                 border: '2px solid var(--brand-blue-accent, #1B2A4E)', borderTopColor: 'transparent',
                 borderRadius: '50%', animation: 'spin 0.8s linear infinite',
               }} />
-              <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>Initializing secure payment...</span>
+              <span style={{ fontSize: '16px', color: 'var(--text-secondary)' }}>Initializing secure payment...</span>
               <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
             </div>
           ) : (
@@ -751,7 +751,7 @@ function UpdateCardFormInner({ userProfile, onClose, onSuccess }) {
           )}
         </div>
         {cardError && (
-          <span style={{ fontSize: '12px', color: 'var(--status-error, #D33F3F)', marginTop: '4px', display: 'block' }}>{cardError}</span>
+          <span style={{ fontSize: '14px', color: 'var(--status-error, #D33F3F)', marginTop: '4px', display: 'block' }}>{cardError}</span>
         )}
       </div>
 
@@ -759,7 +759,7 @@ function UpdateCardFormInner({ userProfile, onClose, onSuccess }) {
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
         </svg>
-        <span style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
+        <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
           Secured by <strong>Stripe</strong> — your card details are never stored on our servers
         </span>
       </div>

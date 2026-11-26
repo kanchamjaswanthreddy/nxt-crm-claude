@@ -172,7 +172,7 @@ export default function LearnPage() {
         <h1 style={{ color: 'var(--brand-navy)', fontSize: 'var(--text-h1)', margin: '0 0 var(--space-3)' }}>NXT University</h1>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{ width: '16px', height: '16px', border: '2px solid var(--brand-blue-accent)', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
-          <span style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Loading...</span>
+          <span style={{ color: 'var(--text-secondary)', fontSize: '16px' }}>Loading...</span>
         </div>
         <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
       </div>
@@ -194,7 +194,7 @@ export default function LearnPage() {
             padding: '6px 16px', borderRadius: '999px', border: '1px solid var(--border-color)',
             backgroundColor: activeCategory === cat.value ? 'var(--brand-navy)' : '#fff',
             color: activeCategory === cat.value ? '#fff' : 'var(--text-primary)',
-            cursor: 'pointer', fontSize: '13px', fontWeight: '500',
+            cursor: 'pointer', fontSize: '15px', fontWeight: '500',
           }}>
             {cat.label}
           </button>
@@ -206,7 +206,7 @@ export default function LearnPage() {
         <Card>
           <div style={{ textAlign: 'center', padding: 'var(--space-5)', color: 'var(--text-secondary)' }}>
             <div style={{ fontSize: '16px', fontWeight: '500' }}>No resources found</div>
-            <div style={{ fontSize: '14px', marginTop: '4px' }}>{isAdmin ? 'Add training materials for your team.' : 'Check back later for new resources.'}</div>
+            <div style={{ fontSize: '16px', marginTop: '4px' }}>{isAdmin ? 'Add training materials for your team.' : 'Check back later for new resources.'}</div>
           </div>
         </Card>
       ) : (
@@ -217,32 +217,32 @@ export default function LearnPage() {
               <Card key={r.id}>
                 <div style={{ display: 'flex', flexDirection: 'column', height: '100%', borderLeft: `3px solid ${accentColor}`, marginLeft: '-16px', paddingLeft: '13px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <span style={{ fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)' }}>{CONTENT_TYPE_ICONS[r.contentType] || 'Link'}</span>
-                    <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '11px', fontWeight: '600', backgroundColor: `${accentColor}14`, color: accentColor, textTransform: 'capitalize' }}>{r.category}</span>
+                    <span style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-secondary)' }}>{CONTENT_TYPE_ICONS[r.contentType] || 'Link'}</span>
+                    <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: '600', backgroundColor: `${accentColor}14`, color: accentColor, textTransform: 'capitalize' }}>{r.category}</span>
                     {r.requiredForOnboarding && (
-                      <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '11px', fontWeight: '600', backgroundColor: 'rgba(211,63,63,0.1)', color: '#D33F3F' }}>Required</span>
+                      <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: '600', backgroundColor: 'rgba(211,63,63,0.1)', color: '#D33F3F' }}>Required</span>
                     )}
                   </div>
-                  <h3 style={{ margin: '0 0 6px', color: 'var(--brand-navy)', fontSize: '15px', fontWeight: '600' }}>{r.title}</h3>
-                  {r.description && <p style={{ margin: '0 0 12px', fontSize: '13px', color: 'var(--text-secondary)', lineHeight: '1.4', flex: 1 }}>{r.description}</p>}
+                  <h3 style={{ margin: '0 0 6px', color: 'var(--brand-navy)', fontSize: '17px', fontWeight: '600' }}>{r.title}</h3>
+                  {r.description && <p style={{ margin: '0 0 12px', fontSize: '15px', color: 'var(--text-secondary)', lineHeight: '1.4', flex: 1 }}>{r.description}</p>}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '8px', borderTop: '1px solid var(--border-color)' }}>
                     {r.url === '#pending-upload' && isAdmin ? (
                       <button onClick={() => handleUploadClick(r.id)} disabled={uploadingId === r.id} style={{
                         background: 'none', border: '1px dashed #7C3AED', borderRadius: '6px', padding: '4px 12px',
-                        color: '#7C3AED', cursor: 'pointer', fontSize: '13px', fontWeight: '500',
+                        color: '#7C3AED', cursor: 'pointer', fontSize: '15px', fontWeight: '500',
                         opacity: uploadingId === r.id ? 0.6 : 1,
                       }}>
                         {uploadingId === r.id ? 'Uploading...' : 'Upload PDF'}
                       </button>
                     ) : r.url === '#pending-upload' ? (
-                      <span style={{ color: 'var(--text-secondary)', fontSize: '13px', fontStyle: 'italic' }}>Pending upload</span>
+                      <span style={{ color: 'var(--text-secondary)', fontSize: '15px', fontStyle: 'italic' }}>Pending upload</span>
                     ) : (
-                      <a href={r.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-blue-accent)', fontSize: '13px', fontWeight: '500', textDecoration: 'none' }}>
+                      <a href={r.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-blue-accent)', fontSize: '15px', fontWeight: '500', textDecoration: 'none' }}>
                         Open {r.contentType === 'video' ? 'Video' : r.contentType === 'pdf' ? 'PDF' : 'Link'} →
                       </a>
                     )}
                     {isAdmin && !r.id.startsWith('lic-') && (
-                      <button onClick={() => handleDelete(r.id)} style={{ background: 'none', border: 'none', color: '#D33F3F', cursor: 'pointer', fontSize: '12px' }}>Remove</button>
+                      <button onClick={() => handleDelete(r.id)} style={{ background: 'none', border: 'none', color: '#D33F3F', cursor: 'pointer', fontSize: '14px' }}>Remove</button>
                     )}
                   </div>
                 </div>
@@ -304,7 +304,7 @@ export default function LearnPage() {
                     </select>
                   </label>
                 </div>
-                <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: 'var(--text-secondary)' }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '15px', color: 'var(--text-secondary)' }}>
                   <input type="checkbox" checked={formRequired} onChange={e => setFormRequired(e.target.checked)} />
                   Required for onboarding
                 </label>
@@ -321,5 +321,5 @@ export default function LearnPage() {
   );
 }
 
-const labelStyle = { display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '13px', fontWeight: '500', color: 'var(--text-secondary)' };
-const inputStyle = { padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '14px', color: 'var(--text-primary)' };
+const labelStyle = { display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '15px', fontWeight: '500', color: 'var(--text-secondary)' };
+const inputStyle = { padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '16px', color: 'var(--text-primary)' };

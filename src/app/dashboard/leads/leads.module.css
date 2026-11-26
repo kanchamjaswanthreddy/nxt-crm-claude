@@ -63,7 +63,7 @@
   border: 1px solid var(--status-error);
   background: rgba(211, 63, 63, 0.06);
   color: var(--status-error);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
 }
@@ -78,7 +78,7 @@
   border: 1px solid var(--border-color);
   background: #fff;
   color: var(--text-secondary);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
   margin-left: auto;

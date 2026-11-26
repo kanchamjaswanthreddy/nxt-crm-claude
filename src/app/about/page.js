@@ -89,7 +89,7 @@ export default function AboutPage() {
           <a href="/auth/login" style={{
             padding: '10px 28px', borderRadius: '8px',
             backgroundColor: '#0C1022', color: '#fff',
-            fontSize: '14px', fontWeight: 700, textDecoration: 'none',
+            fontSize: '16px', fontWeight: 700, textDecoration: 'none',
           }}>
             Agent Login
           </a>
@@ -106,7 +106,7 @@ export default function AboutPage() {
           <div style={{
             display: 'inline-block', padding: '6px 16px', borderRadius: '999px',
             backgroundColor: 'rgba(227, 169, 74, 0.15)', border: '1px solid rgba(227, 169, 74, 0.3)',
-            fontSize: '13px', fontWeight: 600, color: '#E3A94A',
+            fontSize: '15px', fontWeight: 600, color: '#E3A94A',
             marginBottom: '24px', letterSpacing: '0.5px',
           }}>
             Internal SaaS Platform
@@ -151,7 +151,7 @@ export default function AboutPage() {
                 {f.icon}
               </div>
               <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#0C1022', margin: '0 0 8px' }}>{f.title}</h3>
-              <p style={{ fontSize: '14px', color: '#5F5C56', margin: 0, lineHeight: 1.65 }}>{f.desc}</p>
+              <p style={{ fontSize: '16px', color: '#5F5C56', margin: 0, lineHeight: 1.65 }}>{f.desc}</p>
             </div>
           ))}
         </div>
@@ -184,8 +184,8 @@ export default function AboutPage() {
                 }}>
                   {s.step}
                 </div>
-                <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#0C1022', margin: '0 0 6px' }}>{s.title}</h3>
-                <p style={{ fontSize: '13px', color: '#5F5C56', margin: 0, lineHeight: 1.6 }}>{s.desc}</p>
+                <h3 style={{ fontSize: '17px', fontWeight: 700, color: '#0C1022', margin: '0 0 6px' }}>{s.title}</h3>
+                <p style={{ fontSize: '15px', color: '#5F5C56', margin: 0, lineHeight: 1.6 }}>{s.desc}</p>
               </div>
             ))}
           </div>
@@ -208,7 +208,7 @@ export default function AboutPage() {
           {/* Table header */}
           <div style={{
             display: 'flex', justifyContent: 'space-between', padding: '14px 24px',
-            backgroundColor: '#0C1022', color: '#fff', fontSize: '13px', fontWeight: 700,
+            backgroundColor: '#0C1022', color: '#fff', fontSize: '15px', fontWeight: 700,
             textTransform: 'uppercase', letterSpacing: '0.8px',
           }}>
             <span>Agent Level</span>
@@ -222,10 +222,10 @@ export default function AboutPage() {
               backgroundColor: i % 2 === 1 ? '#fafbfc' : '#fff',
             }}>
               <div>
-                <span style={{ fontSize: '15px', fontWeight: 600, color: '#0C1022' }}>
+                <span style={{ fontSize: '17px', fontWeight: 600, color: '#0C1022' }}>
                   Level {row.level}
                 </span>
-                <span style={{ fontSize: '14px', color: '#5F5C56', marginLeft: '8px' }}>
+                <span style={{ fontSize: '16px', color: '#5F5C56', marginLeft: '8px' }}>
                   {row.title}
                 </span>
               </div>
@@ -234,7 +234,7 @@ export default function AboutPage() {
                 backgroundColor: 'rgba(227, 169, 74, 0.1)',
                 padding: '4px 14px', borderRadius: '8px',
               }}>
-                ${row.price}<span style={{ fontSize: '12px', color: '#5F5C56', fontWeight: 500 }}>/mo</span>
+                ${row.price}<span style={{ fontSize: '14px', color: '#5F5C56', fontWeight: 500 }}>/mo</span>
               </span>
             </div>
           ))}
@@ -247,7 +247,7 @@ export default function AboutPage() {
           backgroundColor: 'rgba(47, 168, 79, 0.06)', border: '1px solid rgba(47, 168, 79, 0.15)',
         }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span style={{ fontSize: '14px', color: '#2FA84F', fontWeight: 600 }}>
+          <span style={{ fontSize: '16px', color: '#2FA84F', fontWeight: 600 }}>
             All plans include a 30-day free trial — no charge until day 31
           </span>
         </div>
@@ -268,18 +268,18 @@ export default function AboutPage() {
             </svg>
             <h2 style={{ fontSize: '20px', fontWeight: 700, margin: 0, color: '#0C1022' }}>Payment Processing Disclosure</h2>
           </div>
-          <p style={{ fontSize: '15px', color: '#334155', lineHeight: 1.75, margin: '0 0 16px' }}>
+          <p style={{ fontSize: '17px', color: '#334155', lineHeight: 1.75, margin: '0 0 16px' }}>
             Stripe is used <strong style={{ color: '#0C1022' }}>exclusively</strong> to collect monthly SaaS subscription fees from
             agents for access to the NXT CRM platform. The following types of transactions are
             <strong style={{ color: '#0C1022' }}> never</strong> processed through Stripe:
           </p>
-          <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', color: '#475569', lineHeight: 2.2 }}>
+          <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '16px', color: '#475569', lineHeight: 2.2 }}>
             <li>Insurance premiums or policy payments</li>
             <li>Client-facing financial transactions</li>
             <li>Insurance reimbursements or claims</li>
             <li>Commission payouts or agent compensation</li>
           </ul>
-          <p style={{ fontSize: '14px', color: '#5F5C56', marginTop: '20px', marginBottom: 0, borderTop: '1px solid #e8ecf1', paddingTop: '16px' }}>
+          <p style={{ fontSize: '16px', color: '#5F5C56', marginTop: '20px', marginBottom: 0, borderTop: '1px solid #e8ecf1', paddingTop: '16px' }}>
             All payment processing is limited to recurring B2B software subscription billing
             between NXT Financial Group (the platform operator) and its contracted agents (the platform users).
           </p>
@@ -300,11 +300,11 @@ export default function AboutPage() {
           }}>
             <div>
               <Image src="/new-nxt-logo.png" alt="NXT Financial Group" width={160} height={53} style={{ objectFit: 'contain' }} />
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginTop: '4px' }}>
+              <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.4)', marginTop: '4px' }}>
                 A subsidiary of NXT World Holdings, Inc.
               </div>
             </div>
-            <div style={{ display: 'flex', gap: '24px', fontSize: '14px' }}>
+            <div style={{ display: 'flex', gap: '24px', fontSize: '16px' }}>
               <a href="https://www.nxtfinancialgroup.com" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>Main Website</a>
               <a href="/auth/login" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>Agent Portal</a>
               <a href="/privacy" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>Privacy Policy</a>
@@ -316,10 +316,10 @@ export default function AboutPage() {
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             paddingTop: '20px', flexWrap: 'wrap', gap: '12px',
           }}>
-            <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.3)', margin: 0 }}>
+            <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.3)', margin: 0 }}>
               &copy; {new Date().getFullYear()} NXT Financial Group, NXT World Holdings, Inc. All Rights Reserved.
             </p>
-            <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)', margin: 0 }}>
+            <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.25)', margin: 0 }}>
               Internal CRM Platform — Not a consumer-facing product.
             </p>
           </div>

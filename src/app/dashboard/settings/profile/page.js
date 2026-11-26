@@ -884,7 +884,7 @@ export default function ProfilePage() {
                           border: selectedPrintState === s.abbr ? '1.5px solid var(--brand-navy)' : '1.5px solid rgba(12, 16, 34, 0.2)',
                           backgroundColor: selectedPrintState === s.abbr ? 'var(--brand-navy)' : 'rgba(12, 16, 34, 0.04)',
                           color: selectedPrintState === s.abbr ? 'var(--brand-gold)' : 'var(--brand-navy)',
-                          fontFamily: 'var(--font-base)', fontSize: '13px', fontWeight: 700,
+                          fontFamily: 'var(--font-base)', fontSize: '15px', fontWeight: 700,
                           cursor: 'pointer', transition: 'all 0.15s ease',
                           letterSpacing: '0.02em',
                         }}
@@ -946,7 +946,7 @@ export default function ProfilePage() {
                     {myStates.includes(selected.abbr) && (
                       <span style={{
                         padding: '3px 10px', borderRadius: '999px',
-                        fontSize: '11px', fontWeight: 700,
+                        fontSize: '13px', fontWeight: 700,
                         backgroundColor: 'rgba(47, 168, 79, 0.1)', color: 'var(--status-success)',
                       }}>
                         LICENSED

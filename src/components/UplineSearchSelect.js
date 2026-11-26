@@ -86,7 +86,7 @@ export default function UplineSearchSelect({ agents = [], value, onChange }) {
           {filtered.length === 0 ? (
             <div style={{
               padding: '12px 16px',
-              fontSize: '14px',
+              fontSize: '16px',
               color: 'var(--text-secondary)',
               textAlign: 'center',
             }}>
@@ -115,7 +115,7 @@ export default function UplineSearchSelect({ agents = [], value, onChange }) {
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = a.id === value ? 'rgba(12, 16, 34, 0.06)' : 'transparent'}
               >
                 <span style={{
-                  fontSize: '12px',
+                  fontSize: '14px',
                   fontWeight: 700,
                   color: '#0C1022',
                   backgroundColor: 'rgba(12, 16, 34, 0.08)',
@@ -127,10 +127,10 @@ export default function UplineSearchSelect({ agents = [], value, onChange }) {
                 }}>
                   {a.nxt_id || '---'}
                 </span>
-                <span style={{ fontSize: '14px', fontWeight: 500, color: 'var(--text-primary)' }}>
+                <span style={{ fontSize: '16px', fontWeight: 500, color: 'var(--text-primary)' }}>
                   {dn(a)}
                 </span>
-                <span style={{ fontSize: '12px', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
+                <span style={{ fontSize: '14px', color: 'var(--text-secondary)', marginLeft: 'auto' }}>
                   {a.role}
                 </span>
               </button>

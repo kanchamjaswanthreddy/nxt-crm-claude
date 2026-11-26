@@ -130,3 +130,10 @@
     margin-right: var(--space-4);
   }
 }
+
+/* 2026 redesign */
+.wrapper { border-radius: 24px; background: #fff; box-shadow: var(--shadow-card); }
+.table { font-size: 16px; }
+.th { padding: 16px 18px; font-size: 14px; font-weight: 600; text-transform: none; letter-spacing: 0; background: var(--surface-inset); border-bottom: 1px solid var(--border-color); }
+.tr { transition: background-color 0.2s ease; }
+.td { padding: 16px 18px; }
