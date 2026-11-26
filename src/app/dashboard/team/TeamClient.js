@@ -26,6 +26,23 @@ import { AGENT_LEVELS } from '@/lib/constants';
 import RosterTable from '@/components/team/RosterTable';
 import { useToast } from '@/components/ui/Toast';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
+import hc from './hierarchy.module.css';
+
+const NO_HIDDEN_IDS = new Set();
+
+// Production figures for the chart cards (display only). { byId: { [agentId]: number }, max: number }
+const ChartStatsContext = React.createContext({ byId: {}, max: 0 });
+const money0 = (v) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(v || 0);
+function rollup(node, byId) {
+  // People and production below this person. Split copies are skipped so nobody is counted twice.
+  let people = 0; let prod = 0;
+  (node.children || []).forEach(ch => {
+    if (ch._isSplitClone) return;
+    const r = rollup(ch, byId);
+    people += 1 + r.people; prod += (byId[ch.id] || 0) + r.prod;
+  });
+  return { people, prod };
+}
 
 const STATUS_LABELS = {
   invited: { label: 'Invited', color: 'var(--brand-blue-accent)', bg: 'rgba(227, 169, 74, 0.1)' },
@@ -72,113 +89,62 @@ function NodeCardContent({ node, isSelected, isFindMe, isDropTarget, isDragging 
   const lvl = AGENT_LEVELS.find(l => l.level === (node.agentLevel || 1)) || AGENT_LEVELS[0];
   const childCount = (node.children || []).length;
   const isSplit = !!node._isSplitClone;
+  const stats = React.useContext(ChartStatsContext);
+  const own = stats.byId[node.id] || 0;
+  const team = useMemo(() => rollup(node, stats.byId), [node, stats.byId]);
+  const hasFigures = stats.max > 0;
 
   return (
     <div
       data-card-face=""
-      style={{
-        width: '220px',
-        minHeight: '150px',
-        padding: '16px 14px 12px',
-        borderRadius: '14px',
-        backgroundColor: isDropTarget
-          ? 'rgba(47, 168, 79, 0.1)'
-          : isSplit
-            ? 'rgba(227, 169, 74, 0.03)'
-            : isSelected
-              ? 'rgba(227, 169, 74, 0.08)'
-              : 'var(--surface-card)',
-        border: isDropTarget
-          ? '2px dashed var(--status-success)'
-          : isSplit
-            ? '1.5px dashed rgba(227, 169, 74, 0.5)'
-            : isSelected
-              ? '2px solid var(--brand-gold)'
-              : isFindMe
-                ? '2px solid #1B2A4E'
-                : '1px solid var(--border-color)',
-        textAlign: 'center',
-        transition: 'all 0.2s ease',
-        boxShadow: isDragging
-          ? '0 16px 40px rgba(0,0,0,0.2)'
-          : isSelected
-            ? '0 6px 20px rgba(227, 169, 74, 0.18)'
-            : isFindMe
-              ? '0 0 0 3px rgba(227, 169, 74,0.15)'
-              : isSplit
-                ? '0 2px 8px rgba(227, 169, 74, 0.08)'
-                : '0 2px 12px rgba(0,0,0,0.04)',
-        boxSizing: 'border-box',
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '6px',
-        flexShrink: 0,
-        opacity: isDragging ? 0.9 : isSplit ? 0.8 : 1,
-        position: 'relative',
-      }}
+      className={hc.card}
+      data-selected={isSelected || undefined}
+      data-findme={(isFindMe && !isSelected) || undefined}
+      data-drop={isDropTarget || undefined}
+      data-dragging={isDragging || undefined}
+      data-owner={(node.is_owner && !isSplit) || undefined}
+      data-split={isSplit || undefined}
     >
-      {/* Split clone indicator ribbon */}
-      {isSplit && (
-        <div style={{
-          position: 'absolute', top: '0', left: '0', right: '0',
-          height: '3px', borderRadius: '14px 14px 0 0',
-          background: 'linear-gradient(90deg, var(--brand-gold), #E8C45A)',
-        }} />
-      )}
+      <div className={hc.top}>
+        <Avatar name={dn(node)} photoUrl={node.photo_url} size={46} goldText={node.is_owner} ownerRing={node.is_owner} />
+        <div className={hc.id}>
+          <span className={hc.name}>{dn(node) || 'Name not set'}</span>
+          <span className={hc.title}>{node.is_owner ? 'Owner' : lvl.title}</span>
+        </div>
+      </div>
 
-      <div style={{ flexShrink: 0, marginTop: isSplit ? '2px' : 0 }}>
-        <Avatar name={dn(node)} photoUrl={node.photo_url} size={40} goldText={node.is_owner} ownerRing={node.is_owner} />
-      </div>
-      <div style={{
-        fontWeight: '700', color: 'var(--brand-navy)', fontSize: '15px', lineHeight: '1.3',
-        overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-        width: '100%', textAlign: 'center',
-      }}>
-        {dn(node) || 'Name not set'}
-      </div>
-      {node.is_owner ? (
-        <span style={{
-          display: 'inline-block', padding: '2px 10px', borderRadius: '999px', fontSize: '13px',
-          fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A', flexShrink: 0,
-        }}>
-          Owner
-        </span>
-      ) : (
-        <div style={{
-          display: 'inline-block', padding: '3px 10px', borderRadius: '999px', fontSize: '13px', fontWeight: '600',
-          backgroundColor: 'rgba(10, 37, 64, 0.06)', color: 'var(--brand-navy)', flexShrink: 0,
-          maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-        }}>
-          L{lvl.level} · {lvl.title}
+      {!node.is_owner && (
+        <div className={hc.rail} aria-label={`Level ${lvl.level} of ${AGENT_LEVELS.length}`}>
+          {AGENT_LEVELS.map(l => <i key={l.level} data-on={l.level <= lvl.level || undefined} />)}
+          <b>Level {lvl.level}</b>
         </div>
       )}
 
-      {/* Split percentage badge */}
       {node._splitPercent != null ? (
-        <div style={{ flexShrink: 0, textAlign: 'center', lineHeight: '1.3' }}>
-          <div style={{
-            fontSize: '13px', fontWeight: '700', color: '#fff',
-            background: 'linear-gradient(135deg, var(--brand-gold), #E3A94A)',
-            borderRadius: '999px', padding: '2px 10px',
-            display: 'inline-flex', alignItems: 'center', height: '18px',
-            boxShadow: '0 1px 4px rgba(227, 169, 74,0.3)',
-          }}>
-            {node._splitPercent}% commission
-          </div>
+        <>
+          <span className={hc.splitBadge}>{node._splitPercent}% commission split</span>
           {node._splitOthers && node._splitOthers.length > 0 && (
-            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px' }}>
-              {node._splitOthers.map(o => `${o.name.split(' ')[0]} ${o.percent}%`).join(' · ')}
+            <span className={hc.splitOthers}>{node._splitOthers.map(o => `${o.name.split(' ')[0]} ${o.percent}%`).join(', ')}</span>
+          )}
+        </>
+      ) : (
+        <>
+          {hasFigures && (
+            <>
+              <div className={hc.stats}>
+                <div className={hc.stat}><span>Own this month</span><b>{money0(own)}</b></div>
+                {childCount > 0 && <div className={hc.stat}><span>Team below</span><b>{money0(team.prod)}</b></div>}
+              </div>
+              <div className={hc.bar}><span style={{ width: `${Math.max(own > 0 ? 4 : 0, Math.round((own / stats.max) * 100))}%` }} /></div>
+            </>
+          )}
+          {childCount > 0 && (
+            <div className={hc.people}>
+              <span>{childCount} direct</span>
+              <span className={hc.chip}>{team.people} in team</span>
             </div>
           )}
-        </div>
-      ) : (
-        <div style={{ fontSize: '13px', color: 'var(--text-secondary)', height: '18px', flexShrink: 0, display: 'flex', alignItems: 'center', gap: '4px' }}>
-          {childCount > 0 && (
-            <span>{childCount} report{childCount !== 1 ? 's' : ''}</span>
-          )}
-        </div>
+        </>
       )}
     </div>
   );
@@ -246,18 +212,14 @@ function NodeCard({ node, isSelected, onSelect, isFindMe, cardRef, collapsed, on
 
       {childCount > 0 && (
         <button
+          type="button"
+          className={hc.toggle}
+          data-collapsed={collapsed || undefined}
           onClick={e => { e.stopPropagation(); onToggleCollapse(node.id); }}
-          style={{
-            position: 'absolute', bottom: '-11px', left: '50%', transform: 'translateX(-50%)',
-            width: '22px', height: '22px', borderRadius: '50%',
-            border: '1.5px solid var(--border-color)', backgroundColor: 'var(--surface-card)',
-            cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '13px', color: 'var(--brand-navy)', fontWeight: 700, zIndex: 2,
-            boxShadow: '0 1px 4px rgba(0,0,0,0.1)', transition: 'background-color 0.15s', padding: 0,
-          }}
-          title={collapsed ? `Expand (${childCount})` : `Collapse (${childCount})`}
+          title={collapsed ? `Show ${childCount}` : `Hide ${childCount}`}
+          aria-expanded={!collapsed}
         >
-          {collapsed ? '+' : '−'}
+          {collapsed ? `+${childCount}` : '−'}
         </button>
       )}
     </div>
@@ -297,8 +259,8 @@ function TreeBranch({ node, selectedId, onSelect, isFindMeId, cardRefs, collapse
       />
 
       {showChildren && (
-        <div style={{ marginTop: '28px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ display: 'flex', gap: '28px', justifyContent: 'center', flexWrap: 'nowrap' }}>
+        <div style={{ marginTop: '64px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '26px', justifyContent: 'center', flexWrap: 'nowrap' }}>
             {sortedChildren.map(child => (
               <div key={child.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <TreeBranch
@@ -714,7 +676,8 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
   }, [agents, isAdmin, currentUser]);
 
   // Separate hidden IDs into real agent IDs and split clone IDs (only applied for super-admin)
-  const activeHiddenIds = isSuperAdmin ? hiddenIds : new Set();
+  // One shared empty set: a fresh `new Set()` here on every render made the chart rebuild itself in a loop.
+  const activeHiddenIds = isSuperAdmin ? hiddenIds : NO_HIDDEN_IDS;
   const hiddenRealIds = useMemo(() => {
     const real = new Set();
     activeHiddenIds.forEach(id => { if (!String(id).includes('_split_')) real.add(id); });
@@ -841,6 +804,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
   const contentRef = useRef(null);
   const cardRefs = useRef(new Map());
   const [svgPaths, setSvgPaths] = useState([]);
+  const [svgJoints, setSvgJoints] = useState([]);
   const [svgSize, setSvgSize] = useState({ w: 0, h: 0 });
   const rafId = useRef(null);
   const [findMeId, setFindMeId] = useState(null);
@@ -874,7 +838,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
       const scale = transform.scale;
 
       const paths = [];
-      const R = 8; // corner radius
+      const joints = [];
       const isDev = process.env.NODE_ENV === 'development';
 
       // Convert screen-space rect to content-local unscaled coords
@@ -925,55 +889,27 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
 
           if (childPoints.length === 0) return;
 
-          // Bus line Y sits halfway between parent bottom and first child top
-          const busY = py + (childPoints[0].cy - py) / 2;
-
-          if (childPoints.length === 1) {
-            // Single child: straight vertical line
-            paths.push(`M ${px} ${py} L ${childPoints[0].cx} ${childPoints[0].cy}`);
-          } else {
-            // Multiple children: parent stem → horizontal bus → child stems
-            const leftmost = Math.min(...childPoints.map(p => p.cx));
-            const rightmost = Math.max(...childPoints.map(p => p.cx));
-
-            // Parent stem: vertical from parent bottom-center down to bus
-            paths.push(`M ${px} ${py} L ${px} ${busY}`);
-
-            // Horizontal bus spanning first-child center to last-child center
-            paths.push(`M ${leftmost} ${busY} L ${rightmost} ${busY}`);
-
-            // Child stems: vertical from bus down to each child top-center with rounded corners
-            childPoints.forEach(({ cx, cy }) => {
-              if (Math.abs(cx - px) < 1) {
-                // Directly below parent — straight line continues from bus
-                paths.push(`M ${cx} ${busY} L ${cx} ${cy}`);
-              } else {
-                // Corner: horizontal on bus then turn down to child
-                const dir = cx > px ? 1 : -1;
-                paths.push(
-                  `M ${cx} ${busY + R} L ${cx} ${cy}` // vertical from below corner to child
-                );
-                paths.push(
-                  `M ${cx - dir * R} ${busY} Q ${cx} ${busY} ${cx} ${busY + R}` // rounded corner
-                );
-              }
-            });
-          }
+          // One smooth curve from the parent's bottom centre to each child's top centre
+          childPoints.forEach(({ cx, cy }) => {
+            const bend = (cy - py) * 0.6;
+            paths.push(`M ${px} ${py} C ${px} ${py + bend}, ${cx} ${cy - bend}, ${cx} ${cy}`);
+          });
+          joints.push({ x: px, y: py });
 
           traverse(children);
         });
       }
 
       traverse(roots);
-      setSvgPaths(paths);
+      // Only update when something actually moved; otherwise this redraws itself on every frame.
+      setSvgPaths(prev => (prev.length === paths.length && prev.every((d, i) => d === paths[i]) ? prev : paths));
+      setSvgJoints(prev => (prev.length === joints.length && prev.every((j, i) => j.x === joints[i].x && j.y === joints[i].y) ? prev : joints));
 
       // SVG covers entire content area
       // scrollWidth/scrollHeight report unscaled dimensions since the SVG
       // is inside the scaled container and shares its coordinate space
-      setSvgSize({
-        w: contentEl.scrollWidth,
-        h: contentEl.scrollHeight,
-      });
+      const w = contentEl.scrollWidth; const h = contentEl.scrollHeight;
+      setSvgSize(prev => (prev.w === w && prev.h === h ? prev : { w, h }));
     });
   }, [roots, collapsedIds, transform.scale]);
 
@@ -1472,20 +1408,11 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
           <div style={{ flex: 1 }} />
 
           {/* Legend */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', fontSize: '13px', color: 'var(--text-secondary)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <div style={{ width: '20px', height: '2px', backgroundColor: '#C8CDD5', borderRadius: '1px' }} />
-              <span>Hierarchy</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <div style={{ width: '20px', height: '3px', background: 'linear-gradient(90deg, var(--brand-gold), #E8C45A)', borderRadius: '2px' }} />
-              <span>Split</span>
-            </div>
-            {isAdmin && (
-              <span style={{ color: 'var(--text-secondary)', fontStyle: 'italic' }}>
-                Drag to reassign · Double-click to scope
-              </span>
-            )}
+          <div className={hc.legend}>
+            <span><i data-kind="line" />Reports to</span>
+            <span><i />Level reached</span>
+            <span><i data-kind="split" />Commission split</span>
+            {isAdmin && <span>Drag a card to move someone. Double-click to open their team.</span>}
           </div>
 
           {/* Hidden agents indicator (super-admin only) */}
@@ -1620,12 +1547,13 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
           onMouseLeave={activeId ? undefined : onMouseUp}
           style={{
             width: '100%',
-            height: '640px',
+            height: 'max(640px, calc(100vh - 330px))',
             overflow: 'hidden',
             cursor: activeId ? 'grabbing' : 'grab',
             position: 'relative',
             userSelect: 'none',
           }}
+          className={hc.canvas}
         >
           {roots.length === 0 ? (
             <div style={{ padding: 'var(--space-5)', textAlign: 'center', color: 'var(--text-secondary)' }}>
@@ -1641,7 +1569,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                   left: 0,
                   transformOrigin: '0 0',
                   transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`,
-                  padding: '32px 40px 48px',
+                  padding: '44px 56px 72px',
                   zIndex: 1,
                 }}
               >
@@ -1655,7 +1583,10 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                   }}
                 >
                   {svgPaths.map((d, i) => (
-                    <path key={i} d={d} fill="none" stroke="rgba(12, 16, 34, 0.15)" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round" />
+                    <path key={d} d={d} pathLength="1" className={hc.line} />
+                  ))}
+                  {svgJoints.map((j) => (
+                    <circle key={`${j.x}-${j.y}`} cx={j.x} cy={j.y + 1} r="5" className={hc.joint} />
                   ))}
                 </svg>
 
@@ -1705,18 +1636,8 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                 key={title}
                 onClick={e => { e.stopPropagation(); action(); }}
                 title={title}
-                style={{
-                  width: '34px', height: '34px', borderRadius: '8px',
-                  border: '1.5px solid var(--border-color)',
-                  backgroundColor: 'var(--surface-card)',
-                  cursor: 'pointer', fontSize: '16px', lineHeight: 1,
-                  color: 'var(--brand-navy)', fontWeight: 600,
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  transition: 'background-color 0.15s',
-                }}
-                onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74,0.1)'}
-                onMouseLeave={e => e.currentTarget.style.backgroundColor = 'var(--surface-card)'}
+                className={hc.ctrl}
+                aria-label={title}
               >
                 {label}
               </button>
@@ -2561,6 +2482,13 @@ export default function TeamDashboard() {
     );
   }, [teamMetrics, userProfile]);
 
+  // Figures shown on the chart cards: the same production measure as the tiles, per person the viewer may see.
+  const chartStats = useMemo(() => {
+    const byId = {};
+    visibleMetrics.forEach(m => { byId[m.agentId] = (m.commissionPaid || 0) + (m.overrideEarnedPaid || 0); });
+    return { byId, max: Math.max(0, ...Object.values(byId)) };
+  }, [visibleMetrics]);
+
   const getAgentMetrics = (agentId) => {
     return visibleMetrics.find(m => m.agentId === agentId) || {};
   };
@@ -2721,43 +2649,15 @@ export default function TeamDashboard() {
       </div>
 
       {/* KPI Summary — admin only */}
-      {isAdmin && <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
-        <Card style={{ padding: 'var(--space-2) var(--space-3)' }}>
-          <p style={{ margin: '0 0 4px 0', fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase' }}>
-            Team Size
-          </p>
-          <p style={{ margin: 0, fontSize: 'var(--text-h1)', fontWeight: 'bold', color: 'var(--brand-navy)' }}>
-            {agents.length}
-          </p>
-        </Card>
-        <Card style={{ padding: 'var(--space-2) var(--space-3)' }}>
-          <p style={{ margin: '0 0 4px 0', fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase' }}>
-            MTD Production
-          </p>
-          <p style={{ margin: 0, fontSize: 'var(--text-h1)', fontWeight: 'bold', color: 'var(--brand-navy)' }}>
-            ${totalTeamProd.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-          </p>
-        </Card>
-        <Card style={{ padding: 'var(--space-2) var(--space-3)' }}>
-          <p style={{ margin: '0 0 4px 0', fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase' }}>
-            MTD Deals Won
-          </p>
-          <p style={{ margin: 0, fontSize: 'var(--text-h1)', fontWeight: 'bold', color: 'var(--brand-navy)' }}>
-            {totalDeals}
-          </p>
-        </Card>
-        <Card style={{ padding: 'var(--space-2) var(--space-3)' }}>
-          <p style={{ margin: '0 0 4px 0', fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase' }}>
-            Pending Invites
-          </p>
-          <p style={{ margin: 0, fontSize: 'var(--text-h1)', fontWeight: 'bold', color: pendingInvites.length > 0 ? 'var(--status-warning)' : 'var(--brand-navy)' }}>
-            {pendingInvites.length}
-          </p>
-        </Card>
+      {isAdmin && <div className={hc.kpis}>
+        <div className={hc.kpi} data-tone="navy"><p>Team production this month</p><b>${totalTeamProd.toLocaleString('en-US', { minimumFractionDigits: 2 })}</b></div>
+        <div className={hc.kpi}><p>People on the team</p><b>{agents.length}</b></div>
+        <div className={hc.kpi}><p>Deals won this month</p><b>{totalDeals}</b></div>
+        <div className={hc.kpi} data-tone={pendingInvites.length > 0 ? 'amber' : undefined}><p>Invites waiting</p><b>{pendingInvites.length}</b></div>
       </div>}
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: 'var(--space-1)', marginBottom: 'var(--space-3)', borderBottom: '1px solid var(--border-color)', paddingBottom: 'var(--space-1)' }}>
+      <div className={hc.tabs} role="tablist" aria-label="Team views">
         {[
           { key: 'hierarchy', label: 'Hierarchy' },
           ...(isAdmin ? [
@@ -2768,18 +2668,11 @@ export default function TeamDashboard() {
         ].map(tab => (
           <button
             key={tab.key}
+            type="button"
+            role="tab"
+            aria-selected={activeTab === tab.key}
+            className={hc.tab}
             onClick={() => setActiveTab(tab.key)}
-            style={{
-              padding: 'var(--space-1) var(--space-2)',
-              borderRadius: '999px',
-              border: 'none',
-              backgroundColor: activeTab === tab.key ? 'rgba(227, 169, 74, 0.15)' : 'transparent',
-              color: activeTab === tab.key ? 'var(--brand-navy)' : 'var(--text-secondary)',
-              fontWeight: activeTab === tab.key ? '600' : '500',
-              fontSize: 'var(--text-secondary)',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease'
-            }}
           >
             {tab.label}
           </button>
@@ -2803,7 +2696,7 @@ export default function TeamDashboard() {
       )}
 
       {/* Hierarchy Tab — Visual Org Chart */}
-      {activeTab === 'hierarchy' && <HierarchyChart agents={agents} allOverrides={allOverrides} selectedMember={selectedMember} setSelectedMember={setSelectedMember} isAdmin={isAdmin} router={router} setAssignManagerAgent={setAssignManagerAgent} setSelectedManagerId={setSelectedManagerId} userProfile={userProfile} onRefresh={() => loadAllData()} />}
+      {activeTab === 'hierarchy' && <ChartStatsContext.Provider value={chartStats}><HierarchyChart agents={agents} allOverrides={allOverrides} selectedMember={selectedMember} setSelectedMember={setSelectedMember} isAdmin={isAdmin} router={router} setAssignManagerAgent={setAssignManagerAgent} setSelectedManagerId={setSelectedManagerId} userProfile={userProfile} onRefresh={() => loadAllData()} /></ChartStatsContext.Provider>}
 
       {/* Resend result toast */}
       {resendResult && (
