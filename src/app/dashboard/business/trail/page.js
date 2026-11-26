@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
+import StatTiles from '@/components/ui/StatTiles';
 import { fetchCommissions } from '@/app/actions/commissions';
 import { useUser } from '@/context/UserContext';
 import Card from '@/components/ui/Card';
@@ -42,26 +43,11 @@ export default function TrailCommissionsPage() {
       <PageHeader title="Trail Commissions" />
 
       {/* Summary */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
-        <Card>
-          <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: 'var(--brand-navy)' }}>${totalTrail.toLocaleString()}</div>
-            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Total Trail</div>
-          </div>
-        </Card>
-        <Card>
-          <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: '#2FA84F' }}>${paidTrail.toLocaleString()}</div>
-            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Paid</div>
-          </div>
-        </Card>
-        <Card>
-          <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: '#E08E2B' }}>${pendingTrail.toLocaleString()}</div>
-            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Pending</div>
-          </div>
-        </Card>
-      </div>
+      <StatTiles items={[
+        { label: 'Trail commissions in all', value: `$${totalTrail.toLocaleString()}` },
+        { label: 'Paid', value: `$${paidTrail.toLocaleString()}`, tone: 'good', share: totalTrail ? paidTrail / totalTrail : 0 },
+        { label: 'Waiting to be paid', value: `$${pendingTrail.toLocaleString()}`, tone: 'amber' },
+      ]} />
 
       {commissions.length === 0 ? (
         <Card>

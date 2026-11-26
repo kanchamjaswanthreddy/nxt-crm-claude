@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import StatTiles from '@/components/ui/StatTiles';
 import { useUser } from '@/context/UserContext';
 import { getUploadUrl, finalizeDocumentUpload, fetchDocuments, getDocumentViewUrl } from '@/app/actions/documents';
 import { DOCUMENTS_MANAGER_TYPES, TAX_FORM_TYPES, getDocTypeLabel } from '@/lib/documentTypes';
@@ -199,26 +200,11 @@ export default function DocumentsManagerPage() {
       />
 
       {/* Summary cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
-        <Card>
-          <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: '#2FA84F' }}>{approvedCount}</div>
-            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Approved</div>
-          </div>
-        </Card>
-        <Card>
-          <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: '#E08E2B' }}>{pendingCount}</div>
-            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Pending Review</div>
-          </div>
-        </Card>
-        <Card>
-          <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: '#D33F3F' }}>{rejectedCount}</div>
-            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Rejected</div>
-          </div>
-        </Card>
-      </div>
+      <StatTiles lead={false} items={[
+        { label: 'Approved', value: approvedCount, tone: 'good' },
+        { label: 'Waiting for review', value: pendingCount, tone: pendingCount > 0 ? 'amber' : undefined },
+        { label: 'Rejected', value: rejectedCount, tone: rejectedCount > 0 ? 'warn' : undefined },
+      ]} />
 
       {/* ── Tax Forms Section ── */}
       <Card style={{ marginBottom: 'var(--space-3)' }}>

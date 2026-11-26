@@ -273,3 +273,20 @@ textarea:focus-visible {
 #main-content input:not([type="checkbox"]):not([type="radio"]), #main-content select, #main-content textarea { font-size: 16px; }
 ::selection { background: var(--brand-gold-light); color: var(--brand-navy); }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
+
+/* 2026 redesign: tables and form controls across the back office (many screens set these inline). */
+#main-content table { border-collapse: separate; border-spacing: 0; }
+#main-content thead tr { background: transparent !important; }
+#main-content th { padding: 14px 16px !important; font-size: 14px !important; font-weight: 600 !important; color: var(--text-secondary) !important; background: #FAF8F4 !important; border-bottom: 1px solid var(--border-color) !important; white-space: nowrap; }
+#main-content thead tr:first-child th:first-child { border-top-left-radius: 16px; }
+#main-content thead tr:first-child th:last-child { border-top-right-radius: 16px; }
+#main-content td { padding: 17px 16px !important; font-size: 16px !important; border-bottom: 1px solid var(--border-light) !important; }
+#main-content tbody tr { border-bottom: 0 !important; transition: background 0.2s; }
+#main-content tbody tr:hover > td { background: #FDF9F0; }
+#main-content tbody tr:last-child > td { border-bottom: 0 !important; }
+#main-content tbody td:first-child { font-weight: 600; color: var(--brand-navy); }
+#main-content input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="color"]), #main-content select { min-height: 46px; border-radius: 14px !important; }
+#main-content textarea { border-radius: 16px !important; }
+#main-content input:not([type="checkbox"]):not([type="radio"]):focus-visible, #main-content select:focus-visible, #main-content textarea:focus-visible { outline: 3px solid rgba(227, 169, 74, 0.55); outline-offset: 1px; border-color: #E3A94A !important; }
+#main-content input[type="checkbox"], #main-content input[type="radio"] { width: 18px; height: 18px; accent-color: #0C1022; }
+#main-content label { font-size: 15px; }

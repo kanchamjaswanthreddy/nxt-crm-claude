@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
+import StatTiles from '@/components/ui/StatTiles';
 import { useUser } from '@/context/UserContext';
 import { fetchAllAgencyDocuments } from '@/app/actions/documents';
 import { getDocumentViewUrl } from '@/app/actions/documents';
@@ -175,23 +176,11 @@ export default function AdminDocumentsPage() {
       />
 
       {/* Summary Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginBottom: '24px' }}>
-        <Card style={{ padding: '16px', textAlign: 'center', cursor: 'pointer', border: statusFilter === 'pending_review' ? '2px solid var(--brand-gold)' : undefined }}
-          onClick={() => setStatusFilter('pending_review')}>
-          <div style={{ fontSize: '28px', fontWeight: '700', color: '#856404' }}>{pendingCount}</div>
-          <div style={{ fontSize: '15px', color: 'var(--text-secondary)', marginTop: '4px' }}>Pending Review</div>
-        </Card>
-        <Card style={{ padding: '16px', textAlign: 'center', cursor: 'pointer', border: statusFilter === 'approved' ? '2px solid var(--brand-gold)' : undefined }}
-          onClick={() => setStatusFilter('approved')}>
-          <div style={{ fontSize: '28px', fontWeight: '700', color: '#155724' }}>{approvedCount}</div>
-          <div style={{ fontSize: '15px', color: 'var(--text-secondary)', marginTop: '4px' }}>Approved</div>
-        </Card>
-        <Card style={{ padding: '16px', textAlign: 'center', cursor: 'pointer', border: statusFilter === 'rejected' ? '2px solid var(--brand-gold)' : undefined }}
-          onClick={() => setStatusFilter('rejected')}>
-          <div style={{ fontSize: '28px', fontWeight: '700', color: '#721C24' }}>{rejectedCount}</div>
-          <div style={{ fontSize: '15px', color: 'var(--text-secondary)', marginTop: '4px' }}>Rejected</div>
-        </Card>
-      </div>
+      <StatTiles lead={false} items={[
+        { label: 'Waiting for review', value: pendingCount, tone: 'amber', onClick: () => setStatusFilter('pending_review'), active: statusFilter === 'pending_review' },
+        { label: 'Approved', value: approvedCount, tone: 'good', onClick: () => setStatusFilter('approved'), active: statusFilter === 'approved' },
+        { label: 'Rejected', value: rejectedCount, tone: rejectedCount > 0 ? 'warn' : undefined, onClick: () => setStatusFilter('rejected'), active: statusFilter === 'rejected' },
+      ]} />
 
       {/* Filters */}
       <Card style={{ padding: '16px', marginBottom: '24px' }}>

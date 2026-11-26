@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
+import SegTabs from '@/components/ui/SegTabs';
+import StatTiles from '@/components/ui/StatTiles';
 import { useRouter } from 'next/navigation';
 import { fetchCarriers } from '@/app/actions/commissions';
 import { useUser } from '@/context/UserContext';
@@ -86,48 +88,24 @@ export default function AnnuitiesPage() {
         actions={<button onClick={loadData} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '6px 14px', fontSize: '15px', cursor: 'pointer', color: 'var(--text-secondary)' }}>Refresh</button>}
       />
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
-        <Card>
-          <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: 'var(--brand-navy)' }}>{deals.length}</div>
-            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Total Deals</div>
-          </div>
-        </Card>
-        <Card>
-          <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: '#1B2A4E' }}>{openCount}</div>
-            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Open</div>
-          </div>
-        </Card>
-        <Card>
-          <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: '#2FA84F' }}>{wonCount}</div>
-            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Completed</div>
-          </div>
-        </Card>
-        <Card>
-          <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: 'var(--brand-gold)' }}>${totalPremium.toLocaleString()}</div>
-            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Total Premium</div>
-          </div>
-        </Card>
-      </div>
+      <StatTiles items={[
+        { label: 'Total premium', value: `$${totalPremium.toLocaleString()}`, note: `${deals.length} deals in all` },
+        { label: 'Open', value: openCount, share: deals.length ? openCount / deals.length : 0 },
+        { label: 'Completed', value: wonCount, tone: 'good', share: deals.length ? wonCount / deals.length : 0 },
+        { label: 'Other', value: deals.length - openCount - wonCount, tone: 'amber', note: 'declined or pending' },
+      ]} />
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-3)' }}>
-        <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
-          {['All', 'open', 'won', 'lost', 'pending'].map(s => (
-            <button key={s} onClick={() => setStatusFilter(s)} style={{
-              padding: '6px 16px', borderRadius: '999px', border: '1px solid var(--border-color)',
-              backgroundColor: statusFilter === s ? 'var(--brand-navy)' : 'transparent',
-              color: statusFilter === s ? '#fff' : 'var(--text-secondary)',
-              fontSize: '15px', fontWeight: '500', cursor: 'pointer'
-            }}>{s === 'All' ? 'All' : (STATUS_STYLES[s]?.label || s)}</button>
-          ))}
-        </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-3)' }}>
+        <SegTabs
+          label="Deal status"
+          value={statusFilter}
+          onChange={setStatusFilter}
+          tabs={['All', 'open', 'won', 'lost', 'pending'].map(s => ({ key: s, label: s === 'All' ? 'All' : (STATUS_STYLES[s]?.label || s), count: s === 'All' ? deals.length : deals.filter(d => d.status === s).length }))}
+        />
         <input
-          type="text" placeholder="Search deals..." value={searchTerm}
+          type="search" placeholder="Search by agent, carrier or policy number" aria-label="Search deals" value={searchTerm}
           onChange={e => setSearchTerm(e.target.value)}
-          style={{ padding: '8px 16px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '16px', width: '240px' }}
+          style={{ padding: '8px 18px', border: '1px solid var(--border-color)', fontSize: '16px', width: 'min(340px, 100%)', background: '#fff' }}
         />
       </div>
 

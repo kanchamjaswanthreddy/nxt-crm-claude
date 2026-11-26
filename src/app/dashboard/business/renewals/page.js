@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
+import StatTiles from '@/components/ui/StatTiles';
 import { useRouter } from 'next/navigation';
 import { fetchCarriers } from '@/app/actions/commissions';
 import { useUser } from '@/context/UserContext';
@@ -70,26 +71,11 @@ export default function RenewalsPage() {
         actions={<button onClick={loadData} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '6px 14px', fontSize: '15px', cursor: 'pointer', color: 'var(--text-secondary)' }}>Refresh</button>}
       />
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
-        <Card>
-          <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: 'var(--brand-navy)' }}>{renewals.length}</div>
-            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Total Renewals</div>
-          </div>
-        </Card>
-        <Card>
-          <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: '#2FA84F' }}>{wonCount}</div>
-            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Renewed</div>
-          </div>
-        </Card>
-        <Card>
-          <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: 'var(--brand-gold)' }}>${totalPremium.toLocaleString()}</div>
-            <div style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>Total Premium</div>
-          </div>
-        </Card>
-      </div>
+      <StatTiles items={[
+        { label: 'Premium up for renewal', value: `$${totalPremium.toLocaleString()}` },
+        { label: 'Renewals', value: renewals.length },
+        { label: 'Renewed', value: wonCount, tone: 'good', share: renewals.length ? wonCount / renewals.length : 0 },
+      ]} />
 
       {renewals.length === 0 ? (
         <Card>

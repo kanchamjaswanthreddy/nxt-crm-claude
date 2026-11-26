@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
+import StatTiles from '@/components/ui/StatTiles';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@/context/UserContext';
 import { fetchClients } from '@/app/actions/clients';
@@ -62,26 +63,11 @@ export default function ClientsPage() {
       />
 
       {/* Stats */}
-      <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: '16px', marginBottom: '24px',
-      }}>
-        {[
-          { label: 'Total Clients', value: clients.length, color: 'var(--brand-navy)' },
-          { label: 'With Policies', value: clientsWithPolicies, color: '#16a34a' },
-          { label: 'Total Policies', value: totalPolicies, color: 'var(--brand-gold)' },
-        ].map(stat => (
-          <Card key={stat.label}>
-            <div style={{ padding: '4px 0' }}>
-              <div style={{
-                fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)',
-                textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px',
-              }}>{stat.label}</div>
-              <div style={{ fontSize: '28px', fontWeight: 800, color: stat.color }}>{stat.value}</div>
-            </div>
-          </Card>
-        ))}
-      </div>
+      <StatTiles items={[
+        { label: 'Clients', value: clients.length },
+        { label: 'With at least one policy', value: clientsWithPolicies, tone: 'good', share: clients.length ? clientsWithPolicies / clients.length : 0 },
+        { label: 'Policies in all', value: totalPolicies },
+      ]} />
 
       {error && (
         <div style={{
