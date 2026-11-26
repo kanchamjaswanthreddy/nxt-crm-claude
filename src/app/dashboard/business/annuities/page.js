@@ -11,7 +11,7 @@ import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
 
 const STATUS_STYLES = {
-  open: { bg: 'rgba(45,111,196,0.1)', text: '#2D6FC4', label: 'Open' },
+  open: { bg: 'rgba(227, 169, 74,0.1)', text: '#1B2A4E', label: 'Open' },
   won: { bg: 'rgba(47,168,79,0.1)', text: '#2FA84F', label: 'Completed' },
   lost: { bg: 'rgba(211,63,63,0.1)', text: '#D33F3F', label: 'Declined' },
   pending: { bg: 'rgba(224,142,43,0.1)', text: '#E08E2B', label: 'Pending' },
@@ -95,7 +95,7 @@ export default function AnnuitiesPage() {
         </Card>
         <Card>
           <div style={{ textAlign: 'center', padding: 'var(--space-1)' }}>
-            <div style={{ fontSize: '28px', fontWeight: '700', color: '#2D6FC4' }}>{openCount}</div>
+            <div style={{ fontSize: '28px', fontWeight: '700', color: '#1B2A4E' }}>{openCount}</div>
             <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Open</div>
           </div>
         </Card>

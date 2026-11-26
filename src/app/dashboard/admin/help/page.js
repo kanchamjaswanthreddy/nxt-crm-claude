@@ -35,11 +35,11 @@ const STATUS_STYLES = {
   open: { bg: '#FEF3C7', color: '#92400E', label: 'Open' },
   in_progress: { bg: '#DBEAFE', color: '#1E40AF', label: 'In Progress' },
   resolved: { bg: '#D1FAE5', color: '#065F46', label: 'Resolved' },
-  closed: { bg: '#F3F4F6', color: '#374151', label: 'Closed' },
+  closed: { bg: '#F0EDE6', color: '#374151', label: 'Closed' },
 };
 
 const PRIORITY_STYLES = {
-  low: { bg: '#F3F4F6', color: '#6B7280' },
+  low: { bg: '#F0EDE6', color: '#5F5C56' },
   medium: { bg: '#FEF3C7', color: '#92400E' },
   high: { bg: '#FEE2E2', color: '#991B1B' },
   urgent: { bg: '#FEE2E2', color: '#7F1D1D', border: '1px solid #FCA5A5' },
@@ -533,7 +533,7 @@ export default function HelpDeskPage() {
                       <tr key={ticket.id}
                         onClick={() => setSelectedTicket(ticket)}
                         style={{ borderBottom: '1px solid var(--border-color)', cursor: 'pointer', transition: 'background 0.1s' }}
-                        onMouseEnter={e => e.currentTarget.style.backgroundColor = '#F9FAFB'}
+                        onMouseEnter={e => e.currentTarget.style.backgroundColor = '#F7F5F0'}
                         onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
                       >
                         <td style={{ padding: '12px 16px', fontWeight: 500, color: 'var(--brand-navy)' }}>{ticket.ticketNumber}</td>
@@ -567,14 +567,14 @@ export default function HelpDeskPage() {
                   style={{
                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     padding: '8px 10px', borderRadius: 8, cursor: 'pointer',
-                    backgroundColor: filterCategory === cat.value ? 'rgba(201,154,61,0.1)' : 'transparent',
-                    border: filterCategory === cat.value ? '1px solid rgba(201,154,61,0.3)' : '1px solid transparent',
+                    backgroundColor: filterCategory === cat.value ? 'rgba(227, 169, 74,0.1)' : 'transparent',
+                    border: filterCategory === cat.value ? '1px solid rgba(227, 169, 74,0.3)' : '1px solid transparent',
                   }}
                 >
                   <span style={{ fontSize: 14, color: 'var(--text-primary)', fontWeight: 500 }}>{cat.label}</span>
                   <span style={{
                     fontSize: 13, fontWeight: 600, padding: '2px 9px', borderRadius: 999,
-                    backgroundColor: cat.count > 0 ? 'rgba(201,154,61,0.15)' : '#F3F4F6',
+                    backgroundColor: cat.count > 0 ? 'rgba(227, 169, 74,0.15)' : '#F0EDE6',
                     color: cat.count > 0 ? 'var(--brand-navy)' : 'var(--text-secondary)',
                   }}>{cat.count}</span>
                 </div>
@@ -600,13 +600,13 @@ export default function HelpDeskPage() {
                       style={{
                         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                         padding: '6px 10px', borderRadius: 8, cursor: 'pointer',
-                        backgroundColor: filterAssigned === m.id ? 'rgba(201,154,61,0.1)' : 'transparent',
+                        backgroundColor: filterAssigned === m.id ? 'rgba(227, 169, 74,0.1)' : 'transparent',
                       }}
                     >
                       <span style={{ fontSize: 14, color: 'var(--text-primary)' }}>{m.name}</span>
                       <span style={{
                         fontSize: 12, fontWeight: 600, padding: '2px 8px', borderRadius: 999,
-                        backgroundColor: assignedCount > 0 ? '#DBEAFE' : '#F3F4F6',
+                        backgroundColor: assignedCount > 0 ? '#DBEAFE' : '#F0EDE6',
                         color: assignedCount > 0 ? '#1E40AF' : 'var(--text-secondary)',
                       }}>{assignedCount}</span>
                     </div>

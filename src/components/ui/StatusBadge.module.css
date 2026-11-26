@@ -72,7 +72,7 @@
 /* ── Neutral ── */
 
 .neutral {
-  background: #F3F4F6;
+  background: #F0EDE6;
   color: #4B5563;
 }
 
@@ -83,7 +83,7 @@
 /* ── Gold ── */
 
 .gold {
-  background: rgba(201, 154, 61, 0.12);
+  background: rgba(227, 169, 74, 0.12);
   color: #92610A;
 }
 

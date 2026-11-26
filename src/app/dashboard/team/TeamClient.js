@@ -28,14 +28,14 @@ import { useToast } from '@/components/ui/Toast';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
 const STATUS_LABELS = {
-  invited: { label: 'Invited', color: 'var(--brand-blue-accent)', bg: 'rgba(45, 111, 196, 0.1)' },
+  invited: { label: 'Invited', color: 'var(--brand-blue-accent)', bg: 'rgba(227, 169, 74, 0.1)' },
   active: { label: 'Active', color: 'var(--status-success)', bg: 'rgba(47, 168, 79, 0.08)' },
   onboarding: { label: 'Onboarding', color: 'var(--status-warning)', bg: 'rgba(224, 142, 43, 0.1)' },
-  pending_licensing: { label: 'Pending License', color: 'var(--brand-gold)', bg: 'rgba(201, 154, 61, 0.1)' },
+  pending_licensing: { label: 'Pending License', color: 'var(--brand-gold)', bg: 'rgba(227, 169, 74, 0.1)' },
   docs_pending_review: { label: 'Docs Pending Review', color: 'var(--status-warning)', bg: 'rgba(224, 142, 43, 0.1)' },
-  docs_pending: { label: 'Docs Pending', color: 'var(--brand-gold)', bg: 'rgba(201, 154, 61, 0.1)' },
+  docs_pending: { label: 'Docs Pending', color: 'var(--brand-gold)', bg: 'rgba(227, 169, 74, 0.1)' },
   licensed: { label: 'Licensed', color: 'var(--status-success)', bg: 'rgba(47, 168, 79, 0.08)' },
-  contracted: { label: 'Contracted', color: 'var(--brand-navy)', bg: 'rgba(15, 42, 82, 0.08)' },
+  contracted: { label: 'Contracted', color: 'var(--brand-navy)', bg: 'rgba(12, 16, 34, 0.08)' },
   inactive: { label: 'Inactive', color: 'var(--brand-silver)', bg: 'rgba(169, 172, 177, 0.15)' }
 };
 
@@ -84,29 +84,29 @@ function NodeCardContent({ node, isSelected, isFindMe, isDropTarget, isDragging 
         backgroundColor: isDropTarget
           ? 'rgba(47, 168, 79, 0.1)'
           : isSplit
-            ? 'rgba(201, 154, 61, 0.03)'
+            ? 'rgba(227, 169, 74, 0.03)'
             : isSelected
-              ? 'rgba(201, 154, 61, 0.08)'
+              ? 'rgba(227, 169, 74, 0.08)'
               : 'var(--surface-card)',
         border: isDropTarget
           ? '2px dashed var(--status-success)'
           : isSplit
-            ? '1.5px dashed rgba(201, 154, 61, 0.5)'
+            ? '1.5px dashed rgba(227, 169, 74, 0.5)'
             : isSelected
               ? '2px solid var(--brand-gold)'
               : isFindMe
-                ? '2px solid #2D6FC4'
+                ? '2px solid #1B2A4E'
                 : '1px solid var(--border-color)',
         textAlign: 'center',
         transition: 'all 0.2s ease',
         boxShadow: isDragging
           ? '0 16px 40px rgba(0,0,0,0.2)'
           : isSelected
-            ? '0 6px 20px rgba(201, 154, 61, 0.18)'
+            ? '0 6px 20px rgba(227, 169, 74, 0.18)'
             : isFindMe
-              ? '0 0 0 3px rgba(45,111,196,0.15)'
+              ? '0 0 0 3px rgba(227, 169, 74,0.15)'
               : isSplit
-                ? '0 2px 8px rgba(201, 154, 61, 0.08)'
+                ? '0 2px 8px rgba(227, 169, 74, 0.08)'
                 : '0 2px 12px rgba(0,0,0,0.04)',
         boxSizing: 'border-box',
         overflow: 'hidden',
@@ -141,7 +141,7 @@ function NodeCardContent({ node, isSelected, isFindMe, isDropTarget, isDragging 
       {node.is_owner ? (
         <span style={{
           display: 'inline-block', padding: '2px 10px', borderRadius: '999px', fontSize: '10px',
-          fontWeight: 700, background: 'linear-gradient(135deg, #0F2A52, #1B3A6B)', color: '#C99A3D', flexShrink: 0,
+          fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A', flexShrink: 0,
         }}>
           Owner
         </span>
@@ -160,10 +160,10 @@ function NodeCardContent({ node, isSelected, isFindMe, isDropTarget, isDragging 
         <div style={{ flexShrink: 0, textAlign: 'center', lineHeight: '1.3' }}>
           <div style={{
             fontSize: '10px', fontWeight: '700', color: '#fff',
-            background: 'linear-gradient(135deg, var(--brand-gold), #D4A843)',
+            background: 'linear-gradient(135deg, var(--brand-gold), #E3A94A)',
             borderRadius: '999px', padding: '2px 10px',
             display: 'inline-flex', alignItems: 'center', height: '18px',
-            boxShadow: '0 1px 4px rgba(201,154,61,0.3)',
+            boxShadow: '0 1px 4px rgba(227, 169, 74,0.3)',
           }}>
             {node._splitPercent}% commission
           </div>
@@ -343,7 +343,7 @@ function MobileTreeList({ nodes, depth, onSelect, selectedId }) {
                 marginLeft: `${depth * 20}px`,
                 marginBottom: '4px',
                 borderRadius: '10px',
-                backgroundColor: selectedId === node.id ? 'rgba(201, 154, 61, 0.1)' : 'rgba(0,0,0,0.02)',
+                backgroundColor: selectedId === node.id ? 'rgba(227, 169, 74, 0.1)' : 'rgba(0,0,0,0.02)',
                 border: selectedId === node.id ? '1.5px solid var(--brand-gold)' : '1.5px solid transparent',
                 cursor: 'pointer',
               }}
@@ -358,7 +358,7 @@ function MobileTreeList({ nodes, depth, onSelect, selectedId }) {
                 </div>
               </div>
               {node.is_owner ? (
-                <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '9px', fontWeight: 700, background: 'linear-gradient(135deg, #0F2A52, #1B3A6B)', color: '#C99A3D', whiteSpace: 'nowrap' }}>
+                <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '9px', fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A', whiteSpace: 'nowrap' }}>
                   Owner
                 </span>
               ) : (
@@ -1208,7 +1208,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               </h3>
               <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: 'var(--space-3)' }}>
                 {m.is_owner && (
-                  <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '11px', fontWeight: 700, background: 'linear-gradient(135deg, #0F2A52, #1B3A6B)', color: '#C99A3D' }}>Owner</span>
+                  <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '11px', fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A' }}>Owner</span>
                 )}
                 <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '11px', fontWeight: 600, backgroundColor: 'rgba(10, 37, 64, 0.06)', color: 'var(--brand-navy)' }}>
                   L{lvl.level} — {lvl.title}
@@ -1320,8 +1320,8 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                         style={{
                           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                           padding: '8px 12px', borderRadius: '8px',
-                          backgroundColor: 'rgba(201, 154, 61, 0.06)',
-                          border: '1px solid rgba(201, 154, 61, 0.15)',
+                          backgroundColor: 'rgba(227, 169, 74, 0.06)',
+                          border: '1px solid rgba(227, 169, 74, 0.15)',
                         }}
                       >
                         <span style={{ fontSize: '12px', color: 'var(--brand-navy)', fontWeight: 500 }}>
@@ -1358,7 +1358,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                         onClick={() => { setSelectedMember(null); setAssignManagerAgent(m); setSelectedManagerId(m.upline_id || ''); }}
                         style={{
                           flex: 1, padding: '10px', borderRadius: '10px', fontSize: '13px',
-                          border: '1.5px solid var(--brand-gold)', backgroundColor: 'rgba(201, 154, 61, 0.08)',
+                          border: '1.5px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.08)',
                           cursor: 'pointer', color: 'var(--brand-navy)', fontWeight: 600,
                         }}
                       >
@@ -1402,7 +1402,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
         <div style={{
           padding: '10px 16px', borderBottom: '1px solid var(--border-color)',
           display: 'flex', alignItems: 'center', gap: '12px',
-          background: 'linear-gradient(180deg, rgba(15, 42, 82, 0.03), transparent)',
+          background: 'linear-gradient(180deg, rgba(12, 16, 34, 0.03), transparent)',
         }}>
           {/* Search */}
           <div style={{ position: 'relative', flex: '0 1 260px' }}>
@@ -1451,7 +1451,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                       padding: '8px 12px', cursor: 'pointer',
                       transition: 'background-color 0.1s',
                     }}
-                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(201,154,61,0.06)'}
+                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74,0.06)'}
                     onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
                   >
                     <Avatar name={dn(a)} photoUrl={a.photo_url} size={24} goldText={false} />
@@ -1571,7 +1571,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
         {scopeId && breadcrumbs.length > 0 && (
           <div style={{
             padding: '6px 16px', fontSize: '12px', color: 'var(--text-secondary)',
-            backgroundColor: 'rgba(15, 42, 82, 0.04)', borderBottom: '1px solid var(--border-color)',
+            backgroundColor: 'rgba(12, 16, 34, 0.04)', borderBottom: '1px solid var(--border-color)',
             display: 'flex', alignItems: 'center', gap: '4px', flexWrap: 'wrap',
           }}>
             <button
@@ -1580,7 +1580,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                 background: 'none', border: 'none', cursor: 'pointer', padding: '2px 6px',
                 borderRadius: '4px', fontSize: '12px', color: 'var(--brand-blue-accent)', fontWeight: 600,
               }}
-              onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(45,111,196,0.1)'}
+              onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74,0.1)'}
               onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
             >
               All
@@ -1601,7 +1601,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                         background: 'none', border: 'none', cursor: 'pointer', padding: '2px 6px',
                         borderRadius: '4px', fontSize: '12px', color: 'var(--brand-blue-accent)', fontWeight: 500,
                       }}
-                      onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(45,111,196,0.1)'}
+                      onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74,0.1)'}
                       onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
                     >
                       {dn(node)}
@@ -1655,7 +1655,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                   }}
                 >
                   {svgPaths.map((d, i) => (
-                    <path key={i} d={d} fill="none" stroke="rgba(15, 42, 82, 0.15)" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round" />
+                    <path key={i} d={d} fill="none" stroke="rgba(12, 16, 34, 0.15)" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round" />
                   ))}
                 </svg>
 
@@ -1715,7 +1715,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   transition: 'background-color 0.15s',
                 }}
-                onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(201,154,61,0.1)'}
+                onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74,0.1)'}
                 onMouseLeave={e => e.currentTarget.style.backgroundColor = 'var(--surface-card)'}
               >
                 {label}
@@ -1819,7 +1819,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                     return (
                       <div key={log.id} style={{
                         padding: '10px 12px', borderRadius: '8px',
-                        backgroundColor: log.undone ? 'rgba(0,0,0,0.02)' : 'rgba(201,154,61,0.04)',
+                        backgroundColor: log.undone ? 'rgba(0,0,0,0.02)' : 'rgba(227, 169, 74,0.04)',
                         border: '1px solid var(--border-color)',
                         opacity: log.undone ? 0.6 : 1,
                       }}>
@@ -2209,7 +2209,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
             onClick={() => setSelectedMember(null)}
             style={{
               position: 'fixed', inset: 0,
-              backgroundColor: 'rgba(15, 42, 82, 0.35)',
+              backgroundColor: 'rgba(12, 16, 34, 0.35)',
               backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)',
               zIndex: 9999,
               animation: 'fadeIn 0.2s ease',
@@ -2232,7 +2232,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
             {/* Header with navy accent bar */}
             <div style={{
               padding: '24px 24px 18px',
-              background: 'linear-gradient(180deg, rgba(15, 42, 82, 0.04), transparent)',
+              background: 'linear-gradient(180deg, rgba(12, 16, 34, 0.04), transparent)',
               borderBottom: '1px solid var(--border-light)',
             }}>
               <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
@@ -2243,7 +2243,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                   </h3>
                   <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginTop: '8px' }}>
                     {m.is_owner && (
-                      <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '10px', fontWeight: 700, background: 'linear-gradient(135deg, #0F2A52, #1B3A6B)', color: '#C99A3D' }}>Owner</span>
+                      <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '10px', fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A' }}>Owner</span>
                     )}
                     <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '10px', fontWeight: 600, backgroundColor: 'rgba(10, 37, 64, 0.06)', color: 'var(--brand-navy)' }}>
                       L{lvl.level} · {lvl.title}
@@ -2375,8 +2375,8 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                         style={{
                           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                           padding: '10px 12px', borderRadius: '10px',
-                          background: 'linear-gradient(135deg, rgba(201, 154, 61, 0.06), rgba(201, 154, 61, 0.02))',
-                          border: '1px solid rgba(201, 154, 61, 0.12)',
+                          background: 'linear-gradient(135deg, rgba(227, 169, 74, 0.06), rgba(227, 169, 74, 0.02))',
+                          border: '1px solid rgba(227, 169, 74, 0.12)',
                         }}
                       >
                         <span style={{ fontSize: '12px', color: 'var(--brand-navy)', fontWeight: 500 }}>
@@ -2384,10 +2384,10 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                         </span>
                         <span style={{
                           fontSize: '11px', fontWeight: 700, color: '#fff',
-                          background: 'linear-gradient(135deg, var(--brand-gold), #D4A843)',
+                          background: 'linear-gradient(135deg, var(--brand-gold), #E3A94A)',
                           borderRadius: '999px',
                           padding: '2px 10px', display: 'inline-flex', alignItems: 'center',
-                          boxShadow: '0 1px 3px rgba(201,154,61,0.3)',
+                          boxShadow: '0 1px 3px rgba(227, 169, 74,0.3)',
                         }}>
                           {s.percent}%
                         </span>
@@ -2403,7 +2403,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               padding: '14px 24px 18px',
               borderTop: '1px solid var(--border-light)',
               display: 'flex', gap: '8px', flexWrap: 'wrap',
-              background: 'linear-gradient(0deg, rgba(15, 42, 82, 0.02), transparent)',
+              background: 'linear-gradient(0deg, rgba(12, 16, 34, 0.02), transparent)',
             }}>
               {isAdmin && (
                 <>
@@ -2425,12 +2425,12 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                       onClick={() => { setSelectedMember(null); setAssignManagerAgent(m); setSelectedManagerId(m.upline_id || ''); }}
                       style={{
                         flex: 1, padding: '10px', borderRadius: '10px', fontSize: '12px',
-                        border: '1.5px solid var(--brand-gold)', backgroundColor: 'rgba(201, 154, 61, 0.06)',
+                        border: '1.5px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.06)',
                         cursor: 'pointer', color: 'var(--brand-navy)', fontWeight: 600,
                         transition: 'background-color 0.15s',
                       }}
-                      onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(201, 154, 61, 0.12)'}
-                      onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(201, 154, 61, 0.06)'}
+                      onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74, 0.12)'}
+                      onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74, 0.06)'}
                     >
                       Assign Upline
                     </button>
@@ -2442,12 +2442,12 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                   onClick={() => { setSelectedMember(null); handleScopeIn(m.id); }}
                   style={{
                     flex: 1, padding: '10px', borderRadius: '10px', fontSize: '12px',
-                    border: '1.5px solid var(--brand-blue-accent)', backgroundColor: 'rgba(45, 111, 196, 0.04)',
+                    border: '1.5px solid var(--brand-blue-accent)', backgroundColor: 'rgba(227, 169, 74, 0.04)',
                     cursor: 'pointer', color: 'var(--brand-navy)', fontWeight: 600,
                     transition: 'background-color 0.15s',
                   }}
-                  onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(45, 111, 196, 0.1)'}
-                  onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(45, 111, 196, 0.04)'}
+                  onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74, 0.1)'}
+                  onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74, 0.04)'}
                 >
                   View Team
                 </button>
@@ -2705,7 +2705,7 @@ export default function TeamDashboard() {
               disabled={isSendingWorkAuth}
               style={{
                 padding: '8px 16px', borderRadius: '999px',
-                border: '1.5px solid var(--brand-gold)', backgroundColor: 'rgba(201, 154, 61, 0.08)',
+                border: '1.5px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.08)',
                 color: 'var(--brand-navy)', fontSize: 'var(--text-caption)', fontWeight: 600,
                 cursor: isSendingWorkAuth ? 'wait' : 'pointer', opacity: isSendingWorkAuth ? 0.5 : 1,
                 transition: 'all 0.2s ease',
@@ -2773,7 +2773,7 @@ export default function TeamDashboard() {
               padding: 'var(--space-1) var(--space-2)',
               borderRadius: '999px',
               border: 'none',
-              backgroundColor: activeTab === tab.key ? 'rgba(201, 154, 61, 0.15)' : 'transparent',
+              backgroundColor: activeTab === tab.key ? 'rgba(227, 169, 74, 0.15)' : 'transparent',
               color: activeTab === tab.key ? 'var(--brand-navy)' : 'var(--text-secondary)',
               fontWeight: activeTab === tab.key ? '600' : '500',
               fontSize: 'var(--text-secondary)',
@@ -2936,7 +2936,7 @@ export default function TeamDashboard() {
                               onClick={() => { setAssignManagerAgent(m); setSelectedManagerId(''); }}
                               style={{
                                 padding: '2px 10px', borderRadius: '999px', border: '1px solid var(--brand-gold)',
-                                backgroundColor: 'rgba(201, 154, 61, 0.08)', cursor: 'pointer', fontSize: '11px',
+                                backgroundColor: 'rgba(227, 169, 74, 0.08)', cursor: 'pointer', fontSize: '11px',
                                 color: 'var(--brand-navy)', fontWeight: '500'
                               }}
                             >
@@ -2998,7 +2998,7 @@ export default function TeamDashboard() {
                 const lvl = AGENT_LEVELS.find(l => l.level === (mgr.agentLevel || 1)) || AGENT_LEVELS[0];
                 return (
                   <>
-                    <span style={{ fontSize: '11px', fontWeight: 700, color: '#0f2a52', backgroundColor: 'rgba(15,42,82,0.08)', padding: '2px 8px', borderRadius: '6px', fontFamily: 'monospace', flexShrink: 0 }}>
+                    <span style={{ fontSize: '11px', fontWeight: 700, color: '#0C1022', backgroundColor: 'rgba(12, 16, 34,0.08)', padding: '2px 8px', borderRadius: '6px', fontFamily: 'monospace', flexShrink: 0 }}>
                       {mgr.nxt_id || '---'}
                     </span>
                     <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)' }}>{dn(mgr)}</span>
@@ -3109,7 +3109,7 @@ export default function TeamDashboard() {
                                   onClick={() => router.push(`/dashboard/team/${matchedAgent.id}`)}
                                   style={{
                                     padding: '4px 12px', borderRadius: '999px',
-                                    border: '1px solid var(--brand-navy)', backgroundColor: 'rgba(15, 42, 82, 0.06)',
+                                    border: '1px solid var(--brand-navy)', backgroundColor: 'rgba(12, 16, 34, 0.06)',
                                     cursor: 'pointer', fontSize: 'var(--text-caption)', color: 'var(--brand-navy)',
                                     fontWeight: '600', transition: 'all 0.2s ease'
                                   }}
@@ -3173,7 +3173,7 @@ export default function TeamDashboard() {
                                   onClick={() => { setLinkingInviteId(inv.id); setLinkAgentSearch(''); }}
                                   style={{
                                     padding: '4px 12px', borderRadius: '999px',
-                                    border: '1px solid var(--brand-gold)', backgroundColor: 'rgba(201, 154, 61, 0.08)',
+                                    border: '1px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.08)',
                                     cursor: 'pointer', fontSize: 'var(--text-caption)', color: 'var(--brand-navy)',
                                     fontWeight: '600', transition: 'all 0.2s ease'
                                   }}

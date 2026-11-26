@@ -72,8 +72,8 @@ export default function AgentSearchSelect({
   const defaultRenderItem = (a, isSel) => (
     <>
       <span style={{
-        fontSize: '11px', fontWeight: 700, color: '#0f2a52',
-        backgroundColor: 'rgba(15, 42, 82, 0.08)',
+        fontSize: '11px', fontWeight: 700, color: '#0C1022',
+        backgroundColor: 'rgba(12, 16, 34, 0.08)',
         padding: '2px 8px', borderRadius: '6px',
         fontFamily: 'monospace', letterSpacing: '0.5px', flexShrink: 0,
       }}>
@@ -155,14 +155,14 @@ export default function AgentSearchSelect({
               style={{
                 display: 'flex', alignItems: 'center', width: '100%',
                 padding: '10px 14px', border: 'none',
-                backgroundColor: !value ? 'rgba(15, 42, 82, 0.06)' : 'transparent',
+                backgroundColor: !value ? 'rgba(12, 16, 34, 0.06)' : 'transparent',
                 cursor: 'pointer', textAlign: 'left',
                 fontFamily: 'var(--font-base)',
                 fontSize: '13px', color: 'var(--text-secondary)', fontStyle: 'italic',
                 borderBottom: '1px solid rgba(0,0,0,0.05)',
               }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(15, 42, 82, 0.04)'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = !value ? 'rgba(15, 42, 82, 0.06)' : 'transparent'}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(12, 16, 34, 0.04)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = !value ? 'rgba(12, 16, 34, 0.06)' : 'transparent'}
             >
               {emptyLabel}
             </button>
@@ -180,13 +180,13 @@ export default function AgentSearchSelect({
                 style={{
                   display: 'flex', alignItems: 'center', gap: '8px',
                   width: '100%', padding: '9px 14px', border: 'none',
-                  backgroundColor: a.id === value ? 'rgba(15, 42, 82, 0.06)' : 'transparent',
+                  backgroundColor: a.id === value ? 'rgba(12, 16, 34, 0.06)' : 'transparent',
                   cursor: 'pointer', textAlign: 'left',
                   transition: 'background-color 0.15s ease',
                   fontFamily: 'var(--font-base)',
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(15, 42, 82, 0.04)'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = a.id === value ? 'rgba(15, 42, 82, 0.06)' : 'transparent'}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(12, 16, 34, 0.04)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = a.id === value ? 'rgba(12, 16, 34, 0.06)' : 'transparent'}
               >
                 {renderItem ? renderItem(a, a.id === value) : defaultRenderItem(a, a.id === value)}
               </button>

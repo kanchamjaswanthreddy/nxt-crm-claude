@@ -10,9 +10,9 @@ const CARD_ELEMENT_OPTIONS = {
     base: {
       fontSize: '16px',
       fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
-      color: '#0F2A52',
+      color: '#0C1022',
       '::placeholder': { color: 'rgba(0, 0, 0, 0.3)' },
-      iconColor: '#0F2A52',
+      iconColor: '#0C1022',
     },
     invalid: {
       color: '#D33F3F',

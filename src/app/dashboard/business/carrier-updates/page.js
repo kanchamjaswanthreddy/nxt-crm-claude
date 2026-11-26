@@ -9,10 +9,10 @@ import Button from '@/components/ui/Button';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
 const CATEGORY_STYLES = {
-  product_update: { bg: 'rgba(45,111,196,0.1)', text: '#2D6FC4', label: 'Product Update' },
+  product_update: { bg: 'rgba(227, 169, 74,0.1)', text: '#1B2A4E', label: 'Product Update' },
   rate_change: { bg: 'rgba(224,142,43,0.1)', text: '#E08E2B', label: 'Rate Change' },
   compliance: { bg: 'rgba(211,63,63,0.1)', text: '#D33F3F', label: 'Compliance' },
-  announcement: { bg: 'rgba(107,114,128,0.1)', text: '#6B7280', label: 'Announcement' },
+  announcement: { bg: 'rgba(107,114,128,0.1)', text: '#5F5C56', label: 'Announcement' },
 };
 
 const PRIORITY_STYLES = {

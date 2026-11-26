@@ -25,10 +25,10 @@ import Avatar from '@/components/Avatar';
 function StatusBadge({ status, size = 'default' }) {
   const config = {
     active: { bg: 'rgba(47, 168, 79, 0.1)', color: 'var(--status-success)', label: 'Active' },
-    invited: { bg: 'rgba(45, 111, 196, 0.1)', color: 'var(--brand-blue-accent)', label: 'Invited' },
-    onboarding: { bg: 'rgba(201, 154, 61, 0.1)', color: 'var(--brand-gold)', label: 'Onboarding' },
+    invited: { bg: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-blue-accent)', label: 'Invited' },
+    onboarding: { bg: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-gold)', label: 'Onboarding' },
     docs_pending_review: { bg: 'rgba(224, 142, 43, 0.1)', color: 'var(--status-warning)', label: 'Docs Pending Review' },
-    pending_licensing: { bg: 'rgba(201, 154, 61, 0.1)', color: 'var(--brand-gold)', label: 'Pending License' },
+    pending_licensing: { bg: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-gold)', label: 'Pending License' },
     suspended: { bg: 'rgba(211, 63, 63, 0.1)', color: 'var(--status-error)', label: 'Suspended' },
     inactive: { bg: 'rgba(0, 0, 0, 0.06)', color: 'var(--text-secondary)', label: 'Inactive' },
   };
@@ -59,7 +59,7 @@ function ComplianceIndicator({ label, isComplete, detail }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
         <div style={{
           width: '28px', height: '28px', borderRadius: '50%',
-          backgroundColor: isComplete ? 'rgba(47, 168, 79, 0.1)' : 'rgba(201, 154, 61, 0.1)',
+          backgroundColor: isComplete ? 'rgba(47, 168, 79, 0.1)' : 'rgba(227, 169, 74, 0.1)',
           display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
         }}>
           {isComplete ? (
@@ -576,7 +576,7 @@ export default function AgentDetailPage() {
               {agentIsOwner ? (
                 <span style={{
                   padding: '2px 10px', borderRadius: '999px', fontSize: 'var(--text-caption)',
-                  fontWeight: 700, background: 'linear-gradient(135deg, #0F2A52, #1B3A6B)', color: '#C99A3D',
+                  fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A',
                   letterSpacing: '0.03em',
                 }}>
                   Agency Owner
@@ -584,7 +584,7 @@ export default function AgentDetailPage() {
               ) : (
                 <span style={{
                   padding: '2px 10px', borderRadius: '999px', fontSize: 'var(--text-caption)',
-                  fontWeight: 600, backgroundColor: 'rgba(15, 42, 82, 0.06)', color: 'var(--brand-navy)', textTransform: 'capitalize',
+                  fontWeight: 600, backgroundColor: 'rgba(12, 16, 34, 0.06)', color: 'var(--brand-navy)', textTransform: 'capitalize',
                 }}>
                   {agent.role}
                 </span>
@@ -680,7 +680,7 @@ export default function AgentDetailPage() {
               onClick={() => { setAssignManagerOpen(true); setSelectedManagerId(agent.upline_id || ''); }}
               style={{
                 padding: '5px 12px', borderRadius: '8px',
-                border: '1px solid var(--brand-gold)', backgroundColor: 'rgba(201, 154, 61, 0.06)',
+                border: '1px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.06)',
                 color: 'var(--brand-navy)', fontSize: 'var(--text-caption)',
                 fontWeight: 600, cursor: 'pointer', transition: 'all 0.15s ease',
               }}
@@ -692,7 +692,7 @@ export default function AgentDetailPage() {
               onClick={() => setShowRequestModal(true)}
               style={{
                 padding: '5px 12px', borderRadius: '8px',
-                border: '1px solid var(--brand-blue-accent)', backgroundColor: 'rgba(45, 111, 196, 0.06)',
+                border: '1px solid var(--brand-blue-accent)', backgroundColor: 'rgba(227, 169, 74, 0.06)',
                 color: 'var(--brand-navy)', fontSize: 'var(--text-caption)',
                 fontWeight: 600, cursor: 'pointer', transition: 'all 0.15s ease',
               }}
@@ -837,7 +837,7 @@ export default function AgentDetailPage() {
                   {agent.licensedStates.map(s => (
                     <span key={s} style={{
                       padding: '2px 8px', borderRadius: '999px', fontSize: 'var(--text-caption)',
-                      fontWeight: 500, backgroundColor: 'rgba(15, 42, 82, 0.06)', color: 'var(--brand-navy)',
+                      fontWeight: 500, backgroundColor: 'rgba(12, 16, 34, 0.06)', color: 'var(--brand-navy)',
                     }}>{s}</span>
                   ))}
                 </div>
@@ -869,7 +869,7 @@ export default function AgentDetailPage() {
                     <span style={{ fontWeight: 600, fontSize: 'var(--text-secondary)', color: 'var(--brand-navy)' }}>E&O Insurance</span>
                     <span style={{
                       padding: '2px 8px', borderRadius: '999px', fontSize: '11px', fontWeight: 600,
-                      backgroundColor: hasEO ? 'rgba(47, 168, 79, 0.1)' : 'rgba(201, 154, 61, 0.1)',
+                      backgroundColor: hasEO ? 'rgba(47, 168, 79, 0.1)' : 'rgba(227, 169, 74, 0.1)',
                       color: hasEO ? 'var(--status-success)' : 'var(--brand-gold)',
                     }}>
                       {hasEO ? 'Active' : 'Missing'}
@@ -892,7 +892,7 @@ export default function AgentDetailPage() {
                     <span style={{ fontWeight: 600, fontSize: 'var(--text-secondary)', color: 'var(--brand-navy)' }}>AML Certification</span>
                     <span style={{
                       padding: '2px 8px', borderRadius: '999px', fontSize: '11px', fontWeight: 600,
-                      backgroundColor: hasAML ? 'rgba(47, 168, 79, 0.1)' : 'rgba(201, 154, 61, 0.1)',
+                      backgroundColor: hasAML ? 'rgba(47, 168, 79, 0.1)' : 'rgba(227, 169, 74, 0.1)',
                       color: hasAML ? 'var(--status-success)' : 'var(--brand-gold)',
                     }}>
                       {hasAML ? 'Certified' : 'Missing'}
@@ -1420,7 +1420,7 @@ export default function AgentDetailPage() {
               onClick={() => setShowRequestModal(true)}
               style={{
                 padding: '4px 12px', borderRadius: '8px', border: '1px solid var(--brand-blue-accent)',
-                backgroundColor: 'rgba(45, 111, 196, 0.06)', color: 'var(--brand-navy)',
+                backgroundColor: 'rgba(227, 169, 74, 0.06)', color: 'var(--brand-navy)',
                 fontSize: 'var(--text-caption)', fontWeight: 600, cursor: 'pointer',
               }}
             >
@@ -1456,7 +1456,7 @@ export default function AgentDetailPage() {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
                           <span style={{
                             padding: '2px 8px', borderRadius: '999px', fontSize: '11px', fontWeight: 600,
-                            backgroundColor: 'rgba(45, 111, 196, 0.1)', color: '#2D6FC4',
+                            backgroundColor: 'rgba(227, 169, 74, 0.1)', color: '#1B2A4E',
                           }}>
                             {typeLabels[req.requestType] || req.requestType}
                           </span>
@@ -1583,7 +1583,7 @@ export default function AgentDetailPage() {
               emptyLabel="— No Upline —"
               renderItem={(mgr) => (
                 <>
-                  <span style={{ fontSize: '11px', fontWeight: 700, color: '#0f2a52', backgroundColor: 'rgba(15,42,82,0.08)', padding: '2px 8px', borderRadius: '6px', fontFamily: 'monospace', flexShrink: 0 }}>
+                  <span style={{ fontSize: '11px', fontWeight: 700, color: '#0C1022', backgroundColor: 'rgba(12, 16, 34,0.08)', padding: '2px 8px', borderRadius: '6px', fontFamily: 'monospace', flexShrink: 0 }}>
                     {mgr.nxt_id || '---'}
                   </span>
                   <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)' }}>{dn(mgr)}</span>

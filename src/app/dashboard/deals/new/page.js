@@ -132,7 +132,7 @@ function NewDealForm() {
       <Card>
 
         {prefillLeadId && (
-          <div style={{ padding: 'var(--space-2)', backgroundColor: 'rgba(201,154,61,0.1)', color: 'var(--brand-navy)', borderRadius: '12px', marginBottom: 'var(--space-3)', fontSize: 'var(--text-secondary)' }}>
+          <div style={{ padding: 'var(--space-2)', backgroundColor: 'rgba(227, 169, 74,0.1)', color: 'var(--brand-navy)', borderRadius: '12px', marginBottom: 'var(--space-3)', fontSize: 'var(--text-secondary)' }}>
             This deal will be automatically linked to Lead ID: {prefillLeadId}
           </div>
         )}

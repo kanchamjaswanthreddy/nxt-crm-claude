@@ -18,7 +18,7 @@ import { useToast } from '@/components/ui/Toast';
 
 const CONTACT_TYPES = [
   { value: 'recruit', label: 'Recruit', color: '#8B5CF6' },
-  { value: 'prospect', label: 'Prospect', color: '#3B82F6' },
+  { value: 'prospect', label: 'Prospect', color: '#E3A94A' },
   { value: 'client', label: 'Client', color: '#16A34A' },
   { value: 'referral', label: 'Referral', color: '#F59E0B' },
   { value: 'dual', label: 'Dual (Recruit + Client)', color: '#EC4899' },
@@ -27,7 +27,7 @@ const CONTACT_TYPES = [
 const PRIORITIES = [
   { value: 'hot', label: 'Hot', color: '#EF4444' },
   { value: 'warm', label: 'Warm', color: '#F59E0B' },
-  { value: 'cold', label: 'Cold', color: '#6B7280' },
+  { value: 'cold', label: 'Cold', color: '#5F5C56' },
 ];
 
 const SOURCES = [
@@ -222,7 +222,7 @@ export default function BusinessPipelinePage() {
   if (isLoading) {
     return (
       <div style={{ padding: '60px', textAlign: 'center', color: 'var(--text-secondary)' }}>
-        <div style={{ width: 36, height: 36, border: '3px solid rgba(0,0,0,0.1)', borderTopColor: 'var(--brand-gold, #C99A3D)', borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto 16px' }} />
+        <div style={{ width: 36, height: 36, border: '3px solid rgba(0,0,0,0.1)', borderTopColor: 'var(--brand-gold, #E3A94A)', borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto 16px' }} />
         Loading pipeline...
       </div>
     );
@@ -244,7 +244,7 @@ export default function BusinessPipelinePage() {
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
 
             {/* Stage Type Toggle */}
-            <div style={{ display: 'flex', background: '#f1f5f9', borderRadius: '8px', padding: '3px', gap: '2px' }}>
+            <div style={{ display: 'flex', background: '#F1EFEA', borderRadius: '8px', padding: '3px', gap: '2px' }}>
               {['recruiting', 'sales'].map(t => (
                 <button key={t} onClick={() => setStageType(t)} style={{
                   padding: '6px 14px', borderRadius: '6px', border: 'none', fontSize: '0.875rem', fontWeight: 600, cursor: 'pointer',
@@ -256,7 +256,7 @@ export default function BusinessPipelinePage() {
             </div>
 
             {/* View Toggle */}
-            <div style={{ display: 'flex', background: '#f1f5f9', borderRadius: '8px', padding: '3px', gap: '2px' }}>
+            <div style={{ display: 'flex', background: '#F1EFEA', borderRadius: '8px', padding: '3px', gap: '2px' }}>
               {[{ v: 'board', label: 'Board' }, { v: 'table', label: 'Table' }].map(({ v, label }) => (
                 <button key={v} onClick={() => setView(v)} style={{
                   padding: '6px 14px', borderRadius: '6px', border: 'none', fontSize: '0.875rem', fontWeight: 600, cursor: 'pointer',
@@ -285,7 +285,7 @@ export default function BusinessPipelinePage() {
             {/* Add Contact */}
             <button onClick={() => setAddModalOpen(true)} style={{
               padding: '8px 18px', borderRadius: '8px', border: 'none', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
-              background: 'var(--brand-gold, #C99A3D)', color: '#fff',
+              background: 'var(--brand-gold, #E3A94A)', color: '#fff',
             }}>+ Add Contact</button>
           </div>
         </div>
@@ -308,7 +308,7 @@ export default function BusinessPipelinePage() {
         {showFilters && (
           <div style={{
             display: 'flex', gap: '10px', marginBottom: '16px', flexWrap: 'wrap', padding: '12px 16px',
-            background: '#f8fafc', borderRadius: '10px', border: '1px solid rgba(0,0,0,0.06)',
+            background: '#F7F5F0', borderRadius: '10px', border: '1px solid rgba(0,0,0,0.06)',
           }}>
             <FilterSelect label="Type" value={filterType} onChange={setFilterType} options={CONTACT_TYPES.map(t => ({ value: t.value, label: t.label }))} />
             <FilterSelect label="Priority" value={filterPriority} onChange={setFilterPriority} options={PRIORITIES.map(p => ({ value: p.value, label: p.label }))} />
@@ -425,9 +425,9 @@ function BoardView({ stages, contacts, draggedId, dragOverStage, onDragStart, on
             onDrop={(e) => onDrop(e, stage.name)}
             style={{
               minWidth: '280px', maxWidth: '280px', flexShrink: 0,
-              background: isDragOver ? 'rgba(201,154,61,0.08)' : '#f8fafc',
+              background: isDragOver ? 'rgba(227, 169, 74,0.08)' : '#F7F5F0',
               borderRadius: '12px', padding: '12px', display: 'flex', flexDirection: 'column',
-              border: isDragOver ? '2px dashed var(--brand-gold, #C99A3D)' : '2px solid transparent',
+              border: isDragOver ? '2px dashed var(--brand-gold, #E3A94A)' : '2px solid transparent',
               transition: 'all 0.15s ease',
             }}
           >
@@ -523,12 +523,12 @@ function ContactCard({ contact, onDragStart, onClick, isDragging }) {
 
       {/* Footer */}
       {(contact.lastContactedAt || contact.nextFollowupAt) && (
-        <div style={{ marginTop: '8px', paddingTop: '6px', borderTop: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between' }}>
+        <div style={{ marginTop: '8px', paddingTop: '6px', borderTop: '1px solid #F1EFEA', display: 'flex', justifyContent: 'space-between' }}>
           {contact.lastContactedAt && (
             <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>Last: {timeAgo(contact.lastContactedAt)}</span>
           )}
           {contact.nextFollowupAt && (
-            <span style={{ fontSize: '0.85rem', color: new Date(contact.nextFollowupAt) < new Date() ? '#EF4444' : '#3B82F6', fontWeight: 600 }}>
+            <span style={{ fontSize: '0.85rem', color: new Date(contact.nextFollowupAt) < new Date() ? '#EF4444' : '#E3A94A', fontWeight: 600 }}>
               Follow-up: {formatDate(contact.nextFollowupAt)}
             </span>
           )}
@@ -567,7 +567,7 @@ function TableView({ contacts, stages, onRowClick }) {
   };
 
   const tdStyle = {
-    padding: '10px 14px', fontSize: '0.9rem', color: 'var(--text-primary)', borderBottom: '1px solid #f1f5f9',
+    padding: '10px 14px', fontSize: '0.9rem', color: 'var(--text-primary)', borderBottom: '1px solid #F1EFEA',
     whiteSpace: 'nowrap', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis',
   };
 
@@ -735,11 +735,11 @@ function AddContactModal({ stageType, stages, userProfile, onClose, onCreated })
             <button onClick={onClose} aria-label="Close" style={{ background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center' }}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
           </div>
           {/* Section Tabs */}
-          <div style={{ display: 'flex', gap: '4px', overflowX: 'auto', paddingBottom: '12px', borderBottom: '1px solid #f1f5f9' }}>
+          <div style={{ display: 'flex', gap: '4px', overflowX: 'auto', paddingBottom: '12px', borderBottom: '1px solid #F1EFEA' }}>
             {sections.map(s => (
               <button key={s.key} onClick={() => setActiveSection(s.key)} style={{
                 padding: '6px 14px', borderRadius: '6px', border: 'none', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap',
-                background: activeSection === s.key ? 'var(--brand-navy, #1B2A4A)' : '#f1f5f9',
+                background: activeSection === s.key ? 'var(--brand-navy, #1B2A4A)' : '#F1EFEA',
                 color: activeSection === s.key ? '#fff' : 'var(--text-secondary)',
               }}>{s.label}</button>
             ))}
@@ -803,7 +803,7 @@ function AddContactModal({ stageType, stages, userProfile, onClose, onCreated })
                   <button key={t.value} onClick={() => set('type', t.value)} style={{
                     padding: '6px 14px', borderRadius: '6px', border: '2px solid', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer',
                     borderColor: form.type === t.value ? t.color : 'transparent',
-                    background: form.type === t.value ? t.color + '18' : '#f1f5f9',
+                    background: form.type === t.value ? t.color + '18' : '#F1EFEA',
                     color: form.type === t.value ? t.color : 'var(--text-secondary)',
                   }}>{t.label}</button>
                 ))}
@@ -848,7 +848,7 @@ function AddContactModal({ stageType, stages, userProfile, onClose, onCreated })
                   <button key={v} onClick={() => set('pace', v)} style={{
                     padding: '6px 14px', borderRadius: '6px', border: '2px solid', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer',
                     borderColor: form.pace === v ? '#8B5CF6' : 'transparent',
-                    background: form.pace === v ? 'rgba(139,92,246,0.1)' : '#f1f5f9',
+                    background: form.pace === v ? 'rgba(139,92,246,0.1)' : '#F1EFEA',
                     color: form.pace === v ? '#8B5CF6' : 'var(--text-secondary)',
                   }}>{v}</button>
                 ))}
@@ -868,7 +868,7 @@ function AddContactModal({ stageType, stages, userProfile, onClose, onCreated })
                   <button key={p.value} onClick={() => toggleProduct(p.value)} style={{
                     padding: '6px 12px', borderRadius: '6px', border: '2px solid', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer',
                     borderColor: form.productInterest.includes(p.value) ? '#16A34A' : 'transparent',
-                    background: form.productInterest.includes(p.value) ? 'rgba(22,163,74,0.1)' : '#f1f5f9',
+                    background: form.productInterest.includes(p.value) ? 'rgba(22,163,74,0.1)' : '#F1EFEA',
                     color: form.productInterest.includes(p.value) ? '#16A34A' : 'var(--text-secondary)',
                   }}>{p.label}</button>
                 ))}
@@ -914,7 +914,7 @@ function AddContactModal({ stageType, stages, userProfile, onClose, onCreated })
                   <button key={p.value} onClick={() => set('priority', p.value)} style={{
                     padding: '6px 14px', borderRadius: '6px', border: '2px solid', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer',
                     borderColor: form.priority === p.value ? p.color : 'transparent',
-                    background: form.priority === p.value ? p.color + '18' : '#f1f5f9',
+                    background: form.priority === p.value ? p.color + '18' : '#F1EFEA',
                     color: form.priority === p.value ? p.color : 'var(--text-secondary)',
                   }}>{p.label}</button>
                 ))}
@@ -932,14 +932,14 @@ function AddContactModal({ stageType, stages, userProfile, onClose, onCreated })
         </div>
 
         {/* Footer */}
-        <div style={{ padding: '16px 24px', borderTop: '1px solid #f1f5f9', display: 'flex', justifyContent: 'flex-end', gap: '10px', flexShrink: 0 }}>
+        <div style={{ padding: '16px 24px', borderTop: '1px solid #F1EFEA', display: 'flex', justifyContent: 'flex-end', gap: '10px', flexShrink: 0 }}>
           <button onClick={onClose} style={{
             padding: '9px 20px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff',
             fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', color: 'var(--text-secondary)',
           }}>Cancel</button>
           <button onClick={handleSubmit} disabled={saving} style={{
             padding: '9px 24px', borderRadius: '8px', border: 'none',
-            background: 'var(--brand-gold, #C99A3D)', color: '#fff',
+            background: 'var(--brand-gold, #E3A94A)', color: '#fff',
             fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.6 : 1,
           }}>{saving ? 'Saving...' : 'Add Contact'}</button>
         </div>
@@ -1042,7 +1042,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
         boxShadow: '-10px 0 40px rgba(0,0,0,0.1)',
       }}>
         {/* Header */}
-        <div style={{ padding: '20px 24px', borderBottom: '1px solid #f1f5f9', flexShrink: 0 }}>
+        <div style={{ padding: '20px 24px', borderBottom: '1px solid #F1EFEA', flexShrink: 0 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div>
               <h2 style={{ fontSize: '1.15rem', fontWeight: 700, margin: '0 0 4px' }}>{contact.fullName}</h2>
@@ -1101,7 +1101,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                     <button key={p.value} onClick={() => set('priority', p.value)} style={{
                       padding: '5px 12px', borderRadius: '6px', border: '2px solid', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
                       borderColor: form.priority === p.value ? p.color : 'transparent',
-                      background: form.priority === p.value ? p.color + '18' : '#f1f5f9',
+                      background: form.priority === p.value ? p.color + '18' : '#F1EFEA',
                       color: form.priority === p.value ? p.color : 'var(--text-secondary)',
                     }}>{p.label}</button>
                   ))}
@@ -1114,7 +1114,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                     <button key={t.value} onClick={() => set('type', t.value)} style={{
                       padding: '5px 12px', borderRadius: '6px', border: '2px solid', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
                       borderColor: form.type === t.value ? t.color : 'transparent',
-                      background: form.type === t.value ? t.color + '18' : '#f1f5f9',
+                      background: form.type === t.value ? t.color + '18' : '#F1EFEA',
                       color: form.type === t.value ? t.color : 'var(--text-secondary)',
                     }}>{t.label}</button>
                   ))}
@@ -1127,7 +1127,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                     <button key={p.value} onClick={() => toggleProduct(p.value)} style={{
                       padding: '4px 10px', borderRadius: '5px', border: '2px solid', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
                       borderColor: (form.productInterest || []).includes(p.value) ? '#16A34A' : 'transparent',
-                      background: (form.productInterest || []).includes(p.value) ? 'rgba(22,163,74,0.1)' : '#f1f5f9',
+                      background: (form.productInterest || []).includes(p.value) ? 'rgba(22,163,74,0.1)' : '#F1EFEA',
                       color: (form.productInterest || []).includes(p.value) ? '#16A34A' : 'var(--text-secondary)',
                     }}>{p.label}</button>
                   ))}
@@ -1145,7 +1145,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                 <button onClick={() => setConfirmDelete(true)} style={{ padding: '8px 16px', borderRadius: '6px', border: '1px solid #fecaca', background: '#fef2f2', color: '#DC2626', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}>Delete</button>
                 <div style={{ display: 'flex', gap: '8px' }}>
                   <button onClick={() => setEditing(false)} style={{ padding: '8px 16px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', color: 'var(--text-secondary)' }}>Cancel</button>
-                  <button onClick={handleSave} disabled={saving} style={{ padding: '8px 20px', borderRadius: '6px', border: 'none', background: 'var(--brand-gold, #C99A3D)', color: '#fff', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.6 : 1 }}>{saving ? 'Saving...' : 'Save'}</button>
+                  <button onClick={handleSave} disabled={saving} style={{ padding: '8px 20px', borderRadius: '6px', border: 'none', background: 'var(--brand-gold, #E3A94A)', color: '#fff', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.6 : 1 }}>{saving ? 'Saving...' : 'Save'}</button>
                 </div>
               </div>
               {confirmDelete && (
@@ -1200,7 +1200,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
               )}
 
               {(contact.familyDetails || contact.relationshipNotes || contact.notes) && (
-                <div style={{ marginBottom: '20px', padding: '12px', background: '#f8fafc', borderRadius: '8px' }}>
+                <div style={{ marginBottom: '20px', padding: '12px', background: '#F7F5F0', borderRadius: '8px' }}>
                   {contact.familyDetails && <p style={{ fontSize: '0.8rem', color: 'var(--text-primary)', margin: '0 0 6px' }}><strong>Family:</strong> {contact.familyDetails}</p>}
                   {contact.relationshipNotes && <p style={{ fontSize: '0.8rem', color: 'var(--text-primary)', margin: '0 0 6px' }}><strong>Relationship:</strong> {contact.relationshipNotes}</p>}
                   {contact.notes && <p style={{ fontSize: '0.8rem', color: 'var(--text-primary)', margin: 0 }}><strong>Notes:</strong> {contact.notes}</p>}
@@ -1287,15 +1287,15 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
               </div>
 
               {/* ── Add Activity ── */}
-              <div style={{ marginBottom: '20px', padding: '14px', background: '#f8fafc', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
+              <div style={{ marginBottom: '20px', padding: '14px', background: '#F7F5F0', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
                 <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block', marginBottom: '10px' }}>Log Activity</span>
                 <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '10px' }}>
                   {ACTIVITY_TYPES.map(a => (
                     <button key={a.value} onClick={() => setActivityType(a.value)} style={{
                       padding: '4px 10px', borderRadius: '6px', border: '2px solid', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
-                      borderColor: activityType === a.value ? '#3B82F6' : 'transparent',
-                      background: activityType === a.value ? 'rgba(59,130,246,0.1)' : '#fff',
-                      color: activityType === a.value ? '#3B82F6' : 'var(--text-secondary)',
+                      borderColor: activityType === a.value ? '#E3A94A' : 'transparent',
+                      background: activityType === a.value ? 'rgba(227, 169, 74,0.1)' : '#fff',
+                      color: activityType === a.value ? '#E3A94A' : 'var(--text-secondary)',
                     }}>{a.label}</button>
                   ))}
                 </div>
@@ -1308,7 +1308,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                     onKeyDown={e => { if (e.key === 'Enter') handleAddActivity(); }}
                   />
                   <button onClick={handleAddActivity} disabled={addingActivity} style={{
-                    padding: '8px 16px', borderRadius: '8px', border: 'none', background: 'var(--brand-gold, #C99A3D)', color: '#fff',
+                    padding: '8px 16px', borderRadius: '8px', border: 'none', background: 'var(--brand-gold, #E3A94A)', color: '#fff',
                     fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', opacity: addingActivity ? 0.6 : 1, whiteSpace: 'nowrap',
                   }}>{addingActivity ? '...' : 'Log'}</button>
                 </div>
@@ -1326,8 +1326,8 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                     {activities.map(a => {
                       const atInfo = ACTIVITY_TYPES.find(t => t.value === a.type) || ACTIVITY_TYPES[10];
                       return (
-                        <div key={a.id} style={{ display: 'flex', gap: '10px', padding: '10px 0', borderBottom: '1px solid #f1f5f9' }}>
-                          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#3B82F6', flexShrink: 0, marginTop: '6px' }} />
+                        <div key={a.id} style={{ display: 'flex', gap: '10px', padding: '10px 0', borderBottom: '1px solid #F1EFEA' }}>
+                          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#E3A94A', flexShrink: 0, marginTop: '6px' }} />
                           <div style={{ flex: 1 }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2px' }}>
                               <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)' }}>{atInfo.label}</span>
@@ -1361,7 +1361,7 @@ function InfoField({ label, value, link }) {
     <div>
       <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#94a3b8', display: 'block', marginBottom: '2px' }}>{label}</span>
       {link ? (
-        <a href={link} style={{ fontSize: '0.8rem', color: '#3B82F6', textDecoration: 'none' }}>{value}</a>
+        <a href={link} style={{ fontSize: '0.8rem', color: '#E3A94A', textDecoration: 'none' }}>{value}</a>
       ) : (
         <span style={{ fontSize: '0.8rem', color: 'var(--text-primary)' }}>{value}</span>
       )}
@@ -1382,7 +1382,7 @@ function SettingsModal({ settings, agencyId, stageType, onClose, onSaved }) {
 
   const addStage = () => {
     if (!newStageName.trim()) return;
-    const colors = ['#6B7280','#3B82F6','#8B5CF6','#F59E0B','#F97316','#0EA5E9','#14B8A6','#10B981','#16A34A','#EF4444','#EC4899'];
+    const colors = ['#5F5C56','#E3A94A','#8B5CF6','#F59E0B','#F97316','#0EA5E9','#14B8A6','#10B981','#16A34A','#EF4444','#EC4899'];
     setLocalStages(prev => [...prev, { name: newStageName.trim(), order: prev.length, color: colors[prev.length % colors.length] }]);
     setNewStageName('');
   };
@@ -1415,7 +1415,7 @@ function SettingsModal({ settings, agencyId, stageType, onClose, onSaved }) {
     <div style={{ position: 'fixed', inset: 0, zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: 'center', animation: 'fadeIn 0.15s ease' }} role="dialog" aria-modal="true" aria-label="Customize stages">
       <div onClick={onClose} style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.4)' }} aria-hidden="true" />
       <div style={{ position: 'relative', background: '#fff', borderRadius: '16px', width: '480px', maxHeight: '80vh', display: 'flex', flexDirection: 'column', boxShadow: '0 25px 50px rgba(0,0,0,0.15)' }}>
-        <div style={{ padding: '20px 24px', borderBottom: '1px solid #f1f5f9', flexShrink: 0 }}>
+        <div style={{ padding: '20px 24px', borderBottom: '1px solid #F1EFEA', flexShrink: 0 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0 }}>Customize {stageType === 'recruiting' ? 'Recruiting' : 'Sales'} Stages</h2>
             <button onClick={onClose} aria-label="Close" style={{ background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center' }}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -1425,7 +1425,7 @@ function SettingsModal({ settings, agencyId, stageType, onClose, onSaved }) {
 
         <div style={{ flex: 1, overflowY: 'auto', padding: '16px 24px' }}>
           {localStages.map((stage, idx) => (
-            <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 0', borderBottom: '1px solid #f8fafc' }}>
+            <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 0', borderBottom: '1px solid #F7F5F0' }}>
               <div style={{ width: 12, height: 12, borderRadius: '50%', background: stage.color, flexShrink: 0 }} />
               <input
                 value={stage.name}
@@ -1445,13 +1445,13 @@ function SettingsModal({ settings, agencyId, stageType, onClose, onSaved }) {
               placeholder="New stage name..."
               style={{ flex: 1, padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', fontSize: '0.8rem', outline: 'none' }}
             />
-            <button onClick={addStage} style={{ padding: '8px 16px', borderRadius: '8px', border: 'none', background: '#3B82F6', color: '#fff', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}>Add</button>
+            <button onClick={addStage} style={{ padding: '8px 16px', borderRadius: '8px', border: 'none', background: '#E3A94A', color: '#fff', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}>Add</button>
           </div>
         </div>
 
-        <div style={{ padding: '16px 24px', borderTop: '1px solid #f1f5f9', display: 'flex', justifyContent: 'flex-end', gap: '10px', flexShrink: 0 }}>
+        <div style={{ padding: '16px 24px', borderTop: '1px solid #F1EFEA', display: 'flex', justifyContent: 'flex-end', gap: '10px', flexShrink: 0 }}>
           <button onClick={onClose} style={{ padding: '8px 18px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', color: 'var(--text-secondary)' }}>Cancel</button>
-          <button onClick={handleSave} disabled={saving} style={{ padding: '8px 22px', borderRadius: '8px', border: 'none', background: 'var(--brand-gold, #C99A3D)', color: '#fff', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.6 : 1 }}>{saving ? 'Saving...' : 'Save Changes'}</button>
+          <button onClick={handleSave} disabled={saving} style={{ padding: '8px 22px', borderRadius: '8px', border: 'none', background: 'var(--brand-gold, #E3A94A)', color: '#fff', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.6 : 1 }}>{saving ? 'Saving...' : 'Save Changes'}</button>
         </div>
       </div>
     </div>

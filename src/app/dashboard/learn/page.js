@@ -29,8 +29,8 @@ const CONTENT_TYPE_ICONS = {
 
 const CATEGORY_ACCENT_COLORS = {
   onboarding: '#2FA84F',
-  training: '#2D6FC4',
-  product: '#C99A3D',
+  training: '#1B2A4E',
+  product: '#E3A94A',
   compliance: '#D33F3F',
   sales: '#E08E2B',
   licensing: '#7C3AED',
@@ -212,7 +212,7 @@ export default function LearnPage() {
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 'var(--space-3)' }}>
           {filtered.map(r => {
-            const accentColor = CATEGORY_ACCENT_COLORS[r.category] || '#2D6FC4';
+            const accentColor = CATEGORY_ACCENT_COLORS[r.category] || '#1B2A4E';
             return (
               <Card key={r.id}>
                 <div style={{ display: 'flex', flexDirection: 'column', height: '100%', borderLeft: `3px solid ${accentColor}`, marginLeft: '-16px', paddingLeft: '13px' }}>

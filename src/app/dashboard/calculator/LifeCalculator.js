@@ -7,7 +7,7 @@ import {
   ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line
 } from 'recharts';
 
-const PIE_COLORS = ['#00205B', '#C99A3D', '#3B82F6', '#10B981'];
+const PIE_COLORS = ['#0C1022', '#E3A94A', '#E3A94A', '#10B981'];
 
 export const LIFE_PRODUCTS = [
   { carrier: 'Allianz', type: 'IUL', product: 'Accumulator IUL', state: 'Non-NY', ageBand: '0-80', factor: 80, fa: 60, sfa: 72, fd: 84, fd2: 89.6, fd3: 92, sfd: 96, sfdPlus: 104, gen: [12, 5.6, 2.8, 1.8, 1, 0.4, 0.2, 0.2], total: 128 },
@@ -144,7 +144,7 @@ export default function LifeCalculator() {
   return (
     <div>
       {/* Filters */}
-      <Card style={{ marginBottom: 'var(--space-4)', border: '1px solid rgba(201, 154, 61, 0.2)' }}>
+      <Card style={{ marginBottom: 'var(--space-4)', border: '1px solid rgba(227, 169, 74, 0.2)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-4)' }}>
           <div>
             <label style={{ display: 'block', fontSize: 'var(--text-caption)', fontWeight: 600, color: 'var(--brand-navy)', marginBottom: '6px' }}>
@@ -225,17 +225,17 @@ export default function LifeCalculator() {
       {selectedProduct && (
         <>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
-            <Card style={{ textAlign: 'center', border: '1px solid rgba(201, 154, 61, 0.15)' }}>
+            <Card style={{ textAlign: 'center', border: '1px solid rgba(227, 169, 74, 0.15)' }}>
               <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Your Commission %</div>
               <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: 'var(--brand-navy)' }}>{commissionPct}%</div>
               <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: 600 }}>{LIFE_TITLE_LEVELS.find(l => l.key === selectedLevel)?.title}</div>
             </Card>
-            <Card style={{ textAlign: 'center', border: '1px solid rgba(201, 154, 61, 0.15)' }}>
+            <Card style={{ textAlign: 'center', border: '1px solid rgba(227, 169, 74, 0.15)' }}>
               <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Commission $ Amount</div>
               <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: 'var(--brand-navy)' }}>{fmt(commissionDollar)}</div>
               <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: 600 }}>On {fmt(premium)} annual premium</div>
             </Card>
-            <Card style={{ textAlign: 'center', border: '1px solid rgba(201, 154, 61, 0.15)' }}>
+            <Card style={{ textAlign: 'center', border: '1px solid rgba(227, 169, 74, 0.15)' }}>
               <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Gen Override Total</div>
               <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: 'var(--brand-navy)' }}>{fmt(genOverrideDollar)}</div>
               <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: 600 }}>{genOverrideTotal.toFixed(4)}% across 8 gens</div>
@@ -266,7 +266,7 @@ export default function LifeCalculator() {
                         key={lvl.key}
                         style={{
                           borderBottom: '1px solid rgba(0,0,0,0.06)',
-                          backgroundColor: isSelected ? 'rgba(201, 154, 61, 0.08)' : 'transparent',
+                          backgroundColor: isSelected ? 'rgba(227, 169, 74, 0.08)' : 'transparent',
                           fontWeight: isSelected ? 600 : 400
                         }}
                       >
@@ -355,7 +355,7 @@ export default function LifeCalculator() {
                   <YAxis tick={{ fontSize: 11, fill: '#666' }} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
                   <Tooltip formatter={(value, name) => name.includes('$') ? fmt(value) : value + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
                   <Legend />
-                  <Bar dataKey="Commission $" fill="#00205B" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="Commission $" fill="#0C1022" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </Card>
@@ -387,7 +387,7 @@ export default function LifeCalculator() {
                   <YAxis tick={{ fontSize: 11, fill: '#666' }} tickFormatter={(v) => `$${v}`} />
                   <Tooltip formatter={(value, name) => name.includes('$') ? fmt(value) : value + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
                   <Legend />
-                  <Bar dataKey="Override $" fill="#C99A3D" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="Override $" fill="#E3A94A" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </Card>
@@ -404,7 +404,7 @@ export default function LifeCalculator() {
                   <YAxis tick={{ fontSize: 11, fill: '#666' }} tickFormatter={(v) => `${v}%`} />
                   <Tooltip formatter={(value) => value + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
                   <Legend />
-                  <Line type="monotone" dataKey="Commission %" stroke="#00205B" strokeWidth={2} dot={{ r: 4, fill: '#00205B' }} activeDot={{ r: 6 }} />
+                  <Line type="monotone" dataKey="Commission %" stroke="#0C1022" strokeWidth={2} dot={{ r: 4, fill: '#0C1022' }} activeDot={{ r: 6 }} />
                 </LineChart>
               </ResponsiveContainer>
             </Card>

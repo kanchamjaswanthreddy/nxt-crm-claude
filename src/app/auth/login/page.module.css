@@ -6,7 +6,7 @@
 .title {
   font-size: 40px;
   font-weight: 700;
-  color: #0F2A52;
+  color: #0C1022;
   margin: 0 0 4px;
   line-height: 1.2;
 }
@@ -34,7 +34,7 @@
 .fieldLabel {
   font-size: 15px;
   font-weight: 600;
-  color: #0F2A52;
+  color: #0C1022;
 }
 
 .inputWrap {
@@ -48,7 +48,7 @@
   left: 16px;
   width: 18px;
   height: 18px;
-  color: #9ca3af;
+  color: #8A857B;
   pointer-events: none;
   flex-shrink: 0;
 }
@@ -91,7 +91,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #9ca3af;
+  color: #8A857B;
   padding: 0;
   border-radius: 4px;
 }
@@ -174,7 +174,7 @@
 .checkbox {
   width: 16px;
   height: 16px;
-  accent-color: #0F2A52;
+  accent-color: #0C1022;
   cursor: pointer;
 }
 
@@ -209,8 +209,8 @@
 }
 
 .sessionExpiredBanner {
-  background-color: rgba(59, 130, 246, 0.08);
-  border-left: 3px solid #3b82f6;
+  background-color: rgba(227, 169, 74, 0.08);
+  border-left: 3px solid #E3A94A;
   padding: 12px 16px;
   border-radius: 8px;
   margin-bottom: 20px;

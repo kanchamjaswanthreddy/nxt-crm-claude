@@ -219,7 +219,7 @@ export default function CommissionsSettings() {
                     <td style={{ padding: 'var(--space-2)', fontWeight: '500' }}>{carrier ? carrier.name : 'Unknown'}</td>
                     <td style={{ padding: 'var(--space-2)' }}>{r.policyType}</td>
                     <td style={{ padding: 'var(--space-2)' }}>
-                      <span style={{ backgroundColor: 'rgba(201, 154, 61, 0.1)', color: 'var(--brand-gold)', padding: '4px 12px', borderRadius: '999px', fontWeight: '600', fontSize: 'var(--text-caption)' }}>
+                      <span style={{ backgroundColor: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-gold)', padding: '4px 12px', borderRadius: '999px', fontWeight: '600', fontSize: 'var(--text-caption)' }}>
                         {r.agentLevel}
                       </span>
                     </td>
@@ -278,7 +278,7 @@ export default function CommissionsSettings() {
                           padding: '10px 14px', cursor: 'pointer', fontSize: '14px',
                           borderBottom: '1px solid rgba(0,0,0,0.04)',
                           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                          backgroundColor: editingCarrier?.id === c.id ? 'rgba(201, 154, 61, 0.12)' : 'transparent',
+                          backgroundColor: editingCarrier?.id === c.id ? 'rgba(227, 169, 74, 0.12)' : 'transparent',
                         }}
                       >
                         <span style={{ fontWeight: '500' }}>{c.name}</span>

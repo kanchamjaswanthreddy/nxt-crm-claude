@@ -62,7 +62,7 @@ const GEN_LABELS = ['1st (15%)', '2nd (7%)', '3rd (3.5%)', '4th (2.25%)', '5th (
 const GEN_ORDINALS = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th'];
 const RAW_GEN_OVERRIDES = [15, 7, 3.5, 2.25, 1.25, 0.5, 0.25, 0.25];
 
-const COLORS = ['#00205B', '#C99A3D', '#1a3a6e', '#d4af5a'];
+const COLORS = ['#0C1022', '#E3A94A', '#1a3a6e', '#d4af5a'];
 
 const selectStyle = {
   width: '100%', padding: '12px 16px', borderRadius: '10px',
@@ -149,7 +149,7 @@ export default function AnnuityCalculator() {
   return (
     <div>
       {/* Filters */}
-      <Card style={{ marginBottom: 'var(--space-4)', border: '1px solid rgba(201, 154, 61, 0.2)' }}>
+      <Card style={{ marginBottom: 'var(--space-4)', border: '1px solid rgba(227, 169, 74, 0.2)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-4)' }}>
           <div>
             <label style={{ display: 'block', fontSize: 'var(--text-caption)', fontWeight: 600, color: 'var(--brand-navy)', marginBottom: '6px' }}>
@@ -221,17 +221,17 @@ export default function AnnuityCalculator() {
       {selectedProduct && (
         <>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
-            <Card style={{ textAlign: 'center', border: '1px solid rgba(201, 154, 61, 0.15)' }}>
+            <Card style={{ textAlign: 'center', border: '1px solid rgba(227, 169, 74, 0.15)' }}>
               <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Your Commission %</div>
               <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: 'var(--brand-navy)' }}>{commissionPct}%</div>
               <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: 600 }}>{ANNUITY_TITLE_LEVELS.find(l => l.key === selectedLevel)?.title}</div>
             </Card>
-            <Card style={{ textAlign: 'center', border: '1px solid rgba(201, 154, 61, 0.15)' }}>
+            <Card style={{ textAlign: 'center', border: '1px solid rgba(227, 169, 74, 0.15)' }}>
               <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Commission $ Amount</div>
               <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: 'var(--brand-navy)' }}>{fmt(commissionDollar)}</div>
               <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: 600 }}>On {fmt(premium)} premium</div>
             </Card>
-            <Card style={{ textAlign: 'center', border: '1px solid rgba(201, 154, 61, 0.15)' }}>
+            <Card style={{ textAlign: 'center', border: '1px solid rgba(227, 169, 74, 0.15)' }}>
               <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Gen Override Total</div>
               <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: 'var(--brand-navy)' }}>{fmt(genOverrideDollar)}</div>
               <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: 600 }}>{genOverrideTotal.toFixed(4)}% across 8 gens</div>
@@ -262,7 +262,7 @@ export default function AnnuityCalculator() {
                         key={lvl.key}
                         style={{
                           borderBottom: '1px solid rgba(0,0,0,0.06)',
-                          backgroundColor: isSelected ? 'rgba(201, 154, 61, 0.08)' : 'transparent',
+                          backgroundColor: isSelected ? 'rgba(227, 169, 74, 0.08)' : 'transparent',
                           fontWeight: isSelected ? 600 : 400
                         }}
                       >
@@ -351,7 +351,7 @@ export default function AnnuityCalculator() {
                   <YAxis tick={{ fontSize: 12, fill: '#666' }} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
                   <Tooltip formatter={(value, name) => name.includes('$') ? fmt(value) : value + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
                   <Legend />
-                  <Bar dataKey="Commission $" fill="#00205B" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="Commission $" fill="#0C1022" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </Card>
@@ -402,7 +402,7 @@ export default function AnnuityCalculator() {
                   <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#666' }} />
                   <YAxis tick={{ fontSize: 12, fill: '#666' }} tickFormatter={(v) => `$${v}`} />
                   <Tooltip formatter={(value, name) => name.includes('$') ? fmt(value) : value + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
-                  <Bar dataKey="Override $" fill="#C99A3D" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="Override $" fill="#E3A94A" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </Card>
@@ -419,7 +419,7 @@ export default function AnnuityCalculator() {
                   <YAxis tick={{ fontSize: 12, fill: '#666' }} tickFormatter={(v) => v + '%'} />
                   <Tooltip formatter={(value) => value + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
                   <Legend />
-                  <Line type="monotone" dataKey="Commission %" stroke="#00205B" strokeWidth={3} dot={{ r: 5, fill: '#00205B' }} />
+                  <Line type="monotone" dataKey="Commission %" stroke="#0C1022" strokeWidth={3} dot={{ r: 5, fill: '#0C1022' }} />
                 </LineChart>
               </ResponsiveContainer>
             </Card>

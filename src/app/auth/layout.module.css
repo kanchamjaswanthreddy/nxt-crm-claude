@@ -53,7 +53,7 @@
 }
 
 .headlineGold {
-  background: linear-gradient(135deg, #F0C060, #C99A3D);
+  background: linear-gradient(135deg, #F0C060, #E3A94A);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -109,7 +109,7 @@
   margin-top: 32px;
   text-align: center;
   font-size: 14px;
-  color: #9ca3af;
+  color: #8A857B;
 }
 
 /* ── Responsive: below 900px ── */

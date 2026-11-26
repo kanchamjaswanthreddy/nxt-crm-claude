@@ -109,8 +109,8 @@ function SetupChecklist({ agentData }) {
       borderRadius: '16px',
       background: allDone
         ? 'linear-gradient(135deg, rgba(47,168,79,0.06), rgba(47,168,79,0.02))'
-        : 'linear-gradient(135deg, rgba(201,154,61,0.08), rgba(201,154,61,0.02))',
-      border: `1px solid ${allDone ? 'rgba(47,168,79,0.15)' : 'rgba(201,154,61,0.12)'}`,
+        : 'linear-gradient(135deg, rgba(227, 169, 74,0.08), rgba(227, 169, 74,0.02))',
+      border: `1px solid ${allDone ? 'rgba(47,168,79,0.15)' : 'rgba(227, 169, 74,0.12)'}`,
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
         <div>
@@ -375,7 +375,7 @@ export default function GettingStartedPage() {
                   </ul>
                 </div>
 
-                <div style={{ padding: 'var(--space-3)', borderRadius: '12px', border: '2px solid var(--brand-gold)', backgroundColor: 'rgba(201,154,61,0.03)' }}>
+                <div style={{ padding: 'var(--space-3)', borderRadius: '12px', border: '2px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74,0.03)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                     <strong style={{ color: 'var(--brand-navy)', fontSize: 'var(--text-body)' }}>Professional</strong>
                     <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-secondary)', fontWeight: '600' }}>$20/mo</span>
@@ -447,7 +447,7 @@ export default function GettingStartedPage() {
                 NXT Financial Group has partnered with <strong style={{ color: 'var(--brand-navy)' }}>ExamFX</strong>, the market-share leader in insurance pre-licensing education. As an NXT agent, you receive <strong style={{ color: 'var(--brand-navy)' }}>85% off retail pricing</strong> — no promo code needed, just use our enrollment link below.
               </p>
 
-              <div style={{ border: '1px solid var(--border-color)', borderRadius: '12px', padding: '16px', marginBottom: '16px', backgroundColor: 'rgba(201,154,61,0.03)' }}>
+              <div style={{ border: '1px solid var(--border-color)', borderRadius: '12px', padding: '16px', marginBottom: '16px', backgroundColor: 'rgba(227, 169, 74,0.03)' }}>
                 <h4 style={{ fontWeight: 'bold', color: 'var(--brand-navy)', marginBottom: '12px', fontSize: 'var(--text-body)' }}>Study Packages (60 days access)</h4>
                 <ul style={{ marginLeft: '20px', marginBottom: '12px', color: 'var(--text-secondary)', lineHeight: '2.2', fontSize: 'var(--text-secondary)' }}>
                   <li><Dot /><strong style={{ color: 'var(--brand-navy)' }}>Video Study Package — $34.99</strong> <span style={{ textDecoration: 'line-through', opacity: 0.5 }}>$219.95</span></li>
@@ -803,7 +803,7 @@ export default function GettingStartedPage() {
           <div style={{
             background: 'linear-gradient(135deg, var(--brand-gold), #D4A94E)', borderRadius: '16px',
             padding: 'var(--space-5) 40px', textAlign: 'center',
-            boxShadow: '0 16px 40px rgba(201,154,61,0.2)',
+            boxShadow: '0 16px 40px rgba(227, 169, 74,0.2)',
           }}>
             <div style={{
               width: '44px', height: '44px', borderRadius: '50%',

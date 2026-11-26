@@ -235,7 +235,7 @@ export default function DocumentsManagerPage() {
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '6px',
               padding: '8px 16px', borderRadius: '999px',
-              border: '1.5px solid var(--brand-gold)', backgroundColor: 'rgba(201, 154, 61, 0.08)',
+              border: '1.5px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.08)',
               color: 'var(--brand-navy)', fontSize: '13px', fontWeight: 600,
               textDecoration: 'none', cursor: 'pointer', transition: 'all 0.2s ease',
             }}

@@ -5,7 +5,7 @@ import AgentSearchSelect from '@/components/AgentSearchSelect';
 import { useToast } from '@/components/ui/Toast';
 
 const COLORS = [
-  '#0f2a52', '#c99a3d', '#2d6fc4', '#2fa84f', '#e08e2b',
+  '#0C1022', '#E3A94A', '#1B2A4E', '#2fa84f', '#e08e2b',
   '#8b5cf6', '#ec4899', '#14b8a6', '#f97316', '#6366f1',
 ];
 
@@ -130,7 +130,7 @@ export default function CommissionSplitBar({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#0f2a52',
+              color: '#0C1022',
               fontSize: '11px',
               fontWeight: 600,
               overflow: 'hidden',
@@ -152,7 +152,7 @@ export default function CommissionSplitBar({
               alignItems: 'center',
               gap: '10px',
               padding: '8px 12px',
-              backgroundColor: '#f8f9fb',
+              backgroundColor: '#F1EFEA',
               borderRadius: '8px',
               border: '1px solid rgba(0,0,0,0.06)',
             }}>
@@ -163,11 +163,11 @@ export default function CommissionSplitBar({
                 backgroundColor: COLORS[i % COLORS.length],
                 flexShrink: 0,
               }} />
-              <span style={{ flex: 1, fontSize: '14px', fontWeight: 500, color: '#0f2a52' }}>
+              <span style={{ flex: 1, fontSize: '14px', fontWeight: 500, color: '#0C1022' }}>
                 {o.beneficiaryName || 'Unknown'}
               </span>
               {readOnly ? (
-                <span style={{ fontSize: '14px', fontWeight: 600, color: '#0f2a52' }}>{o.percent}%</span>
+                <span style={{ fontSize: '14px', fontWeight: 600, color: '#0C1022' }}>{o.percent}%</span>
               ) : (
                 <>
                   <input
@@ -188,7 +188,7 @@ export default function CommissionSplitBar({
                       textAlign: 'center',
                     }}
                   />
-                  <span style={{ fontSize: '14px', color: '#6b7280' }}>%</span>
+                  <span style={{ fontSize: '14px', color: '#5F5C56' }}>%</span>
                   <button
                     onClick={() => handleRemove(i)}
                     style={{
@@ -216,11 +216,11 @@ export default function CommissionSplitBar({
         display: 'flex',
         justifyContent: 'space-between',
         fontSize: '13px',
-        color: '#6b7280',
+        color: '#5F5C56',
         marginBottom: '12px',
         padding: '0 4px',
       }}>
-        <span>Total split: <strong style={{ color: totalOverride > 0 ? '#0f2a52' : '#6b7280' }}>{totalOverride}%</strong></span>
+        <span>Total split: <strong style={{ color: totalOverride > 0 ? '#0C1022' : '#5F5C56' }}>{totalOverride}%</strong></span>
         <span>{agentName} keeps: <strong style={{ color: '#2fa84f' }}>{agentKeep}%</strong></span>
       </div>
 
@@ -266,7 +266,7 @@ export default function CommissionSplitBar({
                 disabled={!newBeneficiary || !newPercent}
                 style={{
                   padding: '8px 16px',
-                  backgroundColor: '#0f2a52',
+                  backgroundColor: '#0C1022',
                   color: '#fff',
                   border: 'none',
                   borderRadius: '6px',
@@ -283,7 +283,7 @@ export default function CommissionSplitBar({
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: '#6b7280',
+                  color: '#5F5C56',
                   cursor: 'pointer',
                   fontSize: '13px',
                 }}
@@ -303,7 +303,7 @@ export default function CommissionSplitBar({
                 backgroundColor: 'transparent',
                 border: '1px dashed rgba(0,0,0,0.2)',
                 borderRadius: '8px',
-                color: '#0f2a52',
+                color: '#0C1022',
                 fontSize: '13px',
                 fontWeight: 500,
                 cursor: totalOverride >= 100 ? 'not-allowed' : 'pointer',

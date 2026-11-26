@@ -17,7 +17,7 @@ const STATUS_COLORS = {
   active: { bg: 'rgba(47,168,79,0.1)', text: '#2FA84F' },
   pending: { bg: 'rgba(224,142,43,0.1)', text: '#E08E2B' },
   terminated: { bg: 'rgba(211,63,63,0.1)', text: '#D33F3F' },
-  suspended: { bg: 'rgba(107,114,128,0.1)', text: '#6B7280' },
+  suspended: { bg: 'rgba(107,114,128,0.1)', text: '#5F5C56' },
 };
 
 export default function ContractsPage() {

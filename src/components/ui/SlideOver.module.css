@@ -4,7 +4,7 @@
   position: fixed;
   inset: 0;
   z-index: var(--z-modal, 400);
-  background: rgba(15, 42, 82, 0.50);
+  background: rgba(12, 16, 34, 0.50);
   backdrop-filter: blur(8px) saturate(1.2);
   -webkit-backdrop-filter: blur(8px) saturate(1.2);
   animation: fadeIn var(--duration-normal, 300ms) var(--ease-in-out, ease);
@@ -57,7 +57,7 @@
   font-family: var(--font-base, "Inter", -apple-system, system-ui, sans-serif);
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-primary, #111827);
+  color: var(--text-primary, #0C1022);
   margin: 0;
   line-height: 1.4;
 }
@@ -71,7 +71,7 @@
   border: none;
   border-radius: var(--radius-md, 8px);
   background: transparent;
-  color: var(--text-secondary, #6B7280);
+  color: var(--text-secondary, #5F5C56);
   cursor: pointer;
   transition: background var(--duration-fast, 150ms) var(--ease-in-out, ease),
               color var(--duration-fast, 150ms) var(--ease-in-out, ease);
@@ -79,7 +79,7 @@
 
 .closeBtn:hover {
   background: var(--surface-inset, #F1F3F5);
-  color: var(--text-primary, #111827);
+  color: var(--text-primary, #0C1022);
 }
 
 .closeBtn svg {

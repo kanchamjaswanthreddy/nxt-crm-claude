@@ -151,11 +151,11 @@ ${inviterName}`
           <>
             {/* ── Quick Share Section ── */}
             <div style={{
-              background: 'linear-gradient(135deg, rgba(15, 42, 82, 0.04), rgba(45, 111, 196, 0.04))',
+              background: 'linear-gradient(135deg, rgba(12, 16, 34, 0.04), rgba(227, 169, 74, 0.04))',
               borderRadius: '14px',
               padding: '16px',
               marginBottom: '16px',
-              border: '1px solid rgba(15, 42, 82, 0.06)',
+              border: '1px solid rgba(12, 16, 34, 0.06)',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--brand-blue-accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

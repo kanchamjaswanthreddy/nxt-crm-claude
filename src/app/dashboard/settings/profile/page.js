@@ -110,8 +110,8 @@ function SectionCard({ title, description, children, onSave, isSaving, saveLabel
 function StatusBadge({ status }) {
   const config = {
     active: { bg: 'rgba(47, 168, 79, 0.1)', color: 'var(--status-success)', label: 'Active' },
-    invited: { bg: 'rgba(45, 111, 196, 0.1)', color: 'var(--brand-blue-accent)', label: 'Invited' },
-    pending: { bg: 'rgba(201, 154, 61, 0.1)', color: 'var(--brand-gold)', label: 'Pending' },
+    invited: { bg: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-blue-accent)', label: 'Invited' },
+    pending: { bg: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-gold)', label: 'Pending' },
     suspended: { bg: 'rgba(211, 63, 63, 0.1)', color: 'var(--status-error)', label: 'Suspended' },
   };
   const c = config[status] || config.pending;
@@ -549,18 +549,18 @@ export default function ProfilePage() {
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '34px', fontWeight: 'bold',
                 cursor: 'pointer', overflow: 'hidden',
-                border: '3px solid rgba(201, 154, 61, 0.25)',
-                boxShadow: '0 2px 12px rgba(15, 42, 82, 0.12)',
+                border: '3px solid rgba(227, 169, 74, 0.25)',
+                boxShadow: '0 2px 12px rgba(12, 16, 34, 0.12)',
               }}
               title="Click to change photo"
             >
               {uploadingPhoto ? (
                 <div style={{
                   width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  background: 'rgba(15, 42, 82, 0.85)',
+                  background: 'rgba(12, 16, 34, 0.85)',
                 }}>
                   <div style={{
-                    width: '26px', height: '26px', border: '3px solid rgba(201, 154, 61, 0.3)',
+                    width: '26px', height: '26px', border: '3px solid rgba(227, 169, 74, 0.3)',
                     borderTopColor: 'var(--brand-gold)', borderRadius: '50%',
                     animation: 'spin 0.8s linear infinite',
                   }} />
@@ -610,7 +610,7 @@ export default function ProfilePage() {
               {profile.is_owner ? (
                 <span style={{
                   padding: '3px 12px', borderRadius: '999px', fontSize: 'var(--text-caption)',
-                  fontWeight: 700, background: 'linear-gradient(135deg, #0F2A52, #1B3A6B)', color: '#C99A3D',
+                  fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A',
                   letterSpacing: '0.03em',
                 }}>
                   Agency Owner
@@ -618,7 +618,7 @@ export default function ProfilePage() {
               ) : (
                 <span style={{
                   padding: '3px 12px', borderRadius: '999px', fontSize: 'var(--text-caption)',
-                  fontWeight: 600, backgroundColor: 'rgba(15, 42, 82, 0.06)',
+                  fontWeight: 600, backgroundColor: 'rgba(12, 16, 34, 0.06)',
                   color: 'var(--brand-navy)', textTransform: 'capitalize'
                 }}>
                   {profile.role}
@@ -627,7 +627,7 @@ export default function ProfilePage() {
               {profile.nxt_id && (
                 <span style={{
                   padding: '3px 10px', borderRadius: '999px', fontSize: 'var(--text-caption)',
-                  fontWeight: 600, backgroundColor: 'rgba(201, 154, 61, 0.12)',
+                  fontWeight: 600, backgroundColor: 'rgba(227, 169, 74, 0.12)',
                   color: '#8B6914', fontFamily: 'var(--font-mono, monospace)',
                 }}>
                   {profile.nxt_id}
@@ -881,8 +881,8 @@ export default function ProfilePage() {
                         onClick={() => setSelectedPrintState(s.abbr === selectedPrintState ? '' : s.abbr)}
                         style={{
                           padding: '7px 16px', borderRadius: '999px',
-                          border: selectedPrintState === s.abbr ? '1.5px solid var(--brand-navy)' : '1.5px solid rgba(15, 42, 82, 0.2)',
-                          backgroundColor: selectedPrintState === s.abbr ? 'var(--brand-navy)' : 'rgba(15, 42, 82, 0.04)',
+                          border: selectedPrintState === s.abbr ? '1.5px solid var(--brand-navy)' : '1.5px solid rgba(12, 16, 34, 0.2)',
+                          backgroundColor: selectedPrintState === s.abbr ? 'var(--brand-navy)' : 'rgba(12, 16, 34, 0.04)',
                           color: selectedPrintState === s.abbr ? 'var(--brand-gold)' : 'var(--brand-navy)',
                           fontFamily: 'var(--font-base)', fontSize: '13px', fontWeight: 700,
                           cursor: 'pointer', transition: 'all 0.15s ease',
@@ -918,10 +918,10 @@ export default function ProfilePage() {
               {/* Selected state detail card */}
               {selected && (
                 <div style={{
-                  border: '1.5px solid rgba(15, 42, 82, 0.12)',
+                  border: '1.5px solid rgba(12, 16, 34, 0.12)',
                   borderRadius: '14px',
                   padding: '16px 18px',
-                  backgroundColor: 'rgba(15, 42, 82, 0.02)',
+                  backgroundColor: 'rgba(12, 16, 34, 0.02)',
                   marginTop: '4px',
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
@@ -1048,7 +1048,7 @@ export default function ProfilePage() {
               <Input id="eoExpiry" label="E&O Expiration Date" type="date" value={complianceForm.eoExpiry} onChange={e => setComplianceForm({ ...complianceForm, eoExpiry: e.target.value })} />
 
               {/* E&O Certificate Upload */}
-              <div style={{ padding: '12px 14px', borderRadius: '12px', backgroundColor: 'rgba(15, 42, 82, 0.03)', border: '1px dashed var(--border-color)' }}>
+              <div style={{ padding: '12px 14px', borderRadius: '12px', backgroundColor: 'rgba(12, 16, 34, 0.03)', border: '1px dashed var(--border-color)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
                   <div style={{ minWidth: 0, flex: 1 }}>
                     <span style={{ display: 'block', fontSize: 'var(--text-caption)', fontWeight: 600, color: 'var(--brand-navy)' }}>
@@ -1103,7 +1103,7 @@ export default function ProfilePage() {
                   </div>
                 </div>
                 {docUploading.eo_certificate && (
-                  <div style={{ marginTop: '8px', height: '3px', borderRadius: '2px', backgroundColor: 'rgba(15, 42, 82, 0.1)', overflow: 'hidden' }}>
+                  <div style={{ marginTop: '8px', height: '3px', borderRadius: '2px', backgroundColor: 'rgba(12, 16, 34, 0.1)', overflow: 'hidden' }}>
                     <div style={{ height: '100%', width: `${docUploadProgress.eo_certificate}%`, backgroundColor: 'var(--brand-navy)', borderRadius: '2px', transition: 'width 0.2s ease' }} />
                   </div>
                 )}
@@ -1164,7 +1164,7 @@ export default function ProfilePage() {
               </div>
 
               {/* AML Certificate Upload */}
-              <div style={{ padding: '12px 14px', borderRadius: '12px', backgroundColor: 'rgba(15, 42, 82, 0.03)', border: '1px dashed var(--border-color)' }}>
+              <div style={{ padding: '12px 14px', borderRadius: '12px', backgroundColor: 'rgba(12, 16, 34, 0.03)', border: '1px dashed var(--border-color)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
                   <div style={{ minWidth: 0, flex: 1 }}>
                     <span style={{ display: 'block', fontSize: 'var(--text-caption)', fontWeight: 600, color: 'var(--brand-navy)' }}>
@@ -1219,7 +1219,7 @@ export default function ProfilePage() {
                   </div>
                 </div>
                 {docUploading.anti_money_laundering && (
-                  <div style={{ marginTop: '8px', height: '3px', borderRadius: '2px', backgroundColor: 'rgba(15, 42, 82, 0.1)', overflow: 'hidden' }}>
+                  <div style={{ marginTop: '8px', height: '3px', borderRadius: '2px', backgroundColor: 'rgba(12, 16, 34, 0.1)', overflow: 'hidden' }}>
                     <div style={{ height: '100%', width: `${docUploadProgress.anti_money_laundering}%`, backgroundColor: 'var(--brand-navy)', borderRadius: '2px', transition: 'width 0.2s ease' }} />
                   </div>
                 )}

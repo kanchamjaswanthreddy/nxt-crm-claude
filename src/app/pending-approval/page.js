@@ -75,7 +75,7 @@ export default function PendingApprovalPage() {
         }}>
           <div style={{ textAlign: 'center' }}>
             <div style={{
-              width: '36px', height: '36px', border: '3px solid #E5E7EB',
+              width: '36px', height: '36px', border: '3px solid #E7E3DA',
               borderTopColor: 'var(--brand-gold)', borderRadius: '50%',
               animation: 'spin 0.8s linear infinite', margin: '0 auto 12px',
             }} />
@@ -100,10 +100,10 @@ export default function PendingApprovalPage() {
               {/* Animated clock icon */}
               <div style={{
                 width: '80px', height: '80px', borderRadius: '50%',
-                background: 'linear-gradient(135deg, rgba(201, 154, 61, 0.12), rgba(201, 154, 61, 0.04))',
+                background: 'linear-gradient(135deg, rgba(227, 169, 74, 0.12), rgba(227, 169, 74, 0.04))',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 margin: '0 auto 28px auto',
-                border: '2px solid rgba(201, 154, 61, 0.2)',
+                border: '2px solid rgba(227, 169, 74, 0.2)',
               }}>
                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--brand-gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="10" />
@@ -150,7 +150,7 @@ export default function PendingApprovalPage() {
                         ? 'var(--status-success)'
                         : step.active
                           ? 'var(--brand-gold)'
-                          : '#E5E7EB',
+                          : '#E7E3DA',
                     }}>
                       {step.done ? (
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -165,7 +165,7 @@ export default function PendingApprovalPage() {
                       ) : (
                         <div style={{
                           width: '8px', height: '8px', borderRadius: '50%',
-                          backgroundColor: '#9CA3AF',
+                          backgroundColor: '#8A857B',
                         }} />
                       )}
                     </div>

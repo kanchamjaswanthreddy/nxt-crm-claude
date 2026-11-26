@@ -155,8 +155,8 @@ export default function ImportLeadsPage() {
             {savedTemplates.length > 0 && (
               <div style={{
                 marginBottom: 'var(--space-3)', padding: 'var(--space-2) var(--space-3)',
-                borderRadius: '10px', backgroundColor: 'rgba(201,154,61,0.06)',
-                border: '1px solid rgba(201,154,61,0.12)',
+                borderRadius: '10px', backgroundColor: 'rgba(227, 169, 74,0.06)',
+                border: '1px solid rgba(227, 169, 74,0.12)',
               }}>
                 <p style={{ fontSize: 'var(--text-caption)', fontWeight: 600, color: 'var(--brand-navy)', margin: '0 0 8px' }}>
                   Saved Templates

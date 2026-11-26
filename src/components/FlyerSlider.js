@@ -258,7 +258,7 @@ export default function FlyerSlider({ onComplete }) {
               height: 10,
               borderRadius: '999px',
               border: 'none',
-              background: i === current ? '#C99A3D' : 'rgba(255,255,255,0.3)',
+              background: i === current ? '#E3A94A' : 'rgba(255,255,255,0.3)',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
               padding: 0,
@@ -276,12 +276,12 @@ export default function FlyerSlider({ onComplete }) {
             padding: '14px 48px',
             borderRadius: '999px',
             border: 'none',
-            background: 'linear-gradient(135deg, #C99A3D, #E8C97A)',
-            color: '#00205B',
+            background: 'linear-gradient(135deg, #E3A94A, #E8C97A)',
+            color: '#0C1022',
             fontSize: '16px',
             fontWeight: 700,
             cursor: 'pointer',
-            boxShadow: '0 4px 20px rgba(201,154,61,0.4)',
+            boxShadow: '0 4px 20px rgba(227, 169, 74,0.4)',
             transition: 'all 0.2s',
             animation: 'flyerFadeIn 0.4s ease',
           }}
@@ -299,7 +299,7 @@ export default function FlyerSlider({ onComplete }) {
         left: 0,
         width: `${((current + 1) / total) * 100}%`,
         height: '3px',
-        background: 'linear-gradient(90deg, #C99A3D, #E8C97A)',
+        background: 'linear-gradient(90deg, #E3A94A, #E8C97A)',
         transition: 'width 0.4s ease',
       }} />
 

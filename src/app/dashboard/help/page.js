@@ -31,11 +31,11 @@ const STATUS_STYLES = {
   open: { bg: '#FEF3C7', color: '#92400E', label: 'Open' },
   in_progress: { bg: '#DBEAFE', color: '#1E40AF', label: 'In Progress' },
   resolved: { bg: '#D1FAE5', color: '#065F46', label: 'Resolved' },
-  closed: { bg: '#F3F4F6', color: '#374151', label: 'Closed' },
+  closed: { bg: '#F0EDE6', color: '#374151', label: 'Closed' },
 };
 
 const PRIORITY_STYLES = {
-  low: { bg: '#F3F4F6', color: '#6B7280' },
+  low: { bg: '#F0EDE6', color: '#5F5C56' },
   medium: { bg: '#FEF3C7', color: '#92400E' },
   high: { bg: '#FEE2E2', color: '#991B1B' },
   urgent: { bg: '#FEE2E2', color: '#7F1D1D', border: '1px solid #FCA5A5' },
@@ -347,7 +347,7 @@ export default function HelpPage() {
           <button onClick={() => { setSelectedCategory(null); setShowForm(true); }} style={{
             padding: '10px 24px', backgroundColor: 'var(--brand-gold)', color: 'var(--brand-navy)',
             border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 600, fontSize: 14,
-            boxShadow: '0 2px 8px rgba(201,154,61,0.2)',
+            boxShadow: '0 2px 8px rgba(227, 169, 74,0.2)',
           }}>
             + New Ticket
           </button>
@@ -361,7 +361,7 @@ export default function HelpPage() {
           { label: 'Open', count: stats.open, color: '#92400E', bg: 'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)', iconPath: 'M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z' },
           { label: 'In Progress', count: stats.in_progress, color: '#1E40AF', bg: 'linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%)', iconPath: 'M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99' },
           { label: 'Resolved', count: stats.resolved, color: '#065F46', bg: 'linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%)', iconPath: 'M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
-          { label: 'Closed', count: stats.closed, color: '#374151', bg: 'linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%)', iconPath: 'M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z' },
+          { label: 'Closed', count: stats.closed, color: '#374151', bg: 'linear-gradient(135deg, #F0EDE6 0%, #E7E3DA 100%)', iconPath: 'M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z' },
         ].map(s => (
           <div key={s.label} style={{
             padding: '18px 22px', borderRadius: 12, background: s.bg,
@@ -455,7 +455,7 @@ export default function HelpPage() {
                   fontSize: 13, color: 'var(--text-secondary)', fontWeight: 500,
                   transition: 'border-color 0.15s, background 0.15s',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--brand-blue-accent)'; e.currentTarget.style.background = 'rgba(45,111,196,0.04)'; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--brand-blue-accent)'; e.currentTarget.style.background = 'rgba(227, 169, 74,0.04)'; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-color)'; e.currentTarget.style.background = 'none'; }}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -469,7 +469,7 @@ export default function HelpPage() {
                     <span key={i} style={{
                       display: 'inline-flex', alignItems: 'center', gap: 4,
                       padding: '4px 10px', borderRadius: 6,
-                      backgroundColor: 'rgba(45, 111, 196, 0.08)', fontSize: 12, color: 'var(--brand-navy)',
+                      backgroundColor: 'rgba(227, 169, 74, 0.08)', fontSize: 12, color: 'var(--brand-navy)',
                     }}>
                       {f.name}
                       <button type="button" onClick={() => setFiles(files.filter((_, j) => j !== i))} style={{
@@ -483,7 +483,7 @@ export default function HelpPage() {
 
             <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
               <button type="button" onClick={() => { setShowForm(false); setSelectedCategory(null); setFiles([]); }} style={{
-                padding: '10px 20px', backgroundColor: '#F3F4F6', color: 'var(--text-primary)',
+                padding: '10px 20px', backgroundColor: '#F0EDE6', color: 'var(--text-primary)',
                 border: 'none', borderRadius: 8, cursor: 'pointer', fontSize: 14,
               }}>
                 Cancel
@@ -511,11 +511,11 @@ export default function HelpPage() {
                 padding: '20px 16px', backgroundColor: '#fff', border: '1px solid var(--border-color)',
                 borderRadius: 10, cursor: 'pointer', transition: 'all 0.15s',
               }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--brand-gold)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(201,154,61,0.1)'; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--brand-gold)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(227, 169, 74,0.1)'; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-color)'; e.currentTarget.style.boxShadow = 'none'; }}
               >
                 <div style={{
-                  width: 40, height: 40, borderRadius: 10, backgroundColor: 'rgba(201,154,61,0.1)',
+                  width: 40, height: 40, borderRadius: 10, backgroundColor: 'rgba(227, 169, 74,0.1)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                   <CategoryIcon path={cat.icon} size={20} color="var(--brand-gold)" />
@@ -541,9 +541,9 @@ export default function HelpPage() {
             {[{ value: 'all', label: 'All' }, ...Object.entries(STATUS_STYLES).map(([v, s]) => ({ value: v, label: s.label }))].map(f => (
               <button key={f.value} onClick={() => setFilterStatus(f.value)} style={{
                 padding: '6px 16px', borderRadius: 999, fontSize: 14, fontWeight: filterStatus === f.value ? 600 : 500,
-                backgroundColor: filterStatus === f.value ? 'rgba(201,154,61,0.15)' : 'transparent',
+                backgroundColor: filterStatus === f.value ? 'rgba(227, 169, 74,0.15)' : 'transparent',
                 color: filterStatus === f.value ? 'var(--brand-navy)' : 'var(--text-secondary)',
-                border: filterStatus === f.value ? '1px solid rgba(201,154,61,0.3)' : '1px solid var(--border-color)',
+                border: filterStatus === f.value ? '1px solid rgba(227, 169, 74,0.3)' : '1px solid var(--border-color)',
                 cursor: 'pointer',
               }}>
                 {f.label}
@@ -577,7 +577,7 @@ export default function HelpPage() {
                     backgroundColor: '#fff', borderRadius: 10, border: '1px solid var(--border-color)',
                     padding: '14px 18px', cursor: 'pointer', transition: 'all 0.15s',
                   }}
-                    onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.06)'; e.currentTarget.style.borderColor = 'rgba(201,154,61,0.3)'; }}
+                    onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.06)'; e.currentTarget.style.borderColor = 'rgba(227, 169, 74,0.3)'; }}
                     onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.borderColor = 'var(--border-color)'; }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
@@ -623,7 +623,7 @@ export default function HelpPage() {
               ].map(item => (
                 <div key={item.step} style={{ display: 'flex', gap: 10 }}>
                   <div style={{
-                    width: 26, height: 26, borderRadius: '50%', backgroundColor: 'rgba(201,154,61,0.15)',
+                    width: 26, height: 26, borderRadius: '50%', backgroundColor: 'rgba(227, 169, 74,0.15)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
                     fontSize: 13, fontWeight: 700, color: 'var(--brand-gold)',
                   }}>

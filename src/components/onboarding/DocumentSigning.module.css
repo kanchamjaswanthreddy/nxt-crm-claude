@@ -40,7 +40,7 @@
   border-color: var(--brand-navy);
   background-color: var(--brand-navy);
   color: #fff;
-  box-shadow: 0 2px 8px rgba(15, 42, 82, 0.15);
+  box-shadow: 0 2px 8px rgba(12, 16, 34, 0.15);
 }
 
 .docTabActive:hover {
@@ -178,10 +178,10 @@
 /* ─── Signature Area ──────────────────────── */
 
 .signatureArea {
-  border: 1.5px solid rgba(201, 154, 61, 0.3);
+  border: 1.5px solid rgba(227, 169, 74, 0.3);
   border-radius: 16px;
   padding: var(--space-3);
-  background-color: rgba(201, 154, 61, 0.03);
+  background-color: rgba(227, 169, 74, 0.03);
 }
 
 .signatureSectionTitle {
@@ -207,9 +207,9 @@
 
 .companySignature {
   padding: var(--space-2);
-  background-color: rgba(15, 42, 82, 0.03);
+  background-color: rgba(12, 16, 34, 0.03);
   border-radius: 12px;
-  border: 1px solid rgba(15, 42, 82, 0.08);
+  border: 1px solid rgba(12, 16, 34, 0.08);
 }
 
 .signatureLabel {
@@ -343,7 +343,7 @@
 
 .signatureInput:focus {
   border-color: var(--brand-navy);
-  box-shadow: 0 0 0 3px rgba(15, 42, 82, 0.08);
+  box-shadow: 0 0 0 3px rgba(12, 16, 34, 0.08);
 }
 
 .signatureInput::placeholder {
@@ -356,15 +356,15 @@
   font-style: italic;
   color: var(--brand-navy);
   padding: 12px 16px;
-  border-color: rgba(201, 154, 61, 0.3);
+  border-color: rgba(227, 169, 74, 0.3);
   background-color: rgba(255, 255, 255, 0.8);
   border-bottom: 2px solid var(--brand-navy);
   border-radius: 4px 4px 0 0;
 }
 
 .signatureHandwriting:focus {
-  border-color: rgba(201, 154, 61, 0.5);
-  box-shadow: 0 0 0 3px rgba(201, 154, 61, 0.1);
+  border-color: rgba(227, 169, 74, 0.5);
+  box-shadow: 0 0 0 3px rgba(227, 169, 74, 0.1);
   border-bottom-color: var(--brand-navy);
 }
 
@@ -478,7 +478,7 @@
 }
 
 .docNavBtnPrimary:hover {
-  background-color: rgba(15, 42, 82, 0.85);
+  background-color: rgba(12, 16, 34, 0.85);
   color: #fff;
 }
 

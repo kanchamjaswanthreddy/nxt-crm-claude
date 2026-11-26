@@ -16,14 +16,14 @@ const dn = (a) => [a?.first_name, a?.middle_name, a?.last_name].filter(Boolean).
 const PAGE_SIZE = 25;
 
 const STATUS_LABELS = {
-  invited:              { label: 'Invited',             color: 'var(--brand-blue-accent)', bg: 'rgba(45, 111, 196, 0.1)' },
+  invited:              { label: 'Invited',             color: 'var(--brand-blue-accent)', bg: 'rgba(227, 169, 74, 0.1)' },
   active:              { label: 'Active',              color: 'var(--status-success)',     bg: 'rgba(47, 168, 79, 0.08)' },
   onboarding:          { label: 'Onboarding',          color: 'var(--status-warning)',     bg: 'rgba(224, 142, 43, 0.1)' },
-  pending_licensing:   { label: 'Pending License',     color: 'var(--brand-gold)',         bg: 'rgba(201, 154, 61, 0.1)' },
+  pending_licensing:   { label: 'Pending License',     color: 'var(--brand-gold)',         bg: 'rgba(227, 169, 74, 0.1)' },
   docs_pending_review: { label: 'Docs Pending Review', color: 'var(--status-warning)',     bg: 'rgba(224, 142, 43, 0.1)' },
-  docs_pending:        { label: 'Docs Pending',        color: 'var(--brand-gold)',         bg: 'rgba(201, 154, 61, 0.1)' },
+  docs_pending:        { label: 'Docs Pending',        color: 'var(--brand-gold)',         bg: 'rgba(227, 169, 74, 0.1)' },
   licensed:            { label: 'Licensed',            color: 'var(--status-success)',     bg: 'rgba(47, 168, 79, 0.08)' },
-  contracted:          { label: 'Contracted',          color: 'var(--brand-navy)',         bg: 'rgba(15, 42, 82, 0.08)' },
+  contracted:          { label: 'Contracted',          color: 'var(--brand-navy)',         bg: 'rgba(12, 16, 34, 0.08)' },
   inactive:            { label: 'Inactive',            color: 'var(--brand-silver)',       bg: 'rgba(169, 172, 177, 0.15)' },
 };
 

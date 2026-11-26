@@ -14,7 +14,7 @@ import {
   Tooltip, ResponsiveContainer
 } from 'recharts';
 
-const CHART_COLORS = ['#C99A3D', '#1B2B4B', '#2D6FC4', '#2FA84F', '#E08E2B'];
+const CHART_COLORS = ['#E3A94A', '#1B2B4B', '#1B2A4E', '#2FA84F', '#E08E2B'];
 
 const PERIODS = [
   { value: 'this_month', label: 'This Month' },
@@ -320,8 +320,8 @@ export default function ReportsHub() {
                 <AreaChart data={monthlyProduction} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
                   <defs>
                     <linearGradient id="gradientRevenue" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#C99A3D" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="#C99A3D" stopOpacity={0.02} />
+                      <stop offset="0%" stopColor="#E3A94A" stopOpacity={0.3} />
+                      <stop offset="95%" stopColor="#E3A94A" stopOpacity={0.02} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" vertical={false} />
@@ -342,11 +342,11 @@ export default function ReportsHub() {
                   <Area
                     type="monotone"
                     dataKey="revenue"
-                    stroke="#C99A3D"
+                    stroke="#E3A94A"
                     strokeWidth={2.5}
                     fill="url(#gradientRevenue)"
-                    dot={{ r: 4, fill: '#C99A3D', strokeWidth: 2, stroke: 'white' }}
-                    activeDot={{ r: 6, fill: '#C99A3D', strokeWidth: 2, stroke: 'white' }}
+                    dot={{ r: 4, fill: '#E3A94A', strokeWidth: 2, stroke: 'white' }}
+                    activeDot={{ r: 6, fill: '#E3A94A', strokeWidth: 2, stroke: 'white' }}
                   />
                 </AreaChart>
               </ResponsiveContainer>

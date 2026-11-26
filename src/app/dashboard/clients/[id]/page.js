@@ -46,7 +46,7 @@ function CarrierCombobox({ value, onChange, carriers }) {
                 padding: '12px 16px', cursor: 'pointer', fontSize: '14px',
                 borderBottom: '1px solid rgba(0,0,0,0.04)',
               }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(15,42,82,0.05)'}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(12, 16, 34,0.05)'}
               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#fff'}
             >
               {name}
@@ -68,8 +68,8 @@ const POLICY_STATUSES = [
   { value: 'active', label: 'Active', color: '#16a34a', bg: 'rgba(22,163,74,0.08)' },
   { value: 'pending', label: 'Pending', color: '#ca8a04', bg: 'rgba(202,138,4,0.08)' },
   { value: 'lapsed', label: 'Lapsed', color: '#dc2626', bg: 'rgba(220,38,38,0.08)' },
-  { value: 'cancelled', label: 'Cancelled', color: '#6b7280', bg: 'rgba(107,114,128,0.08)' },
-  { value: 'expired', label: 'Expired', color: '#6b7280', bg: 'rgba(107,114,128,0.08)' },
+  { value: 'cancelled', label: 'Cancelled', color: '#5F5C56', bg: 'rgba(107,114,128,0.08)' },
+  { value: 'expired', label: 'Expired', color: '#5F5C56', bg: 'rgba(107,114,128,0.08)' },
 ];
 
 function PolicyTypeIcon({ type }) {
@@ -387,7 +387,7 @@ export default function ClientDetailPage({ params }) {
           {/* Avatar */}
           <div style={{
             width: '72px', height: '72px', borderRadius: '50%',
-            background: 'linear-gradient(135deg, var(--brand-navy) 0%, #2D6FC4 100%)',
+            background: 'linear-gradient(135deg, var(--brand-navy) 0%, #1B2A4E 100%)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             color: '#fff', fontSize: '24px', fontWeight: 800,
             flexShrink: 0, letterSpacing: '1px',
@@ -446,7 +446,7 @@ export default function ClientDetailPage({ params }) {
           { label: 'Total Policies', value: policies.length, color: 'var(--brand-navy)' },
           { label: 'Active Policies', value: activePolicies.length, color: '#16a34a' },
           { label: 'Monthly Premium', value: fmt(totalPremium), color: 'var(--brand-gold)' },
-          { label: 'Total Coverage', value: fmt(totalCoverage), color: '#2D6FC4' },
+          { label: 'Total Coverage', value: fmt(totalCoverage), color: '#1B2A4E' },
         ].map(stat => (
           <Card key={stat.label}>
             <div style={{ padding: '4px 0' }}>

@@ -489,7 +489,7 @@ export default function BillingPage() {
                             <span style={{ marginLeft: '6px', fontSize: '10px', fontWeight: '700', color: 'var(--brand-gold)' }}>OWNER</span>
                           )}
                           {agent.role === 'it_engineer' && (
-                            <span style={{ marginLeft: '6px', fontSize: '10px', fontWeight: '700', color: '#2D6FC4' }}>IT</span>
+                            <span style={{ marginLeft: '6px', fontSize: '10px', fontWeight: '700', color: '#1B2A4E' }}>IT</span>
                           )}
                           {agent.billingExempt && !agent.is_owner && agent.role !== 'it_engineer' && (
                             <span style={{ marginLeft: '6px', fontSize: '10px', fontWeight: '700', color: '#2FA84F' }}>EXEMPT</span>
@@ -616,9 +616,9 @@ const CARD_ELEMENT_OPTIONS = {
     base: {
       fontSize: '16px',
       fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
-      color: '#0F2A52',
+      color: '#0C1022',
       '::placeholder': { color: 'rgba(0, 0, 0, 0.3)' },
-      iconColor: '#0F2A52',
+      iconColor: '#0C1022',
     },
     invalid: {
       color: '#D33F3F',
@@ -734,7 +734,7 @@ function UpdateCardFormInner({ userProfile, onClose, onSuccess }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 0' }}>
               <div style={{
                 width: '14px', height: '14px',
-                border: '2px solid var(--brand-blue-accent, #2D6FC4)', borderTopColor: 'transparent',
+                border: '2px solid var(--brand-blue-accent, #1B2A4E)', borderTopColor: 'transparent',
                 borderRadius: '50%', animation: 'spin 0.8s linear infinite',
               }} />
               <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>Initializing secure payment...</span>

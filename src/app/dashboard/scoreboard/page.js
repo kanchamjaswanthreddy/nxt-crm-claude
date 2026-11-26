@@ -16,7 +16,7 @@ function SimpleBarChart({ data, colors }) {
     <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px', height: 220, padding: '0 4px' }}>
       {data.map((d, i) => (
         <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', minWidth: 0 }}>
-          <span style={{ fontSize: '11px', color: '#6B7280', fontWeight: 600 }}>
+          <span style={{ fontSize: '11px', color: '#5F5C56', fontWeight: 600 }}>
             ${d.premium >= 1000 ? Math.round(d.premium / 1000) + 'k' : d.premium}
           </span>
           <div style={{
@@ -26,7 +26,7 @@ function SimpleBarChart({ data, colors }) {
             borderRadius: '6px 6px 0 0',
             transition: 'height 0.3s ease',
           }} />
-          <span style={{ fontSize: '11px', color: '#6B7280', textAlign: 'center', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '100%' }}>
+          <span style={{ fontSize: '11px', color: '#5F5C56', textAlign: 'center', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '100%' }}>
             {d.name}
           </span>
         </div>
@@ -47,7 +47,7 @@ function SimplePieChart({ data, colors }) {
           }} />
           <span style={{ flex: 1, fontSize: '13px', color: 'var(--text-primary)' }}>{d.name}</span>
           <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--brand-navy)' }}>{d.value} deals</span>
-          <span style={{ fontSize: '12px', color: '#6B7280', minWidth: '40px', textAlign: 'right' }}>
+          <span style={{ fontSize: '12px', color: '#5F5C56', minWidth: '40px', textAlign: 'right' }}>
             {Math.round((d.value / total) * 100)}%
           </span>
         </div>
@@ -70,9 +70,9 @@ const RANK_BY_OPTIONS = [
   { value: 'leadsConvertedCount', label: 'Leads Converted' },
 ];
 
-const PODIUM_COLORS = ['#C99A3D', '#A9ACB1', '#CD7F32'];
+const PODIUM_COLORS = ['#E3A94A', '#A9ACB1', '#CD7F32'];
 const PODIUM_LABELS = ['1st', '2nd', '3rd'];
-const CHART_COLORS = ['#C99A3D', '#1B2B4B', '#2D6FC4', '#2FA84F', '#E08E2B'];
+const CHART_COLORS = ['#E3A94A', '#1B2B4B', '#1B2A4E', '#2FA84F', '#E08E2B'];
 
 export default function ScoreboardPage() {
   const { userProfile } = useUser();
@@ -223,7 +223,7 @@ export default function ScoreboardPage() {
       {/* Your Rank Banner */}
       {myRank > 0 && (
         <div style={{
-          backgroundColor: 'rgba(201,154,61,0.08)', border: '1px solid rgba(201,154,61,0.25)',
+          backgroundColor: 'rgba(227, 169, 74,0.08)', border: '1px solid rgba(227, 169, 74,0.25)',
           borderRadius: '12px', padding: '14px var(--space-3)',
           marginBottom: 'var(--space-3)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)',
         }}>
@@ -301,14 +301,14 @@ export default function ScoreboardPage() {
                     justifyContent: 'center', position: 'relative',
                     borderTop: `3px solid ${PODIUM_COLORS[i]}`,
                     background: isMe
-                      ? 'linear-gradient(180deg, rgba(201,154,61,0.06) 0%, transparent 100%)'
+                      ? 'linear-gradient(180deg, rgba(227, 169, 74,0.06) 0%, transparent 100%)'
                       : 'transparent',
                   }}>
                     {isMe && (
                       <span style={{
                         position: 'absolute', top: '8px', right: '8px',
                         fontSize: '10px', fontWeight: 600, color: 'var(--brand-gold)',
-                        backgroundColor: 'rgba(201,154,61,0.1)', padding: '2px 8px',
+                        backgroundColor: 'rgba(227, 169, 74,0.1)', padding: '2px 8px',
                         borderRadius: '4px',
                       }}>YOU</span>
                     )}
@@ -317,7 +317,7 @@ export default function ScoreboardPage() {
                       backgroundColor: PODIUM_COLORS[i], color: '#fff',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       fontWeight: 800, fontSize: '15px',
-                      boxShadow: i === 0 ? '0 4px 14px rgba(201,154,61,0.35)' : 'none',
+                      boxShadow: i === 0 ? '0 4px 14px rgba(227, 169, 74,0.35)' : 'none',
                     }}>
                       {PODIUM_LABELS[i]}
                     </div>
@@ -443,7 +443,7 @@ export default function ScoreboardPage() {
                     return (
                       <tr key={agent.agentId} style={{
                         borderBottom: '1px solid var(--border-color)',
-                        backgroundColor: isMe ? 'rgba(201,154,61,0.05)' : 'transparent',
+                        backgroundColor: isMe ? 'rgba(227, 169, 74,0.05)' : 'transparent',
                         transition: 'background-color 0.15s',
                       }}>
                         <td style={{
@@ -485,7 +485,7 @@ const thStyle = {
   padding: '10px 16px',
   textAlign: 'right',
   fontSize: '11px',
-  color: '#6B7280',
+  color: '#5F5C56',
   fontWeight: 700,
   textTransform: 'uppercase',
   letterSpacing: '0.5px',

@@ -106,7 +106,7 @@ export default function CommissionDetail() {
         subtitle="Transaction break-down and override tree"
         actions={
           <span style={{
-            backgroundColor: commission.status === 'paid' ? 'rgba(47, 168, 79, 0.1)' : 'rgba(201, 154, 61, 0.1)',
+            backgroundColor: commission.status === 'paid' ? 'rgba(47, 168, 79, 0.1)' : 'rgba(227, 169, 74, 0.1)',
             color: commission.status === 'paid' ? 'var(--status-success, #2FA84F)' : 'var(--brand-gold)',
             padding: '6px 16px', borderRadius: '999px', fontSize: 'var(--text-secondary)', fontWeight: '600'
           }}>
@@ -191,7 +191,7 @@ export default function CommissionDetail() {
                 <td style={{ padding: 'var(--space-2) 24px', fontWeight: '600' }}>{formatCurrency(o.overrideAmount)}</td>
                 <td style={{ padding: 'var(--space-2) 24px' }}>
                   <span style={{ 
-                    backgroundColor: o.status === 'paid' ? 'rgba(47, 168, 79, 0.1)' : 'rgba(201, 154, 61, 0.1)', 
+                    backgroundColor: o.status === 'paid' ? 'rgba(47, 168, 79, 0.1)' : 'rgba(227, 169, 74, 0.1)', 
                     color: o.status === 'paid' ? 'var(--status-success, #2FA84F)' : 'var(--brand-gold)', 
                     padding: '4px 12px', borderRadius: '999px', fontSize: 'var(--text-caption)', fontWeight: '600' 
                   }}>

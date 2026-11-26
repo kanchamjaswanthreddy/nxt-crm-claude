@@ -936,14 +936,14 @@ export default function OnboardingPage() {
                               borderBottom: '1px solid rgba(0,0,0,0.05)',
                               transition: 'background-color 0.15s',
                             }}
-                            onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(201, 154, 61, 0.08)'}
+                            onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74, 0.08)'}
                             onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
                           >
                             <span style={{ fontWeight: 500 }}>{agent.fullName}</span>
                             {agent.nxtId && (
                               <span style={{
                                 fontSize: '12px', fontWeight: 600, color: 'var(--brand-navy)',
-                                backgroundColor: 'rgba(15, 42, 82, 0.08)', padding: '2px 8px',
+                                backgroundColor: 'rgba(12, 16, 34, 0.08)', padding: '2px 8px',
                                 borderRadius: '999px',
                               }}>
                                 {agent.nxtId}
@@ -970,7 +970,7 @@ export default function OnboardingPage() {
                     return (
                       <div key={idx} style={{
                         padding: '20px', borderRadius: '12px', marginBottom: '16px',
-                        border: '1px solid var(--border-color)', backgroundColor: idx === 0 ? 'rgba(201, 154, 61, 0.03)' : 'var(--surface-page)',
+                        border: '1px solid var(--border-color)', backgroundColor: idx === 0 ? 'rgba(227, 169, 74, 0.03)' : 'var(--surface-page)',
                       }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                           <span style={{ fontSize: '13px', fontWeight: '600', color: 'var(--brand-navy)' }}>
@@ -1059,7 +1059,7 @@ export default function OnboardingPage() {
                   <div style={{
                     padding: '20px', borderRadius: '12px', marginBottom: '20px',
                     border: `1px solid ${validationErrors.workAuthorization ? 'var(--status-error)' : 'var(--border-color)'}`,
-                    backgroundColor: qualificationForm.workAuthorization ? 'rgba(201, 154, 61, 0.03)' : 'var(--surface-page)',
+                    backgroundColor: qualificationForm.workAuthorization ? 'rgba(227, 169, 74, 0.03)' : 'var(--surface-page)',
                   }}>
                     <label className={styles.fieldLabel} style={{ marginBottom: '8px', display: 'block', fontWeight: 600, fontSize: '14px', color: 'var(--brand-navy)' }}>
                       Are you legally authorized to work in the United States? *
@@ -1171,7 +1171,7 @@ export default function OnboardingPage() {
                                       style={{
                                         display: 'inline-flex', alignItems: 'center', gap: '6px',
                                         padding: '6px 14px', borderRadius: '8px',
-                                        border: '1px solid var(--brand-gold)', backgroundColor: 'rgba(201, 154, 61, 0.08)',
+                                        border: '1px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.08)',
                                         color: 'var(--brand-navy)', fontSize: '12px', fontWeight: 600,
                                         textDecoration: 'none', cursor: 'pointer', transition: 'all 0.2s ease',
                                       }}

@@ -40,7 +40,7 @@ const GENERATIONS = [
 const OVERRIDE_PER_LEVEL = 810;
 const SUCCESS_BONUS_PCT = 0.05;
 
-const COLORS = ['#00205B', '#C99A3D', '#1a3a6e', '#d4af5a', '#2c5b94', '#e8c97a', '#3d7cbf', '#f0d89a'];
+const COLORS = ['#0C1022', '#E3A94A', '#1a3a6e', '#d4af5a', '#2c5b94', '#e8c97a', '#3d7cbf', '#f0d89a'];
 
 function fmt(n) {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(n);
@@ -151,7 +151,7 @@ export default function CommissionCalculatorPage() {
       {/* General Calculator */}
       {activeTab === 'general' && <>
       {/* Input Controls */}
-      <Card style={{ marginBottom: 'var(--space-4)', border: '1px solid rgba(201, 154, 61, 0.2)' }}>
+      <Card style={{ marginBottom: 'var(--space-4)', border: '1px solid rgba(227, 169, 74, 0.2)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-4)' }}>
           <div>
             <label style={{ display: 'block', fontSize: 'var(--text-caption)', fontWeight: 600, color: 'var(--brand-navy)', marginBottom: '6px' }}>
@@ -232,17 +232,17 @@ export default function CommissionCalculatorPage() {
       {/* Summary Cards */}
       {selectedData && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
-          <Card style={{ textAlign: 'center', border: '1px solid rgba(201, 154, 61, 0.15)' }}>
+          <Card style={{ textAlign: 'center', border: '1px solid rgba(227, 169, 74, 0.15)' }}>
             <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Direct Commission</div>
             <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: 'var(--brand-navy)' }}>{fmt(selectedData.totalIncome)}</div>
             <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: 600 }}>Net {fmtPct(selectedData.net)}</div>
           </Card>
-          <Card style={{ textAlign: 'center', border: '1px solid rgba(201, 154, 61, 0.15)' }}>
+          <Card style={{ textAlign: 'center', border: '1px solid rgba(227, 169, 74, 0.15)' }}>
             <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Override per Level</div>
             <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: 'var(--brand-navy)' }}>{fmt(selectedData.override)}</div>
             <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: 600 }}>Per downline level</div>
           </Card>
-          <Card style={{ textAlign: 'center', border: '1px solid rgba(201, 154, 61, 0.15)' }}>
+          <Card style={{ textAlign: 'center', border: '1px solid rgba(227, 169, 74, 0.15)' }}>
             <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Success Bonus</div>
             <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: selectedData.successBonus ? 'var(--brand-navy)' : 'var(--text-secondary)' }}>
               {selectedData.successBonus ? fmt(selectedData.successBonus) : 'N/A'}
@@ -273,8 +273,8 @@ export default function CommissionCalculatorPage() {
               <YAxis tick={{ fontSize: 12, fill: '#666' }} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
               <Tooltip formatter={(value) => fmt(value)} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
               <Legend />
-              <Bar dataKey="Total Income" fill="#00205B" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="Override" fill="#C99A3D" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Total Income" fill="#0C1022" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Override" fill="#E3A94A" radius={[4, 4, 0, 0]} />
               <Bar dataKey="Success Bonus" fill="#2c5b94" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
@@ -326,7 +326,7 @@ export default function CommissionCalculatorPage() {
               <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#666' }} />
               <YAxis tick={{ fontSize: 12, fill: '#666' }} tickFormatter={(v) => `$${v}`} />
               <Tooltip formatter={(value, name) => name === 'Income' ? fmt(value) : value + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
-              <Bar dataKey="Income" fill="#C99A3D" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Income" fill="#E3A94A" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </Card>
@@ -343,8 +343,8 @@ export default function CommissionCalculatorPage() {
               <YAxis tick={{ fontSize: 12, fill: '#666' }} tickFormatter={(v) => v + '%'} />
               <Tooltip formatter={(value) => value.toFixed(1) + '%'} contentStyle={{ borderRadius: '8px', border: '1px solid #eee' }} />
               <Legend />
-              <Line type="monotone" dataKey="Commission %" stroke="#00205B" strokeWidth={3} dot={{ r: 5, fill: '#00205B' }} />
-              <Line type="monotone" dataKey="Net %" stroke="#C99A3D" strokeWidth={3} dot={{ r: 5, fill: '#C99A3D' }} />
+              <Line type="monotone" dataKey="Commission %" stroke="#0C1022" strokeWidth={3} dot={{ r: 5, fill: '#0C1022' }} />
+              <Line type="monotone" dataKey="Net %" stroke="#E3A94A" strokeWidth={3} dot={{ r: 5, fill: '#E3A94A' }} />
             </LineChart>
           </ResponsiveContainer>
         </Card>
@@ -374,7 +374,7 @@ export default function CommissionCalculatorPage() {
                   key={r.key}
                   style={{
                     borderBottom: '1px solid rgba(0,0,0,0.06)',
-                    backgroundColor: r.key === selectedLevel ? 'rgba(201, 154, 61, 0.08)' : 'transparent',
+                    backgroundColor: r.key === selectedLevel ? 'rgba(227, 169, 74, 0.08)' : 'transparent',
                     fontWeight: r.key === selectedLevel ? 600 : 400
                   }}
                 >

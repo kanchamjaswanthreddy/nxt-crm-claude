@@ -17,7 +17,7 @@
   height: 48px;
   border-radius: var(--radius-full, 999px);
   background: var(--surface-inset, #F1F3F5);
-  color: var(--text-secondary, #6B7280);
+  color: var(--text-secondary, #5F5C56);
   margin-bottom: 4px;
 }
 
@@ -30,7 +30,7 @@
   font-family: var(--font-base, "Inter", -apple-system, system-ui, sans-serif);
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-primary, #111827);
+  color: var(--text-primary, #0C1022);
   margin: 0;
   line-height: 1.4;
 }
@@ -38,7 +38,7 @@
 .richDescription {
   font-family: var(--font-base, "Inter", -apple-system, system-ui, sans-serif);
   font-size: 13px;
-  color: var(--text-secondary, #6B7280);
+  color: var(--text-secondary, #5F5C56);
   margin: 0;
   max-width: 320px;
   line-height: 1.5;
@@ -62,7 +62,7 @@
 .minimalText {
   font-family: var(--font-base, "Inter", -apple-system, system-ui, sans-serif);
   font-size: 14px;
-  color: var(--text-secondary, #6B7280);
+  color: var(--text-secondary, #5F5C56);
   margin: 0;
   line-height: 1.5;
 }
@@ -70,7 +70,7 @@
 .minimalLink {
   font-family: var(--font-base, "Inter", -apple-system, system-ui, sans-serif);
   font-size: 13px;
-  color: var(--brand-navy, #0F2A52);
+  color: var(--brand-navy, #0C1022);
   background: none;
   border: none;
   padding: 0;
@@ -93,7 +93,7 @@
 .tableRowCell {
   font-family: var(--font-base, "Inter", -apple-system, system-ui, sans-serif);
   font-size: 14px;
-  color: var(--text-secondary, #6B7280);
+  color: var(--text-secondary, #5F5C56);
   padding: 32px;
   line-height: 1.5;
 }

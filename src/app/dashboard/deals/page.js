@@ -9,7 +9,7 @@ import PageHeader from '@/components/ui/PageHeader';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 
 const STATUS_MAP = {
-  open: { label: 'Submitted', color: '#2D6FC4', bg: 'rgba(45,111,196,0.08)' },
+  open: { label: 'Submitted', color: '#1B2A4E', bg: 'rgba(227, 169, 74,0.08)' },
   pending: { label: 'Under Review', color: '#E08E2B', bg: 'rgba(224,142,43,0.08)' },
   won: { label: 'Approved', color: '#2FA84F', bg: 'rgba(47,168,79,0.08)' },
   lost: { label: 'Declined', color: '#D33F3F', bg: 'rgba(211,63,63,0.08)' },
@@ -318,11 +318,11 @@ export default function DealsPage() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
-                boxShadow: '0 4px 16px -4px rgba(15,42,82,0.4)',
+                boxShadow: '0 4px 16px -4px rgba(12, 16, 34,0.4)',
                 transition: 'transform 0.15s ease, box-shadow 0.15s ease',
               }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 6px 20px -4px rgba(15,42,82,0.5)'; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 16px -4px rgba(15,42,82,0.4)'; }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 6px 20px -4px rgba(12, 16, 34,0.5)'; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 16px -4px rgba(12, 16, 34,0.4)'; }}
             >
               <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M8 2v12M2 8h12" /></svg>
               New Deal
@@ -342,8 +342,8 @@ export default function DealsPage() {
         <StatCard
           label="Active Deals"
           value={stats.activeDeals}
-          icon={<svg width="20" height="20" fill="none" stroke="#2D6FC4" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-          accent="#2D6FC4"
+          icon={<svg width="20" height="20" fill="none" stroke="#1B2A4E" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+          accent="#1B2A4E"
         />
         <StatCard
           label="Approved This Month"
@@ -361,7 +361,7 @@ export default function DealsPage() {
       </div>
 
       {/* Status Tabs */}
-      <div style={{ display: 'flex', gap: '4px', marginBottom: '16px', borderBottom: '1px solid #E5E7EB', paddingBottom: '0' }}>
+      <div style={{ display: 'flex', gap: '4px', marginBottom: '16px', borderBottom: '1px solid #E7E3DA', paddingBottom: '0' }}>
         {[
           { key: 'all', label: 'All' },
           { key: 'open', label: 'Submitted' },
@@ -394,7 +394,7 @@ export default function DealsPage() {
               fontWeight: '600',
               padding: '2px 8px',
               borderRadius: '999px',
-              backgroundColor: statusTab === tab.key ? 'rgba(15,42,82,0.08)' : '#F3F4F6',
+              backgroundColor: statusTab === tab.key ? 'rgba(12, 16, 34,0.08)' : '#F0EDE6',
               color: statusTab === tab.key ? 'var(--brand-navy)' : 'var(--text-secondary)',
             }}>
               {statusCounts[tab.key]}
@@ -407,7 +407,7 @@ export default function DealsPage() {
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' }}>
         {/* Search */}
         <div style={{ position: 'relative', flex: '1', minWidth: '200px', maxWidth: '320px' }}>
-          <svg width="16" height="16" fill="none" stroke="#9CA3AF" strokeWidth="2" viewBox="0 0 24 24" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }}>
+          <svg width="16" height="16" fill="none" stroke="#8A857B" strokeWidth="2" viewBox="0 0 24 24" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }}>
             <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35" strokeLinecap="round"/>
           </svg>
           <input
@@ -418,7 +418,7 @@ export default function DealsPage() {
             style={{
               width: '100%',
               padding: '9px 12px 9px 36px',
-              border: '1px solid #E5E7EB',
+              border: '1px solid #E7E3DA',
               borderRadius: '8px',
               fontSize: '13px',
               outline: 'none',
@@ -426,7 +426,7 @@ export default function DealsPage() {
               backgroundColor: '#fff',
             }}
             onFocus={e => e.target.style.borderColor = 'var(--brand-navy)'}
-            onBlur={e => e.target.style.borderColor = '#E5E7EB'}
+            onBlur={e => e.target.style.borderColor = '#E7E3DA'}
           />
         </div>
 
@@ -436,7 +436,7 @@ export default function DealsPage() {
           onChange={e => setPolicyType(e.target.value)}
           style={{
             padding: '9px 32px 9px 12px',
-            border: '1px solid #E5E7EB',
+            border: '1px solid #E7E3DA',
             borderRadius: '8px',
             fontSize: '13px',
             backgroundColor: '#fff',
@@ -457,7 +457,7 @@ export default function DealsPage() {
           onChange={e => setDateRange(e.target.value)}
           style={{
             padding: '9px 32px 9px 12px',
-            border: '1px solid #E5E7EB',
+            border: '1px solid #E7E3DA',
             borderRadius: '8px',
             fontSize: '13px',
             backgroundColor: '#fff',
@@ -478,12 +478,12 @@ export default function DealsPage() {
             onClick={handleExport}
             style={{
               display: 'flex', alignItems: 'center', gap: '6px',
-              padding: '9px 16px', border: '1px solid #E5E7EB', borderRadius: '8px',
+              padding: '9px 16px', border: '1px solid #E7E3DA', borderRadius: '8px',
               fontSize: '13px', fontWeight: '500', backgroundColor: '#fff', cursor: 'pointer',
               color: 'var(--text-primary)', transition: 'border-color 0.15s ease',
             }}
             onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--brand-navy)'}
-            onMouseLeave={e => e.currentTarget.style.borderColor = '#E5E7EB'}
+            onMouseLeave={e => e.currentTarget.style.borderColor = '#E7E3DA'}
           >
             <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" strokeLinecap="round" strokeLinejoin="round"/></svg>
             Export
@@ -498,11 +498,11 @@ export default function DealsPage() {
       </div>
 
       {/* Table */}
-      <div style={{ border: '1px solid #E5E7EB', borderRadius: '12px', overflow: 'hidden', backgroundColor: '#fff', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+      <div style={{ border: '1px solid #E7E3DA', borderRadius: '12px', overflow: 'hidden', backgroundColor: '#fff', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
             <thead>
-              <tr style={{ backgroundColor: '#FAFAFA', borderBottom: '1px solid #E5E7EB' }}>
+              <tr style={{ backgroundColor: '#FAFAFA', borderBottom: '1px solid #E7E3DA' }}>
                 <th scope="col" style={{ padding: '12px 16px', width: '40px' }}>
                   <input
                     type="checkbox"
@@ -528,7 +528,7 @@ export default function DealsPage() {
                     <div style={{ maxWidth: '320px', margin: '0 auto' }}>
                       <div style={{
                         width: '64px', height: '64px', borderRadius: '16px',
-                        background: 'linear-gradient(135deg, rgba(15,42,82,0.06), rgba(201,154,61,0.08))',
+                        background: 'linear-gradient(135deg, rgba(12, 16, 34,0.06), rgba(227, 169, 74,0.08))',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         margin: '0 auto 16px',
                       }}>
@@ -557,15 +557,15 @@ export default function DealsPage() {
                 </tr>
               ) : (
                 filteredDeals.map((deal, i) => {
-                  const statusInfo = STATUS_MAP[deal.status] || { label: deal.status, color: '#6B7280', bg: '#F3F4F6' };
+                  const statusInfo = STATUS_MAP[deal.status] || { label: deal.status, color: '#5F5C56', bg: '#F0EDE6' };
                   return (
                     <tr
                       key={deal.id}
                       onClick={() => setSelectedDeal(selectedDeal?.id === deal.id ? null : deal)}
                       style={{
-                        borderBottom: i < filteredDeals.length - 1 ? '1px solid #F3F4F6' : 'none',
+                        borderBottom: i < filteredDeals.length - 1 ? '1px solid #F0EDE6' : 'none',
                         cursor: 'pointer',
-                        backgroundColor: selectedDeal?.id === deal.id ? 'rgba(15,42,82,0.03)' : 'transparent',
+                        backgroundColor: selectedDeal?.id === deal.id ? 'rgba(12, 16, 34,0.03)' : 'transparent',
                         transition: 'background-color 0.12s ease',
                       }}
                       onMouseEnter={e => { if (selectedDeal?.id !== deal.id) e.currentTarget.style.backgroundColor = '#FAFAFA'; }}
@@ -669,7 +669,7 @@ function StatCard({ label, value, subtitle, icon, accent }) {
     <div style={{
       padding: '20px',
       borderRadius: '12px',
-      border: '1px solid #E5E7EB',
+      border: '1px solid #E7E3DA',
       backgroundColor: '#fff',
       boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
       transition: 'box-shadow 0.2s ease, transform 0.2s ease',
@@ -695,7 +695,7 @@ function StatCard({ label, value, subtitle, icon, accent }) {
 }
 
 function DealDetailPanel({ deal, agents, carriers, stages, onClose, onViewFull }) {
-  const statusInfo = STATUS_MAP[deal.status] || { label: deal.status, color: '#6B7280', bg: '#F3F4F6' };
+  const statusInfo = STATUS_MAP[deal.status] || { label: deal.status, color: '#5F5C56', bg: '#F0EDE6' };
 
   return (
     <>
@@ -722,7 +722,7 @@ function DealDetailPanel({ deal, agents, carriers, stages, onClose, onViewFull }
         `}</style>
 
         {/* Panel Header */}
-        <div style={{ padding: '20px 24px', borderBottom: '1px solid #E5E7EB', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ padding: '20px 24px', borderBottom: '1px solid #E7E3DA', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontFamily: 'monospace', marginBottom: '2px' }}>#{deal.id.substring(0, 8).toUpperCase()}</div>
             <h2 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--brand-navy)', margin: 0 }}>Deal Details</h2>
@@ -765,7 +765,7 @@ function DealDetailPanel({ deal, agents, carriers, stages, onClose, onViewFull }
         </div>
 
         {/* Panel Footer */}
-        <div style={{ padding: '16px 24px', borderTop: '1px solid #E5E7EB' }}>
+        <div style={{ padding: '16px 24px', borderTop: '1px solid #E7E3DA' }}>
           <button
             onClick={onViewFull}
             style={{
@@ -789,7 +789,7 @@ function DealDetailPanel({ deal, agents, carriers, stages, onClose, onViewFull }
 
 function DetailRow({ label, value, highlight, capitalize }) {
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: '1px solid #F3F4F6' }}>
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: '1px solid #F0EDE6' }}>
       <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>{label}</span>
       <span style={{
         fontSize: '13px', fontWeight: highlight ? '700' : '500',

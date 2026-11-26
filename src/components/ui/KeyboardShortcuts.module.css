@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(15, 42, 82, 0.50);
+  background: rgba(12, 16, 34, 0.50);
   backdrop-filter: blur(8px) saturate(1.2);
   -webkit-backdrop-filter: blur(8px) saturate(1.2);
   animation: fadeIn var(--duration-fast) var(--ease-out);

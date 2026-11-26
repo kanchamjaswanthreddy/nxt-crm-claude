@@ -20,12 +20,12 @@ import {
 const PRIORITIES = [
   { value: 'urgent', label: 'Urgent', color: '#D33F3F', bg: 'rgba(211,63,63,0.08)' },
   { value: 'high', label: 'High', color: '#E08E2B', bg: 'rgba(224,142,43,0.08)' },
-  { value: 'normal', label: 'Normal', color: '#2D6FC4', bg: 'rgba(45,111,196,0.08)' },
-  { value: 'low', label: 'Low', color: '#6B7280', bg: 'rgba(107,114,128,0.08)' },
+  { value: 'normal', label: 'Normal', color: '#1B2A4E', bg: 'rgba(227, 169, 74,0.08)' },
+  { value: 'low', label: 'Low', color: '#5F5C56', bg: 'rgba(107,114,128,0.08)' },
 ];
 
 const STATUSES = [
-  { value: 'open', label: 'Open', color: '#2D6FC4', bg: 'rgba(45,111,196,0.08)' },
+  { value: 'open', label: 'Open', color: '#1B2A4E', bg: 'rgba(227, 169, 74,0.08)' },
   { value: 'in_progress', label: 'In Progress', color: '#E08E2B', bg: 'rgba(224,142,43,0.08)' },
   { value: 'done', label: 'Done', color: '#2FA84F', bg: 'rgba(47,168,79,0.08)' },
 ];
@@ -38,10 +38,10 @@ const CATEGORIES = [
 ];
 
 const CATEGORY_COLORS = {
-  crm: { color: '#0f2a52', bg: 'rgba(15,42,82,0.08)' },
+  crm: { color: '#0C1022', bg: 'rgba(12, 16, 34,0.08)' },
   website: { color: '#8b5cf6', bg: 'rgba(139,92,246,0.08)' },
   client_request: { color: '#E08E2B', bg: 'rgba(224,142,43,0.08)' },
-  general: { color: '#6B7280', bg: 'rgba(107,114,128,0.08)' },
+  general: { color: '#5F5C56', bg: 'rgba(107,114,128,0.08)' },
 };
 
 export default function WorkBoardPage() {

@@ -114,7 +114,7 @@ export default function GroupsDashboard() {
                 left: 0,
                 right: 0,
                 height: '3px',
-                background: 'linear-gradient(90deg, var(--brand-navy), var(--brand-gold, #C99A3D))',
+                background: 'linear-gradient(90deg, var(--brand-navy), var(--brand-gold, #E3A94A))',
                 borderRadius: '16px 16px 0 0',
               }} />
 

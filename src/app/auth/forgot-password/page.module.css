@@ -6,7 +6,7 @@
 .title {
   font-size: 28px;
   font-weight: 700;
-  color: #0F2A52;
+  color: #0C1022;
   margin: 0 0 6px;
 }
 
@@ -33,7 +33,7 @@
 .fieldLabel {
   font-size: 15px;
   font-weight: 600;
-  color: #0F2A52;
+  color: #0C1022;
 }
 
 .inputWrap {
@@ -47,7 +47,7 @@
   left: 16px;
   width: 18px;
   height: 18px;
-  color: #9ca3af;
+  color: #8A857B;
   pointer-events: none;
 }
 
@@ -124,7 +124,7 @@
   font-size: 15px;
   font-weight: 500;
   font-family: var(--font-base);
-  color: #0F2A52;
+  color: #0C1022;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s;
 }

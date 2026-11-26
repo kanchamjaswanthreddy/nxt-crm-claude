@@ -86,7 +86,7 @@ function CalendarView({ tasks, month, onMonthChange, onTaskClick, getPriorityCol
                     alignItems: 'center',
                     justifyContent: 'center',
                     borderRadius: 'var(--radius-full)',
-                    backgroundColor: isToday(day) ? 'rgba(201, 154, 61, 0.12)' : 'transparent',
+                    backgroundColor: isToday(day) ? 'rgba(227, 169, 74, 0.12)' : 'transparent',
                   }}>
                     {day}
                   </div>
@@ -493,7 +493,7 @@ export default function TasksPage() {
                     {(viewType === 'team' || !isMyTask) && task.ownerAgentName && (
                       <div style={{
                         padding: '2px 8px', borderRadius: '999px',
-                        backgroundColor: 'rgba(15, 42, 82, 0.06)',
+                        backgroundColor: 'rgba(12, 16, 34, 0.06)',
                         fontWeight: '500', color: 'var(--brand-navy)',
                       }}>
                         {isMyTask ? 'You' : task.ownerAgentName}
@@ -509,12 +509,12 @@ export default function TasksPage() {
 
                     {/* Linked lead/deal */}
                     {task.relatedDealId && (
-                      <Link href={`/dashboard/deals/${task.relatedDealId}`} style={{ color: 'var(--brand-blue-accent, #2D6FC4)', textDecoration: 'none', backgroundColor: 'rgba(45, 111, 196, 0.1)', padding: '2px 8px', borderRadius: '4px' }}>
+                      <Link href={`/dashboard/deals/${task.relatedDealId}`} style={{ color: 'var(--brand-blue-accent, #1B2A4E)', textDecoration: 'none', backgroundColor: 'rgba(227, 169, 74, 0.1)', padding: '2px 8px', borderRadius: '4px' }}>
                         Linked Deal
                       </Link>
                     )}
                     {task.relatedLeadId && !task.relatedDealId && (
-                      <Link href={`/dashboard/leads/${task.relatedLeadId}`} style={{ color: 'var(--brand-blue-accent, #2D6FC4)', textDecoration: 'none', backgroundColor: 'rgba(45, 111, 196, 0.1)', padding: '2px 8px', borderRadius: '4px' }}>
+                      <Link href={`/dashboard/leads/${task.relatedLeadId}`} style={{ color: 'var(--brand-blue-accent, #1B2A4E)', textDecoration: 'none', backgroundColor: 'rgba(227, 169, 74, 0.1)', padding: '2px 8px', borderRadius: '4px' }}>
                         Linked Lead
                       </Link>
                     )}
@@ -629,7 +629,7 @@ export default function TasksPage() {
                   padding: '4px 12px', borderRadius: '999px', fontSize: 'var(--text-caption)',
                   fontWeight: '600',
                   color: selectedTask.status === 'completed' ? 'var(--status-success)' : 'var(--brand-navy)',
-                  backgroundColor: selectedTask.status === 'completed' ? 'rgba(47,168,79,0.1)' : 'rgba(15,42,82,0.06)',
+                  backgroundColor: selectedTask.status === 'completed' ? 'rgba(47,168,79,0.1)' : 'rgba(12, 16, 34,0.06)',
                 }}>
                   {selectedTask.status === 'completed' ? 'Completed' : 'Open'}
                 </span>
@@ -718,7 +718,7 @@ export default function TasksPage() {
                 {selectedTask.relatedDealId && (
                   <Link href={`/dashboard/deals/${selectedTask.relatedDealId}`} style={{
                     display: 'inline-block', padding: '6px 16px', borderRadius: '8px',
-                    backgroundColor: 'rgba(45, 111, 196, 0.1)', color: 'var(--brand-blue-accent, #2D6FC4)',
+                    backgroundColor: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-blue-accent, #1B2A4E)',
                     textDecoration: 'none', fontWeight: '500', fontSize: 'var(--text-caption)', marginRight: 'var(--space-2)',
                   }}>
                     View Linked Deal
@@ -727,7 +727,7 @@ export default function TasksPage() {
                 {selectedTask.relatedLeadId && !selectedTask.relatedDealId && (
                   <Link href={`/dashboard/leads/${selectedTask.relatedLeadId}`} style={{
                     display: 'inline-block', padding: '6px 16px', borderRadius: '8px',
-                    backgroundColor: 'rgba(45, 111, 196, 0.1)', color: 'var(--brand-blue-accent, #2D6FC4)',
+                    backgroundColor: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-blue-accent, #1B2A4E)',
                     textDecoration: 'none', fontWeight: '500', fontSize: 'var(--text-caption)',
                   }}>
                     View Linked Lead

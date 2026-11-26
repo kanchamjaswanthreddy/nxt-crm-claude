@@ -13,7 +13,7 @@ function formatDate(iso) {
   return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
-const STATUS_DOT = { active: '#2FA84F', invited: '#C99A3D', pending_approval: '#C99A3D', pending_licensing: '#C99A3D' };
+const STATUS_DOT = { active: '#2FA84F', invited: '#E3A94A', pending_approval: '#E3A94A', pending_licensing: '#E3A94A' };
 
 // ── Podium Card ─────────────────────────────────────────────────────────────
 
@@ -24,8 +24,8 @@ function PodiumCard({ recruiter, rank, total }) {
   const avatarSize = isChamp ? 96 : 64;
   const ringSize = avatarSize + 12;
 
-  const accentColor = isChamp ? '#C99A3D' : isSecond ? '#8C939A' : '#A0612B';
-  const accentLight = isChamp ? 'rgba(201,154,61,0.12)' : isSecond ? 'rgba(140,147,154,0.1)' : 'rgba(160,97,43,0.1)';
+  const accentColor = isChamp ? '#E3A94A' : isSecond ? '#8C939A' : '#A0612B';
+  const accentLight = isChamp ? 'rgba(227, 169, 74,0.12)' : isSecond ? 'rgba(140,147,154,0.1)' : 'rgba(160,97,43,0.1)';
 
   const pct = total > 0 ? Math.round((recruiter.recruitCount / total) * 100) : 0;
 
@@ -40,7 +40,7 @@ function PodiumCard({ recruiter, rank, total }) {
       <div style={{
         width: '100%',
         background: isChamp
-          ? 'linear-gradient(165deg, #0B1D3A 0%, #132D54 50%, #0F2A52 100%)'
+          ? 'linear-gradient(165deg, #0B1D3A 0%, #132D54 50%, #0C1022 100%)'
           : '#FFFFFF',
         borderRadius: isChamp ? '28px' : '20px',
         padding: isChamp ? '0 24px 28px' : '0 16px 20px',
@@ -48,7 +48,7 @@ function PodiumCard({ recruiter, rank, total }) {
         position: 'relative',
         overflow: 'visible',
         boxShadow: isChamp
-          ? '0 24px 80px rgba(11,29,58,0.35), 0 0 0 1px rgba(201,154,61,0.15), inset 0 1px 0 rgba(255,255,255,0.05)'
+          ? '0 24px 80px rgba(11,29,58,0.35), 0 0 0 1px rgba(227, 169, 74,0.15), inset 0 1px 0 rgba(255,255,255,0.05)'
           : '0 8px 32px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04)',
         transform: isChamp ? 'translateY(-16px)' : 'none',
       }}>
@@ -58,13 +58,13 @@ function PodiumCard({ recruiter, rank, total }) {
             <div style={{
               position: 'absolute', top: '-60px', left: '50%', transform: 'translateX(-50%)',
               width: '200px', height: '120px',
-              background: 'radial-gradient(ellipse, rgba(201,154,61,0.2) 0%, transparent 70%)',
+              background: 'radial-gradient(ellipse, rgba(227, 169, 74,0.2) 0%, transparent 70%)',
               pointerEvents: 'none',
             }} />
             <div style={{
               position: 'absolute', bottom: '-40px', left: '50%', transform: 'translateX(-50%)',
               width: '160px', height: '80px',
-              background: 'radial-gradient(ellipse, rgba(201,154,61,0.08) 0%, transparent 70%)',
+              background: 'radial-gradient(ellipse, rgba(227, 169, 74,0.08) 0%, transparent 70%)',
               pointerEvents: 'none',
             }} />
           </>
@@ -84,11 +84,11 @@ function PodiumCard({ recruiter, rank, total }) {
             background: isChamp
               ? 'conic-gradient(from 0deg, #FFD700, #F0C040, #DAA520, #F0C040, #FFD700)'
               : isSecond
-                ? 'conic-gradient(from 0deg, #D1D5DB, #9CA3AF, #B0B5BC, #9CA3AF, #D1D5DB)'
+                ? 'conic-gradient(from 0deg, #D1D5DB, #8A857B, #B0B5BC, #8A857B, #D1D5DB)'
                 : 'conic-gradient(from 0deg, #CD7F32, #D4943C, #A0612B, #D4943C, #CD7F32)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             boxShadow: isChamp
-              ? '0 4px 16px rgba(201,154,61,0.5), 0 0 0 3px rgba(201,154,61,0.15)'
+              ? '0 4px 16px rgba(227, 169, 74,0.5), 0 0 0 3px rgba(227, 169, 74,0.15)'
               : '0 2px 8px rgba(0,0,0,0.12)',
           }}>
             <span style={{
@@ -111,7 +111,7 @@ function PodiumCard({ recruiter, rank, total }) {
               transform: 'translate(-50%, -50%)',
               width: `${ringSize + 16}px`, height: `${ringSize + 16}px`,
               borderRadius: '50%',
-              background: 'conic-gradient(from 0deg, transparent, rgba(201,154,61,0.15), transparent, rgba(201,154,61,0.1), transparent)',
+              background: 'conic-gradient(from 0deg, transparent, rgba(227, 169, 74,0.15), transparent, rgba(227, 169, 74,0.1), transparent)',
               animation: 'spin 6s linear infinite',
             }} />
           )}
@@ -120,10 +120,10 @@ function PodiumCard({ recruiter, rank, total }) {
             borderRadius: '50%',
             padding: '3px',
             background: isChamp
-              ? 'conic-gradient(from 0deg, #FFD700, #DAA520, #C99A3D, #DAA520, #FFD700)'
+              ? 'conic-gradient(from 0deg, #FFD700, #DAA520, #E3A94A, #DAA520, #FFD700)'
               : `linear-gradient(135deg, ${accentColor}, ${accentColor}77)`,
             boxShadow: isChamp
-              ? '0 0 24px rgba(201,154,61,0.3)'
+              ? '0 0 24px rgba(227, 169, 74,0.3)'
               : `0 0 12px ${accentColor}22`,
             position: 'relative', zIndex: 1,
           }}>
@@ -141,7 +141,7 @@ function PodiumCard({ recruiter, rank, total }) {
         {/* Name + ID */}
         <p style={{
           fontSize: isChamp ? '20px' : '14px', fontWeight: '700',
-          color: isChamp ? '#fff' : '#0F2A52',
+          color: isChamp ? '#fff' : '#0C1022',
           margin: '0 0 2px 0',
           lineHeight: 1.3,
           letterSpacing: isChamp ? '-0.3px' : '0',
@@ -152,7 +152,7 @@ function PodiumCard({ recruiter, rank, total }) {
         {recruiter.nxtId && (
           <p style={{
             fontSize: '11px', margin: '0 0 16px 0', fontWeight: '500',
-            color: isChamp ? 'rgba(255,255,255,0.4)' : '#9CA3AF',
+            color: isChamp ? 'rgba(255,255,255,0.4)' : '#8A857B',
             letterSpacing: '0.5px',
           }}>
             {recruiter.nxtId}
@@ -164,7 +164,7 @@ function PodiumCard({ recruiter, rank, total }) {
           <span style={{
             fontSize: isChamp ? '44px' : '30px',
             fontWeight: '900',
-            color: isChamp ? '#C99A3D' : '#0F2A52',
+            color: isChamp ? '#E3A94A' : '#0C1022',
             lineHeight: 1,
             letterSpacing: '-1px',
           }}>
@@ -173,7 +173,7 @@ function PodiumCard({ recruiter, rank, total }) {
         </div>
         <p style={{
           fontSize: '12px', fontWeight: '600', margin: '0 0 12px 0',
-          color: isChamp ? 'rgba(255,255,255,0.4)' : '#9CA3AF',
+          color: isChamp ? 'rgba(255,255,255,0.4)' : '#8A857B',
           textTransform: 'uppercase', letterSpacing: '1.5px',
         }}>
           Recruits
@@ -190,7 +190,7 @@ function PodiumCard({ recruiter, rank, total }) {
             height: '100%', borderRadius: '2px',
             width: `${Math.max(pct, 5)}%`,
             background: isChamp
-              ? 'linear-gradient(90deg, #C99A3D, #FFD700)'
+              ? 'linear-gradient(90deg, #E3A94A, #FFD700)'
               : `linear-gradient(90deg, ${accentColor}88, ${accentColor})`,
             transition: 'width 600ms ease',
           }} />
@@ -267,7 +267,7 @@ export default function RecruitmentLeaderboardPage() {
     <div>
       {/* ── Hero Section ── */}
       <div style={{
-        background: 'linear-gradient(160deg, #0B1D3A 0%, #132D54 40%, #1B3A6B 70%, #0F2A52 100%)',
+        background: 'linear-gradient(160deg, #0B1D3A 0%, #132D54 40%, #1B2A4E 70%, #0C1022 100%)',
         borderRadius: '24px',
         padding: '40px 32px 48px',
         marginBottom: '32px',
@@ -275,23 +275,23 @@ export default function RecruitmentLeaderboardPage() {
         overflow: 'hidden',
       }}>
         {/* Decorative circles */}
-        <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '140px', height: '140px', borderRadius: '50%', background: 'rgba(201,154,61,0.06)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', bottom: '-20px', left: '60px', width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(201,154,61,0.04)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '140px', height: '140px', borderRadius: '50%', background: 'rgba(227, 169, 74,0.06)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: '-20px', left: '60px', width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(227, 169, 74,0.04)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', top: '20px', left: '-20px', width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(47,168,79,0.05)', pointerEvents: 'none' }} />
 
         {/* Trophy icon */}
         <div style={{
           width: '56px', height: '56px', borderRadius: '16px',
-          background: 'rgba(201,154,61,0.1)', border: '1px solid rgba(201,154,61,0.15)',
+          background: 'rgba(227, 169, 74,0.1)', border: '1px solid rgba(227, 169, 74,0.15)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           marginBottom: '20px',
         }}>
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-            <path d="M6 2h12v6a6 6 0 01-12 0V2z" stroke="#C99A3D" strokeWidth="1.5" strokeLinecap="round"/>
-            <path d="M6 4H4a2 2 0 00-2 2v1a4 4 0 004 4" stroke="#C99A3D" strokeWidth="1.5" strokeLinecap="round"/>
-            <path d="M18 4h2a2 2 0 012 2v1a4 4 0 01-4 4" stroke="#C99A3D" strokeWidth="1.5" strokeLinecap="round"/>
-            <path d="M9 14v2a3 3 0 003 3v0a3 3 0 003-3v-2" stroke="#C99A3D" strokeWidth="1.5"/>
-            <rect x="7" y="19" width="10" height="2" rx="1" stroke="#C99A3D" strokeWidth="1.5"/>
+            <path d="M6 2h12v6a6 6 0 01-12 0V2z" stroke="#E3A94A" strokeWidth="1.5" strokeLinecap="round"/>
+            <path d="M6 4H4a2 2 0 00-2 2v1a4 4 0 004 4" stroke="#E3A94A" strokeWidth="1.5" strokeLinecap="round"/>
+            <path d="M18 4h2a2 2 0 012 2v1a4 4 0 01-4 4" stroke="#E3A94A" strokeWidth="1.5" strokeLinecap="round"/>
+            <path d="M9 14v2a3 3 0 003 3v0a3 3 0 003-3v-2" stroke="#E3A94A" strokeWidth="1.5"/>
+            <rect x="7" y="19" width="10" height="2" rx="1" stroke="#E3A94A" strokeWidth="1.5"/>
           </svg>
         </div>
 
@@ -316,7 +316,7 @@ export default function RecruitmentLeaderboardPage() {
             borderTop: '1px solid rgba(255,255,255,0.06)',
           }}>
             {[
-              { value: data.totalAgents || 0, label: 'Total Team', color: '#C99A3D' },
+              { value: data.totalAgents || 0, label: 'Total Team', color: '#E3A94A' },
               { value: list.length, label: 'Recruiters', color: '#fff' },
               { value: totalRecruits, label: tab === 'thisMonth' ? 'This Month' : 'Total Recruits', color: '#2FA84F' },
             ].map((stat, i) => (
@@ -343,19 +343,19 @@ export default function RecruitmentLeaderboardPage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
             <div style={{
               width: '36px', height: '36px', borderRadius: '10px',
-              background: 'rgba(201,154,61,0.1)', border: '1px solid rgba(201,154,61,0.15)',
+              background: 'rgba(227, 169, 74,0.1)', border: '1px solid rgba(227, 169, 74,0.15)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C99A3D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E3A94A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
               </svg>
             </div>
             <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#0F2A52', margin: 0 }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#0C1022', margin: 0 }}>
                 Your Invite Link
               </h3>
-              <p style={{ fontSize: '12px', color: '#9CA3AF', margin: '2px 0 0' }}>
+              <p style={{ fontSize: '12px', color: '#8A857B', margin: '2px 0 0' }}>
                 Share this link to recruit new agents — they&apos;ll be automatically linked to you
               </p>
             </div>
@@ -368,7 +368,7 @@ export default function RecruitmentLeaderboardPage() {
           }}>
             <div style={{
               flex: 1, minWidth: '200px',
-              background: '#F9FAFB', border: '1px solid #E5E7EB', borderRadius: '12px',
+              background: '#F7F5F0', border: '1px solid #E7E3DA', borderRadius: '12px',
               padding: '12px 16px', fontSize: '13px', color: '#374151',
               fontFamily: 'monospace', wordBreak: 'break-all',
               display: 'flex', alignItems: 'center',
@@ -381,12 +381,12 @@ export default function RecruitmentLeaderboardPage() {
               rel="noopener noreferrer"
               style={{
                 padding: '12px 20px', borderRadius: '12px', border: 'none',
-                background: 'linear-gradient(135deg, #C99A3D, #D4A843)', color: '#0F2A52',
+                background: 'linear-gradient(135deg, #E3A94A, #E3A94A)', color: '#0C1022',
                 fontSize: '13px', fontWeight: '600', cursor: 'pointer',
                 display: 'flex', alignItems: 'center', gap: '6px',
                 transition: 'all 150ms ease', whiteSpace: 'nowrap',
                 textDecoration: 'none',
-                boxShadow: '0 4px 14px rgba(201, 154, 61, 0.3)',
+                boxShadow: '0 4px 14px rgba(227, 169, 74, 0.3)',
               }}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -400,7 +400,7 @@ export default function RecruitmentLeaderboardPage() {
               onClick={handleCopy}
               style={{
                 padding: '12px 20px', borderRadius: '12px', border: 'none',
-                background: copied ? '#059669' : '#0F2A52', color: '#fff',
+                background: copied ? '#059669' : '#0C1022', color: '#fff',
                 fontSize: '13px', fontWeight: '600', cursor: 'pointer',
                 display: 'flex', alignItems: 'center', gap: '6px',
                 transition: 'all 150ms ease', whiteSpace: 'nowrap',
@@ -427,7 +427,7 @@ export default function RecruitmentLeaderboardPage() {
               onClick={handleEmailShare}
               style={{
                 padding: '12px 20px', borderRadius: '12px',
-                border: '1px solid #E5E7EB', background: '#fff', color: '#374151',
+                border: '1px solid #E7E3DA', background: '#fff', color: '#374151',
                 fontSize: '13px', fontWeight: '600', cursor: 'pointer',
                 display: 'flex', alignItems: 'center', gap: '6px',
                 transition: 'all 150ms ease', whiteSpace: 'nowrap',
@@ -446,7 +446,7 @@ export default function RecruitmentLeaderboardPage() {
       {/* ── Tab Toggle ── */}
       <div style={{
         display: 'inline-flex', gap: '2px', marginBottom: '32px',
-        background: '#F3F4F6', borderRadius: '14px', padding: '4px',
+        background: '#F0EDE6', borderRadius: '14px', padding: '4px',
       }}>
         {[
           { key: 'allTime', label: 'All Time' },
@@ -458,7 +458,7 @@ export default function RecruitmentLeaderboardPage() {
             style={{
               padding: '10px 24px', borderRadius: '10px', border: 'none',
               fontSize: '14px', fontWeight: tab === t.key ? '600' : '500',
-              color: tab === t.key ? '#0F2A52' : '#6B7280',
+              color: tab === t.key ? '#0C1022' : '#5F5C56',
               background: tab === t.key ? '#fff' : 'transparent',
               boxShadow: tab === t.key ? '0 2px 8px rgba(0,0,0,0.06)' : 'none',
               cursor: 'pointer', transition: 'all 150ms ease',
@@ -502,17 +502,17 @@ export default function RecruitmentLeaderboardPage() {
                 padding: '20px 24px 12px',
                 borderBottom: '1px solid rgba(0,0,0,0.04)',
               }}>
-                <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#0F2A52', margin: 0 }}>
+                <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#0C1022', margin: 0 }}>
                   Full Rankings
                 </h3>
               </div>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
                 <thead>
                   <tr style={{ borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
-                    <th scope="col" style={{ padding: '12px 24px', textAlign: 'left', fontWeight: '600', color: '#9CA3AF', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '60px' }}>Rank</th>
-                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontWeight: '600', color: '#9CA3AF', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px' }}>Agent</th>
-                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'center', fontWeight: '600', color: '#9CA3AF', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '100px' }}>Recruits</th>
-                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'center', fontWeight: '600', color: '#9CA3AF', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '100px' }}>Active</th>
+                    <th scope="col" style={{ padding: '12px 24px', textAlign: 'left', fontWeight: '600', color: '#8A857B', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '60px' }}>Rank</th>
+                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontWeight: '600', color: '#8A857B', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px' }}>Agent</th>
+                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'center', fontWeight: '600', color: '#8A857B', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '100px' }}>Recruits</th>
+                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'center', fontWeight: '600', color: '#8A857B', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '100px' }}>Active</th>
                     <th scope="col" style={{ padding: '12px 24px', width: '48px' }}></th>
                   </tr>
                 </thead>
@@ -544,7 +544,7 @@ export default function RecruitmentLeaderboardPage() {
                             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                               <Avatar name={recruiter.name} photoUrl={recruiter.photoUrl} size={36} />
                               <div>
-                                <div style={{ fontWeight: '600', color: '#0F2A52', fontSize: '14px' }}>{recruiter.name}</div>
+                                <div style={{ fontWeight: '600', color: '#0C1022', fontSize: '14px' }}>{recruiter.name}</div>
                                 {recruiter.nxtId && (
                                   <div style={{ fontSize: '11px', color: '#B0B5BC', marginTop: '1px' }}>{recruiter.nxtId}</div>
                                 )}
@@ -553,8 +553,8 @@ export default function RecruitmentLeaderboardPage() {
                           </td>
                           <td style={{ padding: '14px 16px', textAlign: 'center' }}>
                             <span style={{
-                              fontWeight: '700', fontSize: '16px', color: '#0F2A52',
-                              background: 'rgba(15,42,82,0.04)',
+                              fontWeight: '700', fontSize: '16px', color: '#0C1022',
+                              background: 'rgba(12, 16, 34,0.04)',
                               padding: '4px 14px', borderRadius: '999px',
                             }}>
                               {recruiter.recruitCount}
@@ -572,9 +572,9 @@ export default function RecruitmentLeaderboardPage() {
                             <span style={{
                               display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                               width: '24px', height: '24px', borderRadius: '6px',
-                              background: isExpanded ? 'rgba(15,42,82,0.06)' : 'transparent',
+                              background: isExpanded ? 'rgba(12, 16, 34,0.06)' : 'transparent',
                               transition: 'all 200ms',
-                              color: '#9CA3AF', fontSize: '10px',
+                              color: '#8A857B', fontSize: '10px',
                               transform: isExpanded ? 'rotate(180deg)' : 'none',
                             }}>
                               &#9660;
@@ -599,15 +599,15 @@ export default function RecruitmentLeaderboardPage() {
                                   }}>
                                     <span style={{
                                       width: '7px', height: '7px', borderRadius: '50%',
-                                      background: STATUS_DOT[r.status] || '#9CA3AF', flexShrink: 0,
-                                      boxShadow: `0 0 4px ${STATUS_DOT[r.status] || '#9CA3AF'}44`,
+                                      background: STATUS_DOT[r.status] || '#8A857B', flexShrink: 0,
+                                      boxShadow: `0 0 4px ${STATUS_DOT[r.status] || '#8A857B'}44`,
                                     }} />
-                                    <span style={{ fontWeight: '500', color: '#111827', flex: 1 }}>{r.name}</span>
+                                    <span style={{ fontWeight: '500', color: '#0C1022', flex: 1 }}>{r.name}</span>
                                     <span style={{ color: '#B0B5BC', fontSize: '12px' }}>{formatDate(r.joinedAt)}</span>
                                     <span style={{
                                       fontSize: '10px', padding: '2px 8px', borderRadius: '999px',
-                                      background: r.status === 'active' ? 'rgba(47,168,79,0.08)' : 'rgba(201,154,61,0.08)',
-                                      color: r.status === 'active' ? '#2FA84F' : '#C99A3D',
+                                      background: r.status === 'active' ? 'rgba(47,168,79,0.08)' : 'rgba(227, 169, 74,0.08)',
+                                      color: r.status === 'active' ? '#2FA84F' : '#E3A94A',
                                       fontWeight: '600', textTransform: 'capitalize',
                                     }}>
                                       {r.status?.replace(/_/g, ' ')}

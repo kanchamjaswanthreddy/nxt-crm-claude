@@ -156,7 +156,7 @@ export default function ClientsPage() {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                           <div style={{
                             width: '38px', height: '38px', borderRadius: '50%',
-                            background: 'linear-gradient(135deg, var(--brand-navy) 0%, #2D6FC4 100%)',
+                            background: 'linear-gradient(135deg, var(--brand-navy) 0%, #1B2A4E 100%)',
                             display: 'flex', alignItems: 'center', justifyContent: 'center',
                             color: '#fff', fontSize: '13px', fontWeight: 700,
                             flexShrink: 0, letterSpacing: '0.5px',

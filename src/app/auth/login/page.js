@@ -38,7 +38,7 @@ const EyeIcon = ({ open }) => open ? (
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<p style={{ textAlign: 'center', color: '#6b7280' }}>Loading...</p>}>
+    <Suspense fallback={<p style={{ textAlign: 'center', color: '#5F5C56' }}>Loading...</p>}>
       <LoginForm />
     </Suspense>
   );

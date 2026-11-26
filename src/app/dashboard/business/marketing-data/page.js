@@ -34,10 +34,10 @@ function FileIcon({ mimeType, size = 20 }) {
     return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#F97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><rect x="8" y="12" width="8" height="6" rx="1"/></svg>;
   }
   if (mimeType?.includes('document') || mimeType?.includes('word') || mimeType?.includes('text')) {
-    return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>;
+    return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#E3A94A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>;
   }
   // Default file
-  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>;
+  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#5F5C56" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>;
 }
 
 function SearchIcon() {
@@ -209,7 +209,7 @@ export default function MarketingDataPage() {
             onClick={() => setViewMode('grid')}
             style={{
               padding: '8px 12px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center',
-              background: viewMode === 'grid' ? 'var(--brand-navy, #0F2A52)' : '#fff',
+              background: viewMode === 'grid' ? 'var(--brand-navy, #0C1022)' : '#fff',
               color: viewMode === 'grid' ? '#fff' : 'var(--text-secondary)',
             }}
           ><GridIcon /></button>
@@ -218,7 +218,7 @@ export default function MarketingDataPage() {
             style={{
               padding: '8px 12px', border: 'none', borderLeft: '1px solid rgba(0,0,0,0.1)', cursor: 'pointer',
               display: 'flex', alignItems: 'center',
-              background: viewMode === 'list' ? 'var(--brand-navy, #0F2A52)' : '#fff',
+              background: viewMode === 'list' ? 'var(--brand-navy, #0C1022)' : '#fff',
               color: viewMode === 'list' ? '#fff' : 'var(--text-secondary)',
             }}
           ><ListIcon /></button>
@@ -287,7 +287,7 @@ export default function MarketingDataPage() {
           color: '#DC2626', fontSize: '0.875rem',
         }}>
           <strong>Error:</strong> {error}
-          <div style={{ marginTop: '8px', fontSize: '0.8rem', color: '#9CA3AF' }}>
+          <div style={{ marginTop: '8px', fontSize: '0.8rem', color: '#8A857B' }}>
             Make sure the Google Drive folder is shared with the Firebase service account email.
           </div>
         </div>
@@ -387,7 +387,7 @@ export default function MarketingDataPage() {
                       <div style={{
                         height: '100px', borderRadius: '8px', marginBottom: '12px',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        background: '#f8fafc', overflow: 'hidden',
+                        background: '#F7F5F0', overflow: 'hidden',
                       }}>
                         {file.thumbnailLink ? (
                           <img
@@ -503,7 +503,7 @@ export default function MarketingDataPage() {
             {/* Preview area */}
             <div style={{ flex: 1, overflow: 'hidden' }}>
               {previewFile.mimeType?.includes('image') && previewFile.thumbnailLink ? (
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', height: '400px', background: '#f8fafc' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', height: '400px', background: '#F7F5F0' }}>
                   <img
                     src={previewFile.thumbnailLink.replace('=s220', '=s800')}
                     alt={previewFile.name}
@@ -511,7 +511,7 @@ export default function MarketingDataPage() {
                   />
                 </div>
               ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '48px', background: '#f8fafc' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '48px', background: '#F7F5F0' }}>
                   <FileIcon mimeType={previewFile.mimeType} size={64} />
                   <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '16px', textAlign: 'center' }}>
                     Open this file in Google Drive to view its full contents.
@@ -546,7 +546,7 @@ export default function MarketingDataPage() {
                   rel="noopener noreferrer"
                   style={{
                     padding: '8px 16px', borderRadius: '8px', border: 'none',
-                    background: 'var(--brand-gold, #C99A3D)', fontSize: '0.85rem', fontWeight: 600,
+                    background: 'var(--brand-gold, #E3A94A)', fontSize: '0.85rem', fontWeight: 600,
                     color: '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px',
                   }}
                 >

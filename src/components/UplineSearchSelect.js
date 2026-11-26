@@ -105,20 +105,20 @@ export default function UplineSearchSelect({ agents = [], value, onChange }) {
                   width: '100%',
                   padding: '10px 16px',
                   border: 'none',
-                  backgroundColor: a.id === value ? 'rgba(15, 42, 82, 0.06)' : 'transparent',
+                  backgroundColor: a.id === value ? 'rgba(12, 16, 34, 0.06)' : 'transparent',
                   cursor: 'pointer',
                   textAlign: 'left',
                   transition: 'background-color 0.15s ease',
                   fontFamily: 'var(--font-base)',
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(15, 42, 82, 0.04)'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = a.id === value ? 'rgba(15, 42, 82, 0.06)' : 'transparent'}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(12, 16, 34, 0.04)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = a.id === value ? 'rgba(12, 16, 34, 0.06)' : 'transparent'}
               >
                 <span style={{
                   fontSize: '12px',
                   fontWeight: 700,
-                  color: '#0f2a52',
-                  backgroundColor: 'rgba(15, 42, 82, 0.08)',
+                  color: '#0C1022',
+                  backgroundColor: 'rgba(12, 16, 34, 0.08)',
                   padding: '2px 8px',
                   borderRadius: '6px',
                   fontFamily: 'monospace',

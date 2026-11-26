@@ -72,14 +72,14 @@ function relativeTime(ts) {
 }
 
 const DOT_CLASS = { overdue: s.dotOverdue, today: s.dotToday, upcoming: s.dotUpcoming };
-const PIPE_COLORS = ['#2D6FC4', '#245BB3', '#1B3A6B', '#0F2A52', '#C99A3D', '#8B5CF6', '#059669'];
+const PIPE_COLORS = ['#1B2A4E', '#245BB3', '#1B2A4E', '#0C1022', '#E3A94A', '#8B5CF6', '#059669'];
 
 const BANNER_DISMISS_KEY = 'nxt_v2_banner_dismissed_at';
 const SEVEN_DAYS_MS = 7 * 86400000;
 
 // ── Sparkline ────────────────────────────────────────────────────────────────
 
-function Sparkline({ data, color = '#2D6FC4', width = 80, height = 28 }) {
+function Sparkline({ data, color = '#1B2A4E', width = 80, height = 28 }) {
   if (!data || data.length < 2 || data.every(v => v === 0)) return null;
   const max = Math.max(...data);
   const min = Math.min(...data);
@@ -164,7 +164,7 @@ function OnboardingBanner({ agent, dismissed, onDismiss }) {
   return (
     <div className={s.banner}>
       <div className={s.bannerIcon}>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C99A3D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E3A94A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" />
         </svg>
       </div>
@@ -582,7 +582,7 @@ function AgentView({ data, onCompleteTask }) {
           hint={kpis.pipelineValue === 0
             ? 'Add deals to build pipeline'
             : `Across ${pipelineByStage.reduce((t, st) => t + st.count, 0)} deals`}
-          sparkColor="#0F2A52"
+          sparkColor="#0C1022"
         />
         <KpiPill
           label="Deals Won"
@@ -727,7 +727,7 @@ function AdminView({ data, onCompleteTask }) {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
           </div>
           <p className={s.kpiLabel}>Pending Invites</p>
-          <p className={s.kpiSquareValue} style={admin.pendingInvites > 0 ? { color: '#C99A3D' } : undefined}>
+          <p className={s.kpiSquareValue} style={admin.pendingInvites > 0 ? { color: '#E3A94A' } : undefined}>
             {admin.pendingInvites}
           </p>
           <p className={s.kpiHint}>
@@ -878,7 +878,7 @@ export default function DashboardV2Page() {
   if (loadError || !data) return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: 16, padding: 32 }}>
       <h2 style={{ fontSize: 20, fontWeight: 600, color: '#1a1a2e' }}>Unable to load dashboard</h2>
-      <p style={{ fontSize: 14, color: '#64748b', textAlign: 'center', maxWidth: 400 }}>
+      <p style={{ fontSize: 14, color: '#5F5C56', textAlign: 'center', maxWidth: 400 }}>
         {loadError || 'No data returned from server.'}
       </p>
       <button

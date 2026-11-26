@@ -75,11 +75,11 @@
 }
 
 .trSelected {
-  background-color: rgba(201, 154, 61, 0.06);
+  background-color: rgba(227, 169, 74, 0.06);
 }
 
 .trSelected:hover {
-  background-color: rgba(201, 154, 61, 0.1);
+  background-color: rgba(227, 169, 74, 0.1);
 }
 
 .checkbox {

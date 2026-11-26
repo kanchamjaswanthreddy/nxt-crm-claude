@@ -4,7 +4,7 @@
   position: fixed;
   inset: 0;
   z-index: var(--z-modal, 400);
-  background: rgba(15, 42, 82, 0.50);
+  background: rgba(12, 16, 34, 0.50);
   backdrop-filter: blur(8px) saturate(1.2);
   -webkit-backdrop-filter: blur(8px) saturate(1.2);
   display: flex;
@@ -63,14 +63,14 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--space-5, 20px) var(--space-6, 24px);
-  border-bottom: 1px solid var(--border-color, #e5e7eb);
+  border-bottom: 1px solid var(--border-color, #E7E3DA);
 }
 
 .title {
   font-family: var(--font-base, 'Inter', -apple-system, system-ui, sans-serif);
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-primary, #111827);
+  color: var(--text-primary, #0C1022);
   margin: 0;
   line-height: 1.4;
 }
@@ -86,15 +86,15 @@
   width: 32px;
   height: 32px;
   border-radius: var(--radius-md, 8px);
-  color: var(--text-secondary, #6b7280);
+  color: var(--text-secondary, #5F5C56);
   transition: background 150ms ease, color 150ms ease;
   flex-shrink: 0;
   margin-left: var(--space-3, 12px);
 }
 
 .closeButton:hover {
-  background: var(--border-light, #f3f4f6);
-  color: var(--text-primary, #111827);
+  background: var(--border-light, #F0EDE6);
+  color: var(--text-primary, #0C1022);
 }
 
 .closeButton:focus-visible {
@@ -122,7 +122,7 @@
   justify-content: flex-end;
   gap: var(--space-2, 8px);
   padding: var(--space-4, 16px) var(--space-6, 24px);
-  border-top: 1px solid var(--border-color, #e5e7eb);
+  border-top: 1px solid var(--border-color, #E7E3DA);
 }
 
 /* Responsive: mobile bottom-sheet style */

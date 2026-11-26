@@ -261,7 +261,7 @@ export default function PipelinePage() {
               style={{
                 width: '320px',
                 minWidth: '320px',
-                backgroundColor: dragOverStageId === stage.id ? 'rgba(45, 111, 196, 0.05)' : 'var(--surface-card)',
+                backgroundColor: dragOverStageId === stage.id ? 'rgba(227, 169, 74, 0.05)' : 'var(--surface-card)',
                 borderRadius: '16px',
                 display: 'flex',
                 flexDirection: 'column',

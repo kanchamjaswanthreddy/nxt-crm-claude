@@ -130,7 +130,7 @@ export default function CommissionsHub() {
                   </td>
                   <td style={{ padding: 'var(--space-2)' }}>
                     <span style={{ 
-                      backgroundColor: c.status === 'paid' ? 'rgba(47, 168, 79, 0.1)' : 'rgba(201, 154, 61, 0.1)', 
+                      backgroundColor: c.status === 'paid' ? 'rgba(47, 168, 79, 0.1)' : 'rgba(227, 169, 74, 0.1)', 
                       color: c.status === 'paid' ? 'var(--status-success, #2FA84F)' : 'var(--brand-gold)', 
                       padding: '4px 12px', borderRadius: '999px', fontSize: 'var(--text-caption)', fontWeight: '600' 
                     }}>
@@ -168,7 +168,7 @@ export default function CommissionsHub() {
                   <td style={{ padding: 'var(--space-2)', fontWeight: '600' }}>{formatCurrency(o.overrideAmount)}</td>
                   <td style={{ padding: 'var(--space-2)' }}>
                     <span style={{ 
-                      backgroundColor: o.status === 'paid' ? 'rgba(47, 168, 79, 0.1)' : 'rgba(201, 154, 61, 0.1)', 
+                      backgroundColor: o.status === 'paid' ? 'rgba(47, 168, 79, 0.1)' : 'rgba(227, 169, 74, 0.1)', 
                       color: o.status === 'paid' ? 'var(--status-success, #2FA84F)' : 'var(--brand-gold)', 
                       padding: '4px 12px', borderRadius: '999px', fontSize: 'var(--text-caption)', fontWeight: '600' 
                     }}>

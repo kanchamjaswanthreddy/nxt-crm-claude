@@ -222,7 +222,7 @@
 
 .selectField:focus {
   border-color: var(--brand-blue-accent);
-  box-shadow: 0 0 0 3px rgba(45, 111, 196, 0.1);
+  box-shadow: 0 0 0 3px rgba(227, 169, 74, 0.1);
 }
 
 /* ─── Radio Cards ──────────────────────── */
@@ -247,12 +247,12 @@
 
 .radioCard:hover {
   border-color: var(--brand-blue-accent);
-  background-color: rgba(45, 111, 196, 0.02);
+  background-color: rgba(227, 169, 74, 0.02);
 }
 
 .radioCardActive {
   border-color: var(--brand-navy);
-  background-color: rgba(15, 42, 82, 0.03);
+  background-color: rgba(12, 16, 34, 0.03);
   box-shadow: 0 0 0 1px var(--brand-navy);
 }
 
@@ -310,8 +310,8 @@
 }
 
 .stateChipActive:hover {
-  background-color: rgba(15, 42, 82, 0.85);
-  border-color: rgba(15, 42, 82, 0.85);
+  background-color: rgba(12, 16, 34, 0.85);
+  border-color: rgba(12, 16, 34, 0.85);
   color: #fff;
 }
 
@@ -393,7 +393,7 @@
 }
 
 .infoBanner {
-  background-color: rgba(45, 111, 196, 0.06);
+  background-color: rgba(227, 169, 74, 0.06);
   border-left: 4px solid var(--brand-blue-accent);
   padding: var(--space-2);
   border-radius: 4px;
@@ -443,7 +443,7 @@
 }
 
 .reviewEditBtn:hover {
-  background-color: rgba(45, 111, 196, 0.06);
+  background-color: rgba(227, 169, 74, 0.06);
   border-color: var(--brand-blue-accent);
 }
 
@@ -518,7 +518,7 @@
 
 .ssnInputWrapper:focus-within {
   border-color: var(--brand-blue-accent);
-  box-shadow: 0 0 0 3px rgba(45, 111, 196, 0.1);
+  box-shadow: 0 0 0 3px rgba(227, 169, 74, 0.1);
 }
 
 .ssnInput {
@@ -612,8 +612,8 @@
 }
 
 .yesNoBtnActiveYes:hover {
-  background-color: rgba(15, 42, 82, 0.85);
-  border-color: rgba(15, 42, 82, 0.85);
+  background-color: rgba(12, 16, 34, 0.85);
+  border-color: rgba(12, 16, 34, 0.85);
   color: #fff;
 }
 
@@ -624,8 +624,8 @@
 }
 
 .yesNoBtnActiveNo:hover {
-  background-color: rgba(15, 42, 82, 0.85);
-  border-color: rgba(15, 42, 82, 0.85);
+  background-color: rgba(12, 16, 34, 0.85);
+  border-color: rgba(12, 16, 34, 0.85);
   color: #fff;
 }
 
@@ -693,8 +693,8 @@
   border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: var(--space-2) 16px;
-  background-color: rgba(201, 154, 61, 0.04);
-  border-color: rgba(201, 154, 61, 0.2);
+  background-color: rgba(227, 169, 74, 0.04);
+  border-color: rgba(227, 169, 74, 0.2);
 }
 
 /* ─── Optional Banner ──────────────────────── */
@@ -705,8 +705,8 @@
   gap: var(--space-2);
   padding: var(--space-2) 16px;
   border-radius: 12px;
-  background-color: rgba(201, 154, 61, 0.06);
-  border: 1px solid rgba(201, 154, 61, 0.15);
+  background-color: rgba(227, 169, 74, 0.06);
+  border: 1px solid rgba(227, 169, 74, 0.15);
   font-size: var(--text-caption);
   color: var(--text-secondary);
   line-height: 1.5;
@@ -729,7 +729,7 @@
   margin-top: var(--space-1);
   padding: var(--space-1) var(--space-2);
   border-radius: 8px;
-  background-color: rgba(201, 154, 61, 0.06);
+  background-color: rgba(227, 169, 74, 0.06);
   font-size: var(--text-caption);
   color: var(--brand-gold);
   font-weight: 500;
@@ -757,7 +757,7 @@
 
 .documentCard:hover {
   border-color: var(--brand-navy);
-  background-color: rgba(15, 42, 82, 0.02);
+  background-color: rgba(12, 16, 34, 0.02);
 }
 
 .documentCardUploaded {
