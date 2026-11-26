@@ -240,3 +240,21 @@
     height: 48px;
   }
 }
+
+/* 2026 redesign */
+.header { text-align: left; margin-bottom: 26px; }
+.title { font-size: clamp(34px, 3.2vw, 46px); font-weight: 350; letter-spacing: -0.05em; line-height: 1.02; color: #0C1022; }
+.subtitle { margin-top: 10px; font-size: 17px; color: #5F5C56; text-align: left; }
+.form { gap: 18px; }
+.fieldLabel { font-size: 15px; font-weight: 600; color: #0C1022; }
+.input { height: 56px; border-radius: 18px; border: 1.5px solid #E7E3DA; background: #FAF8F4; font-size: 17px; color: #0C1022; transition: border-color 0.2s, box-shadow 0.2s, background 0.2s; }
+.input::placeholder { color: #8B877F; }
+.input:focus { border-color: #E3A94A; background: #fff; box-shadow: 0 0 0 4px rgba(227, 169, 74, 0.22); outline: none; }
+.signInBtn, .submitBtn { height: 58px; border-radius: 999px; background: #0C1022; color: #fff; font-size: 17px; font-weight: 600; box-shadow: none; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s; }
+.signInBtn:hover:not(:disabled), .submitBtn:hover:not(:disabled) { background: #1B2A4E; transform: translateY(-2px); }
+.signInBtn:focus-visible, .submitBtn:focus-visible { outline: 3px solid #E3A94A; outline-offset: 3px; }
+.forgotLink, .backLink { color: #8A5A0B; font-size: 15px; font-weight: 600; }
+.checkboxLabel { font-size: 15px; color: #5F5C56; }
+.checkbox { accent-color: #0C1022; width: 18px; height: 18px; }
+.errorBanner { border-radius: 18px; }
+.sessionExpiredBanner { border-radius: 18px; background: #FBF1DC; border-color: #F5D9A0; }

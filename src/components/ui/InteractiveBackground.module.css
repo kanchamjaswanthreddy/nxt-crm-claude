@@ -1,0 +1,8 @@
+.bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; background: #F1EFEA; }
+.glowA, .glowB { position: absolute; border-radius: 50%; }
+.glowA { right: -12vw; top: -18vw; width: 52vw; aspect-ratio: 1; background: radial-gradient(circle, rgba(227, 169, 74, 0.3), transparent 66%); animation: ibFloat 16s ease-in-out infinite alternate; }
+.glowB { left: -16vw; bottom: -22vw; width: 56vw; aspect-ratio: 1; background: radial-gradient(circle, rgba(27, 42, 78, 0.16), transparent 66%); animation: ibFloat 20s ease-in-out infinite alternate-reverse; }
+.rings { position: absolute; right: -14vw; bottom: -20vw; width: 62vw; fill: none; stroke: rgba(12, 16, 34, 0.1); stroke-width: 1.2; stroke-dasharray: 3 9; transform-origin: center; animation: ibSpin 120s linear infinite; }
+@keyframes ibFloat { to { transform: translate(-5%, 6%) scale(1.1); } }
+@keyframes ibSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .glowA, .glowB, .rings { animation: none; } }
