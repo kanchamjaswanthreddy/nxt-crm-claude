@@ -8,6 +8,8 @@ import { updateTaskStatus } from '@/app/actions/tasks';
 import Avatar from '@/components/Avatar';
 import InviteAgentModal from '@/components/InviteAgentModal';
 import FlyerCarousel from '@/components/FlyerCarousel';
+import { CountUp, Ticker, TrendWidget, RingWidget, Leaderboard, ActivityTimeline, FactGrid, useSpotlight } from './widgets';
+import w from './widgets.module.css';
 import s from './dashboard.module.css';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -274,7 +276,7 @@ function FeaturedCard({ label, production, pending, sparkData, momPct }) {
       <div className={s.featuredContent}>
         <div className={s.featuredMain}>
           <p className={s.featuredLabel}>{label || 'MTD Production'}</p>
-          <p className={s.featuredValue}>{fmtCurrency(production).replace(/\.00$/, '')}</p>
+          <p className={s.featuredValue}><CountUp value={production} format={(v) => fmtCurrency(Math.round(v)).replace(/\.00$/, '')} /></p>
           {hasData && pending > 0 && (
             <p className={s.featuredSubtext}><span className={s.featuredChip}>+ {fmtCurrency(pending)} pending</span></p>
           )}
@@ -580,8 +582,24 @@ function TopRecruitersCard({ topRecruiters }) {
 function AgentView({ data, onCompleteTask }) {
   const router = useRouter();
   const { kpis, pipelineByStage, tasks } = data;
+  const spot = useSpotlight();
+  const openDeals = pipelineByStage.reduce((t, st) => t + st.count, 0);
+  const earned = (kpis.mtdProduction || 0) + (kpis.mtdPending || 0);
+  const sixTotal = (kpis.sparkProduction || []).reduce((t, v) => t + (v || 0), 0);
+  const sixDeals = (kpis.sparkDeals || []).reduce((t, v) => t + (v || 0), 0);
+  const tickerItems = [
+    { value: fmtCompact(kpis.mtdProduction), label: 'paid to you this month', tone: 'good' },
+    kpis.mtdPending > 0 && { value: fmtCompact(kpis.mtdPending), label: 'still pending' },
+    { value: kpis.dealsWonMonth, label: `deal${kpis.dealsWonMonth !== 1 ? 's' : ''} won this month`, tone: 'good' },
+    { value: fmtCompact(kpis.pipelineValue), label: `open across ${openDeals} deals` },
+    kpis.momPct != null && { value: `${kpis.momPct >= 0 ? '+' : ''}${Math.round(kpis.momPct)}%`, label: 'against last month', tone: kpis.momPct >= 0 ? 'good' : 'warn' },
+    { value: tasks.length, label: 'open tasks' },
+    kpis.overdueTaskCount > 0 && { value: kpis.overdueTaskCount, label: 'overdue', tone: 'warn' },
+    data.uplineName && { value: data.uplineName, label: 'is your upline' },
+  ];
   return (
-    <>
+    <div ref={spot}>
+      <Ticker items={tickerItems} />
       {/* Row 1: this month's production beside pipeline and tasks */}
       <div className={s.heroRow}>
         <FeaturedCard
@@ -600,7 +618,7 @@ function AgentView({ data, onCompleteTask }) {
         </button>
         <button type="button" className={s.bigTile} onClick={() => router.push('/dashboard/tasks')}>
           <span className={s.bigTileLabel}>Deals won this month</span>
-          <span className={s.bigTileValue}>{kpis.dealsWonMonth}</span>
+          <span className={s.bigTileValue}><CountUp value={kpis.dealsWonMonth} /></span>
           <span className={s.bigTileHint} data-alert={kpis.overdueTaskCount > 0 || undefined}>
             {kpis.overdueTaskCount > 0 ? `${kpis.overdueTaskCount} overdue task${kpis.overdueTaskCount !== 1 ? 's' : ''}` : 'All tasks on track'}
           </span>
@@ -631,6 +649,31 @@ function AgentView({ data, onCompleteTask }) {
         </div>
       </div>
 
+      {/* Trend, this month's money, and personal read-outs */}
+      <div className={w.row3}>
+        <TrendWidget production={kpis.sparkProduction} deals={kpis.sparkDeals} title="Six-month trend" />
+        <RingWidget
+          title="Paid and pending"
+          centerValue={fmtCompact(earned)}
+          centerLabel="earned"
+          parts={[
+            { label: 'Paid', value: kpis.mtdProduction || 0, display: fmtCompact(kpis.mtdProduction), tone: 'navy' },
+            { label: 'Pending', value: kpis.mtdPending || 0, display: fmtCompact(kpis.mtdPending), tone: 'gold' },
+          ]}
+          footer={data.agent.contractLevel ? `Your level: ${data.agent.contractLevel}.` : undefined}
+          action={<button type="button" className={w.link} onClick={() => router.push('/dashboard/commissions')}>Commissions</button>}
+        />
+        <FactGrid
+          title="Your read-outs"
+          items={[
+            { label: 'Average open deal', value: fmtCompact(openDeals > 0 ? kpis.pipelineValue / openDeals : 0), note: `${openDeals} open` },
+            { label: 'Six-month production', value: fmtCompact(sixTotal), note: 'paid' },
+            { label: 'Deals won in six months', value: sixDeals, note: `${(sixDeals / 6).toFixed(1)} a month` },
+            { label: 'Upline', value: data.uplineName ? data.uplineName.split(' ')[0] : 'None', note: data.uplineName || 'No upline set' },
+          ]}
+        />
+      </div>
+
       {/* Top Recruiters — visible to all agents */}
       <div className={s.bottomRow} style={{ marginTop: '20px' }}>
         <div className={`${s.card} ${s.cardHover}`} onClick={() => router.push('/dashboard/recruitment')} role="button" tabIndex={0} style={{ cursor: 'pointer' }}>
@@ -643,7 +686,7 @@ function AgentView({ data, onCompleteTask }) {
           <TopRecruitersCard topRecruiters={data.topRecruiters} />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -652,9 +695,32 @@ function AgentView({ data, onCompleteTask }) {
 function AdminView({ data, onCompleteTask }) {
   const router = useRouter();
   const { kpis, pipelineByStage, tasks, admin } = data;
+  const spot = useSpotlight();
+  // Derived read-outs for the widgets (display only).
+  const avgWon = admin.agencyDealsWon > 0 ? admin.agencyDealsWonPremium / admin.agencyDealsWon : 0;
+  const avgOpen = admin.openDealCount > 0 ? admin.agencyPipelineValue / admin.openDealCount : 0;
+  const perActive = admin.activeCount > 0 ? admin.agencyMtdProduction / admin.activeCount : 0;
+  // Stages are stored per agent, so add them up by name before picking the biggest.
+  const byName = {};
+  pipelineByStage.forEach(st => { byName[st.name] = (byName[st.name] || 0) + (st.value || 0); });
+  const biggest = Object.entries(byName).sort((a, b) => b[1] - a[1])[0] || ['None', 0];
+  const biggestShare = admin.agencyPipelineValue > 0 ? Math.round((biggest[1] / admin.agencyPipelineValue) * 100) : 0;
+  const tickerItems = [
+    { value: fmtCompact(admin.agencyMtdProduction), label: 'agency production this month', tone: 'good' },
+    { value: admin.agencyDealsWon, label: `deal${admin.agencyDealsWon !== 1 ? 's' : ''} won this month`, tone: 'good' },
+    { value: fmtCompact(admin.agencyPipelineValue), label: `open across ${admin.openDealCount} deals` },
+    admin.agencyMomPct != null && { value: `${admin.agencyMomPct >= 0 ? '+' : ''}${Math.round(admin.agencyMomPct)}%`, label: 'against last month', tone: admin.agencyMomPct >= 0 ? 'good' : 'warn' },
+    { value: admin.activeCount, label: 'active agents' },
+    admin.onboardingCount > 0 && { value: admin.onboardingCount, label: 'still onboarding' },
+    admin.pendingApprovals > 0 && { value: admin.pendingApprovals, label: 'waiting for your approval', tone: 'warn' },
+    admin.docsAwaitingReview > 0 && { value: admin.docsAwaitingReview, label: 'documents to review', tone: 'warn' },
+    admin.pendingInvites > 0 && { value: admin.pendingInvites, label: `invite${admin.pendingInvites !== 1 ? 's' : ''} not accepted yet` },
+    kpis.overdueTaskCount > 0 && { value: kpis.overdueTaskCount, label: 'of your tasks overdue', tone: 'warn' },
+  ];
 
   return (
-    <>
+    <div ref={spot}>
+      <Ticker items={tickerItems} />
       {/* Row 1: production beside the two figures an owner checks first */}
       <div className={s.heroRow}>
         <FeaturedCard
@@ -676,7 +742,7 @@ function AdminView({ data, onCompleteTask }) {
           <span className={s.bigTileFaces} aria-hidden="true">
             {(admin.topProducers || []).slice(0, 3).map(p => <Avatar key={p.id} name={p.name} photoUrl={p.photoUrl} size={40} />)}
           </span>
-          <span className={s.bigTileValue}>{admin.teamSize}</span>
+          <span className={s.bigTileValue}><CountUp value={admin.teamSize} /></span>
           <span className={s.bigTileHint}>{admin.activeCount} active &middot; {admin.onboardingCount} onboarding</span>
         </button>
       </div>
@@ -724,23 +790,36 @@ function AdminView({ data, onCompleteTask }) {
         </div>
       </div>
 
-      {/* Row 3: Top Producers + Recent Activity (#7) */}
-      <div className={s.bottomRow}>
-        <div className={s.card}>
-          <div className={s.cardHeader}>
-            <h3 className={s.cardHeaderTitle}>Top Producers</h3>
-            <button className={s.headerLink} onClick={() => router.push('/dashboard/scoreboard')}>
-              Scoreboard
-            </button>
-          </div>
-          <TopProducers producers={admin.topProducers} />
-        </div>
-        <div className={s.card}>
-          <div className={s.cardHeader}>
-            <h3 className={s.cardHeaderTitle}>Recent Activity</h3>
-          </div>
-          <RecentActivity activity={admin.recentActivity} />
-        </div>
+      {/* Row 3: trend, team make-up, and deal averages */}
+      <div className={w.row3}>
+        <TrendWidget production={kpis.sparkProduction} deals={kpis.sparkDeals} title="Six-month trend" />
+        <RingWidget
+          title="Team make-up"
+          centerValue={admin.teamSize}
+          centerLabel="people"
+          parts={[
+            { label: 'Active', value: admin.activeCount, tone: 'navy' },
+            { label: 'Onboarding', value: admin.onboardingCount, tone: 'gold' },
+            { label: 'Other', value: Math.max(0, admin.teamSize - admin.activeCount - admin.onboardingCount), tone: 'pale' },
+          ]}
+          footer={admin.pendingInvites > 0 ? `${admin.pendingInvites} invite${admin.pendingInvites !== 1 ? 's' : ''} not accepted yet, oldest ${admin.oldestInviteDays} days.` : 'No invites waiting.'}
+          action={<button type="button" className={w.link} onClick={() => router.push('/dashboard/team')}>Team</button>}
+        />
+        <FactGrid
+          title="Deal read-outs"
+          items={[
+            { label: 'Average premium per won deal', value: fmtCompact(avgWon), note: `${admin.agencyDealsWon} won this month` },
+            { label: 'Average open deal', value: fmtCompact(avgOpen), note: `${admin.openDealCount} open` },
+            { label: 'Production per active agent', value: fmtCompact(perActive), note: 'this month' },
+            { label: 'Biggest stage by value', value: fmtCompact(biggest[1]), note: `${biggest[0]}, ${biggestShare}% of pipeline` },
+          ]}
+        />
+      </div>
+
+      {/* Row 4: who is producing, and what just happened */}
+      <div className={w.row2}>
+        <Leaderboard producers={admin.topProducers || []} total={admin.agencyMtdProduction} onOpen={(p) => router.push(`/dashboard/team/${p.id}`)} onAll={() => router.push('/dashboard/scoreboard')} />
+        <ActivityTimeline activity={admin.recentActivity || []} />
       </div>
 
       {/* Row 4: Needs Attention + Action Items */}
@@ -780,7 +859,7 @@ function AdminView({ data, onCompleteTask }) {
           <TopRecruitersCard topRecruiters={data.topRecruiters} />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
