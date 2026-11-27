@@ -8,8 +8,17 @@ import { updateTaskStatus } from '@/app/actions/tasks';
 import Avatar from '@/components/Avatar';
 import InviteAgentModal from '@/components/InviteAgentModal';
 import FlyerCarousel from '@/components/FlyerCarousel';
-import { CountUp, Ticker, TrendWidget, RingWidget, Leaderboard, ActivityTimeline, FactGrid, useSpotlight } from './widgets';
+import { GoalBand, CountUp, Ticker, TrendWidget, RingWidget, Leaderboard, ActivityTimeline, FactGrid, useSpotlight } from './widgets';
 import w from './widgets.module.css';
+import { fetchGoals, saveGoal } from '@/app/actions/goals';
+
+// Loads and saves the monthly targets shown in the goal band.
+function useGoals() {
+  const [goals, setGoals] = useState({ myGoal: null, agencyGoal: null });
+  useEffect(() => { let live = true; fetchGoals().then(r => { if (live && r.success) setGoals({ myGoal: r.myGoal, agencyGoal: r.agencyGoal }); }); return () => { live = false; }; }, []);
+  const save = (scope) => async (amount) => { const r = await saveGoal(scope, amount); if (r.success) setGoals(g => ({ ...g, [scope === 'agency' ? 'agencyGoal' : 'myGoal']: r.goal })); return r; };
+  return { goals, save };
+}
 import s from './dashboard.module.css';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -583,6 +592,7 @@ function AgentView({ data, onCompleteTask }) {
   const router = useRouter();
   const { kpis, pipelineByStage, tasks } = data;
   const spot = useSpotlight();
+  const { goals, save: saveGoalFor } = useGoals();
   const openDeals = pipelineByStage.reduce((t, st) => t + st.count, 0);
   const earned = (kpis.mtdProduction || 0) + (kpis.mtdPending || 0);
   const sixTotal = (kpis.sparkProduction || []).reduce((t, v) => t + (v || 0), 0);
@@ -600,6 +610,7 @@ function AgentView({ data, onCompleteTask }) {
   return (
     <div ref={spot}>
       <Ticker items={tickerItems} />
+      <GoalBand label="Your goal this month" current={kpis.mtdProduction} goal={goals.myGoal} onSave={saveGoalFor('self')} />
       {/* Row 1: this month's production beside pipeline and tasks */}
       <div className={s.heroRow}>
         <FeaturedCard
@@ -696,6 +707,7 @@ function AdminView({ data, onCompleteTask }) {
   const router = useRouter();
   const { kpis, pipelineByStage, tasks, admin } = data;
   const spot = useSpotlight();
+  const { goals, save: saveGoalFor } = useGoals();
   // Derived read-outs for the widgets (display only).
   const avgWon = admin.agencyDealsWon > 0 ? admin.agencyDealsWonPremium / admin.agencyDealsWon : 0;
   const avgOpen = admin.openDealCount > 0 ? admin.agencyPipelineValue / admin.openDealCount : 0;
@@ -721,6 +733,7 @@ function AdminView({ data, onCompleteTask }) {
   return (
     <div ref={spot}>
       <Ticker items={tickerItems} />
+      <GoalBand label="Agency goal this month" current={admin.agencyMtdProduction} goal={goals.agencyGoal} onSave={saveGoalFor('agency')} />
       {/* Row 1: production beside the two figures an owner checks first */}
       <div className={s.heroRow}>
         <FeaturedCard

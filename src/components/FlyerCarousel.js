@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import s from './FlyerCarousel.module.css';
+import { fetchAnnouncements } from '@/app/actions/announcements';
 
 // The company flyers, shown as a slideshow on the dashboard. Text is live (not baked into pictures),
 // so it stays sharp at any size and can be edited here.
@@ -16,13 +17,12 @@ const VALUES = [
   { letter: 'T', name: 'Trust', line: 'We build confidence through consistency.', points: ['We act with integrity in every decision.', 'We deliver on our commitments.', 'We protect what matters most.'], photo: 'trust', cta: { label: 'See my clients', href: '/dashboard/clients' } },
 ];
 
-const SLIDES = [
+const BASE_SLIDES = [
   { kind: 'lead', key: 'vision', label: 'Our vision', title: 'Where advisors own their future and every family is protected', text: 'To be a financial services company built on integrity and purpose.', photo: 'our-vision' },
   { kind: 'lead', key: 'mission', label: 'Our mission', title: 'Careers worth having, agencies worth owning, legacies worth leaving', text: 'While giving every family access to financial protection they can trust.', photo: 'our-mission' },
   { kind: 'protect', key: 'protect', label: 'What we stand for', title: 'Our values spell PROTECT', text: 'Seven commitments behind every career we build and every family we serve. Pick a letter.' },
   ...VALUES.map((v, i) => ({ kind: 'value', key: `v${i}`, valueIndex: i, label: `Value ${i + 1} of 7`, title: v.name, text: v.line, points: v.points, photo: v.photo, cta: v.cta })),
 ];
-const FIRST_VALUE = 3;
 const AUTO_MS = 7000;
 
 export default function FlyerCarousel() {
@@ -31,6 +31,14 @@ export default function FlyerCarousel() {
   const [hover, setHover] = useState(false);
   const [hidden, setHidden] = useState(false);
   const touch = useRef(null);
+  const [news, setNews] = useState([]);
+  useEffect(() => { let live = true; fetchAnnouncements().then(r => { if (live && r.success) setNews(r.announcements); }).catch(() => {}); return () => { live = false; }; }, []);
+  // Announcements added by an admin come first, then the standing vision and values slides.
+  const SLIDES = React.useMemo(() => [
+    ...news.map(a => ({ kind: 'news', key: `n${a.id}`, label: a.label || 'Announcement', title: a.title, text: a.text, photo: a.photo || null, cta: a.ctaLabel && a.ctaHref ? { label: a.ctaLabel, href: a.ctaHref } : null })),
+    ...BASE_SLIDES,
+  ], [news]);
+  const FIRST_VALUE = news.length + 3;
   const total = SLIDES.length;
 
   useEffect(() => { try { if (localStorage.getItem('nxt_flyers_min') === '1') setHidden(true); } catch { /* storage unavailable */ } }, []);
@@ -59,7 +67,7 @@ export default function FlyerCarousel() {
     );
   }
 
-  const slide = SLIDES[i];
+  const slide = SLIDES[Math.min(i, SLIDES.length - 1)];
   const running = !paused && !hover;
 
   return (
@@ -102,8 +110,10 @@ export default function FlyerCarousel() {
         )}
 
         <div className={s.actions}>
-          {slide.cta && <Link href={slide.cta.href} className={s.cta}>{slide.cta.label}</Link>}
-          {slide.kind === 'lead' && <button type="button" className={s.cta} onClick={() => go(2)}>See our values</button>}
+          {slide.cta && (slide.cta.href.startsWith('/')
+            ? <Link href={slide.cta.href} className={s.cta}>{slide.cta.label}</Link>
+            : <a href={slide.cta.href} className={s.cta} target="_blank" rel="noopener noreferrer">{slide.cta.label}</a>)}
+          {slide.kind === 'lead' && <button type="button" className={s.cta} onClick={() => go(news.length + 2)}>See our values</button>}
         </div>
       </div>
 

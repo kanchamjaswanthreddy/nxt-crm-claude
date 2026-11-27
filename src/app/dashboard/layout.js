@@ -328,6 +328,7 @@ function DashboardLayoutInner({ children }) {
                   {subLink('/dashboard/commission-distribution', 'Commission Distribution')}
                   {subLink('/dashboard/admin/groups', 'Groups')}
                   {subLink('/dashboard/admin/workboard', 'Work Board')}
+                  {subLink('/dashboard/admin/announcements', 'Announcements')}
                 </>
               )}
 

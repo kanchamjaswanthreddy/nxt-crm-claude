@@ -231,3 +231,69 @@ export function useSpotlight() {
   }, []);
   return ref;
 }
+
+/** Monthly target with progress, pace marker and inline editing. `onSave(amount)` returns { success, goal, error }. */
+export function GoalBand({ label, current = 0, goal, onSave, canEdit = true }) {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState('');
+  const now = new Date();
+  const daysIn = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+  const day = now.getDate(); const left = daysIn - day;
+  const pct = goal ? Math.min(100, (current / goal) * 100) : 0;
+  const pace = (day / daysIn) * 100;
+  const remaining = goal ? Math.max(0, goal - current) : 0;
+  const ahead = goal ? pct >= pace : false;
+  const save = async (e) => {
+    e.preventDefault(); setBusy(true); setErr('');
+    const res = await onSave(draft === '' ? 0 : Number(String(draft).replace(/[^0-9.]/g, '')));
+    setBusy(false);
+    if (res && res.success) setEditing(false); else setErr((res && res.error) || 'Could not save the goal.');
+  };
+
+  if (editing) {
+    return (
+      <form className={w.goal} onSubmit={save}>
+        <label className={w.goalLabel} htmlFor={`goal-${label}`}>{label}: set a monthly target in dollars</label>
+        <div className={w.goalForm}>
+          <input id={`goal-${label}`} inputMode="numeric" autoFocus value={draft} onChange={e => setDraft(e.target.value)} placeholder="For example 50000" className={w.goalInput} />
+          <button type="submit" className={w.goalBtn} disabled={busy}>{busy ? 'Saving' : 'Save goal'}</button>
+          <button type="button" className={w.goalGhost} onClick={() => { setEditing(false); setErr(''); }}>Cancel</button>
+        </div>
+        {err && <p className={w.goalErr} role="alert">{err}</p>}
+        <p className={w.goalHint}>Leave it empty and save to remove the goal.</p>
+      </form>
+    );
+  }
+
+  if (!goal) {
+    return (
+      <div className={w.goal} data-empty>
+        <div><p className={w.goalLabel}>{label}</p><p className={w.goalEmpty}>No target set yet. Set one to track this month against it.</p></div>
+        {canEdit && <button type="button" className={w.goalBtn} onClick={() => { setDraft(''); setEditing(true); }}>Set a goal</button>}
+      </div>
+    );
+  }
+
+  return (
+    <div className={w.goal}>
+      <div className={w.goalTop}>
+        <div>
+          <p className={w.goalLabel}>{label}</p>
+          <p className={w.goalValue}><CountUp value={current} format={(v) => usd0(v)} /> <span>of {usd0(goal)}</span></p>
+        </div>
+        <div className={w.goalFacts}>
+          <span className={w.goalChip} data-good={ahead || undefined}>{pct >= 100 ? 'Goal reached' : ahead ? 'Ahead of pace' : 'Behind pace'}</span>
+          <span>{Math.round(pct)}% there</span>
+          {pct < 100 && <span>{left > 0 ? `${compact(remaining / left)} a day for ${left} more day${left !== 1 ? 's' : ''}` : `${compact(remaining)} to go today`}</span>}
+          {canEdit && <button type="button" className={w.goalGhost} onClick={() => { setDraft(String(goal)); setEditing(true); }}>Change</button>}
+        </div>
+      </div>
+      <div className={w.goalTrack} role="img" aria-label={`${Math.round(pct)}% of the goal. Day ${day} of ${daysIn}.`}>
+        <span className={w.goalFill} style={{ width: `${pct}%` }} />
+        <span className={w.goalPace} style={{ left: `${pace}%` }}><em>Today</em></span>
+      </div>
+    </div>
+  );
+}
