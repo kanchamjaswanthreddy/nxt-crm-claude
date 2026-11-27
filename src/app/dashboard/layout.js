@@ -283,11 +283,12 @@ function DashboardLayoutInner({ children }) {
               label="Resources"
               icon={ICONS.briefcase}
               pathname={pathname}
-              activePaths={['/dashboard/business/documents', '/dashboard/business/carrier-updates', '/dashboard/business/carrier-resources', '/dashboard/business/marketing-data']}
+              activePaths={['/dashboard/business/documents', '/dashboard/business/carrier-updates', '/dashboard/business/carrier-resources', '/dashboard/business/client-education', '/dashboard/business/marketing-data']}
             >
               {subLink('/dashboard/business/documents', 'Documents')}
               {subLink('/dashboard/business/carrier-updates', 'Carrier Updates')}
               {subLink('/dashboard/business/carrier-resources', 'Carrier Resources')}
+              {subLink('/dashboard/business/client-education', 'Client Education')}
               {subLink('/dashboard/business/marketing-data', 'Marketing Data')}
               <a href="https://drive.google.com/drive/folders/1j3lVm330BJBRCIPi7fi1PUVZACSjrhx5" target="_blank" rel="noopener noreferrer" className={s.navSubItem}>
                 NXT Templates {ICONS.external}

@@ -1,0 +1,74 @@
+/* Client Education: brochure library and the printable brochure sheet. */
+.tabs { margin-bottom: 12px; overflow-x: auto; }
+.blurb { margin: 0 0 20px; color: var(--text-secondary); }
+.groupLabel { margin: 22px 0 12px; font-size: 15px; font-weight: 600; color: #8A5A0B; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.card { display: flex; flex-direction: column; height: 100%; border-radius: 24px; overflow: hidden; background: #fff; border: 1px solid var(--border-color); text-decoration: none; transition: transform 0.5s var(--ease-out-expo), box-shadow 0.3s ease; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 26px 50px -30px rgba(12, 16, 34, 0.45); opacity: 1; }
+.thumb { display: block; height: 150px; background-size: cover; background-position: center; position: relative; }
+.thumb::after { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(227, 169, 74, 0.38), rgba(12, 16, 34, 0.18)); mix-blend-mode: multiply; }
+.cardBody { display: flex; flex-direction: column; gap: 8px; padding: 20px; flex: 1; }
+.cardTitle { font-size: 19px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; color: var(--brand-navy); }
+.cardSummary { font-size: 15px; line-height: 1.4; color: var(--text-secondary); }
+.cardOpen { margin-top: auto; padding-top: 8px; font-size: 14px; font-weight: 600; color: #8A5A0B; }
+.missing { padding: 48px 24px; border-radius: 24px; background: #fff; text-align: center; color: var(--text-secondary); }
+
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+
+/* The brochure sheet: letter-size proportions on screen, exact on paper. */
+.sheet { position: relative; display: flex; flex-direction: column; min-height: 1139px; max-width: 880px; margin: 0 auto 24px; background: #FBFAF7; border-radius: 12px; overflow: hidden; box-shadow: 0 34px 70px -40px rgba(12, 16, 34, 0.5); color: #0C1022; font-size: 14.5px; line-height: 1.5; }
+.watermark { position: absolute; left: 50%; top: 58%; width: 78%; transform: translate(-50%, -50%) rotate(-24deg); opacity: 0.055; pointer-events: none; z-index: 0; }
+.watermark img { width: 100%; height: auto; display: block; filter: grayscale(0.2); }
+
+.hero { position: relative; z-index: 1; display: grid; grid-template-columns: 1.25fr 1fr; background: #0C1022; color: #fff; }
+.heroText { padding: 34px 36px 36px; }
+.heroLogo { display: inline-block; height: 46px; padding: 7px 12px; margin-bottom: 26px; border-radius: 12px; background: #fff; }
+.kicker { margin: 0 0 10px; font-size: 13px; font-weight: 600; color: #F5D9A0; }
+.sheet .title { margin: 0 0 12px; font-size: 34px !important; font-weight: 400 !important; letter-spacing: -0.04em !important; line-height: 1.06 !important; color: #fff; }
+.summary { margin: 0; font-size: 16px; color: rgba(255, 255, 255, 0.8); }
+.heroPhoto { position: relative; min-height: 250px; background-size: cover; background-position: center; }
+.heroPhoto::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #0C1022 0%, rgba(12, 16, 34, 0) 38%), linear-gradient(120deg, rgba(227, 169, 74, 0.35), rgba(12, 16, 34, 0.05)); }
+
+.body { position: relative; z-index: 1; padding: 30px 36px 26px; }
+.intro { margin: 0 0 22px; padding-left: 16px; border-left: 3px solid #E3A94A; font-size: 16.5px; line-height: 1.5; color: #26241F; }
+.columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.section h2, .questions h2 { margin: 0 0 10px; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: #0C1022; }
+.section h2 { padding-bottom: 8px; border-bottom: 2px solid #F5D9A0; }
+.section p { margin: 0 0 10px; color: #3B3934; }
+.section ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.section li { position: relative; padding-left: 16px; color: #3B3934; }
+.section li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 8px; height: 2.5px; border-radius: 2px; background: #E3A94A; }
+
+.lower { display: grid; grid-template-columns: 1.5fr 1fr; gap: 18px; margin-top: 24px; }
+.questions { padding: 20px 22px; border-radius: 18px; background: #fff; border: 1px solid #E7E3DA; }
+.questions ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; color: #26241F; }
+.takeaway { display: flex; flex-direction: column; justify-content: center; padding: 20px 22px; border-radius: 18px; background: #FBF1DC; }
+.takeawayLabel { margin: 0 0 8px; font-size: 13px; font-weight: 600; color: #8A5A0B; }
+.takeawayText { margin: 0; font-size: 18px; letter-spacing: -0.02em; line-height: 1.3; color: #0C1022; }
+
+.foot { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1.7fr; gap: 24px; align-items: center; margin-top: auto; padding: 20px 36px 24px; border-top: 1px solid #E7E3DA; }
+.contactLabel { margin: 0 0 4px; font-size: 12px; font-weight: 600; color: #8A5A0B; }
+.contactName { margin: 0; font-size: 17px; font-weight: 600; color: #0C1022; }
+.contactLine { margin: 2px 0 0; font-size: 13px; color: #5F5C56; overflow-wrap: anywhere; }
+.disclosure { margin: 0; font-size: 10.5px; line-height: 1.45; color: #6E6A62; }
+
+@media (max-width: 760px) {
+  .hero, .columns, .lower, .foot { grid-template-columns: 1fr; }
+  .heroPhoto { min-height: 180px; }
+  .heroText, .body, .foot { padding-left: 22px; padding-right: 22px; }
+}
+
+/* Printing: only the sheet, exactly one letter page, colours kept, contact strip at the foot. */
+@media print {
+  @page { size: letter; margin: 0; }
+  .toolbar { display: none !important; }
+  .sheet { display: flex; flex-direction: column; max-width: none; width: 8.5in; height: 11in; min-height: 0; margin: 0; border-radius: 0; box-shadow: none; overflow: hidden; break-inside: avoid; break-after: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .foot { margin-top: auto; padding-top: 14px; padding-bottom: 18px; }
+  .sheet { font-size: 13.5px; line-height: 1.45; }
+  .heroText { padding-top: 26px; padding-bottom: 26px; }
+  .heroLogo { margin-bottom: 18px; }
+  .heroPhoto { min-height: 0; }
+  .body { padding-top: 22px; padding-bottom: 14px; }
+  .intro { margin-bottom: 16px; font-size: 15px; }
+  .lower { margin-top: 16px; }
+}

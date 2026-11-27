@@ -732,3 +732,11 @@
     box-shadow: 0 20px 50px -30px rgba(12, 16, 34, 0.35);
   }
 }
+
+/* Printing from inside the back office (brochures): paper shows the page content only, no menu or frame. */
+@media print {
+  .shell { display: block; height: auto; min-height: 0; padding: 0; background: #fff; overflow: visible; }
+  .sidebar, .mobileHeader, .overlay { display: none !important; }
+  .main { display: block; height: auto; min-height: 0; margin: 0; padding: 0 !important; border-radius: 0; background: #fff; box-shadow: none; overflow: visible; }
+  .content { padding: 0 !important; overflow: visible !important; }
+}
