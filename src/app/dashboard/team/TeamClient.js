@@ -2022,16 +2022,30 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                     <tr style={{ background: 'rgba(220,53,69,0.04)' }}>
                       <th scope="col" style={{ padding: '8px 12px', textAlign: 'left', fontWeight: 600, color: 'var(--brand-navy)', borderBottom: '1px solid rgba(220,53,69,0.1)' }}>Name</th>
                       <th scope="col" style={{ padding: '8px 12px', textAlign: 'left', fontWeight: 600, color: 'var(--brand-navy)', borderBottom: '1px solid rgba(220,53,69,0.1)' }}>Email</th>
-                      <th scope="col" style={{ padding: '8px 12px', textAlign: 'left', fontWeight: 600, color: 'var(--brand-navy)', borderBottom: '1px solid rgba(220,53,69,0.1)' }}>Role</th>
+                      <th scope="col" style={{ padding: '8px 12px', textAlign: 'left', fontWeight: 600, color: 'var(--brand-navy)', borderBottom: '1px solid rgba(220,53,69,0.1)' }}>Account</th>
                       <th scope="col" style={{ padding: '8px 12px', textAlign: 'center', fontWeight: 600, color: 'var(--brand-navy)', borderBottom: '1px solid rgba(220,53,69,0.1)' }}>Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {paymentTracker.missing.map(agent => (
+                    {/* Active people first: they are the ones using the CRM without a card. */}
+                    {[...paymentTracker.missing].sort((a, b) => (a.status === 'active' ? 0 : 1) - (b.status === 'active' ? 0 : 1) || String(a.name).localeCompare(String(b.name))).map(agent => {
+                      const key = String(agent.name || '').toLowerCase().replace(/[^a-z]/g, '');
+                      const twinHasCard = key && (paymentTracker.withCard || []).some(w => String(w.name || '').toLowerCase().replace(/[^a-z]/g, '') === key);
+                      const twinMissing = key && paymentTracker.missing.some(m => m.id !== agent.id && String(m.name || '').toLowerCase().replace(/[^a-z]/g, '') === key);
+                      return (
                       <tr key={agent.id} style={{ borderBottom: '1px solid rgba(0,0,0,0.04)' }}>
-                        <td style={{ padding: '8px 12px', color: 'var(--brand-navy)', fontWeight: 500 }}>{agent.name}</td>
+                        <td style={{ padding: '8px 12px', color: 'var(--brand-navy)', fontWeight: 500 }}>
+                          {agent.name}
+                          {(twinHasCard || twinMissing) && (
+                            <span style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: 'var(--ink-gold)' }}>
+                              {twinHasCard ? 'Another account with this name already has a card' : 'There are two accounts with this name'}
+                            </span>
+                          )}
+                        </td>
                         <td style={{ padding: '8px 12px', color: 'var(--text-secondary)' }}>{agent.email}</td>
-                        <td style={{ padding: '8px 12px', color: 'var(--text-secondary)', textTransform: 'capitalize' }}>{agent.role}</td>
+                        <td style={{ padding: '8px 12px', color: 'var(--text-secondary)' }}>
+                          {agent.status === 'active' ? 'Active' : agent.status === 'invited' ? 'Invited, not joined yet' : agent.status === 'pending_licensing' ? 'Pending licensing' : agent.status === 'pending_approval' ? 'Pending approval' : (agent.status || 'Unknown')}
+                        </td>
                         <td style={{ padding: '8px 12px', textAlign: 'center' }}>
                           <span style={{
                             display: 'inline-block', padding: '2px 10px', borderRadius: '999px',
@@ -2042,7 +2056,8 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                           </span>
                         </td>
                       </tr>
-                    ))}
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
