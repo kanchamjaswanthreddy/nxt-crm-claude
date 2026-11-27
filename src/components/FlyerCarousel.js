@@ -31,6 +31,36 @@ export default function FlyerCarousel() {
   const [hover, setHover] = useState(false);
   const [hidden, setHidden] = useState(false);
   const touch = useRef(null);
+  const wrapRef = useRef(null);
+  const [fitHeight, setFitHeight] = useState(null);
+
+  // On desktop the slideshow fills the panel down to the bottom of the menu,
+  // so the first thing on screen is the flyer and nothing peeks in underneath.
+  useEffect(() => {
+    const main = document.getElementById('main-content');
+    if (!main) return;
+    const fit = () => {
+      const el = wrapRef.current;
+      if (!el || window.innerWidth < 1025) { setFitHeight(null); return; }
+      const top = el.getBoundingClientRect().top - main.getBoundingClientRect().top + main.scrollTop;
+      setFitHeight(Math.max(460, Math.round(main.clientHeight - top - 12)));
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(main);
+    if (main.firstElementChild) ro.observe(main.firstElementChild);
+    window.addEventListener('resize', fit);
+    return () => { ro.disconnect(); window.removeEventListener('resize', fit); };
+  }, [hidden]);
+
+  const continueToDashboard = () => {
+    const main = document.getElementById('main-content');
+    const next = wrapRef.current?.nextElementSibling;
+    if (!main || !next) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const y = next.getBoundingClientRect().top - main.getBoundingClientRect().top + main.scrollTop - 20;
+    main.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+  };
   const [news, setNews] = useState([]);
   useEffect(() => { let live = true; fetchAnnouncements().then(r => { if (live && r.success) setNews(r.announcements); }).catch(() => {}); return () => { live = false; }; }, []);
   // Announcements added by an admin come first, then the standing vision and values slides.
@@ -72,6 +102,8 @@ export default function FlyerCarousel() {
 
   return (
     <section
+      ref={wrapRef}
+      style={fitHeight ? { height: fitHeight } : undefined}
       className={s.wrap}
       aria-roledescription="carousel"
       aria-label="NXT vision, mission and values"
@@ -139,6 +171,10 @@ export default function FlyerCarousel() {
             <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </button>
           <button type="button" className={s.hide} onClick={() => setMin(true)}>Hide</button>
+          <button type="button" className={s.continue} onClick={continueToDashboard}>
+            Continue to Dashboard
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3.5 8.5L8 13l4.5-4.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </button>
         </div>
       </div>
     </section>
