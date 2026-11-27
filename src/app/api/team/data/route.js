@@ -103,14 +103,23 @@ export async function GET() {
         let exempt = 0;
         snap.forEach(doc => {
           const d = doc.data();
-          if (d.is_owner || d.status === 'invited') { exempt++; return; }
-          if (d.payment_method) {
-            withCard.push({ id: doc.id, name: [d.first_name, d.last_name].filter(Boolean).join(' ') || d.email });
-          } else {
-            missing.push({ id: doc.id, name: [d.first_name, d.last_name].filter(Boolean).join(' ') || d.email, email: d.email });
-          }
+          // Same rule as the dashboard banner and the Refresh button: owners, IT and billing-exempt
+          // people are skipped; a card counts once Stripe customer, subscription and last four are saved.
+          // (This used to look for a `payment_method` field that nothing writes, so it showed 0 completed.)
+          if (d.is_owner || d.billingExempt || d.role === 'it_engineer') { exempt++; return; }
+          const hasCard = !!(d.stripe_customer_id && d.stripe_subscription_id && d.payment?.cardLastFour);
+          const info = {
+            id: doc.id,
+            name: [d.first_name, d.last_name].filter(Boolean).join(' ') || d.email || 'Unknown',
+            email: d.email || '',
+            role: d.role || 'agent',
+            status: d.status || 'unknown',
+            subscriptionStatus: d.subscriptionStatus || 'none',
+            cardLastFour: d.payment?.cardLastFour || null,
+          };
+          if (hasCard) withCard.push(info); else missing.push(info);
         });
-        paymentTracker = { success: true, missing, withCard, exempt };
+        paymentTracker = { success: true, missing, withCard, withCardCount: withCard.length, exempt, total: snap.size };
       } catch {
         paymentTracker = null;
       }
