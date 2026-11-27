@@ -8,6 +8,7 @@ import { updateTaskStatus } from '@/app/actions/tasks';
 import Avatar from '@/components/Avatar';
 import InviteAgentModal from '@/components/InviteAgentModal';
 import FlyerCarousel from '@/components/FlyerCarousel';
+import OnboardingDocsCard from '@/components/OnboardingDocsCard';
 import { GoalBand, CountUp, Ticker, TrendWidget, RingWidget, Leaderboard, ActivityTimeline, FactGrid, useSpotlight } from './widgets';
 import w from './widgets.module.css';
 import { fetchGoals, saveGoal } from '@/app/actions/goals';
@@ -1003,6 +1004,8 @@ export default function DashboardV2Page() {
         pendingApprovals={data.admin?.pendingApprovals || 0}
         onInvite={() => setIsInviteOpen(true)}
       />
+
+      <OnboardingDocsCard agent={userProfile} />
 
       <FlyerCarousel />
 

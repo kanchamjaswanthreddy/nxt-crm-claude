@@ -1,0 +1,26 @@
+.wrap { margin-bottom: 26px; padding: 26px 28px; border-radius: 28px; background: #fff; box-shadow: var(--shadow-card); }
+.head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 14px; }
+.title { margin: 0; font-size: 24px; font-weight: 500; letter-spacing: -0.035em; color: var(--brand-navy); }
+.sub { margin: 6px 0 0; font-size: 16px; color: var(--text-secondary); }
+.meter { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; min-width: 200px; }
+.meter b { font-size: 30px; font-weight: 400; letter-spacing: -0.04em; line-height: 1; color: var(--brand-navy); }
+.meter small { font-size: 15px; font-weight: 400; letter-spacing: 0; color: var(--text-secondary); }
+.meter span { display: block; width: 100%; height: 8px; border-radius: 999px; background: #F1EFEA; overflow: hidden; }
+.meter i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #0C1022, #E3A94A); }
+.list { list-style: none; margin: 0; padding: 0; }
+.list li { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto 104px; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid var(--border-light); }
+.mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; border: 2px dashed #D9D3C4; font-size: 15px; font-weight: 700; color: #fff; }
+.list li[data-status="approved"] .mark { border: 0; background: #22A06B; }
+.list li[data-status="pending_review"] .mark { border: 0; background: #E3A94A; color: #0C1022; }
+.list li[data-status="rejected"] .mark { border-color: #B42318; }
+.text { display: flex; flex-direction: column; min-width: 0; }
+.text b { font-size: 17px; font-weight: 600; color: var(--brand-navy); }
+.text small { font-size: 14px; color: var(--text-secondary); }
+.pill { padding: 4px 12px; border-radius: 999px; background: #F1EFEA; font-size: 13px; font-weight: 650; color: var(--text-secondary); white-space: nowrap; }
+.list li[data-status="approved"] .pill { background: var(--status-success-light); color: #15803D; }
+.list li[data-status="pending_review"] .pill { background: var(--amber-soft); color: var(--ink-gold); }
+.list li[data-status="rejected"] .pill { background: #FEE4E2; color: #B42318; }
+.btn { min-height: 44px; border: 0; border-radius: 999px; background: var(--brand-navy); color: #fff; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: transform 0.3s var(--ease-out-expo), background 0.25s; }
+.btn:hover { background: #1B2A4E; transform: translateY(-2px); }
+.btn:focus-visible { outline: 3px solid #E3A94A; outline-offset: 2px; }
+@media (max-width: 720px) { .list li { grid-template-columns: 30px 1fr auto; } .pill { grid-column: 2; justify-self: start; } .btn { grid-column: 3; grid-row: 1; padding: 0 16px; } .done { display: none; } .meter { align-items: flex-start; } }

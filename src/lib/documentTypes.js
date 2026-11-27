@@ -156,3 +156,45 @@ export function getW9Status(agent, docs) {
   if (w9Doc.status === 'rejected') return 'rejected';
   return 'pending_review';
 }
+
+/**
+ * Everything an agent is asked for, in the order shown on the onboarding checklist.
+ * `aliases` are older type names that count as the same document; `uploadType` is the value
+ * the Documents screen uses in its upload list.
+ */
+export const ONBOARDING_CHECKLIST = [
+  { key: 'government_id', uploadType: 'government_id', aliases: [], signup: true },
+  { key: 'w9', uploadType: 'w9', aliases: [], signup: true },
+  { key: 'voided_check', uploadType: 'voided_check', aliases: ['direct_deposit'], signup: true },
+  { key: 'eo_certificate', uploadType: 'eo_insurance', aliases: ['eo_insurance'], signup: true },
+  { key: 'state_license', uploadType: 'state_license', aliases: [], signup: true },
+  { key: 'driving_license_front', uploadType: 'driving_license_front', aliases: ['driving_license'], signup: false },
+  { key: 'driving_license_back', uploadType: 'driving_license_back', aliases: ['driving_license'], signup: false },
+  { key: 'anti_money_laundering', uploadType: 'anti_money_laundering', aliases: [], signup: false },
+  { key: 'background_check', uploadType: 'background_check', aliases: [], signup: false },
+];
+
+const CHECK_RANK = { approved: 3, pending_review: 2, rejected: 1 };
+
+/**
+ * Where an agent stands on each document.
+ * @returns {{ items: Array<{key,label,description,signup,uploadType,status:'missing'|'pending_review'|'approved'|'rejected'}>,
+ *            total:number, uploaded:number, approved:number, toUpload:number, complete:boolean }}
+ */
+export function computeDocChecklist(agent, docs = []) {
+  const items = ONBOARDING_CHECKLIST
+    .filter(c => c.key !== 'w9' || requiresW9(agent))
+    .map(c => {
+      const types = [c.key, ...c.aliases];
+      let status = 'missing';
+      docs.forEach(d => {
+        if (!types.includes(d.docType)) return;
+        const st = CHECK_RANK[d.status] ? d.status : 'pending_review';
+        if (status === 'missing' || CHECK_RANK[st] > CHECK_RANK[status]) status = st;
+      });
+      return { key: c.key, label: DOCUMENT_TYPES[c.key].label, description: DOCUMENT_TYPES[c.key].description, signup: c.signup, uploadType: c.uploadType, status };
+    });
+  const uploaded = items.filter(i => i.status === 'pending_review' || i.status === 'approved').length;
+  const approved = items.filter(i => i.status === 'approved').length;
+  return { items, total: items.length, uploaded, approved, toUpload: items.length - uploaded, complete: approved === items.length };
+}

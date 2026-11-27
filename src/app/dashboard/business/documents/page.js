@@ -4,7 +4,8 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import StatTiles from '@/components/ui/StatTiles';
 import { useUser } from '@/context/UserContext';
 import { getUploadUrl, finalizeDocumentUpload, fetchDocuments, getDocumentViewUrl } from '@/app/actions/documents';
-import { DOCUMENTS_MANAGER_TYPES, TAX_FORM_TYPES, getDocTypeLabel } from '@/lib/documentTypes';
+import { DOCUMENTS_MANAGER_TYPES, TAX_FORM_TYPES, getDocTypeLabel, computeDocChecklist } from '@/lib/documentTypes';
+import ck from './checklist.module.css';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import PageHeader from '@/components/ui/PageHeader';
@@ -48,6 +49,17 @@ export default function DocumentsManagerPage() {
   useEffect(() => {
     (async () => { await loadDocuments(); })();
   }, [loadDocuments]);
+
+  // Open the upload box for one document type: used by the checklist below and by links like
+  // /dashboard/business/documents?upload=w9 from the dashboard card.
+  const openUploadFor = useCallback((type) => {
+    setUploadDocType(DOCUMENTS_MANAGER_TYPES.some(t => t.value === type) ? type : '');
+    setUploadFile(null); setUploadError(''); setUploadSuccess(''); setShowUpload(true);
+  }, []);
+  useEffect(() => {
+    const type = new URLSearchParams(window.location.search).get('upload');
+    if (type) openUploadFor(type);
+  }, [openUploadFor]);
 
   const validateFile = (file) => {
     if (!file) return 'Please select a file.';
@@ -185,6 +197,11 @@ export default function DocumentsManagerPage() {
   const pendingCount = documents.filter(d => d.status === 'pending_review').length;
   const rejectedCount = documents.filter(d => d.status === 'rejected').length;
 
+  // The signed-in person's own onboarding checklist (not shown to owners, admins or IT).
+  const showChecklist = !!userProfile && !userProfile.is_owner && !['admin', 'it_engineer'].includes(userProfile.role);
+  const checklist = showChecklist ? computeDocChecklist(userProfile, documents.filter(d => !d.agentId || d.agentId === userProfile.uid)) : null;
+  const CHECK_WORD = { missing: 'Not uploaded', rejected: 'Rejected, upload again', pending_review: 'In review', approved: 'Approved' };
+
   if (isLoading) return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '40vh' }}><LoadingSpinner label="Loading Documents..." /></div>;
 
   return (
@@ -198,6 +215,37 @@ export default function DocumentsManagerPage() {
           </>
         }
       />
+
+      {checklist && (
+        <section className={ck.wrap} aria-label="Your onboarding documents">
+          <header className={ck.head}>
+            <div>
+              <h2 className={ck.title}>{checklist.complete ? 'Onboarding documents complete' : checklist.toUpload > 0 ? 'Onboarding pending' : 'Documents in review'}</h2>
+              <p className={ck.sub}>
+                {checklist.complete ? 'Every document is approved.' : checklist.toUpload > 0
+                  ? `${checklist.toUpload} of ${checklist.total} still to upload. Accepted files: PDF, JPG or PNG, up to 20 MB.`
+                  : 'Everything is uploaded. Each one turns to Approved once it has been reviewed.'}
+              </p>
+            </div>
+            <div className={ck.meter} role="img" aria-label={`${checklist.uploaded} of ${checklist.total} uploaded`}>
+              <b>{checklist.uploaded}<small> of {checklist.total}</small></b>
+              <span><i style={{ width: `${(checklist.uploaded / checklist.total) * 100}%` }} /></span>
+            </div>
+          </header>
+          <ul className={ck.list}>
+            {checklist.items.map(item => (
+              <li key={item.key} data-status={item.status}>
+                <span className={ck.mark} aria-hidden="true">{item.status === 'approved' ? '✓' : item.status === 'pending_review' ? '…' : ''}</span>
+                <span className={ck.text}><b>{item.label}</b><small>{item.description}</small></span>
+                <span className={ck.pill}>{CHECK_WORD[item.status]}</span>
+                {(item.status === 'missing' || item.status === 'rejected') ? (
+                  <button type="button" className={ck.btn} onClick={() => openUploadFor(item.uploadType)}>Upload</button>
+                ) : <span className={ck.done} />}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* Summary cards */}
       <StatTiles lead={false} items={[
