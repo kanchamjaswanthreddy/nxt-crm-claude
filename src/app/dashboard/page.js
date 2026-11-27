@@ -8,7 +8,7 @@ import { updateTaskStatus } from '@/app/actions/tasks';
 import Avatar from '@/components/Avatar';
 import InviteAgentModal from '@/components/InviteAgentModal';
 import FlyerCarousel from '@/components/FlyerCarousel';
-import OnboardingDocsCard from '@/components/OnboardingDocsCard';
+import OnboardingDocsCard, { OnboardingDocsPill } from '@/components/OnboardingDocsCard';
 import { GoalBand, CountUp, Ticker, TrendWidget, RingWidget, Leaderboard, ActivityTimeline, FactGrid, useSpotlight } from './widgets';
 import w from './widgets.module.css';
 import { fetchGoals, saveGoal } from '@/app/actions/goals';
@@ -987,6 +987,7 @@ export default function DashboardV2Page() {
             {getGreeting()}{firstName ? `, ${firstName}` : ''}
           </h1>
           {roleBadge && <span className={s.roleBadge}>{roleBadge}</span>}
+          <OnboardingDocsPill agent={userProfile} />
         </div>
         <p className={s.greetingDate}>{formatDate()}</p>
       </div>
@@ -1005,9 +1006,9 @@ export default function DashboardV2Page() {
         onInvite={() => setIsInviteOpen(true)}
       />
 
-      <OnboardingDocsCard agent={userProfile} />
-
       <FlyerCarousel />
+
+      <OnboardingDocsCard agent={userProfile} />
 
       {data.agent.isPrivileged ? (
         <AdminView data={data} onCompleteTask={handleCompleteTask} />

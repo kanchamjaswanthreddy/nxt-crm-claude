@@ -26,3 +26,12 @@
 @keyframes odRise { from { opacity: 0; transform: translateY(14px); } }
 @media (max-width: 720px) { .main { grid-template-columns: auto 1fr; } .go { grid-column: 1 / -1; text-align: center; } }
 @media (prefers-reduced-motion: reduce) { .card, .list li { animation: none; } .item { transition: none; } }
+
+.card { scroll-margin-top: 24px; }
+.pill { display: inline-flex; align-items: center; gap: 9px; min-height: 36px; padding: 0 16px; border-radius: 999px; background: #0C1022; color: #F5D9A0; font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; transition: transform 0.3s var(--ease-out-expo, ease); }
+.pill:hover { transform: translateY(-2px); }
+.pill i { width: 8px; height: 8px; border-radius: 50%; background: #E3A94A; animation: odPing 2.2s ease-out infinite; box-shadow: 0 0 0 0 rgba(227, 169, 74, 0.7); }
+.pill[data-wait] { background: #fff; color: #8A5A0B; box-shadow: var(--shadow-card); }
+.pill:focus-visible { outline: 3px solid #E3A94A; outline-offset: 3px; }
+@keyframes odPing { 70% { box-shadow: 0 0 0 9px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+@media (prefers-reduced-motion: reduce) { .pill i { animation: none; } .pill { transition: none; } }
