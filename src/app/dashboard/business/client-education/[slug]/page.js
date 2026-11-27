@@ -4,14 +4,11 @@ import React from 'react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import BackLink from '@/components/ui/BackLink';
-import { useUser } from '@/context/UserContext';
-import { getDisplayName } from '@/lib/constants';
-import { BROCHURES, EDUCATION_CATEGORIES, DISCLOSURE } from '@/data/clientEducation';
+import { BROCHURES, EDUCATION_CATEGORIES, DISCLOSURE, CONTACT } from '@/data/clientEducation';
 import s from '../clientEducation.module.css';
 
 export default function BrochurePage() {
   const { slug } = useParams();
-  const { userProfile } = useUser();
   const b = BROCHURES.find(x => x.slug === slug);
 
   if (!b) {
@@ -24,10 +21,6 @@ export default function BrochurePage() {
   }
 
   const category = EDUCATION_CATEGORIES.find(c => c.key === b.category);
-  const agentName = userProfile ? getDisplayName(userProfile) : '';
-  const agentPhone = userProfile?.phone || userProfile?.phone_number || '';
-  const agentEmail = userProfile?.email || '';
-
   return (
     <div>
       <div className={s.toolbar}>
@@ -76,8 +69,10 @@ export default function BrochurePage() {
         <footer className={s.foot}>
           <div className={s.contact}>
             <p className={s.contactLabel}>Your NXT professional</p>
-            <p className={s.contactName}>{agentName || 'NXT Financial Group'}</p>
-            <p className={s.contactLine}>{[agentPhone, agentEmail].filter(Boolean).join('   |   ') || 'nxtfinancialgroup.com'}</p>
+            <p className={s.contactName}>{CONTACT.name}</p>
+            <p className={s.contactLine}>{CONTACT.company}</p>
+            <p className={s.contactLine}>{CONTACT.phone}</p>
+            <p className={s.contactLine}>{CONTACT.email}</p>
           </div>
           <p className={s.disclosure}>{DISCLOSURE}</p>
         </footer>

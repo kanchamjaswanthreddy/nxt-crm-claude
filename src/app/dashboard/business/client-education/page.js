@@ -17,7 +17,7 @@ export default function ClientEducationPage() {
 
   return (
     <div>
-      <PageHeader title="Client Education" subtitle="NXT brochures to share with clients. Open one to print it or save it as a PDF with your details on it." />
+      <PageHeader title="Client Education" subtitle="NXT brochures to share with clients. Open one to print it or save it as a PDF." />
 
       <div className={s.tabs}>
         <SegTabs label="Brochure category" value={category} onChange={setCategory}

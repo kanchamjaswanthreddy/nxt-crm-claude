@@ -263,3 +263,6 @@ export const BROCHURES = [
 ];
 
 export const DISCLOSURE = 'This material is for general education only. It is not tax, legal or investment advice, and it is not an offer of any specific product. Product features, riders and availability vary by insurer and state. Guarantees are backed by the financial strength and claims-paying ability of the issuing insurance company. Please speak with your licensed professional and your tax or legal adviser about your own situation.';
+
+// The name printed at the foot of every brochure.
+export const CONTACT = { name: 'Shiv Thakur', company: 'NXT Financial Group', phone: '857-205-3333', email: 'info@nxtfinancialgroup.com' };

@@ -72,3 +72,20 @@
   .intro { margin-bottom: 16px; font-size: 15px; }
   .lower { margin-top: 16px; }
 }
+
+/* Alignment across every brochure:
+   - the three section headings share one row, so their gold rules line up even when a heading wraps;
+   - the questions and takeaway boxes always sit directly above the contact strip. */
+.body { flex: 1; display: flex; flex-direction: column; }
+.columns { grid-template-rows: auto 1fr; row-gap: 0; }
+.section { display: grid; grid-row: span 2; grid-template-rows: subgrid; align-content: start; }
+.section h2 { display: flex; align-items: flex-end; margin-bottom: 12px; }
+.section > :not(h2) { align-self: start; }
+.section > p + p, .section > p + ul { margin-top: 0; }
+.lower { margin-top: auto; padding-top: 22px; align-items: stretch; }
+.questions h2 { margin-bottom: 10px; }
+@media (max-width: 760px) { .columns { grid-template-rows: none; row-gap: 20px; } .section { display: block; grid-row: auto; } }
+@media print { .lower { margin-top: auto; padding-top: 14px; } }
+.contactLine { white-space: nowrap; }
+.foot { align-items: start; }
+@media print { .hero { min-height: 2.5in; } }
