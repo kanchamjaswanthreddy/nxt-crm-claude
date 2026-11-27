@@ -236,7 +236,7 @@ export default function BusinessPipelinePage() {
       <div style={{ flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <h1 style={{ margin: 0 }}>Pipeline Tracker</h1>
+            <h1 style={{ margin: 0 }}>Pipeline Board</h1>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem', marginTop: '2px' }}>
               {filtered.length} contact{filtered.length !== 1 ? 's' : ''}
               {activeFilterCount > 0 && ` (${activeFilterCount} filter${activeFilterCount > 1 ? 's' : ''} active)`}

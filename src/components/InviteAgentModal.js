@@ -36,7 +36,7 @@ export default function InviteAgentModal({ isOpen, onClose, userProfile, agents 
     });
   }, [isOpen, referralLink]);
 
-  // Opened from a link that already knows who to invite (Pipeline Tracker "Invite to team")
+  // Opened from a link that already knows who to invite (Pipeline Board "Invite to team")
   useEffect(() => {
     if (isOpen && initialEmail) { setForm(prev => ({ ...prev, email: initialEmail })); setShowForm(true); }
   }, [isOpen, initialEmail]);
