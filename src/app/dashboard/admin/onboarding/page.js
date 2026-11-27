@@ -130,7 +130,7 @@ export default function TeamOnboardingPage() {
         <div className={st.overlay} role="dialog" aria-modal="true" aria-labelledby="up-title" onClick={e => { if (e.target === e.currentTarget && !upload.busy) setUpload(null); }}>
           <div className={st.dialog}>
             <h2 id="up-title" className={st.dTitle}>Upload {upload.item.label}</h2>
-            <p className={st.dText}>For {upload.person.name}. PDF, JPG or PNG, up to 20 MB. It will show as "In review" until it is approved.</p>
+            <p className={st.dText}>For {upload.person.name}. PDF, JPG or PNG, up to 20 MB. It will show as &ldquo;In review&rdquo; until it is approved.</p>
             <input ref={fileRef} type="file" accept=".pdf,.jpg,.jpeg,.png" onChange={pick} disabled={upload.busy} className={st.file} />
             {upload.busy && <div className={st.progress}><i style={{ width: `${upload.progress}%` }} /></div>}
             {upload.error && <p className={st.err} role="alert">{upload.error}</p>}
