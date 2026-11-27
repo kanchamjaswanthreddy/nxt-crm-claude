@@ -169,7 +169,18 @@ export async function moveDealStage(dealId, newStageId, updateData = {}) {
     let oldStageId = null;
     let newStatus = 'open';
 
-    await db.runTransaction(async (transaction) => {
+    await db.runTransaction(async (realTransaction) => {
+      // Firestore rejects any read that comes after a write in the same transaction, and this
+      // function reads (task templates, lead, commission check, rates) after it has started writing.
+      // So writes are queued here in their original order and applied once every read is done.
+      const queuedWrites = [];
+      const transaction = {
+        get: (ref) => realTransaction.get(ref),
+        set: (...args) => { queuedWrites.push(() => realTransaction.set(...args)); },
+        update: (...args) => { queuedWrites.push(() => realTransaction.update(...args)); },
+        delete: (...args) => { queuedWrites.push(() => realTransaction.delete(...args)); },
+      };
+
       const dealSnap = await transaction.get(dealRef);
       if (!dealSnap.exists) {
         throw new Error("Deal not found.");
@@ -447,6 +458,9 @@ export async function moveDealStage(dealId, newStageId, updateData = {}) {
       }
 
       dealDataForHook = { id: dealId, ...currentData, ...nextData };
+
+      // All reads are finished: apply the queued writes in order.
+      queuedWrites.forEach(write => write());
     });
 
     // Call Automation Hooks immediately after transaction succeeds
