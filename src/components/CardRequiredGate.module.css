@@ -1,0 +1,20 @@
+.page { position: fixed; inset: 0; z-index: 2000; display: grid; place-items: center; padding: 20px; overflow-y: auto; background: radial-gradient(60vw circle at 85% 0%, rgba(227, 169, 74, 0.28), transparent 60%), linear-gradient(160deg, #0C1022, #1B2A4E); }
+.card { width: min(520px, 100%); display: flex; flex-direction: column; gap: 16px; padding: clamp(26px, 4vw, 44px); border-radius: 32px; background: #fff; box-shadow: 0 40px 90px rgba(0, 0, 0, 0.4); animation: gateIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.title { margin: 6px 0 0; font-size: clamp(28px, 3.4vw, 38px); font-weight: 350; letter-spacing: -0.045em; line-height: 1.06; color: #0C1022; text-wrap: balance; }
+.title span { color: #E3A94A; }
+.text { margin: 0; font-size: 17px; line-height: 1.5; color: #5F5C56; }
+.form { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.label { font-size: 15px; font-weight: 600; color: #0C1022; }
+.cardBox { min-height: 56px; display: flex; flex-direction: column; justify-content: center; padding: 16px 18px; border: 1.5px solid #E7E3DA; border-radius: 18px; background: #FAF8F4; }
+.cardBox:focus-within { border-color: #E3A94A; box-shadow: 0 0 0 4px rgba(227, 169, 74, 0.22); background: #fff; }
+.loading { font-size: 16px; color: #8B877F; }
+.error { margin: 0; padding: 12px 14px; border-radius: 14px; background: #FEE4E2; color: #B42318; font-size: 15px; }
+.save { min-height: 56px; margin-top: 6px; border: 0; border-radius: 999px; background: #0C1022; color: #fff; font: inherit; font-size: 17px; font-weight: 600; cursor: pointer; transition: background 0.25s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.save:hover:not(:disabled) { background: #1B2A4E; transform: translateY(-2px); }
+.save:disabled { opacity: 0.5; cursor: not-allowed; }
+.out { min-height: 50px; border: 1.5px solid #E7E3DA; border-radius: 999px; background: #fff; color: #0C1022; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer; }
+.out:hover:not(:disabled) { background: #FAF8F4; }
+.save:focus-visible, .out:focus-visible { outline: 3px solid #E3A94A; outline-offset: 3px; }
+.small { margin: 0; font-size: 14px; color: #5F5C56; }
+@keyframes gateIn { from { opacity: 0; transform: translateY(24px) scale(0.98); } }
+@media (prefers-reduced-motion: reduce) { .card { animation: none; } .save { transition: none; } }

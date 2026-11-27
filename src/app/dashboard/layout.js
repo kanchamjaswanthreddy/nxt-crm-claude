@@ -15,6 +15,8 @@ import { ToastProvider } from '@/components/ui/Toast';
 // fetchMyGroups moved to API route to avoid server-action POST on every page load
 import { getMenuLinksForGroups } from '@/lib/groups';
 import s from './layout.module.css';
+import CardRequiredGate from '@/components/CardRequiredGate';
+import { isSubscriptionExempt } from '@/lib/constants';
 
 export default function DashboardLayout({ children }) {
   return (
@@ -96,7 +98,7 @@ function NavSection({ label, icon, children, defaultOpen = false, pathname, acti
 
 function DashboardLayoutInner({ children }) {
   const pathname = usePathname();
-  const { userProfile, firebaseUser, isLoading } = useUser();
+  const { userProfile, firebaseUser, isLoading, refreshProfile } = useUser();
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -193,6 +195,14 @@ function DashboardLayoutInner({ children }) {
     : userProfile?.role === 'admin' ? 'Admin'
     : userProfile?.role === 'it_engineer' ? 'IT'
     : '';
+
+  // Card required: anyone who must have a card on file (everyone except owners, IT and billing-exempt
+  // accounts) and has none sees only the add-card screen. Saving a card lets them straight in;
+  // otherwise their only other choice is to log out.
+  const needsCard = !!userProfile && !isSubscriptionExempt(userProfile) && !userProfile.payment?.cardLastFour;
+  if (needsCard) {
+    return <CardRequiredGate userProfile={userProfile} onSaved={refreshProfile} />;
+  }
 
   return (
     <div className={s.shell}>
