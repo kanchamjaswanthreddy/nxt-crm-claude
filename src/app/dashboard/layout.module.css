@@ -697,9 +697,23 @@
 /* One panel: the cream panel runs the full width with the same rounded corners,
    and the menu sits on top of it as a floating card. Desktop only; phones keep the slide-in menu. */
 @media (min-width: 1025px) {
+  .shell { height: 100vh; overflow: hidden; }
   .main {
     margin-left: 0;
-    padding-left: calc(var(--sidebar-width) + 24px);
+    padding-left: calc(var(--sidebar-width) + 8px);
+    height: calc(100vh - 28px);
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  /* The panel stays still; only what is inside it scrolls. */
+  .content {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
   }
   .sidebar {
     top: 26px;
