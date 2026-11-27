@@ -14,6 +14,7 @@ import { useToast } from '@/components/ui/Toast';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 import TaskQuickAddModal from '@/components/TaskQuickAddModal';
 import Link from 'next/link';
+import ExpectedCommission from '@/components/ExpectedCommission';
 
 export default function DealDetailPage({ params }) {
   const router = useRouter();
@@ -156,7 +157,9 @@ export default function DealDetailPage({ params }) {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-3)' }}>
+      <ExpectedCommission dealId={id} refreshKey={`${deal?.premiumAmount}|${deal?.carrierId}|${deal?.policyType}|${deal?.status}`} />
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-3)', marginTop: '20px' }}>
         <Card>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-2)' }}>
             <h2 style={{ fontSize: 'var(--text-body)', color: 'var(--brand-navy)', margin: 0 }}>Information</h2>
