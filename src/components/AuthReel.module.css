@@ -8,10 +8,9 @@
 
 .tint { position: absolute; inset: 0; background: linear-gradient(120deg, rgba(227, 169, 74, 0.42), rgba(245, 217, 160, 0.12) 60%, rgba(138, 90, 11, 0.28)); mix-blend-mode: multiply; }
 
-.letters { position: absolute; left: 0; top: -22vh; mix-blend-mode: multiply; animation: letterPan var(--total) linear infinite; will-change: transform; }
+.letters { position: absolute; left: 0; top: -22vh; animation: letterPan var(--total) linear infinite; }
 @keyframes letterPan { to { transform: translateX(calc(var(--n) * var(--lpitch) * -1)); } }
-.letters span { position: absolute; top: 0; left: calc(var(--k) * var(--lpitch) + 32vw); font-size: 112vh; font-weight: 700; line-height: 1; opacity: 0.5; color: transparent;
-  background: linear-gradient(160deg, #F5D9A0, #E3A94A 55%, #8A5A0B); -webkit-background-clip: text; background-clip: text; }
+.letters span { position: absolute; top: 0; left: calc(var(--k) * var(--lpitch) + 32vw); font-size: 112vh; font-weight: 700; line-height: 1; color: #E3A94A; opacity: 0.4; mix-blend-mode: multiply; }
 
 .wash { position: absolute; inset: 0; background:
   linear-gradient(100deg, #F1EFEA 0%, #F1EFEA 24%, rgba(241, 239, 234, 0.9) 36%, rgba(241, 239, 234, 0.35) 52%, rgba(241, 239, 234, 0) 66%),
