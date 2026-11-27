@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { fetchAgentDirectory } from '@/app/actions/directory';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Card from '@/components/ui/Card';
@@ -166,16 +167,15 @@ export default function AgentDetailPage() {
       try {
         const [docsRes, allAgentsSnap] = await Promise.all([
           fetchAgentDocumentsAdmin(id),
-          userProfile.agency_id ? getDocs(query(collection(db, 'agents'), where('agency_id', '==', userProfile.agency_id))) : Promise.resolve(null),
+          userProfile.agency_id ? fetchAgentDirectory() : Promise.resolve(null),
         ]);
 
         if (docsRes.success) {
           setAgentDocs(docsRes.documents);
         }
 
-        if (allAgentsSnap) {
-          const agList = [];
-          allAgentsSnap.forEach(d => agList.push({ id: d.id, ...d.data() }));
+        if (allAgentsSnap && allAgentsSnap.success) {
+          const agList = allAgentsSnap.agents;
           setAllAgents(agList);
           setTeamMembers(agList.filter(a => a.upline_id === id));
         }

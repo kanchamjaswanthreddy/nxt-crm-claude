@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { fetchAgentDirectory } from '@/app/actions/directory';
 import { db } from '@/lib/firebase/clientApp';
 import { getDocs, collection, query, where } from 'firebase/firestore';
 import { useUser } from '@/context/UserContext';
@@ -61,11 +62,10 @@ export default function ContractsPage() {
 
       if (userProfile.role === 'admin' || userProfile.role === 'it_engineer') {
         try {
-          const agentsSnap = await getDocs(query(collection(db, 'agents'), where('agency_id', '==', userProfile.agency_id)));
+          const dir = await fetchAgentDirectory();
           const map = {};
-          agentsSnap.forEach(d => {
-            const data = d.data();
-            map[d.id] = [data.first_name, data.middle_name, data.last_name].filter(Boolean).join(' ') || data.full_name || `${data.firstName || ''} ${data.lastName || ''}`.trim();
+          (dir.success ? dir.agents : []).forEach(data => {
+            map[data.id] = [data.first_name, data.middle_name, data.last_name].filter(Boolean).join(' ') || data.full_name || `${data.firstName || ''} ${data.lastName || ''}`.trim();
           });
           setAgents(map);
         } catch (e) { /* ignore */ }

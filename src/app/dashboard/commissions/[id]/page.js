@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { fetchAgentDirectory } from '@/app/actions/directory';
 import { useRouter, useParams } from 'next/navigation';
 import { useUser } from '@/context/UserContext';
 import { db } from '@/lib/firebase/clientApp';
@@ -76,12 +77,11 @@ export default function CommissionDetail() {
       let oList = [];
       overrideSnap.forEach(d => oList.push({ id: d.id, ...d.data() }));
       // Names and levels for the split view (display only). If a profile cannot be read, the ID is shown.
-      await Promise.all(oList.map(async (o) => {
-        try {
-          const bSnap = await getDoc(doc(db, 'agents', o.beneficiaryAgentId));
-          if (bSnap.exists()) { o.beneficiaryName = dn(bSnap.data()); o.beneficiaryLevel = bSnap.data().contractLevel || null; }
-        } catch { /* keep the ID */ }
-      }));
+      if (oList.length > 0) {
+        const dir = await fetchAgentDirectory();
+        const byId = {}; (dir.success ? dir.agents : []).forEach(a => { byId[a.id] = a; });
+        oList.forEach(o => { const b = byId[o.beneficiaryAgentId]; if (b) { o.beneficiaryName = dn(b); o.beneficiaryLevel = b.contractLevel || null; } });
+      }
       oList.sort((a, b) => (b.beneficiaryHierarchyPath || '').length - (a.beneficiaryHierarchyPath || '').length);
       setOverrides(oList);
 

@@ -1,6 +1,7 @@
 import { getDisplayName } from '@/lib/constants';
 import { NextResponse } from 'next/server';
-import { requireUser, requireAdmin } from '@/lib/serverAuth';
+import { requireUser, requireAdmin, isTeamLeader } from '@/lib/serverAuth';
+import { scopeAgentsForCaller } from '@/lib/agentPrivacy';
 import { getAdminApp } from '@/lib/firebase/adminApp';
 
 function cleanDoc(data) {
@@ -40,8 +41,11 @@ export async function GET() {
       db.collection('invites').where('agency_id', '==', agencyId).get(),
     ]);
 
-    const agents = [];
-    agentSnap.forEach(doc => agents.push({ id: doc.id, ...cleanDoc(doc.data()) }));
+    // People only receive personal details they are entitled to (see lib/agentPrivacy.js).
+    const callerIsLeader = isPrivileged ? false : await isTeamLeader(caller.uid, caller.agencyId);
+    const rawAgents = [];
+    agentSnap.forEach(doc => rawAgents.push({ id: doc.id, ...cleanDoc(doc.data()) }));
+    const agents = scopeAgentsForCaller(rawAgents, caller, { isLeader: callerIsLeader });
 
     const invites = [];
     inviteSnap.forEach(doc => invites.push({ id: doc.id, ...cleanDoc(doc.data()) }));

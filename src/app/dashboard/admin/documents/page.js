@@ -68,7 +68,9 @@ export default function AdminDocumentsPage() {
     (async () => {
       const res = await fetchMyGroups();
       if (res.success) {
-        const groupIds = res.groups.map(g => g.groupId);
+        // fetchMyGroups returns { groupIds: [...] }. This used to read res.groups, which does not exist,
+        // so team leaders were always shown "Access Denied" here.
+        const groupIds = res.groupIds || [];
         setIsTeamLeader(groupIds.includes('team-leaders'));
       }
     })();

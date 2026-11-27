@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, use } from 'react';
+import { fetchAgentDirectory } from '@/app/actions/directory';
 import { useRouter } from 'next/navigation';
 import { db } from '@/lib/firebase/clientApp';
 import { doc, getDoc, collection, query, where, getDocs, orderBy } from 'firebase/firestore';
@@ -74,9 +75,9 @@ export default function DealDetailPage({ params }) {
       }
 
       // Fetch Agents for mapping names
-      const aSnap = await getDocs(query(collection(db, 'agents'), where('agency_id', '==', profile.agency_id)));
+      const dir = await fetchAgentDirectory();
       const aMap = {};
-      aSnap.forEach(d => { const dd = d.data(); aMap[d.id] = [dd.first_name, dd.middle_name, dd.last_name].filter(Boolean).join(' ') || dd.full_name || ''; });
+      (dir.success ? dir.agents : []).forEach(dd => { aMap[dd.id] = [dd.first_name, dd.middle_name, dd.last_name].filter(Boolean).join(' ') || dd.full_name || ''; });
       setAgents(aMap);
 
     } catch (e) {

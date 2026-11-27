@@ -22,12 +22,37 @@ service cloud.firestore {
     }
 
     match /agents/{agentId} {
-      // Users can read/write their own profile
-      allow read, update: if isAuthenticated() && request.auth.uid == agentId;
-      // Agents can read other agents in their own agency
-      allow read: if isAuthenticated() && getAgentData().agency_id == resource.data.agency_id;
-      // Allow creation during signup/invite acceptance
-      allow create: if isAuthenticated() && request.auth.uid == agentId;
+      // Fields a person must never be able to change on their own record from the browser.
+      // (The CRM changes these only through its server, which is not limited by these rules.)
+      function protectedAgentFields() {
+        return ['role', 'is_owner', 'billingExempt', 'status', 'agency_id', 'upline_id', 'hierarchyPath',
+                'agentLevel', 'contractLevel', 'nxt_id', 'payment', 'stripe_customer_id', 'stripe_subscription_id',
+                'subscriptionStatus', 'nextChargeDate', 'trialStartDate', 'onboarding_completed_at', 'approved_at',
+                'approved_by', 'onboardingProgress', 'compliance', 'monthlyGoal'];
+      }
+      function callerIsPrivileged() {
+        return getAgentData().get('role', '') == 'admin' || getAgentData().get('role', '') == 'it_engineer' || getAgentData().get('is_owner', false) == true;
+      }
+
+      // Read: your own record; anyone in your agency if you are an owner, admin or IT;
+      // or someone below you in the hierarchy. Colleagues' names come from the server's directory instead.
+      allow get: if isAuthenticated() && (
+        request.auth.uid == agentId ||
+        (getAgentData().agency_id == resource.data.agency_id &&
+          (callerIsPrivileged() || resource.data.get('hierarchyPath', '').matches('.*/' + request.auth.uid + '/.*')))
+      );
+      allow list: if isAuthenticated() && getAgentData().agency_id == resource.data.agency_id && callerIsPrivileged();
+
+      // Update: your own record, but never the protected fields above.
+      allow update: if isAuthenticated() && request.auth.uid == agentId
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(protectedAgentFields());
+
+      // Create (accepting an invite): only your own record, only as a new "invited" account,
+      // and never with billing, card or exemption fields filled in.
+      allow create: if isAuthenticated() && request.auth.uid == agentId
+        && request.resource.data.status == 'invited'
+        && !request.resource.data.keys().hasAny(['billingExempt', 'payment', 'stripe_customer_id', 'stripe_subscription_id',
+                                                  'onboarding_completed_at', 'approved_at', 'approved_by']);
     }
 
     match /invites/{inviteId} {

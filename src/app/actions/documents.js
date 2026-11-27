@@ -1,7 +1,8 @@
 'use server';
 
 import { getAdminApp } from '@/lib/firebase/adminApp';
-import { requireUser, requireAdmin, requireApprover, isInSubtree } from '@/lib/serverAuth';
+import { requireUser, requireAdmin, requireApprover, isInSubtree, isTeamLeader } from '@/lib/serverAuth';
+import { computeDocChecklist } from '@/lib/documentTypes';
 import { getDisplayName } from '@/lib/constants';
 
 const ALLOWED_TYPES = ['application/pdf', 'image/jpeg', 'image/png'];
@@ -28,13 +29,17 @@ export async function getUploadUrl({ docType, fileName, contentType, size, targe
     const agentId = targetAgentId || caller.uid;
     if (targetAgentId && targetAgentId !== caller.uid) {
       const isPrivileged = caller.isOwner || caller.role === 'admin' || caller.role === 'it_engineer';
-      if (!isPrivileged) {
-        return { success: false, error: 'Only admins can upload documents on behalf of other agents.' };
-      }
       // Verify target agent exists in same agency
       const targetSnap = await db.collection('agents').doc(targetAgentId).get();
       if (!targetSnap.exists || targetSnap.data().agency_id !== caller.agencyId) {
         return { success: false, error: 'Target agent not found.' };
+      }
+      // Admins may upload for anyone; a team leader may upload for people in their own downline.
+      if (!isPrivileged) {
+        const leaderOk = (await isTeamLeader(caller.uid, caller.agencyId)) && isInSubtree(targetSnap.data().hierarchyPath, caller.uid);
+        if (!leaderOk) {
+          return { success: false, error: 'Only admins, or a team leader for their own downline, can upload documents for another agent.' };
+        }
       }
     }
 
@@ -100,7 +105,12 @@ export async function finalizeDocumentUpload({ docType, storagePath, fileName, s
     if (targetAgentId && targetAgentId !== caller.uid) {
       const isPrivileged = caller.isOwner || caller.role === 'admin' || caller.role === 'it_engineer';
       if (!isPrivileged) {
-        return { success: false, error: 'Only admins can upload documents on behalf of other agents.' };
+        const targetSnap = await db.collection('agents').doc(targetAgentId).get();
+        const leaderOk = targetSnap.exists && targetSnap.data().agency_id === caller.agencyId
+          && (await isTeamLeader(caller.uid, caller.agencyId)) && isInSubtree(targetSnap.data().hierarchyPath, caller.uid);
+        if (!leaderOk) {
+          return { success: false, error: 'Only admins, or a team leader for their own downline, can upload documents for another agent.' };
+        }
       }
     }
 
@@ -296,15 +306,16 @@ export async function fetchAgentDocumentsAdmin(agentId) {
     const isOwn = caller.uid === agentId;
     const isPrivileged = caller.isOwner || caller.role === 'admin' || caller.role === 'it_engineer';
 
-    if (!isOwn && !isPrivileged) {
-      return { success: false, error: 'Permission denied.' };
-    }
-
-    // Verify agent is in same agency (for admin path)
+    // Verify agent is in same agency, and that the caller may see them:
+    // admins see anyone; a team leader sees people in their own downline.
     if (!isOwn) {
       const agentSnap = await db.collection('agents').doc(agentId).get();
       if (!agentSnap.exists || agentSnap.data().agency_id !== caller.agencyId) {
         return { success: false, error: 'Agent not found.' };
+      }
+      if (!isPrivileged) {
+        const leaderOk = (await isTeamLeader(caller.uid, caller.agencyId)) && isInSubtree(agentSnap.data().hierarchyPath, caller.uid);
+        if (!leaderOk) return { success: false, error: 'Permission denied.' };
       }
     }
 
@@ -439,6 +450,52 @@ export async function fetchAgencyW9Status() {
     });
 
     return { success: true, w9Map };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+}
+
+
+/**
+ * Onboarding status for the people the caller looks after: everyone for owners, admins and IT;
+ * the caller's own downline for team leaders. One row per person with their document checklist.
+ */
+export async function fetchTeamOnboarding() {
+  let caller;
+  try { caller = await requireApprover(); } catch { return { success: false, error: 'Unauthorized' }; }
+  const db = getAdminApp().firestore();
+  try {
+    const [agentSnap, docSnap] = await Promise.all([
+      db.collection('agents').where('agency_id', '==', caller.agencyId).get(),
+      db.collection('agentDocuments').where('agencyId', '==', caller.agencyId).get(),
+    ]);
+    const docsByAgent = {};
+    docSnap.forEach(d => { const x = d.data(); (docsByAgent[x.agentId] = docsByAgent[x.agentId] || []).push({ docType: x.docType, status: x.status }); });
+    const names = {};
+    agentSnap.forEach(d => { names[d.id] = getDisplayName(d.data()) || d.data().email || 'Unknown'; });
+
+    const people = [];
+    agentSnap.forEach(d => {
+      const a = d.data();
+      if (a.is_owner || ['admin', 'it_engineer'].includes(a.role)) return;          // not onboarded through documents
+      if (caller.isTeamLeaderOnly && !isInSubtree(a.hierarchyPath, caller.uid)) return;
+      const list = computeDocChecklist(a, docsByAgent[d.id] || []);
+      people.push({
+        id: d.id,
+        name: names[d.id],
+        email: a.email || '',
+        status: a.status || 'unknown',
+        level: a.contractLevel || '',
+        uplineName: a.upline_id ? (names[a.upline_id] || '') : '',
+        hasCard: !!a.payment?.cardLastFour,
+        cardExempt: !!a.billingExempt,
+        hasNpn: !!a.npn,
+        total: list.total, uploaded: list.uploaded, approved: list.approved, toUpload: list.toUpload, complete: list.complete,
+        items: list.items.map(i => ({ key: i.key, label: i.label, status: i.status, uploadType: i.uploadType })),
+      });
+    });
+    people.sort((x, y) => (x.complete ? 1 : 0) - (y.complete ? 1 : 0) || y.toUpload - x.toUpload || x.name.localeCompare(y.name));
+    return { success: true, people, scope: caller.isTeamLeaderOnly ? 'downline' : 'agency' };
   } catch (error) {
     return { success: false, error: error.message };
   }

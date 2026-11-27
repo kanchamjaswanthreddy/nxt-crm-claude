@@ -1,6 +1,8 @@
 'use server';
 
 import { getAdminApp } from '@/lib/firebase/adminApp';
+import { isTeamLeader } from '@/lib/serverAuth';
+import { scopeAgentsForCaller } from '@/lib/agentPrivacy';
 import { requireUser, requireAdmin, requireApprover, isInSubtree } from '@/lib/serverAuth';
 import { getDisplayName } from '@/lib/constants';
 import { validateLengths, validatePhone, FIELD_LIMITS } from '@/lib/validation';
@@ -59,8 +61,11 @@ export async function fetchTeamData({ limit: agentLimit = 100, startAfter: start
       db.collection('invites').where('agency_id', '==', agencyId).get(),
     ]);
 
-    const agents = [];
-    agentSnap.forEach(doc => agents.push({ id: doc.id, ...cleanDoc(doc.data()) }));
+    // People only receive personal details they are entitled to (see lib/agentPrivacy.js).
+    const callerIsLeader = (caller.isOwner || caller.role === 'admin' || caller.role === 'it_engineer') ? false : await isTeamLeader(caller.uid, caller.agencyId);
+    const rawAgents = [];
+    agentSnap.forEach(doc => rawAgents.push({ id: doc.id, ...cleanDoc(doc.data()) }));
+    const agents = scopeAgentsForCaller(rawAgents, caller, { isLeader: callerIsLeader });
 
     const invites = [];
     inviteSnap.forEach(doc => invites.push({ id: doc.id, ...cleanDoc(doc.data()) }));

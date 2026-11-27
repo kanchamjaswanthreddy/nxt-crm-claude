@@ -13,7 +13,7 @@ export async function fetchGroups() {
   let caller;
   try { caller = await requireUser(); } catch { return { success: false, error: 'Unauthorized' }; }
 
-  if (caller.role !== 'admin' && caller.role !== 'it_engineer') {
+  if (caller.role !== 'admin' && caller.role !== 'it_engineer' && !caller.isOwner) {
     return { success: false, error: 'Permission denied' };
   }
 
@@ -49,7 +49,7 @@ export async function fetchGroupMembers(groupId) {
   let caller;
   try { caller = await requireUser(); } catch { return { success: false, error: 'Unauthorized' }; }
 
-  if (caller.role !== 'admin' && caller.role !== 'it_engineer') {
+  if (caller.role !== 'admin' && caller.role !== 'it_engineer' && !caller.isOwner) {
     return { success: false, error: 'Permission denied' };
   }
 
@@ -99,7 +99,7 @@ export async function addGroupMember(groupId, agentId) {
   let caller;
   try { caller = await requireUser(); } catch { return { success: false, error: 'Unauthorized' }; }
 
-  if (caller.role !== 'admin' && caller.role !== 'it_engineer') {
+  if (caller.role !== 'admin' && caller.role !== 'it_engineer' && !caller.isOwner) {
     return { success: false, error: 'Permission denied' };
   }
 
@@ -166,7 +166,7 @@ export async function removeGroupMember(groupId, agentId) {
   let caller;
   try { caller = await requireUser(); } catch { return { success: false, error: 'Unauthorized' }; }
 
-  if (caller.role !== 'admin' && caller.role !== 'it_engineer') {
+  if (caller.role !== 'admin' && caller.role !== 'it_engineer' && !caller.isOwner) {
     return { success: false, error: 'Permission denied' };
   }
 
@@ -208,7 +208,7 @@ export async function searchAgentsForGroup(searchQuery) {
   let caller;
   try { caller = await requireUser(); } catch { return { success: false, error: 'Unauthorized' }; }
 
-  if (caller.role !== 'admin' && caller.role !== 'it_engineer') {
+  if (caller.role !== 'admin' && caller.role !== 'it_engineer' && !caller.isOwner) {
     return { success: false, error: 'Permission denied' };
   }
 
@@ -261,7 +261,7 @@ export async function seedBillingExemptGroup() {
   let caller;
   try { caller = await requireUser(); } catch { return { success: false, error: 'Unauthorized' }; }
 
-  if (caller.role !== 'admin' && caller.role !== 'it_engineer') {
+  if (caller.role !== 'admin' && caller.role !== 'it_engineer' && !caller.isOwner) {
     return { success: false, error: 'Permission denied' };
   }
 

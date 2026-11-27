@@ -326,6 +326,7 @@ function DashboardLayoutInner({ children }) {
                 <>
                   {subLink('/dashboard/admin/approvals', 'Agent Approvals')}
                   {subLink('/dashboard/admin/documents', 'Document Review')}
+                  {subLink('/dashboard/admin/onboarding', 'Team Onboarding')}
                 </>
               )}
 

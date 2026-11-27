@@ -2,6 +2,7 @@
 
 import { getAdminApp } from '@/lib/firebase/adminApp';
 import { getDisplayName } from '@/lib/constants';
+import { requireUser } from '@/lib/serverAuth';
 
 const PRIVILEGED_ROLES = ['admin', 'it_engineer'];
 const MAX_BATCH_SIZE = 400;
@@ -9,7 +10,12 @@ const MAX_BATCH_SIZE = 400;
 /**
  * Check if the caller has admin/owner privileges.
  */
-async function assertPrivileged(db, callerUid) {
+async function assertPrivileged(db, _callerUidFromClient) {
+  // The caller is taken from the signed-in session. The id the browser passes in is ignored:
+  // trusting it let anyone act as an owner just by sending the owner's id.
+  let session;
+  try { session = await requireUser(); } catch { return { ok: false, error: 'Unauthorized' }; }
+  const callerUid = session.uid;
   const callerSnap = await db.collection('agents').doc(callerUid).get();
   if (!callerSnap.exists) return { ok: false, error: 'Caller agent not found.' };
   const data = callerSnap.data();
@@ -237,8 +243,8 @@ export async function moveAgent(callerUid, agentId, newParentId) {
       oldPath,
       newPath,
       descendantsUpdated: descendants.length,
-      performedBy: callerUid,
-      performedByName: getDisplayName(auth.caller) || auth.caller.email || callerUid,
+      performedBy: auth.caller.id,
+      performedByName: getDisplayName(auth.caller) || auth.caller.email || auth.caller.id,
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
       undone: false,
     };
@@ -326,7 +332,7 @@ export async function undoMove(callerUid, moveId) {
     await db.collection('hierarchyMoves').doc(moveId).update({
       undone: true,
       undoneAt: admin.firestore.FieldValue.serverTimestamp(),
-      undoneBy: callerUid,
+      undoneBy: auth.caller.id,
     });
 
     return { success: true, agentId: move.agentId, restoredUplineId: move.oldUplineId };

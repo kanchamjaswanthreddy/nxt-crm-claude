@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { fetchAgentDirectory } from '@/app/actions/directory';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { db } from '@/lib/firebase/clientApp';
@@ -42,12 +43,8 @@ export default function UnassignedLeadsPage() {
 
   const loadAgents = useCallback(async (agencyId) => {
     try {
-      const q = query(collection(db, 'agents'), where('agency_id', '==', agencyId), where('status', '==', 'active'));
-      const snap = await getDocs(q);
-      const fetched = [];
-      snap.forEach(d => {
-        fetched.push({ id: d.id, ...d.data() });
-      });
+      const dir = await fetchAgentDirectory();
+      const fetched = (dir.success ? dir.agents : []).filter(a => a.status === 'active');
       setAgents(fetched);
     } catch (e) {
       // silenced
