@@ -330,7 +330,7 @@ function PipelineSection({ data, emptyAction }) {
       <EmptyState
         text="No pipeline stages configured"
         linkText="Set up pipeline"
-        onAction={() => router.push('/dashboard/business/pipeline')}
+        onAction={() => router.push('/dashboard/settings/pipeline')}
       />
     );
   }
@@ -356,7 +356,7 @@ function PipelineSection({ data, emptyAction }) {
             type="button"
             key={stage.name}
             className={s.pipeCol}
-            onClick={() => router.push(`/dashboard/business/pipeline?stage=${stage.stageId}`)}
+            onClick={() => router.push(`/dashboard/pipeline?stage=${stage.stageId}`)}
           >
             <span className={s.pipeTrack}>
               <span
@@ -621,7 +621,7 @@ function AgentView({ data, onCompleteTask }) {
           sparkData={kpis.sparkProduction}
           momPct={kpis.momPct}
         />
-        <button type="button" className={`${s.bigTile} ${s.bigTileWarm}`} onClick={() => router.push('/dashboard/business/pipeline')}>
+        <button type="button" className={`${s.bigTile} ${s.bigTileWarm}`} onClick={() => router.push('/dashboard/pipeline')}>
           <span className={s.bigTileLabel}>Open pipeline</span>
           <span className={s.bigTileValue}>{fmtCompact(kpis.pipelineValue)}</span>
           <span className={s.bigTileHint}>
@@ -641,7 +641,7 @@ function AgentView({ data, onCompleteTask }) {
         <div className={s.card}>
           <div className={s.cardHeader}>
             <h3 className={s.cardHeaderTitle}>Your Pipeline</h3>
-            <button className={s.headerLink} onClick={() => router.push('/dashboard/business/pipeline')}>
+            <button className={s.headerLink} onClick={() => router.push('/dashboard/pipeline')}>
               View all
             </button>
           </div>
@@ -744,7 +744,7 @@ function AdminView({ data, onCompleteTask }) {
           sparkData={kpis.sparkProduction}
           momPct={admin.agencyMomPct}
         />
-        <button type="button" className={`${s.bigTile} ${s.bigTileWarm}`} onClick={() => router.push('/dashboard/business/pipeline')}>
+        <button type="button" className={`${s.bigTile} ${s.bigTileWarm}`} onClick={() => router.push('/dashboard/pipeline')}>
           <span className={s.bigTileLabel}>Open pipeline</span>
           <span className={s.bigTileValue}>{fmtCompact(admin.agencyPipelineValue)}</span>
           <span className={s.bigTileHint}>
@@ -766,7 +766,7 @@ function AdminView({ data, onCompleteTask }) {
         <div className={s.card}>
           <div className={s.cardHeader}>
             <h3 className={s.cardHeaderTitle}>Agency Pipeline</h3>
-            <button className={s.headerLink} onClick={() => router.push('/dashboard/business/pipeline')}>
+            <button className={s.headerLink} onClick={() => router.push('/dashboard/pipeline')}>
               Open board
             </button>
           </div>
@@ -793,7 +793,7 @@ function AdminView({ data, onCompleteTask }) {
                 {admin.agencyDealsWon > 0 ? fmtCurrency(admin.agencyDealsWonPremium) + ' premium' : 'None closed yet'}
               </span>
             </div>
-            <button type="button" className={s.miniTile} onClick={() => router.push('/dashboard/team?filter=invited')}>
+            <button type="button" className={s.miniTile} onClick={() => router.push('/dashboard/team?tab=invites')}>
               <span className={s.bigTileLabel}>Pending invites</span>
               <span className={s.miniValue}>{admin.pendingInvites}</span>
               <span className={s.bigTileHint}>

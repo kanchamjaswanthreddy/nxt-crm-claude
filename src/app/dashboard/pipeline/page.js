@@ -18,6 +18,13 @@ export default function PipelinePage() {
   
   const [stages, setStages] = useState([]);
   const [deals, setDeals] = useState([]);
+  // Coming from a stage bar on the dashboard: bring that stage's column into view.
+  useEffect(() => {
+    const stageId = new URLSearchParams(window.location.search).get('stage');
+    if (!stageId || stages.length === 0) return;
+    const col = document.querySelector(`[data-stage-id="${stageId}"]`);
+    if (col) { col.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); col.style.boxShadow = '0 0 0 3px #E3A94A'; setTimeout(() => { col.style.boxShadow = ''; }, 2600); }
+  }, [stages]);
   const [carriers, setCarriers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -199,8 +206,8 @@ export default function PipelinePage() {
     <div style={{ height: 'calc(100vh - 100px)', display: 'flex', flexDirection: 'column' }}>
       <div style={{ marginBottom: 'var(--space-3)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0 }}>
         <div>
-          <h1 style={{ color: 'var(--brand-navy)', fontSize: 'var(--text-h1)', margin: '0 0 8px 0' }}>My Pipeline</h1>
-          <p style={{ color: 'var(--text-secondary)' }}>Your personal deals board. Drag and drop to update stages.</p>
+          <h1 style={{ color: 'var(--brand-navy)', fontSize: 'var(--text-h1)', margin: '0 0 8px 0' }}>Deals Board</h1>
+          <p style={{ color: 'var(--text-secondary)' }}>Your deals by stage. Drag a card to move it to another stage.</p>
         </div>
         <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
           <Button variant="secondary" onClick={() => { if (userProfile) loadPipeline(userProfile); }}>
@@ -255,6 +262,7 @@ export default function PipelinePage() {
           return (
             <div 
               key={stage.id} 
+              data-stage-id={stage.id}
               onDragOver={(e) => handleDragOver(e, stage.id)}
               onDragLeave={handleDragLeave}
               onDrop={(e) => handleDrop(e, stage.id)}
@@ -349,7 +357,7 @@ export default function PipelinePage() {
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-2)' }}>
               <Button variant="secondary" onClick={cancelMove}>Cancel</Button>
-              <Button onClick={confirmWon} disabled={!policyNumber.trim() || !carrierId} style={{ backgroundColor: 'var(--status-success, #2FA84F)' }}>Confirm Won</Button>
+              <Button onClick={confirmWon} disabled={!policyNumber.trim() || !carrierId}>Confirm Won</Button>
             </div>
           </Card>
         </div>
@@ -381,7 +389,7 @@ export default function PipelinePage() {
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-2)' }}>
               <Button variant="secondary" onClick={cancelMove}>Cancel</Button>
-              <Button onClick={confirmLost} style={{ backgroundColor: 'var(--status-error, #D33F3F)' }}>Confirm Lost</Button>
+              <Button variant="danger" onClick={confirmLost}>Confirm Lost</Button>
             </div>
           </Card>
         </div>

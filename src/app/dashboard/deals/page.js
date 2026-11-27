@@ -9,6 +9,7 @@ import Avatar from '@/components/Avatar';
 import PageHeader from '@/components/ui/PageHeader';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 
+import SegTabs from '@/components/ui/SegTabs';
 const STATUS_MAP = {
   open: { label: 'Submitted', color: '#1B2A4E', bg: 'rgba(227, 169, 74,0.08)' },
   pending: { label: 'Under Review', color: '#E08E2B', bg: 'rgba(224,142,43,0.08)' },
@@ -283,47 +284,15 @@ export default function DealsPage() {
         subtitle="Track and manage all submitted deals"
         actions={
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-            <button
+            <button className="nxt-btn"
               onClick={() => { if (userProfile) loadData(userProfile); }}
-              style={{
-                background: '#fff',
-                color: 'var(--brand-navy)',
-                border: '1px solid var(--brand-navy)',
-                padding: '10px 20px',
-                borderRadius: '999px',
-                fontWeight: '600',
-                fontSize: '16px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                transition: 'background 0.15s ease',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'var(--brand-navy)'; e.currentTarget.style.color = '#fff'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = 'var(--brand-navy)'; }}
             >
               <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" strokeLinecap="round" strokeLinejoin="round"/></svg>
               Refresh
             </button>
-            <button
+            <button className="nxt-btn" onClick={() => router.push('/dashboard/pipeline')}>Board View</button>
+            <button className="nxt-btn nxt-btn-primary"
               onClick={() => router.push('/dashboard/deals/new')}
-              style={{
-                background: 'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)',
-                color: '#fff',
-                border: 'none',
-                padding: '12px 28px',
-                borderRadius: '999px',
-                fontWeight: '600',
-                fontSize: '16px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                boxShadow: '0 4px 16px -4px rgba(12, 16, 34,0.4)',
-                transition: 'transform 0.15s ease, box-shadow 0.15s ease',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 6px 20px -4px rgba(12, 16, 34,0.5)'; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 16px -4px rgba(12, 16, 34,0.4)'; }}
             >
               <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M8 2v12M2 8h12" /></svg>
               New Deal
@@ -341,46 +310,14 @@ export default function DealsPage() {
       ]} />
 
       {/* Status Tabs */}
-      <div style={{ display: 'flex', gap: '4px', marginBottom: '16px', borderBottom: '1px solid #E7E3DA', paddingBottom: '0' }}>
-        {[
-          { key: 'all', label: 'All' },
-          { key: 'open', label: 'Submitted' },
-          { key: 'pending', label: 'Under Review' },
-          { key: 'won', label: 'Approved' },
-          { key: 'lost', label: 'Declined' },
-        ].map(tab => (
-          <button
-            key={tab.key}
-            onClick={() => setStatusTab(tab.key)}
-            style={{
-              padding: '10px 20px',
-              fontSize: '15px',
-              fontWeight: statusTab === tab.key ? '600' : '500',
-              color: statusTab === tab.key ? 'var(--brand-navy)' : 'var(--text-secondary)',
-              background: 'none',
-              border: 'none',
-              borderBottom: statusTab === tab.key ? '2px solid var(--brand-navy)' : '2px solid transparent',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              transition: 'color 0.15s ease, border-color 0.15s ease',
-              marginBottom: '-1px',
-            }}
-          >
-            {tab.label}
-            <span style={{
-              fontSize: '13px',
-              fontWeight: '600',
-              padding: '2px 8px',
-              borderRadius: '999px',
-              backgroundColor: statusTab === tab.key ? 'rgba(12, 16, 34,0.08)' : '#F0EDE6',
-              color: statusTab === tab.key ? 'var(--brand-navy)' : 'var(--text-secondary)',
-            }}>
-              {statusCounts[tab.key]}
-            </span>
-          </button>
-        ))}
+      <div style={{ marginBottom: '16px' }}>
+        <SegTabs label="Deal status" value={statusTab} onChange={setStatusTab} tabs={[
+          { key: 'all', label: 'All', count: statusCounts.all },
+          { key: 'open', label: 'Submitted', count: statusCounts.open },
+          { key: 'pending', label: 'Under Review', count: statusCounts.pending },
+          { key: 'won', label: 'Approved', count: statusCounts.won },
+          { key: 'lost', label: 'Declined', count: statusCounts.lost },
+        ]} />
       </div>
 
       {/* Filters Bar */}
@@ -454,16 +391,8 @@ export default function DealsPage() {
 
         <div style={{ marginLeft: 'auto', display: 'flex', gap: '8px' }}>
           {/* Export */}
-          <button
+          <button className="nxt-btn"
             onClick={handleExport}
-            style={{
-              display: 'flex', alignItems: 'center', gap: '6px',
-              padding: '9px 16px', border: '1px solid #E7E3DA', borderRadius: '8px',
-              fontSize: '15px', fontWeight: '500', backgroundColor: '#fff', cursor: 'pointer',
-              color: 'var(--text-primary)', transition: 'border-color 0.15s ease',
-            }}
-            onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--brand-navy)'}
-            onMouseLeave={e => e.currentTarget.style.borderColor = '#E7E3DA'}
           >
             <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" strokeLinecap="round" strokeLinejoin="round"/></svg>
             Export
@@ -521,13 +450,8 @@ export default function DealsPage() {
                           : 'Submit your first deal to get started.'}
                       </p>
                       {!searchQuery && statusTab === 'all' && (
-                        <button
+                        <button className="nxt-btn nxt-btn-primary"
                           onClick={() => router.push('/dashboard/deals/new')}
-                          style={{
-                            background: 'var(--brand-navy)', color: '#fff', border: 'none',
-                            padding: '10px 24px', borderRadius: '999px', fontSize: '15px',
-                            fontWeight: '600', cursor: 'pointer',
-                          }}
                         >
                           + New Deal
                         </button>
@@ -746,17 +670,8 @@ function DealDetailPanel({ deal, agents, carriers, stages, onClose, onViewFull }
 
         {/* Panel Footer */}
         <div style={{ padding: '16px 24px', borderTop: '1px solid #E7E3DA' }}>
-          <button
+          <button className="nxt-btn nxt-btn-primary"
             onClick={onViewFull}
-            style={{
-              width: '100%', padding: '12px', borderRadius: '10px',
-              background: 'var(--brand-navy)', color: '#fff', border: 'none',
-              fontSize: '16px', fontWeight: '600', cursor: 'pointer',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
-              transition: 'opacity 0.15s ease',
-            }}
-            onMouseEnter={e => e.currentTarget.style.opacity = '0.9'}
-            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
           >
             View Full Details
             <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/></svg>

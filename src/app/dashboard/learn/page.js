@@ -10,6 +10,7 @@ import Button from '@/components/ui/Button';
 import { useToast } from '@/components/ui/Toast';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
+import SegTabs from '@/components/ui/SegTabs';
 const CATEGORIES = [
   { value: 'all', label: 'All' },
   { value: 'onboarding', label: 'Onboarding' },
@@ -188,17 +189,8 @@ export default function LearnPage() {
       </div>
 
       {/* Category tabs */}
-      <div style={{ display: 'flex', gap: '8px', marginBottom: 'var(--space-4)', flexWrap: 'wrap' }}>
-        {CATEGORIES.map(cat => (
-          <button key={cat.value} onClick={() => setActiveCategory(cat.value)} style={{
-            padding: '6px 16px', borderRadius: '999px', border: '1px solid var(--border-color)',
-            backgroundColor: activeCategory === cat.value ? 'var(--brand-navy)' : '#fff',
-            color: activeCategory === cat.value ? '#fff' : 'var(--text-primary)',
-            cursor: 'pointer', fontSize: '15px', fontWeight: '500',
-          }}>
-            {cat.label}
-          </button>
-        ))}
+      <div style={{ marginBottom: 'var(--space-4)' }}>
+        <SegTabs label="Categories" value={activeCategory} onChange={setActiveCategory} tabs={CATEGORIES.map(c => ({ key: c.value, label: c.label }))} />
       </div>
 
 
@@ -227,11 +219,7 @@ export default function LearnPage() {
                   {r.description && <p style={{ margin: '0 0 12px', fontSize: '15px', color: 'var(--text-secondary)', lineHeight: '1.4', flex: 1 }}>{r.description}</p>}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '8px', borderTop: '1px solid var(--border-color)' }}>
                     {r.url === '#pending-upload' && isAdmin ? (
-                      <button onClick={() => handleUploadClick(r.id)} disabled={uploadingId === r.id} style={{
-                        background: 'none', border: '1px dashed #7C3AED', borderRadius: '6px', padding: '4px 12px',
-                        color: '#7C3AED', cursor: 'pointer', fontSize: '15px', fontWeight: '500',
-                        opacity: uploadingId === r.id ? 0.6 : 1,
-                      }}>
+                      <button className="nxt-btn nxt-btn-sm" onClick={() => handleUploadClick(r.id)} disabled={uploadingId === r.id}>
                         {uploadingId === r.id ? 'Uploading...' : 'Upload PDF'}
                       </button>
                     ) : r.url === '#pending-upload' ? (
@@ -242,7 +230,7 @@ export default function LearnPage() {
                       </a>
                     )}
                     {isAdmin && !r.id.startsWith('lic-') && (
-                      <button onClick={() => handleDelete(r.id)} style={{ background: 'none', border: 'none', color: '#D33F3F', cursor: 'pointer', fontSize: '14px' }}>Remove</button>
+                      <button className="nxt-btn nxt-btn-sm nxt-btn-danger" onClick={() => handleDelete(r.id)}>Remove</button>
                     )}
                   </div>
                 </div>

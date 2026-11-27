@@ -34,3 +34,8 @@
 .rowBtns { display: inline-flex; gap: 2px; }
 @media (max-width: 1000px) { .grid { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .two, .three { grid-template-columns: 1fr; } }
+
+/* Same button scale as the rest of the CRM */
+.primary { min-height: 44px; padding: 0 22px; font-size: 15px; }
+.ghost, .danger { min-height: 34px; padding: 0 14px; font-size: 14px; }
+.danger { background: #fff; color: #B42318; box-shadow: inset 0 0 0 1.5px #F1B4AE; }

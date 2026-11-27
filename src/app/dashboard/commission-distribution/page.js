@@ -15,6 +15,7 @@ import {
   ResponsiveContainer, PieChart, Pie, Cell
 } from 'recharts';
 
+import SegTabs from '@/components/ui/SegTabs';
 /* ─── CRM agent level (1-5) → commission title key mapping ─── */
 const LEVEL_TO_TITLE_KEY = {
   1: null,      // Unlicensed — cannot sell
@@ -256,25 +257,8 @@ export default function CommissionDistributionPage() {
 
       {/* Product Type Toggle */}
       <Card style={{ marginBottom: 'var(--space-4)', border: '1px solid rgba(227, 169, 74, 0.2)' }}>
-        <div style={{ display: 'flex', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
-          {[
-            { key: 'annuity', label: 'Annuity' },
-            { key: 'life', label: 'Life' },
-          ].map(tab => (
-            <button
-              key={tab.key}
-              onClick={() => { setProductType(tab.key); setCarrier(''); setProductName(''); setAgeBand(''); }}
-              style={{
-                padding: '10px 28px', borderRadius: '8px', fontWeight: 700,
-                fontSize: 'var(--text-caption)', cursor: 'pointer', border: 'none',
-                backgroundColor: productType === tab.key ? 'var(--brand-navy)' : 'rgba(0,0,0,0.04)',
-                color: productType === tab.key ? '#fff' : 'var(--text-secondary)',
-                transition: 'all 0.2s ease',
-              }}
-            >
-              {tab.label}
-            </button>
-          ))}
+        <div style={{ marginBottom: 'var(--space-4)' }}>
+          <SegTabs label="Product type" value={productType} onChange={(k) => { setProductType(k); setCarrier(''); setProductName(''); setAgeBand(''); }} tabs={[{ key: 'annuity', label: 'Annuity' }, { key: 'life', label: 'Life' }]} />
         </div>
 
         {/* Product Selection */}

@@ -159,3 +159,8 @@
 @media (prefers-reduced-motion: reduce) { .goal, .goalFill { animation: none; } }
 .goal .goalValue { font-size: clamp(30px, 3vw, 42px); font-weight: 350; letter-spacing: -0.05em; line-height: 1; color: var(--brand-navy); }
 .goal .goalValue span { font-size: 18px; }
+
+/* Same button scale as the rest of the CRM */
+.goalBtn { min-height: 44px; padding: 0 22px; font-size: 15px; }
+.goalGhost { min-height: 34px; font-size: 14px; }
+.seg button { height: 36px; min-height: 36px; white-space: nowrap; }

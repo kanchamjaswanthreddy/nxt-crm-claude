@@ -146,18 +146,9 @@ function SamlAuthorizeFlow() {
             <p style={{ color: '#dc2626', fontSize: '15px', marginBottom: '16px' }}>
               {error}
             </p>
-            <button
+            <button className="nxt-btn nxt-btn-primary"
               onClick={() => router.push('/dashboard')}
-              style={{
-                padding: '10px 24px',
-                background: '#0a1628',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '14px',
-                fontWeight: 500,
-                cursor: 'pointer',
-              }}
+             
             >
               Return to Dashboard
             </button>

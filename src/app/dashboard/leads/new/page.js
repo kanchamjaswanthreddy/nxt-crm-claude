@@ -92,7 +92,7 @@ export default function AddLeadPage() {
       {fromPipeline && (
         <div style={{
           backgroundColor: 'rgba(227, 169, 74,0.06)', color: '#1d4ed8',
-          padding: '12px 16px', borderRadius: '10px', marginBottom: '16px', maxWidth: '800px',
+          padding: '12px 16px', borderRadius: '10px', marginBottom: '16px',
           fontSize: '16px', border: '1px solid rgba(227, 169, 74,0.15)',
           display: 'flex', alignItems: 'center', gap: '8px',
         }}>
@@ -101,7 +101,7 @@ export default function AddLeadPage() {
         </div>
       )}
 
-      <Card style={{ maxWidth: '800px' }}>
+      <Card>
         {error && (
           <div style={{ backgroundColor: 'var(--status-error, #fde8e8)', color: 'var(--status-error-text, #9b1c1c)', padding: 'var(--space-2)', borderRadius: '8px', marginBottom: 'var(--space-3)', fontSize: 'var(--text-secondary)' }}>
             {error}

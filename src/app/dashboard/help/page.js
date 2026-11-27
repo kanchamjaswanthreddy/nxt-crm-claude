@@ -11,6 +11,7 @@ import PageHeader from '@/components/ui/PageHeader';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
 
+import SegTabs from '@/components/ui/SegTabs';
 const CATEGORIES = [
   { value: 'general', label: 'General', icon: 'M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z' },
   { value: 'billing', label: 'Billing', icon: 'M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z' },
@@ -180,11 +181,8 @@ export default function HelpPage() {
     const ps = PRIORITY_STYLES[selectedTicket.priority] || PRIORITY_STYLES.medium;
     return (
       <div>
-        <button onClick={() => setSelectedTicket(null)} style={{
-          background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)',
-          fontSize: 16, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 4,
-        }}>
-          ← Back to tickets
+        <button className="nxt-back" onClick={() => setSelectedTicket(null)}>
+          Back to Tickets
         </button>
 
         <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
@@ -236,10 +234,7 @@ export default function HelpPage() {
               </div>
 
               {selectedTicket.status === 'resolved' && (
-                <button onClick={handleReopen} style={{
-                  marginTop: 12, padding: '6px 16px', backgroundColor: '#FEF3C7', color: '#92400E',
-                  border: '1px solid #F59E0B', borderRadius: 6, cursor: 'pointer', fontSize: 15, fontWeight: 600,
-                }}>
+                <button className="nxt-btn" onClick={handleReopen}>
                   Reopen Ticket
                 </button>
               )}
@@ -283,11 +278,7 @@ export default function HelpPage() {
                       borderRadius: 6, fontSize: 16, outline: 'none',
                     }}
                   />
-                  <button onClick={handleAddComment} disabled={commentLoading || !commentText.trim()} style={{
-                    padding: '8px 16px', backgroundColor: 'var(--brand-gold)', color: 'var(--brand-navy)',
-                    border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: 15,
-                    opacity: commentLoading || !commentText.trim() ? 0.5 : 1,
-                  }}>
+                  <button className="nxt-btn nxt-btn-primary" onClick={handleAddComment} disabled={commentLoading || !commentText.trim()}>
                     {commentLoading ? 'Sending...' : 'Send'}
                   </button>
                 </div>
@@ -345,11 +336,7 @@ export default function HelpPage() {
         title="NXT Help"
         subtitle="Submit and track your support requests"
         actions={
-          <button onClick={() => { setSelectedCategory(null); setShowForm(true); }} style={{
-            padding: '10px 24px', backgroundColor: 'var(--brand-gold)', color: 'var(--brand-navy)',
-            border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 600, fontSize: 16,
-            boxShadow: '0 2px 8px rgba(227, 169, 74,0.2)',
-          }}>
+          <button className="nxt-btn nxt-btn-primary" onClick={() => { setSelectedCategory(null); setShowForm(true); }}>
             + New Ticket
           </button>
         }
@@ -466,17 +453,10 @@ export default function HelpPage() {
             </div>
 
             <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
-              <button type="button" onClick={() => { setShowForm(false); setSelectedCategory(null); setFiles([]); }} style={{
-                padding: '10px 20px', backgroundColor: '#F0EDE6', color: 'var(--text-primary)',
-                border: 'none', borderRadius: 8, cursor: 'pointer', fontSize: 16,
-              }}>
+              <button className="nxt-btn" type="button" onClick={() => { setShowForm(false); setSelectedCategory(null); setFiles([]); }}>
                 Cancel
               </button>
-              <button type="submit" disabled={submitting} style={{
-                padding: '10px 24px', backgroundColor: 'var(--brand-gold)', color: 'var(--brand-navy)',
-                border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 600, fontSize: 16,
-                opacity: submitting ? 0.5 : 1,
-              }}>
+              <button className="nxt-btn nxt-btn-primary" type="submit" disabled={submitting}>
                 {submitting ? 'Creating...' : 'Submit Ticket'}
               </button>
             </div>
@@ -521,21 +501,8 @@ export default function HelpPage() {
           </div>
 
           {/* Filter tabs */}
-          <div style={{ display: 'flex', gap: 4, marginBottom: 12, flexWrap: 'wrap' }}>
-            {[{ value: 'all', label: 'All' }, ...Object.entries(STATUS_STYLES).map(([v, s]) => ({ value: v, label: s.label }))].map(f => (
-              <button key={f.value} onClick={() => setFilterStatus(f.value)} style={{
-                padding: '6px 16px', borderRadius: 999, fontSize: 16, fontWeight: filterStatus === f.value ? 600 : 500,
-                backgroundColor: filterStatus === f.value ? 'rgba(227, 169, 74,0.15)' : 'transparent',
-                color: filterStatus === f.value ? 'var(--brand-navy)' : 'var(--text-secondary)',
-                border: filterStatus === f.value ? '1px solid rgba(227, 169, 74,0.3)' : '1px solid var(--border-color)',
-                cursor: 'pointer',
-              }}>
-                {f.label}
-                {f.value !== 'all' && stats[f.value] > 0 && (
-                  <span style={{ marginLeft: 4, fontSize: 13, opacity: 0.7 }}>({stats[f.value]})</span>
-                )}
-              </button>
-            ))}
+          <div style={{ marginBottom: 12 }}>
+            <SegTabs size="sm" label="Ticket status" value={filterStatus} onChange={setFilterStatus} tabs={[{ key: 'all', label: 'All' }, ...Object.entries(STATUS_STYLES).map(([v, st]) => ({ key: v, label: st.label, count: stats[v] > 0 ? stats[v] : undefined }))]} />
           </div>
 
           {/* Ticket list */}

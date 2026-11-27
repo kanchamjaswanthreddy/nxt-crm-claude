@@ -723,3 +723,12 @@
     box-shadow: 0 24px 50px -22px rgba(12, 16, 34, 0.75);
   }
 }
+
+/* Frame colour: soft cream outside, near-white panel, so the cards and the menu stand out. */
+.shell { background: #E9E5DC; }
+@media (min-width: 1025px) {
+  .main {
+    background: #FBFAF7;
+    box-shadow: 0 20px 50px -30px rgba(12, 16, 34, 0.35);
+  }
+}

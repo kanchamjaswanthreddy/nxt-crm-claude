@@ -232,7 +232,7 @@ export default function ImportLeadsPage() {
                   fontSize: 'var(--text-caption)', width: '180px',
                 }}
               />
-              <button
+              <button className="nxt-btn nxt-btn-sm"
                 onClick={() => {
                   if (!templateName.trim()) { toast.error('Enter a template name'); return; }
                   const updated = [...savedTemplates, { name: templateName.trim(), mapping: { ...mapping } }];
@@ -240,11 +240,6 @@ export default function ImportLeadsPage() {
                   localStorage.setItem('nxt_import_templates', JSON.stringify(updated));
                   setTemplateName('');
                   toast.success('Template saved');
-                }}
-                style={{
-                  padding: '6px 14px', borderRadius: '6px', border: '1px solid var(--border-color)',
-                  background: '#fff', fontSize: 'var(--text-caption)', fontWeight: 600,
-                  cursor: 'pointer', color: 'var(--brand-navy)',
                 }}
               >
                 Save Mapping

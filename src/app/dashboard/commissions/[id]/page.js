@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
+import BackLink from '@/components/ui/BackLink';
 import { fetchAgentDirectory } from '@/app/actions/directory';
 import { useRouter, useParams } from 'next/navigation';
 import { useUser } from '@/context/UserContext';
@@ -102,13 +103,20 @@ export default function CommissionDetail() {
   };
 
   if (isLoading) return <div style={{display:'flex',justifyContent:'center',alignItems:'center',minHeight:'40vh'}}><LoadingSpinner label="Loading..." /></div>;
-  if (!commission) return null;
+  if (!commission) return (
+    <div>
+      <BackLink href="/dashboard/commissions">Back to Commissions</BackLink>
+      <div style={{ padding: '48px 24px', textAlign: 'center', background: '#fff', borderRadius: 24 }}>
+        <p style={{ margin: '0 0 6px', fontSize: 20, fontWeight: 600, color: 'var(--brand-navy)' }}>This commission could not be opened</p>
+        <p style={{ margin: '0 0 18px', color: 'var(--text-secondary)' }}>It may have been removed, or it belongs to someone outside your team.</p>
+        <button type="button" className="nxt-btn" onClick={loadData}>Try Again</button>
+      </div>
+    </div>
+  );
 
   return (
     <div>
-      <Button variant="secondary" onClick={() => router.back()} style={{ marginBottom: 'var(--space-3)' }}>
-        ← Back
-      </Button>
+      <BackLink href="/dashboard/commissions">Back to Commissions</BackLink>
 
       <PageHeader
         title="Commission Details"

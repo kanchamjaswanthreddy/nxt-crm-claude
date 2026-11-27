@@ -17,6 +17,7 @@ import {
   fetchAdminUsers,
 } from '@/app/actions/workboard';
 
+import SegTabs from '@/components/ui/SegTabs';
 const PRIORITIES = [
   { value: 'urgent', label: 'Urgent', color: '#D33F3F', bg: 'rgba(211,63,63,0.08)' },
   { value: 'high', label: 'High', color: '#E08E2B', bg: 'rgba(224,142,43,0.08)' },
@@ -240,45 +241,12 @@ export default function WorkBoardPage() {
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '2px', marginBottom: 'var(--space-3)', backgroundColor: 'rgba(0,0,0,0.04)', borderRadius: '10px', padding: '3px' }}>
-        {[
+      <div style={{ marginBottom: 'var(--space-3)' }}>
+        <SegTabs label="Task lists" value={tab} onChange={setTab} tabs={[
           { key: 'assigned_to_me', label: 'Assigned to Me', count: myCount },
           { key: 'assigned_by_me', label: 'Assigned by Me', count: byMeCount },
           { key: 'all', label: 'All Tasks', count: tasks.filter(t => t.status !== 'done').length },
-        ].map(t => (
-          <button
-            key={t.key}
-            onClick={() => setTab(t.key)}
-            style={{
-              flex: 1,
-              padding: '10px 16px',
-              borderRadius: '8px',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '15px',
-              fontWeight: tab === t.key ? 700 : 500,
-              backgroundColor: tab === t.key ? '#fff' : 'transparent',
-              color: tab === t.key ? 'var(--brand-navy)' : 'var(--text-secondary)',
-              boxShadow: tab === t.key ? '0 1px 3px rgba(0,0,0,0.08)' : 'none',
-              transition: 'all 0.15s ease',
-            }}
-          >
-            {t.label}
-            {t.count > 0 && (
-              <span style={{
-                marginLeft: '6px',
-                padding: '1px 7px',
-                borderRadius: '999px',
-                fontSize: '13px',
-                fontWeight: 700,
-                backgroundColor: tab === t.key ? 'var(--brand-navy)' : 'rgba(0,0,0,0.08)',
-                color: tab === t.key ? '#fff' : 'var(--text-secondary)',
-              }}>
-                {t.count}
-              </span>
-            )}
-          </button>
-        ))}
+        ]} />
       </div>
 
       {/* Filters */}
@@ -502,14 +470,9 @@ export default function WorkBoardPage() {
                       style={{ display: 'none' }}
                       onChange={e => handleDetailFileUpload(Array.from(e.target.files))}
                     />
-                    <button
+                    <button className="nxt-btn nxt-btn-sm"
                       onClick={() => detailFileRef.current?.click()}
                       disabled={detailUploading}
-                      style={{
-                        padding: '6px 14px', borderRadius: '8px', fontSize: '14px', fontWeight: 600,
-                        border: '1px dashed var(--border-color)', backgroundColor: 'transparent',
-                        color: 'var(--brand-navy)', cursor: detailUploading ? 'wait' : 'pointer',
-                      }}
                     >
                       {detailUploading ? 'Uploading...' : '+ Add File'}
                     </button>
@@ -556,12 +519,11 @@ export default function WorkBoardPage() {
                         fontFamily: 'inherit',
                       }}
                     />
-                    <Button
-                      size="small"
+                    <Button size="small"
+                     
                       onClick={handleAddComment}
                       disabled={!commentText.trim() || sendingComment}
                       isLoading={sendingComment}
-                      style={{ alignSelf: 'flex-end' }}
                     >
                       Send
                     </Button>
@@ -570,9 +532,8 @@ export default function WorkBoardPage() {
 
                 {/* Delete */}
                 <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'flex-end' }}>
-                  <button
+                  <button className="nxt-btn nxt-btn-danger"
                     onClick={() => { setConfirmState({ open: true, title: 'Delete Task', message: 'Delete this task?', variant: 'danger', onConfirm: () => handleDelete(selectedTask.id) }); }}
-                    style={{ padding: '6px 14px', borderRadius: '8px', fontSize: '14px', fontWeight: 600, border: '1px solid rgba(211,63,63,0.3)', backgroundColor: 'transparent', color: '#D33F3F', cursor: 'pointer' }}
                   >
                     Delete Task
                   </button>
@@ -667,9 +628,8 @@ export default function WorkBoardPage() {
                     ))}
                   </div>
                 )}
-                <button
+                <button className="nxt-btn nxt-btn-sm"
                   onClick={() => fileInputRef.current?.click()}
-                  style={{ padding: '6px 14px', borderRadius: '8px', fontSize: '14px', fontWeight: 600, border: '1px dashed var(--border-color)', backgroundColor: 'transparent', color: 'var(--brand-navy)', cursor: 'pointer' }}
                 >
                   + Choose Files
                 </button>

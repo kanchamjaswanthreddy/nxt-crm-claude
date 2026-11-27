@@ -217,10 +217,7 @@ export default function LeadDetailPage({ params }) {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '40vh', gap: '12px', padding: '32px' }}>
       <h2 style={{ color: 'var(--brand-navy)', fontSize: '20px' }}>Unable to load lead</h2>
       <p style={{ color: 'var(--text-secondary)', fontSize: '16px', textAlign: 'center', maxWidth: '400px' }}>{loadError || 'Lead not found.'}</p>
-      <button onClick={() => router.push('/dashboard/leads')} style={{
-        marginTop: '8px', padding: '8px 20px', borderRadius: '8px', border: '1px solid var(--border-color)',
-        background: 'var(--surface-card)', cursor: 'pointer', fontSize: '16px', fontWeight: 500, color: 'var(--brand-navy)',
-      }}>Back to Leads</button>
+      <button className="nxt-btn" onClick={() => router.push('/dashboard/leads')}>Back to Leads</button>
     </div>
   );
 
@@ -240,10 +237,10 @@ export default function LeadDetailPage({ params }) {
     <div>
       <div style={{ marginBottom: 'var(--space-3)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <button onClick={() => router.push('/dashboard/leads')} style={{ background: 'none', border: 'none', color: 'var(--brand-blue)', cursor: 'pointer', marginBottom: 'var(--space-1)' }}>
-            &larr; Back to Leads
+          <button className="nxt-back" onClick={() => router.push('/dashboard/leads')}>
+            Back to Leads
           </button>
-          <h1 style={{ color: 'var(--brand-navy)', fontSize: 'var(--text-h1)', margin: 0 }}>
+          <h1 data-plain style={{ color: 'var(--brand-navy)', fontSize: 'var(--text-h1)', margin: 0 }}>
             {lead.firstName} {lead.lastName}
           </h1>
         </div>
@@ -332,18 +329,17 @@ export default function LeadDetailPage({ params }) {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-2)' }}>
             <h3 style={{ margin: 0, color: 'var(--brand-navy)' }}>Contact Info</h3>
             <div style={{ display: 'flex', gap: 'var(--space-1)' }}>
-              <button 
+              <button className="nxt-btn nxt-btn-sm" 
                 onClick={() => setIsEditing(!isEditing)}
-                style={{ background: 'none', border: 'none', color: 'var(--brand-blue)', cursor: 'pointer', fontSize: 'var(--text-caption)' }}
               >
                 {isEditing ? 'Cancel' : 'Edit'}
               </button>
               {(userProfile?.role === 'admin' || userProfile?.role === 'it_engineer') && (
                 <>
-                  <button onClick={handleExport} disabled={isExporting} style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: 'var(--text-caption)' }}>
+                  <button className="nxt-btn nxt-btn-sm" onClick={handleExport} disabled={isExporting}>
                     {isExporting ? '...' : 'Export'}
                   </button>
-                  <button onClick={handleAnonymize} disabled={isAnonymizing} style={{ background: 'none', border: 'none', color: '#D93025', cursor: 'pointer', fontSize: 'var(--text-caption)' }}>
+                  <button className="nxt-btn nxt-btn-sm nxt-btn-danger" onClick={handleAnonymize} disabled={isAnonymizing}>
                     Anonymize
                   </button>
                 </>

@@ -77,5 +77,11 @@
 /* 2026 redesign */
 .header { margin-bottom: 28px; }
 .title { font-size: clamp(30px, 3vw, 42px); font-weight: 400; letter-spacing: -0.045em; line-height: 1.05; }
-.title::after { content: "."; color: var(--brand-gold); }
+/* the gold full stop now comes from globals.css so every screen title gets it */
 .subtitle, .description { font-size: 17px; color: var(--text-secondary); }
+
+/* Phones: buttons drop under the title and wrap instead of running off the screen */
+@media (max-width: 720px) {
+  .header { flex-direction: column; align-items: flex-start; }
+  .actions, .actions > div { flex-wrap: wrap; }
+}

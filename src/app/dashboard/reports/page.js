@@ -231,14 +231,9 @@ export default function ReportsHub() {
                 />
               </>
             )}
-            <button
+            <button className="nxt-btn"
               onClick={loadData}
               disabled={loading || (period === 'custom' && (!customStart || !customEnd))}
-              style={{
-                padding: '8px 14px', borderRadius: '8px', border: '1px solid var(--border-color)',
-                backgroundColor: '#fff', fontSize: '16px', fontWeight: 500, cursor: 'pointer',
-                color: 'var(--text-primary)', opacity: loading ? 0.5 : 1,
-              }}
             >
               {period === 'custom' ? 'Apply' : 'Refresh'}
             </button>
@@ -569,7 +564,7 @@ export default function ReportsHub() {
             </div>
 
             <div style={{ paddingTop: '8px', borderTop: '1px solid var(--border-color)' }}>
-              <Button onClick={handleExport} style={{ width: '100%' }}>
+              <Button variant="secondary" onClick={handleExport}>
                 Export Deals to CSV
               </Button>
             </div>

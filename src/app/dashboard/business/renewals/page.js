@@ -68,7 +68,7 @@ export default function RenewalsPage() {
     <div>
       <PageHeader
         title="Renewals"
-        actions={<button onClick={loadData} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '6px 14px', fontSize: '15px', cursor: 'pointer', color: 'var(--text-secondary)' }}>Refresh</button>}
+        actions={<button className="nxt-btn" onClick={loadData}>Refresh</button>}
       />
 
       <StatTiles items={[

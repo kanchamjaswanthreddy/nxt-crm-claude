@@ -112,8 +112,8 @@ export default function PipelineSettingsPage() {
 
   return (
     <div>
-      <button onClick={() => router.push('/dashboard/pipeline')} style={{ background: 'none', border: 'none', color: 'var(--brand-blue)', cursor: 'pointer', marginBottom: 'var(--space-3)' }}>
-        &larr; Back to Pipeline
+      <button className="nxt-back" onClick={() => router.push('/dashboard/pipeline')}>
+        Back to Deals Board
       </button>
 
       <h1 style={{ color: 'var(--brand-navy)', fontSize: 'var(--text-h1)', margin: '0 0 24px 0' }}>Pipeline Settings</h1>
@@ -146,9 +146,9 @@ export default function PipelineSettingsPage() {
                 </div>
               </div>
               <div style={{ display: 'flex', gap: 'var(--space-1)' }}>
-                <Button variant="secondary" onClick={() => moveUp(index)} disabled={index === 0}>&uarr;</Button>
-                <Button variant="secondary" onClick={() => moveDown(index)} disabled={index === stages.length - 1}>&darr;</Button>
-                <Button variant="secondary" onClick={() => handleArchive(stage.id)} style={{ color: 'var(--status-error, #D33F3F)' }}>Archive</Button>
+                <Button size="small" variant="secondary" onClick={() => moveUp(index)} disabled={index === 0}>&uarr;</Button>
+                <Button size="small" variant="secondary" onClick={() => moveDown(index)} disabled={index === stages.length - 1}>&darr;</Button>
+                <Button size="small" variant="danger" onClick={() => handleArchive(stage.id)}>Archive</Button>
               </div>
             </div>
           ))}

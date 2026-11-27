@@ -137,34 +137,22 @@ export default function AdminApprovalsPage() {
                   </div>
 
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                    <button
+                    <button className="nxt-btn"
                       onClick={() => setExpandedAgent(expandedAgent === agent.id ? null : agent.id)}
-                      style={{
-                        background: 'none', border: '1px solid var(--border-color)',
-                        borderRadius: '8px', padding: '6px 14px', cursor: 'pointer',
-                        fontSize: '15px', color: 'var(--brand-navy)', fontWeight: '500',
-                      }}
                     >
                       {expandedAgent === agent.id ? 'Hide Details' : 'View Details'}
                     </button>
                     {rejectingId !== agent.id && (
                       <>
-                        <button
+                        <button className="nxt-btn nxt-btn-danger"
                           onClick={() => { setRejectingId(agent.id); setRejectReason(''); }}
                           disabled={actionLoading === agent.id}
-                          style={{
-                            background: 'none', border: '1px solid rgba(211, 63, 63, 0.3)',
-                            borderRadius: '8px', padding: '6px 14px', cursor: 'pointer',
-                            fontSize: '15px', color: '#D33F3F', fontWeight: '600',
-                            opacity: actionLoading === agent.id ? 0.5 : 1,
-                          }}
                         >
                           Reject
                         </button>
                         <Button
                           onClick={() => handleApprove(agent.id)}
                           isLoading={actionLoading === agent.id}
-                          style={{ fontSize: '15px', padding: '6px 20px' }}
                         >
                           Approve
                         </Button>
@@ -192,25 +180,14 @@ export default function AdminApprovalsPage() {
                       }}
                     />
                     <div style={{ display: 'flex', gap: '8px', marginTop: '10px', justifyContent: 'flex-end' }}>
-                      <button
+                      <button className="nxt-btn nxt-btn-sm"
                         onClick={() => { setRejectingId(null); setRejectReason(''); }}
-                        style={{
-                          background: 'none', border: '1px solid var(--border-color)',
-                          borderRadius: '8px', padding: '6px 14px', cursor: 'pointer',
-                          fontSize: '15px', color: 'var(--text-secondary)',
-                        }}
                       >
                         Cancel
                       </button>
-                      <button
+                      <button className="nxt-btn nxt-btn-sm nxt-btn-danger"
                         onClick={() => handleReject(agent.id)}
                         disabled={actionLoading === agent.id}
-                        style={{
-                          background: '#D33F3F', border: 'none', color: '#fff',
-                          borderRadius: '8px', padding: '6px 18px', cursor: 'pointer',
-                          fontSize: '15px', fontWeight: '600',
-                          opacity: actionLoading === agent.id ? 0.5 : 1,
-                        }}
                       >
                         {actionLoading === agent.id ? 'Rejecting...' : 'Confirm Reject'}
                       </button>
@@ -326,25 +303,25 @@ export default function AdminApprovalsPage() {
                         <div style={{ display: 'flex', gap: '12px', marginTop: '8px', flexWrap: 'wrap' }}>
                           {agent.agreement?.ica ? (
                             <>
-                              <a href={`/api/documents/filled?agentId=${agent.id}&doc=ica`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
+                              <a className="nxt-btn nxt-btn-sm" href={`/api/documents/filled?agentId=${agent.id}&doc=ica`} target="_blank" rel="noopener noreferrer">
                                 View Signed ICA
                               </a>
-                              <a href={`/api/documents/filled?agentId=${agent.id}&doc=aoa`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
+                              <a className="nxt-btn nxt-btn-sm" href={`/api/documents/filled?agentId=${agent.id}&doc=aoa`} target="_blank" rel="noopener noreferrer">
                                 View Signed AOA
                               </a>
-                              <a href={`/api/documents/filled?agentId=${agent.id}&doc=businessStandards`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
+                              <a className="nxt-btn nxt-btn-sm" href={`/api/documents/filled?agentId=${agent.id}&doc=businessStandards`} target="_blank" rel="noopener noreferrer">
                                 View Signed Standards
                               </a>
                             </>
                           ) : (
                             <>
-                              <a href="/documents/NXT_Independent_Contractor_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
+                              <a className="nxt-btn nxt-btn-sm" href="/documents/NXT_Independent_Contractor_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer">
                                 View ICA PDF
                               </a>
-                              <a href="/documents/NXT_Agent_Ownership_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
+                              <a className="nxt-btn nxt-btn-sm" href="/documents/NXT_Agent_Ownership_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer">
                                 View AOA PDF
                               </a>
-                              <a href="/documents/NXT_Business_Standards_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>
+                              <a className="nxt-btn nxt-btn-sm" href="/documents/NXT_Business_Standards_Revised.pdf" target="_blank" rel="noopener noreferrer">
                                 View Standards PDF
                               </a>
                             </>

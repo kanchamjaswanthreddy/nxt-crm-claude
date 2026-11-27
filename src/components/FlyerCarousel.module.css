@@ -21,7 +21,7 @@
 .letterBtn:hover { transform: translateY(-4px); background: rgba(227, 169, 74, 0.16); border-color: #E3A94A; }
 
 .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; animation: fcRise 0.8s 0.3s var(--ease-out-expo) both; }
-.cta { display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border: 0; border-radius: 999px; background: #E3A94A; color: #0C1022; font: inherit; font-size: 16px; font-weight: 600; text-decoration: none; cursor: pointer; transition: transform 0.3s var(--ease-out-expo), background 0.25s; }
+.cta { display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border: 0; border-radius: 999px; background: #E3A94A; color: #0C1022; font: inherit; font-size: 15px; white-space: nowrap; font-weight: 600; text-decoration: none; cursor: pointer; transition: transform 0.3s var(--ease-out-expo), background 0.25s; }
 .cta:hover { transform: translateY(-2px); background: #F5D9A0; }
 
 .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 26px; }

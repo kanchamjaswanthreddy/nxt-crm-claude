@@ -8,6 +8,7 @@ import Avatar from '@/components/Avatar';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
 
+import SegTabs from '@/components/ui/SegTabs';
 function formatDate(iso) {
   if (!iso) return '';
   return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -295,7 +296,7 @@ export default function RecruitmentLeaderboardPage() {
           </svg>
         </div>
 
-        <h1 style={{
+        <h1 data-plain style={{
           fontSize: '32px', fontWeight: '800', color: '#fff',
           margin: '0 0 8px 0', letterSpacing: '-0.5px', lineHeight: 1.2,
         }}>
@@ -375,36 +376,21 @@ export default function RecruitmentLeaderboardPage() {
             }}>
               {inviteLink}
             </div>
-            <a
+            <a className="nxt-btn"
               href={inviteLink}
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                padding: '12px 20px', borderRadius: '12px', border: 'none',
-                background: 'linear-gradient(135deg, #E3A94A, #E3A94A)', color: '#0C1022',
-                fontSize: '15px', fontWeight: '600', cursor: 'pointer',
-                display: 'flex', alignItems: 'center', gap: '6px',
-                transition: 'all 150ms ease', whiteSpace: 'nowrap',
-                textDecoration: 'none',
-                boxShadow: '0 4px 14px rgba(227, 169, 74, 0.3)',
-              }}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
-              Get Started
+              Open Link
             </a>
-            <button
+            <button className="nxt-btn nxt-btn-primary"
               onClick={handleCopy}
-              style={{
-                padding: '12px 20px', borderRadius: '12px', border: 'none',
-                background: copied ? '#059669' : '#0C1022', color: '#fff',
-                fontSize: '15px', fontWeight: '600', cursor: 'pointer',
-                display: 'flex', alignItems: 'center', gap: '6px',
-                transition: 'all 150ms ease', whiteSpace: 'nowrap',
-              }}
+             
             >
               {copied ? (
                 <>
@@ -423,15 +409,9 @@ export default function RecruitmentLeaderboardPage() {
                 </>
               )}
             </button>
-            <button
+            <button className="nxt-btn"
               onClick={handleEmailShare}
-              style={{
-                padding: '12px 20px', borderRadius: '12px',
-                border: '1px solid #E7E3DA', background: '#fff', color: '#374151',
-                fontSize: '15px', fontWeight: '600', cursor: 'pointer',
-                display: 'flex', alignItems: 'center', gap: '6px',
-                transition: 'all 150ms ease', whiteSpace: 'nowrap',
-              }}
+             
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -444,29 +424,8 @@ export default function RecruitmentLeaderboardPage() {
       )}
 
       {/* ── Tab Toggle ── */}
-      <div style={{
-        display: 'inline-flex', gap: '2px', marginBottom: '32px',
-        background: '#F0EDE6', borderRadius: '14px', padding: '4px',
-      }}>
-        {[
-          { key: 'allTime', label: 'All Time' },
-          { key: 'thisMonth', label: 'This Month' },
-        ].map(t => (
-          <button
-            key={t.key}
-            onClick={() => setTab(t.key)}
-            style={{
-              padding: '10px 24px', borderRadius: '10px', border: 'none',
-              fontSize: '16px', fontWeight: tab === t.key ? '600' : '500',
-              color: tab === t.key ? '#0C1022' : '#5F5C56',
-              background: tab === t.key ? '#fff' : 'transparent',
-              boxShadow: tab === t.key ? '0 2px 8px rgba(0,0,0,0.06)' : 'none',
-              cursor: 'pointer', transition: 'all 150ms ease',
-            }}
-          >
-            {t.label}
-          </button>
-        ))}
+      <div style={{ marginBottom: '32px' }}>
+        <SegTabs label="Period" value={tab} onChange={setTab} tabs={[{ key: 'allTime', label: 'All Time' }, { key: 'thisMonth', label: 'This Month' }]} />
       </div>
 
       {isLoading ? (

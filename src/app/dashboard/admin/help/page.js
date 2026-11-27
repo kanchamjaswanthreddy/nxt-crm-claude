@@ -223,11 +223,8 @@ export default function HelpDeskPage() {
     const ps = PRIORITY_STYLES[selectedTicket.priority] || PRIORITY_STYLES.medium;
     return (
       <div>
-        <button onClick={() => setSelectedTicket(null)} style={{
-          background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)',
-          fontSize: 16, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 4,
-        }}>
-          ← Back to all tickets
+        <button className="nxt-back" onClick={() => setSelectedTicket(null)}>
+          Back to All Tickets
         </button>
 
         <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
@@ -294,11 +291,7 @@ export default function HelpDeskPage() {
                     borderRadius: 6, fontSize: 16, outline: 'none',
                   }}
                 />
-                <button onClick={handleAddComment} disabled={commentLoading || !commentText.trim()} style={{
-                  padding: '8px 16px', backgroundColor: 'var(--brand-gold)', color: 'var(--brand-navy)',
-                  border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: 15,
-                  opacity: commentLoading || !commentText.trim() ? 0.5 : 1,
-                }}>
+                <button className="nxt-btn nxt-btn-primary" onClick={handleAddComment} disabled={commentLoading || !commentText.trim()}>
                   {commentLoading ? 'Sending...' : 'Send'}
                 </button>
               </div>)}
@@ -346,10 +339,7 @@ export default function HelpDeskPage() {
                 {STATUS_OPTIONS.filter(s => s.value !== selectedTicket.status).map(s => {
                   const style = STATUS_STYLES[s.value];
                   return (
-                    <button key={s.value} onClick={() => handleStatusChange(selectedTicket.id, s.value)} style={{
-                      padding: '5px 12px', borderRadius: 6, fontSize: 14, fontWeight: 600,
-                      backgroundColor: style.bg, color: style.color, border: 'none', cursor: 'pointer',
-                    }}>
+                    <button className="nxt-btn nxt-btn-sm" key={s.value} onClick={() => handleStatusChange(selectedTicket.id, s.value)}>
                       Mark {s.label}
                     </button>
                   );
@@ -470,10 +460,7 @@ export default function HelpDeskPage() {
           {(filterStatus !== 'all' || filterCategory !== 'all' || filterPriority !== 'all' || filterAssigned !== 'all' || searchQuery.trim()) && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12, flexWrap: 'wrap' }}>
               <span style={{ fontSize: 16, color: 'var(--text-secondary)' }}>Showing {filtered.length} of {tickets.length} tickets</span>
-              <button onClick={() => { setFilterStatus('all'); setFilterCategory('all'); setFilterPriority('all'); setFilterAssigned('all'); setSearchQuery(''); }} style={{
-                padding: '4px 12px', borderRadius: 999, fontSize: 15, backgroundColor: '#FEE2E2', color: '#991B1B',
-                border: 'none', cursor: 'pointer', fontWeight: 600,
-              }}>
+              <button className="nxt-btn" onClick={() => { setFilterStatus('all'); setFilterCategory('all'); setFilterPriority('all'); setFilterAssigned('all'); setSearchQuery(''); }}>
                 Clear Filters
               </button>
             </div>

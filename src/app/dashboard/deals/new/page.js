@@ -124,8 +124,8 @@ function NewDealForm() {
 
   return (
     <div>
-      <button onClick={() => router.push(prefillLeadId ? `/dashboard/leads/${prefillLeadId}` : '/dashboard/pipeline')} style={{ background: 'none', border: 'none', color: 'var(--brand-blue)', cursor: 'pointer', marginBottom: 'var(--space-3)' }}>
-        &larr; Back
+      <button className="nxt-back" onClick={() => router.push(prefillLeadId ? `/dashboard/leads/${prefillLeadId}` : '/dashboard/deals')}>
+        Back
       </button>
 
       <PageHeader title="Add Deal" />
@@ -194,7 +194,10 @@ function NewDealForm() {
             This is a renewal of an existing policy
           </label>
 
-          <Button type="submit" isLoading={isSubmitting} style={{ marginTop: 'var(--space-1)' }}>Create Deal</Button>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-2)', marginTop: 'var(--space-3)' }}>
+            <Button type="button" variant="secondary" onClick={() => router.push(prefillLeadId ? `/dashboard/leads/${prefillLeadId}` : '/dashboard/deals')}>Cancel</Button>
+            <Button type="submit" isLoading={isSubmitting}>Create Deal</Button>
+          </div>
         </form>
       </Card>
     </div>

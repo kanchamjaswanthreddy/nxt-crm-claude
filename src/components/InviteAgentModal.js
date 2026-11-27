@@ -10,7 +10,7 @@ import { AGENT_LEVELS } from '@/lib/constants';
 import CommissionSplitBar from '@/components/CommissionSplitBar';
 
 
-export default function InviteAgentModal({ isOpen, onClose, userProfile, agents = [] }) {
+export default function InviteAgentModal({ isOpen, onClose, userProfile, agents = [], initialEmail = '' }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [result, setResult] = useState(null);
   const [copied, setCopied] = useState(false);
@@ -35,6 +35,11 @@ export default function InviteAgentModal({ isOpen, onClose, userProfile, agents 
       }
     });
   }, [isOpen, referralLink]);
+
+  // Opened from a link that already knows who to invite (Pipeline Tracker "Invite to team")
+  useEffect(() => {
+    if (isOpen && initialEmail) { setForm(prev => ({ ...prev, email: initialEmail })); setShowForm(true); }
+  }, [isOpen, initialEmail]);
 
   if (!isOpen) return null;
 
@@ -186,17 +191,9 @@ ${inviterName}`
                     overflow: 'hidden', textOverflow: 'ellipsis'
                   }}
                 />
-                <button
+                <button className="nxt-btn nxt-btn-sm nxt-btn-primary"
                   onClick={handleCopyLink}
                   disabled={!referralLink}
-                  style={{
-                    padding: '7px 16px', borderRadius: '8px',
-                    border: 'none', cursor: referralLink ? 'pointer' : 'default',
-                    backgroundColor: linkCopied ? 'var(--status-success)' : 'var(--brand-navy)',
-                    color: '#fff', fontSize: '14px', fontWeight: '600',
-                    transition: 'background-color 0.2s ease', whiteSpace: 'nowrap',
-                    opacity: referralLink ? 1 : 0.5,
-                  }}
                 >
                   {linkCopied ? 'Copied!' : 'Copy'}
                 </button>
@@ -400,15 +397,8 @@ ${inviterName}`
                   overflow: 'hidden', textOverflow: 'ellipsis'
                 }}
               />
-              <button
+              <button className="nxt-btn nxt-btn-sm nxt-btn-primary"
                 onClick={handleCopyResult}
-                style={{
-                  padding: '7px 16px', borderRadius: '8px',
-                  border: 'none', cursor: 'pointer',
-                  backgroundColor: copied ? 'var(--status-success)' : 'var(--brand-navy)',
-                  color: '#fff', fontSize: '14px', fontWeight: '600',
-                  transition: 'background-color 0.2s ease', whiteSpace: 'nowrap'
-                }}
               >
                 {copied ? 'Copied!' : 'Copy'}
               </button>

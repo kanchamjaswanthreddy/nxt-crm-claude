@@ -137,7 +137,7 @@ export default function CarrierUpdatesPage() {
                     <p style={{ margin: 0, color: 'var(--text-primary)', fontSize: '16px', lineHeight: '1.5', whiteSpace: 'pre-wrap' }}>{u.body}</p>
                   </div>
                   {isAdmin && (
-                    <button onClick={() => handleDelete(u.id)} style={{ background: 'none', border: 'none', color: '#D33F3F', cursor: 'pointer', fontSize: '15px', flexShrink: 0 }}>Delete</button>
+                    <button className="nxt-btn nxt-btn-sm nxt-btn-danger" onClick={() => handleDelete(u.id)}>Delete</button>
                   )}
                 </div>
               </Card>

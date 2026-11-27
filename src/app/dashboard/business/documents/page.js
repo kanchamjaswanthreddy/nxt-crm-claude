@@ -210,7 +210,7 @@ export default function DocumentsManagerPage() {
         title="Documents Manager"
         actions={
           <>
-            <button onClick={loadDocuments} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '6px 14px', fontSize: '15px', cursor: 'pointer', color: 'var(--text-secondary)' }}>Refresh</button>
+            <button className="nxt-btn" onClick={loadDocuments}>Refresh</button>
             <Button onClick={() => { setShowUpload(true); setUploadError(''); setUploadSuccess(''); }}>+ Upload Document</Button>
           </>
         }
@@ -263,16 +263,10 @@ export default function DocumentsManagerPage() {
               IRS W-9 is required for all agents. Download the blank form, complete it, and upload.
             </p>
           </div>
-          <a
+          <a className="nxt-btn"
             href="/documents/W9.pdf"
             download
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: '6px',
-              padding: '8px 16px', borderRadius: '999px',
-              border: '1.5px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.08)',
-              color: 'var(--brand-navy)', fontSize: '15px', fontWeight: 600,
-              textDecoration: 'none', cursor: 'pointer', transition: 'all 0.2s ease',
-            }}
+           
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -313,8 +307,8 @@ export default function DocumentsManagerPage() {
                   <tr key={d.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
                     <td style={{ ...tdStyle, fontWeight: '500' }}>{getDocTypeLabel(d.docType)}</td>
                     <td style={tdStyle}>
-                      <button onClick={() => handleViewDocument(d)}
-                        style={{ background: 'none', border: 'none', padding: 0, color: 'var(--brand-blue-accent)', cursor: 'pointer', textDecoration: 'underline', fontSize: '16px' }}>
+                      <button className="nxt-btn nxt-btn-sm" onClick={() => handleViewDocument(d)}
+                       >
                         {d.fileName || 'View'}
                       </button>
                     </td>
@@ -357,9 +351,8 @@ export default function DocumentsManagerPage() {
                   <tr key={d.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
                     <td style={{ ...tdStyle, fontWeight: '500' }}>{getDocTypeLabel(d.docType)}</td>
                     <td style={tdStyle}>
-                      <button
+                      <button className="nxt-btn nxt-btn-sm"
                         onClick={() => handleViewDocument(d)}
-                        style={{ background: 'none', border: 'none', padding: 0, color: 'var(--brand-blue-accent)', cursor: 'pointer', textDecoration: 'underline', fontSize: '16px' }}
                       >
                         {d.fileName || 'View'}
                       </button>

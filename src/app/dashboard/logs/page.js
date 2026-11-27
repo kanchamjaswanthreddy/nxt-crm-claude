@@ -114,7 +114,7 @@ export default function LogsPage() {
   }
 
   return (
-    <div style={{ padding: '32px' }}>
+    <div>
       <PageHeader title="Activity Logs" subtitle="System-wide audit trail — visible only to you" />
 
       {/* Filters */}
@@ -158,17 +158,8 @@ export default function LogsPage() {
           }}
         />
 
-        <button
+        <button className="nxt-btn"
           onClick={() => { setLogs([]); setLastTimestamp(null); loadLogs(true); }}
-          style={{
-            padding: '8px 16px',
-            borderRadius: '8px',
-            border: '1px solid rgba(0,0,0,0.15)',
-            backgroundColor: '#fff',
-            cursor: 'pointer',
-            fontSize: '1rem',
-            fontWeight: '500',
-          }}
         >
           Refresh
         </button>
@@ -244,16 +235,8 @@ export default function LogsPage() {
       {/* Load More */}
       {hasMore && !isLoading && filteredLogs.length > 0 && (
         <div style={{ textAlign: 'center', marginTop: '16px' }}>
-          <button
+          <button className="nxt-btn"
             onClick={() => loadLogs(false)}
-            style={{
-              padding: '8px 24px',
-              borderRadius: '8px',
-              border: '1px solid rgba(0,0,0,0.15)',
-              backgroundColor: '#fff',
-              cursor: 'pointer',
-              fontSize: '1rem',
-            }}
           >
             Load More
           </button>

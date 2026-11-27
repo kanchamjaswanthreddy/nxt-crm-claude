@@ -42,7 +42,7 @@ export default function DealDetailPage({ params }) {
       const dealSnap = await getDoc(doc(db, 'deals', id));
       if (!dealSnap.exists()) {
         toast.error("Deal not found or permission denied.");
-        router.push('/dashboard/pipeline');
+        router.push('/dashboard/deals');
         return;
       }
       
@@ -67,7 +67,8 @@ export default function DealDetailPage({ params }) {
       if (hRes.success) setHistory(hRes.history);
 
       // Fetch Pipeline Stages for mapping names
-      const sRes = await fetchPipelineStages();
+      // Stages belong to each agent, so load the deal owner's stages (not the viewer's) to name them.
+      const sRes = await fetchPipelineStages(dData.ownerAgentId || undefined);
       if (sRes.success) {
         const sMap = {};
         sRes.stages.forEach(s => sMap[s.id] = s.name);
@@ -121,7 +122,7 @@ export default function DealDetailPage({ params }) {
         setIsDeleting(true);
         const res = await deleteDeal(id);
         if (res.success) {
-          router.push('/dashboard/pipeline');
+          router.push('/dashboard/deals');
         } else {
           toast.error('Failed to delete deal: ' + res.error);
           setIsDeleting(false);
@@ -136,8 +137,8 @@ export default function DealDetailPage({ params }) {
     <div>
       <div style={{ marginBottom: 'var(--space-3)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <button onClick={() => router.push('/dashboard/pipeline')} style={{ background: 'none', border: 'none', color: 'var(--brand-blue)', cursor: 'pointer', marginBottom: 'var(--space-1)' }}>
-            &larr; Back to Pipeline
+          <button className="nxt-back" onClick={() => router.push('/dashboard/deals')}>
+            Back to New Businesses
           </button>
           <h1 style={{ color: 'var(--brand-navy)', fontSize: 'var(--text-h1)', margin: 0 }}>
             Deal Details
@@ -147,11 +148,10 @@ export default function DealDetailPage({ params }) {
           <Button variant="secondary" onClick={() => setIsTaskModalOpen(true)}>
             + Task
           </Button>
-          <Button
-            variant="secondary"
+          <Button variant="danger"
+           
             onClick={handleDelete}
             isLoading={isDeleting}
-            style={{ color: 'var(--status-error, #D33F3F)', borderColor: 'var(--status-error, #D33F3F)' }}
           >
             Delete
           </Button>
@@ -193,7 +193,7 @@ export default function DealDetailPage({ params }) {
 
             <div>
               <label style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)' }}>Current Stage</label>
-              <div style={{ fontWeight: '500' }}>{stages[deal.stageId] || 'Unknown'}</div>
+              <div style={{ fontWeight: '500' }}>{stages[deal.stageId] || deal.stageName || 'Unknown'}</div>
             </div>
 
             {!isEditing ? (
@@ -263,8 +263,8 @@ export default function DealDetailPage({ params }) {
                   <div style={{ fontWeight: '600' }}>{lead.firstName} {lead.lastName}</div>
                   <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)' }}>{lead.email || lead.phone}</div>
                 </div>
-                <Link href={`/dashboard/leads/${lead.id}`} style={{ color: 'var(--brand-blue)', textDecoration: 'none', fontSize: 'var(--text-secondary)' }}>
-                  View Lead &rarr;
+                <Link className="nxt-btn nxt-btn-sm" href={`/dashboard/leads/${lead.id}`}>
+                  View Lead
                 </Link>
               </div>
             </Card>

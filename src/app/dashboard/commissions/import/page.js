@@ -294,12 +294,11 @@ export default function CommissionImport() {
           <div style={{ display: 'flex', gap: 'var(--space-2)', justifyContent: 'center' }}>
             <Button onClick={() => router.push('/dashboard/commissions')}>Go to Commissions</Button>
             {showUndo && (
-              <Button
-                variant="secondary"
+              <Button variant="danger"
+               
                 onClick={handleUndo}
                 isLoading={isUndoing}
                 disabled={isUndoing}
-                style={{ color: 'var(--status-error, #D32F2F)' }}
               >
                 Undo Import
               </Button>

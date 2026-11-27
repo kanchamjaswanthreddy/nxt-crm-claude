@@ -10,6 +10,7 @@ import {
 import AnnuityCalculator from './AnnuityCalculator';
 import LifeCalculator from './LifeCalculator';
 
+import SegTabs from '@/components/ui/SegTabs';
 const CALC_TABS = [
   { key: 'general', label: 'General Calculator' },
   { key: 'annuity', label: 'Annuity Commission Calculator' },
@@ -121,28 +122,8 @@ export default function CommissionCalculatorPage() {
       <PageHeader title="Commission Calculator" subtitle="Estimate your earnings based on premium, factor, and agent level." />
 
       {/* Tab Switcher */}
-      <div style={{
-        display: 'flex', gap: '0', marginBottom: 'var(--space-4)',
-        borderRadius: '12px', overflow: 'hidden',
-        border: '1px solid rgba(0, 32, 91, 0.15)',
-        backgroundColor: 'rgba(0, 32, 91, 0.03)'
-      }}>
-        {CALC_TABS.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            style={{
-              flex: 1, padding: '14px 20px', border: 'none', cursor: 'pointer',
-              fontSize: 'var(--text-secondary)', fontWeight: 700,
-              color: activeTab === tab.key ? '#fff' : 'var(--brand-navy)',
-              backgroundColor: activeTab === tab.key ? 'var(--brand-navy)' : 'transparent',
-              transition: 'all 0.2s ease',
-              borderRight: tab.key !== 'life' ? '1px solid rgba(0, 32, 91, 0.1)' : 'none',
-            }}
-          >
-            {tab.label}
-          </button>
-        ))}
+      <div style={{ marginBottom: 'var(--space-4)' }}>
+        <SegTabs label="Calculators" value={activeTab} onChange={setActiveTab} tabs={CALC_TABS} />
       </div>
 
       {activeTab === 'annuity' && <AnnuityCalculator />}

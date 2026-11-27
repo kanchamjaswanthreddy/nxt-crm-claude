@@ -383,15 +383,9 @@ export default function BillingPage() {
                         <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
                           L{lvl?.level} &middot; {formatCurrency(lvl?.price)}/mo
                         </span>
-                        <button
+                        <button className="nxt-btn nxt-btn-sm nxt-btn-primary"
                           onClick={() => handleActivate(a.id)}
                           disabled={activatingAgentId === a.id || activateAllLoading}
-                          style={{
-                            padding: '4px 12px', borderRadius: '6px', fontSize: '13px', fontWeight: 700,
-                            border: 'none', cursor: activatingAgentId === a.id ? 'wait' : 'pointer',
-                            backgroundColor: 'var(--brand-navy)', color: '#fff',
-                            opacity: (activatingAgentId === a.id || activateAllLoading) ? 0.5 : 1,
-                          }}
                         >
                           {activatingAgentId === a.id ? 'Creating...' : 'Activate'}
                         </button>
@@ -408,14 +402,13 @@ export default function BillingPage() {
                       onClick={handleActivateAll}
                       isLoading={activateAllLoading}
                       disabled={!!activatingAgentId}
-                      style={{ fontSize: '14px' }}
                     >
                       Activate All ({noSub.length})
                     </Button>
                   )}
-                  <Button
+                  <Button variant="secondary"
                     size="small"
-                    variant="secondary"
+                   
                     onClick={async () => {
                       setIsSendingReminders(true);
                       setReminderResult(null);
@@ -434,7 +427,6 @@ export default function BillingPage() {
                     }}
                     isLoading={isSendingReminders}
                     disabled={!!activatingAgentId || activateAllLoading}
-                    style={{ fontSize: '14px' }}
                   >
                     Send Email Reminders Instead
                   </Button>

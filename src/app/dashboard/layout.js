@@ -98,6 +98,8 @@ function NavSection({ label, icon, children, defaultOpen = false, pathname, acti
 
 function DashboardLayoutInner({ children }) {
   const pathname = usePathname();
+  // The panel is the scroll area now, so a new screen must start at its top.
+  useEffect(() => { document.getElementById('main-content')?.scrollTo({ top: 0 }); }, [pathname]);
   const { userProfile, firebaseUser, isLoading, refreshProfile } = useUser();
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);

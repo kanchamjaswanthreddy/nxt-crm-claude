@@ -134,11 +134,10 @@ export default function GroupDetailPage() {
     return (
       <div style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center', padding: 'var(--space-6)' }}>
         <p style={{ color: 'var(--status-error)', fontWeight: 600 }}>{error}</p>
-        <button
+        <button className="nxt-back"
           onClick={() => router.push('/dashboard/admin/groups')}
-          style={{ background: 'none', border: 'none', color: 'var(--brand-blue)', cursor: 'pointer', fontSize: 'var(--text-secondary)' }}
         >
-          ← Back to Groups
+          Back to Groups
         </button>
       </div>
     );
@@ -147,15 +146,10 @@ export default function GroupDetailPage() {
   return (
     <div>
       {/* Back link */}
-      <button
+      <button className="nxt-back"
         onClick={() => router.push('/dashboard/admin/groups')}
-        style={{
-          background: 'none', border: 'none', color: 'var(--brand-blue)',
-          cursor: 'pointer', marginBottom: 'var(--space-2)', padding: 0,
-          fontSize: 'var(--text-secondary)',
-        }}
       >
-        ← Back to Groups
+        Back to Groups
       </button>
 
       {/* Group header */}
@@ -264,17 +258,9 @@ export default function GroupDetailPage() {
                       </div>
                     </div>
                   </div>
-                  <button
+                  <button className="nxt-btn nxt-btn-sm nxt-btn-primary"
                     onClick={() => handleAdd(agent.id)}
                     disabled={isAdding === agent.id}
-                    style={{
-                      padding: '4px 14px', borderRadius: '999px',
-                      border: '1.5px solid var(--brand-navy)',
-                      backgroundColor: isAdding === agent.id ? 'var(--brand-navy)' : 'transparent',
-                      color: isAdding === agent.id ? '#fff' : 'var(--brand-navy)',
-                      fontSize: '14px', fontWeight: 600, cursor: 'pointer',
-                      transition: 'all 0.15s ease', flexShrink: 0,
-                    }}
                   >
                     {isAdding === agent.id ? 'Adding...' : 'Add'}
                   </button>
@@ -345,18 +331,9 @@ export default function GroupDetailPage() {
                   </div>
                 </div>
 
-                <button
+                <button className="nxt-btn nxt-btn-sm nxt-btn-danger"
                   onClick={() => handleRemove(member.agentId)}
                   disabled={removingId === member.agentId}
-                  style={{
-                    padding: '4px 12px', borderRadius: '999px',
-                    border: '1.5px solid var(--status-error, #D33F3F)',
-                    backgroundColor: 'transparent',
-                    color: 'var(--status-error, #D33F3F)',
-                    fontSize: '14px', fontWeight: 600, cursor: 'pointer',
-                    transition: 'all 0.15s ease', flexShrink: 0,
-                    opacity: removingId === member.agentId ? 0.5 : 1,
-                  }}
                 >
                   {removingId === member.agentId ? 'Removing...' : 'Remove'}
                 </button>

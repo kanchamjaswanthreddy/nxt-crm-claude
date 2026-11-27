@@ -74,7 +74,7 @@ service cloud.firestore {
       function canAccessLead(data, agent) {
         return data.agencyId == agent.agency_id && (
           data.ownerAgentId == request.auth.uid ||
-          (data.ownerHierarchyPath != null && data.ownerHierarchyPath.startsWith(agent.hierarchyPath + '/')) ||
+          (data.ownerHierarchyPath != null && data.ownerHierarchyPath.matches('^' + agent.hierarchyPath + '/.*')) ||
           (data.ownerAgentId == null && (agent.role == 'admin' || agent.role == 'manager'))
         );
       }
@@ -119,7 +119,7 @@ service cloud.firestore {
       function canAccessDeal(data, agent) {
         return data.agencyId == agent.agency_id && (
           data.ownerAgentId == request.auth.uid ||
-          (data.ownerHierarchyPath != null && data.ownerHierarchyPath.startsWith(agent.hierarchyPath + '/')) ||
+          (data.ownerHierarchyPath != null && data.ownerHierarchyPath.matches('^' + agent.hierarchyPath + '/.*')) ||
           agent.role == 'admin' ||
           agent.role == 'it_engineer'
         );
@@ -166,7 +166,7 @@ service cloud.firestore {
       function canAccessTask(data, agent) {
         return data.agencyId == agent.agency_id && (
           data.ownerAgentId == request.auth.uid ||
-          (data.ownerHierarchyPath != null && data.ownerHierarchyPath.startsWith(agent.hierarchyPath + '/')) ||
+          (data.ownerHierarchyPath != null && data.ownerHierarchyPath.matches('^' + agent.hierarchyPath + '/.*')) ||
           agent.role == 'admin' ||
           agent.role == 'it_engineer'
         );
@@ -204,7 +204,7 @@ service cloud.firestore {
     match /commissions/{commissionId} {
       allow read: if isAuthenticated() && resource.data.agencyId == getAgentData().agency_id && (
         resource.data.agentId == request.auth.uid ||
-        (resource.data.agentHierarchyPath != null && resource.data.agentHierarchyPath.startsWith(getAgentData().hierarchyPath + '/'))
+        (resource.data.agentHierarchyPath != null && resource.data.agentHierarchyPath.matches('^' + getAgentData().hierarchyPath + '/.*'))
       );
       // All writes come from backend (deals.js/commissions.js) EXCEPT if admin edits needs review
       allow write: if isAuthenticated() && getAgentData().agency_id == resource.data.agencyId && getAgentData().role == 'admin';
@@ -213,7 +213,7 @@ service cloud.firestore {
     match /commissionOverrides/{overrideId} {
       allow read: if isAuthenticated() && resource.data.agencyId == getAgentData().agency_id && (
         resource.data.beneficiaryAgentId == request.auth.uid ||
-        (resource.data.beneficiaryHierarchyPath != null && resource.data.beneficiaryHierarchyPath.startsWith(getAgentData().hierarchyPath + '/'))
+        (resource.data.beneficiaryHierarchyPath != null && resource.data.beneficiaryHierarchyPath.matches('^' + getAgentData().hierarchyPath + '/.*'))
       );
       allow write: if isAuthenticated() && getAgentData().agency_id == resource.data.agencyId && getAgentData().role == 'admin';
     }
@@ -231,7 +231,7 @@ service cloud.firestore {
       // Read allowed if it's the agent's own summary or they are upline
       allow read: if isAuthenticated() && resource.data.agencyId == getAgentData().agency_id && (
         resource.data.agentId == request.auth.uid ||
-        (resource.data.agentHierarchyPath != null && resource.data.agentHierarchyPath.startsWith(getAgentData().hierarchyPath + '/'))
+        (resource.data.agentHierarchyPath != null && resource.data.agentHierarchyPath.matches('^' + getAgentData().hierarchyPath + '/.*'))
       );
       // Strictly NO client writes permitted for metrics summary (backend only)
       allow write: if false;
@@ -272,7 +272,7 @@ service cloud.firestore {
       function canAccessClient(data, agent) {
         return data.agencyId == agent.agency_id && (
           data.agentId == request.auth.uid ||
-          (data.agentHierarchyPath != null && data.agentHierarchyPath.startsWith(agent.hierarchyPath + '/')) ||
+          (data.agentHierarchyPath != null && data.agentHierarchyPath.matches('^' + agent.hierarchyPath + '/.*')) ||
           agent.role == 'admin' ||
           agent.role == 'it_engineer'
         );

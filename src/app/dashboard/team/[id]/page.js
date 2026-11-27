@@ -480,6 +480,12 @@ export default function AgentDetailPage() {
     setTimeout(() => setSuccessMsg(null), 3000);
   };
 
+  useEffect(() => {
+    if (isLoading || typeof window === 'undefined' || window.location.hash !== '#team') return;
+    const t = setTimeout(() => document.getElementById('team')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+    return () => clearTimeout(t);
+  }, [isLoading]);
+
   if (isLoading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px' }}>
@@ -549,26 +555,14 @@ export default function AgentDetailPage() {
         </div>
       )}
 
-      {/* Back link */}
-      <Link
-        href="/dashboard/team"
-        style={{
-          display: 'inline-flex', alignItems: 'center', gap: '6px',
-          fontSize: 'var(--text-secondary)', color: 'var(--text-secondary)',
-          textDecoration: 'none', marginBottom: 'var(--space-3)',
-          fontWeight: 500, transition: 'color 0.2s ease',
-        }}
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-        Back to Team
-      </Link>
+      <Link href="/dashboard/team" className="nxt-back">Back to Team</Link>
 
       {/* Agent Header */}
       <Card style={{ marginBottom: 'var(--space-3)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
           <Avatar name={dn(agent)} photoUrl={agent.photo_url} size={72} />
           <div style={{ flex: 1, minWidth: 0 }}>
-            <h1 style={{ fontSize: 'var(--text-h1)', color: 'var(--brand-navy)', fontWeight: 700, margin: 0 }}>
+            <h1 data-plain style={{ fontSize: 'var(--text-h1)', color: 'var(--brand-navy)', fontWeight: 700, margin: 0 }}>
               {dn(agent) || 'No name set'}
             </h1>
             <p style={{ fontSize: 'var(--text-secondary)', color: 'var(--text-secondary)', margin: '2px 0 0 0' }}>{agent.email}</p>
@@ -676,26 +670,14 @@ export default function AgentDetailPage() {
               </div>
             )}
 
-            <button
+            <button className="nxt-btn nxt-btn-sm"
               onClick={() => { setAssignManagerOpen(true); setSelectedManagerId(agent.upline_id || ''); }}
-              style={{
-                padding: '5px 12px', borderRadius: '8px',
-                border: '1px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.06)',
-                color: 'var(--brand-navy)', fontSize: 'var(--text-caption)',
-                fontWeight: 600, cursor: 'pointer', transition: 'all 0.15s ease',
-              }}
             >
               Assign Upline
             </button>
 
-            <button
+            <button className="nxt-btn nxt-btn-sm"
               onClick={() => setShowRequestModal(true)}
-              style={{
-                padding: '5px 12px', borderRadius: '8px',
-                border: '1px solid var(--brand-blue-accent)', backgroundColor: 'rgba(227, 169, 74, 0.06)',
-                color: 'var(--brand-navy)', fontSize: 'var(--text-caption)',
-                fontWeight: 600, cursor: 'pointer', transition: 'all 0.15s ease',
-              }}
             >
               Send Request
             </button>
@@ -717,16 +699,8 @@ export default function AgentDetailPage() {
                 Activate
               </Button>
             )}
-            <button
+            <button className="nxt-btn nxt-btn-sm nxt-btn-danger"
               onClick={() => setShowDeleteConfirm(true)}
-              style={{
-                padding: '5px 12px', borderRadius: '8px',
-                border: '1px solid var(--status-error)', backgroundColor: 'transparent',
-                color: 'var(--status-error)', fontSize: 'var(--text-caption)',
-                fontWeight: 600, cursor: 'pointer', transition: 'all 0.15s ease',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'var(--status-error)'; e.currentTarget.style.color = '#fff'; }}
-              onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'var(--status-error)'; }}
             >
               Delete
             </button>
@@ -747,40 +721,22 @@ export default function AgentDetailPage() {
                 Personal Information
               </h3>
               {(isAdmin || isOwner) && !isEditMode && (
-                <button
+                <button className="nxt-btn nxt-btn-sm"
                   onClick={startEditing}
-                  style={{
-                    padding: '3px 12px', borderRadius: '999px',
-                    border: '1.5px solid var(--brand-navy)', backgroundColor: 'transparent',
-                    fontSize: 'var(--text-caption)', color: 'var(--brand-navy)', fontWeight: 600,
-                    cursor: 'pointer',
-                  }}
                 >
                   Edit Profile
                 </button>
               )}
               {isEditMode && (
                 <div style={{ display: 'flex', gap: '6px' }}>
-                  <button
+                  <button className="nxt-btn nxt-btn-sm"
                     onClick={cancelEditing}
-                    style={{
-                      padding: '3px 12px', borderRadius: '999px',
-                      border: '1px solid var(--border-color)', backgroundColor: 'transparent',
-                      fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', fontWeight: 500,
-                      cursor: 'pointer',
-                    }}
                   >
                     Cancel
                   </button>
-                  <button
+                  <button className="nxt-btn nxt-btn-sm nxt-btn-primary"
                     onClick={handleSaveProfile}
                     disabled={isSavingProfile}
-                    style={{
-                      padding: '3px 12px', borderRadius: '999px',
-                      border: 'none', backgroundColor: isSavingProfile ? 'rgba(0,0,0,0.1)' : 'var(--brand-navy)',
-                      fontSize: 'var(--text-caption)', color: '#fff', fontWeight: 600,
-                      cursor: isSavingProfile ? 'not-allowed' : 'pointer',
-                    }}
                   >
                     {isSavingProfile ? 'Saving...' : 'Save'}
                   </button>
@@ -974,14 +930,8 @@ export default function AgentDetailPage() {
             </h3>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               {(isAdmin || isOwner) && (
-                <button
+                <button className="nxt-btn nxt-btn-sm"
                   onClick={() => setShowAdminUpload(true)}
-                  style={{
-                    padding: '3px 12px', borderRadius: '999px',
-                    border: '1.5px solid var(--brand-navy)', backgroundColor: 'transparent',
-                    fontSize: 'var(--text-caption)', color: 'var(--brand-navy)', fontWeight: 600,
-                    cursor: 'pointer',
-                  }}
                 >
                   Upload
                 </button>
@@ -1037,7 +987,7 @@ export default function AgentDetailPage() {
 
                   <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexShrink: 0 }}>
                     {/* View button — fetches signed URL */}
-                    <button
+                    <button className="nxt-btn nxt-btn-sm"
                       onClick={async () => {
                         const res = await getDocumentViewUrl(adoc.id);
                         if (res.success) {
@@ -1048,12 +998,6 @@ export default function AgentDetailPage() {
                           if (legacy) window.open(legacy, '_blank');
                         }
                       }}
-                      style={{
-                        padding: '4px 12px', borderRadius: '999px',
-                        border: '1px solid var(--border-color)', backgroundColor: 'transparent',
-                        fontSize: 'var(--text-caption)', color: 'var(--brand-navy)', fontWeight: 500,
-                        cursor: 'pointer', transition: 'all 0.2s ease',
-                      }}
                     >
                       View
                     </button>
@@ -1061,27 +1005,15 @@ export default function AgentDetailPage() {
                     {/* Admin approve/reject */}
                     {isAdmin && adoc.status === 'pending_review' && (
                       <>
-                        <button
+                        <button className="nxt-btn nxt-btn-sm nxt-btn-primary"
                           onClick={() => handleApproveDoc(adoc.id)}
                           disabled={isUpdating}
-                          style={{
-                            padding: '4px 12px', borderRadius: '999px',
-                            border: '1.5px solid var(--status-success)', backgroundColor: 'transparent',
-                            fontSize: 'var(--text-caption)', color: 'var(--status-success)', fontWeight: 600,
-                            cursor: 'pointer', transition: 'all 0.2s ease',
-                          }}
                         >
                           Approve
                         </button>
-                        <button
+                        <button className="nxt-btn nxt-btn-sm nxt-btn-danger"
                           onClick={() => setRejectingDocId(adoc.id)}
                           disabled={isUpdating}
-                          style={{
-                            padding: '4px 12px', borderRadius: '999px',
-                            border: '1.5px solid var(--status-error)', backgroundColor: 'transparent',
-                            fontSize: 'var(--text-caption)', color: 'var(--status-error)', fontWeight: 600,
-                            cursor: 'pointer', transition: 'all 0.2s ease',
-                          }}
                         >
                           Reject
                         </button>
@@ -1101,14 +1033,8 @@ export default function AgentDetailPage() {
             No documents uploaded yet.
           </p>
           {(isAdmin || isOwner) && (
-            <button
+            <button className="nxt-btn nxt-btn-sm"
               onClick={() => setShowAdminUpload(true)}
-              style={{
-                marginTop: 'var(--space-2)', padding: '6px 16px', borderRadius: '999px',
-                border: '1.5px solid var(--brand-navy)', backgroundColor: 'transparent',
-                fontSize: 'var(--text-caption)', color: 'var(--brand-navy)', fontWeight: 600,
-                cursor: 'pointer',
-              }}
             >
               Upload on behalf of agent
             </button>
@@ -1166,26 +1092,14 @@ export default function AgentDetailPage() {
             </div>
 
             <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: 'var(--space-1)' }}>
-              <button
+              <button className="nxt-btn nxt-btn-sm"
                 onClick={() => { setShowAdminUpload(false); setAdminUploadDocType(''); setAdminUploadFile(null); }}
-                style={{
-                  padding: '6px 16px', borderRadius: '999px',
-                  border: '1px solid var(--border-color)', backgroundColor: 'transparent',
-                  fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', fontWeight: 500,
-                  cursor: 'pointer',
-                }}
               >
                 Cancel
               </button>
-              <button
+              <button className="nxt-btn nxt-btn-sm nxt-btn-primary"
                 onClick={handleAdminUpload}
                 disabled={!adminUploadDocType || !adminUploadFile || isAdminUploading}
-                style={{
-                  padding: '6px 16px', borderRadius: '999px',
-                  border: 'none', backgroundColor: (!adminUploadDocType || !adminUploadFile || isAdminUploading) ? 'rgba(0,0,0,0.1)' : 'var(--brand-navy)',
-                  fontSize: 'var(--text-caption)', color: (!adminUploadDocType || !adminUploadFile || isAdminUploading) ? 'var(--text-secondary)' : '#fff', fontWeight: 600,
-                  cursor: (!adminUploadDocType || !adminUploadFile || isAdminUploading) ? 'not-allowed' : 'pointer',
-                }}
               >
                 {isAdminUploading ? 'Uploading...' : 'Upload'}
               </button>
@@ -1215,7 +1129,7 @@ export default function AgentDetailPage() {
                       <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginTop: '2px' }}>Entity: {agent.agreement.ica.entityName}{agent.agreement.ica.entityTitle ? ` — ${agent.agreement.ica.entityTitle}` : ''}</div>
                     )}
                   </div>
-                  <a href={`/api/documents/filled?agentId=${id}&doc=ica`} target="_blank" rel="noopener noreferrer" style={{ padding: '4px 12px', borderRadius: '999px', border: '1px solid var(--border-color)', fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 500, textDecoration: 'none' }}>View PDF</a>
+                  <a className="nxt-btn nxt-btn-sm" href={`/api/documents/filled?agentId=${id}&doc=ica`} target="_blank" rel="noopener noreferrer">View PDF</a>
                 </div>
 
                 {/* AOA */}
@@ -1230,7 +1144,7 @@ export default function AgentDetailPage() {
                       <div style={{ fontSize: '14px', color: 'var(--text-secondary)', marginTop: '2px' }}>Assigned Level: Level {agent.agreement.aoa.assignedLevel}</div>
                     )}
                   </div>
-                  <a href={`/api/documents/filled?agentId=${id}&doc=aoa`} target="_blank" rel="noopener noreferrer" style={{ padding: '4px 12px', borderRadius: '999px', border: '1px solid var(--border-color)', fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 500, textDecoration: 'none' }}>View PDF</a>
+                  <a className="nxt-btn nxt-btn-sm" href={`/api/documents/filled?agentId=${id}&doc=aoa`} target="_blank" rel="noopener noreferrer">View PDF</a>
                 </div>
 
                 {/* Business Standards */}
@@ -1242,7 +1156,7 @@ export default function AgentDetailPage() {
                       {agent.agreement.businessStandards?.signed_at && ` · ${new Date(agent.agreement.businessStandards.signed_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`}
                     </div>
                   </div>
-                  <a href={`/api/documents/filled?agentId=${id}&doc=businessStandards`} target="_blank" rel="noopener noreferrer" style={{ padding: '4px 12px', borderRadius: '999px', border: '1px solid var(--border-color)', fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 500, textDecoration: 'none' }}>View PDF</a>
+                  <a className="nxt-btn nxt-btn-sm" href={`/api/documents/filled?agentId=${id}&doc=businessStandards`} target="_blank" rel="noopener noreferrer">View PDF</a>
                 </div>
 
                 {/* Summary row */}
@@ -1262,9 +1176,9 @@ export default function AgentDetailPage() {
                   <InfoRow label="Signed At" value={agent.agreement.signed_at ? new Date(agent.agreement.signed_at).toLocaleString() : '—'} />
                 </div>
                 <div style={{ display: 'flex', gap: '12px', marginTop: '4px', flexWrap: 'wrap' }}>
-                  <a href="/documents/NXT_Independent_Contractor_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>View ICA PDF</a>
-                  <a href="/documents/NXT_Agent_Ownership_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>View AOA PDF</a>
-                  <a href="/documents/NXT_Business_Standards_Revised.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-blue-accent)', textDecoration: 'none', fontWeight: 600 }}>View Standards PDF</a>
+                  <a className="nxt-btn nxt-btn-sm" href="/documents/NXT_Independent_Contractor_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer">View ICA PDF</a>
+                  <a className="nxt-btn nxt-btn-sm" href="/documents/NXT_Agent_Ownership_Agreement_Revised.pdf" target="_blank" rel="noopener noreferrer">View AOA PDF</a>
+                  <a className="nxt-btn nxt-btn-sm" href="/documents/NXT_Business_Standards_Revised.pdf" target="_blank" rel="noopener noreferrer">View Standards PDF</a>
                 </div>
               </>
             )}
@@ -1306,15 +1220,9 @@ export default function AgentDetailPage() {
               <Button variant="secondary" size="small" onClick={() => { setRejectingDocId(null); setRejectReason(''); }}>
                 Cancel
               </Button>
-              <button
+              <button className="nxt-btn nxt-btn-sm nxt-btn-danger"
                 onClick={() => handleRejectDoc(rejectingDocId)}
                 disabled={!rejectReason.trim()}
-                style={{
-                  padding: '8px 20px', borderRadius: '999px', border: 'none',
-                  backgroundColor: rejectReason.trim() ? 'var(--status-error)' : 'rgba(0,0,0,0.1)',
-                  color: '#fff', fontWeight: 600, fontSize: 'var(--text-secondary)',
-                  cursor: rejectReason.trim() ? 'pointer' : 'not-allowed',
-                }}
               >
                 Reject Document
               </button>
@@ -1324,6 +1232,7 @@ export default function AgentDetailPage() {
       )}
 
       {/* Team Members (if this agent is a manager) */}
+      <span id="team" style={{ display: 'block', scrollMarginTop: 24 }} />
       {agent.role === 'admin' && teamMembers.length > 0 && (
         <Card style={{ marginTop: 'var(--space-3)' }}>
           <h3 style={{ fontSize: 'var(--text-body)', fontWeight: 700, color: 'var(--brand-navy)', margin: '0 0 var(--space-2) 0' }}>
@@ -1348,13 +1257,8 @@ export default function AgentDetailPage() {
                       </div>
                     </div>
                   </div>
-                  <button
+                  <button className="nxt-btn nxt-btn-sm"
                     onClick={() => router.push(`/dashboard/team/${m.id}`)}
-                    style={{
-                      padding: '4px 12px', borderRadius: '999px', border: '1px solid var(--border-color)',
-                      backgroundColor: 'transparent', cursor: 'pointer', fontSize: 'var(--text-caption)',
-                      color: 'var(--brand-navy)', fontWeight: '500'
-                    }}
                   >
                     View
                   </button>
@@ -1416,13 +1320,8 @@ export default function AgentDetailPage() {
             <h3 style={{ fontSize: 'var(--text-body)', fontWeight: 700, color: 'var(--brand-navy)', margin: 0 }}>
               Requests
             </h3>
-            <button
+            <button className="nxt-btn nxt-btn-sm"
               onClick={() => setShowRequestModal(true)}
-              style={{
-                padding: '4px 12px', borderRadius: '8px', border: '1px solid var(--brand-blue-accent)',
-                backgroundColor: 'rgba(227, 169, 74, 0.06)', color: 'var(--brand-navy)',
-                fontSize: 'var(--text-caption)', fontWeight: 600, cursor: 'pointer',
-              }}
             >
               + New Request
             </button>
@@ -1477,12 +1376,8 @@ export default function AgentDetailPage() {
                         </div>
                       </div>
                       {req.status === 'pending' && (
-                        <button
+                        <button className="nxt-btn nxt-btn-sm"
                           onClick={() => handleDismissRequest(req.id)}
-                          style={{
-                            background: 'none', border: 'none', color: 'var(--text-secondary)',
-                            cursor: 'pointer', fontSize: '14px', flexShrink: 0,
-                          }}
                         >
                           Dismiss
                         </button>
@@ -1648,16 +1543,9 @@ export default function AgentDetailPage() {
               <Button variant="secondary" size="small" onClick={() => setShowDeleteConfirm(false)} disabled={isDeleting}>
                 Cancel
               </Button>
-              <button
+              <button className="nxt-btn nxt-btn-sm nxt-btn-danger"
                 onClick={handleDelete}
                 disabled={isDeleting}
-                style={{
-                  padding: '8px 20px', borderRadius: '999px', border: 'none',
-                  backgroundColor: 'var(--status-error)', color: '#fff',
-                  fontWeight: 600, fontSize: 'var(--text-secondary)',
-                  cursor: isDeleting ? 'wait' : 'pointer',
-                  opacity: isDeleting ? 0.6 : 1,
-                }}
               >
                 {isDeleting ? 'Deleting...' : 'Yes, Delete Permanently'}
               </button>

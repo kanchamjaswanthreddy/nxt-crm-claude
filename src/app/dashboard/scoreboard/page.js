@@ -9,6 +9,7 @@ import PageHeader from '@/components/ui/PageHeader';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
 
+import SegTabs from '@/components/ui/SegTabs';
 const dn = (a) => [a?.first_name, a?.middle_name, a?.last_name].filter(Boolean).join(' ') || a?.full_name || a?.name || a?.email || '';
 
 function SimpleBarChart({ data, colors }) {
@@ -161,25 +162,7 @@ export default function ScoreboardPage() {
         actions={
           <div style={{ display: 'flex', gap: 'var(--space-1)', flexWrap: 'wrap', alignItems: 'center' }}>
             {(userProfile?.role === 'admin' || userProfile?.role === 'it_engineer') && (
-              <div style={{
-                display: 'flex', borderRadius: '8px', border: '1px solid var(--border-color)', overflow: 'hidden',
-              }}>
-                {['individual', 'team'].map(mode => (
-                  <button
-                    key={mode}
-                    onClick={() => setViewMode(mode)}
-                    style={{
-                      padding: '8px 14px', border: 'none',
-                      backgroundColor: viewMode === mode ? 'var(--brand-navy)' : '#fff',
-                      color: viewMode === mode ? '#fff' : 'var(--text-secondary)',
-                      fontSize: '16px', fontWeight: 600, cursor: 'pointer',
-                      textTransform: 'capitalize',
-                    }}
-                  >
-                    {mode}
-                  </button>
-                ))}
-              </div>
+              <SegTabs label="View" value={viewMode} onChange={setViewMode} tabs={[{ key: 'individual', label: 'Individual' }, { key: 'team', label: 'Team' }]} />
             )}
             <select
               value={period}

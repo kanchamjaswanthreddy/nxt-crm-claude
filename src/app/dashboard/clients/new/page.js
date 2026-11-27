@@ -116,17 +116,10 @@ export default function AddClientPage() {
   return (
     <div>
       {/* Back + Header */}
-      <button
+      <button className="nxt-back"
         onClick={() => router.push('/dashboard/clients')}
-        style={{
-          background: 'none', border: 'none', color: 'var(--text-secondary)',
-          cursor: 'pointer', fontSize: '16px', display: 'flex', alignItems: 'center',
-          gap: '6px', marginBottom: '20px', padding: 0,
-        }}
-        onMouseEnter={(e) => e.currentTarget.style.color = 'var(--brand-navy)'}
-        onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
       >
-        <span style={{ fontSize: '18px' }}>&larr;</span> Back to Clients
+        Back to Clients
       </button>
 
       <PageHeader title="Add New Client" subtitle="Enter your client's details. You can add policies after creating the client." />

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import SegTabs from '@/components/ui/SegTabs';
 const CATEGORIES = [
   { value: 'all', label: 'All Items' },
   { value: 'apparel', label: 'Apparel' },
@@ -120,7 +121,7 @@ export default function BrandShopPage() {
   });
 
   return (
-    <div style={{ padding: '32px 40px', maxWidth: 1200, margin: '0 auto' }}>
+    <div>
       {/* Header */}
       <div style={{ marginBottom: 32 }}>
         <h1 style={{ fontSize: 28, fontWeight: 700, color: 'var(--brand-navy)', margin: 0 }}>
@@ -135,26 +136,7 @@ export default function BrandShopPage() {
       <div style={{
         display: 'flex', gap: 12, alignItems: 'center', marginBottom: 24, flexWrap: 'wrap',
       }}>
-        <div style={{
-          display: 'flex', background: 'var(--surface-card)', borderRadius: 8,
-          border: '1px solid var(--border-color)', overflow: 'hidden',
-        }}>
-          {CATEGORIES.map(cat => (
-            <button
-              key={cat.value}
-              onClick={() => setActiveCategory(cat.value)}
-              style={{
-                padding: '8px 16px', fontSize: 15, fontWeight: activeCategory === cat.value ? 600 : 500,
-                color: activeCategory === cat.value ? '#fff' : 'var(--text-secondary)',
-                background: activeCategory === cat.value ? 'var(--brand-navy)' : 'transparent',
-                border: 'none', cursor: 'pointer',
-                transition: 'all 150ms',
-              }}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
+        <SegTabs label="Categories" value={activeCategory} onChange={setActiveCategory} tabs={CATEGORIES.map(c => ({ key: c.value, label: c.label }))} />
 
         <input
           type="text"

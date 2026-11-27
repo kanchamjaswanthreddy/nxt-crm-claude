@@ -172,7 +172,7 @@ export default function MarketingDataPage() {
   }
 
   return (
-    <div style={{ padding: '24px 32px' }}>
+    <div>
       {/* Header */}
       <PageHeader
         title="Marketing Data"
@@ -207,6 +207,7 @@ export default function MarketingDataPage() {
         <div style={{ display: 'flex', borderRadius: '8px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)' }}>
           <button
             onClick={() => setViewMode('grid')}
+            aria-label="Grid view" title="Grid view" aria-pressed={viewMode === 'grid'}
             style={{
               padding: '8px 12px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center',
               background: viewMode === 'grid' ? 'var(--brand-navy, #0C1022)' : '#fff',
@@ -215,6 +216,7 @@ export default function MarketingDataPage() {
           ><GridIcon /></button>
           <button
             onClick={() => setViewMode('list')}
+            aria-label="List view" title="List view" aria-pressed={viewMode === 'list'}
             style={{
               padding: '8px 12px', border: 'none', borderLeft: '1px solid rgba(0,0,0,0.1)', cursor: 'pointer',
               display: 'flex', alignItems: 'center',
@@ -225,29 +227,18 @@ export default function MarketingDataPage() {
         </div>
 
         {/* Refresh */}
-        <button
+        <button className="nxt-btn"
           onClick={() => loadFolder(currentFolderId)}
           disabled={isLoading}
-          style={{
-            padding: '8px 14px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.1)',
-            background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px',
-            fontSize: '0.9375rem', fontWeight: 600, color: 'var(--text-secondary)',
-            opacity: isLoading ? 0.5 : 1,
-          }}
         >
           <RefreshIcon /> Refresh
         </button>
 
         {/* Open in Drive */}
-        <a
+        <a className="nxt-btn"
           href={`https://drive.google.com/drive/folders/${currentFolderId || '18j7lnOyihC4CwIvmIq6JhwsbFpMnSl-J'}`}
           target="_blank"
           rel="noopener noreferrer"
-          style={{
-            padding: '8px 14px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.1)',
-            background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px',
-            fontSize: '0.9375rem', fontWeight: 600, color: 'var(--text-secondary)', textDecoration: 'none',
-          }}
         >
           <ExternalLinkIcon /> Open in Drive
         </a>
@@ -526,29 +517,19 @@ export default function MarketingDataPage() {
               justifyContent: 'flex-end', flexShrink: 0,
             }}>
               {previewFile.webContentLink && (
-                <a
+                <a className="nxt-btn nxt-btn-primary"
                   href={previewFile.webContentLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    padding: '8px 16px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.1)',
-                    background: '#fff', fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)',
-                    textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px',
-                  }}
                 >
                   <DownloadIcon /> Download
                 </a>
               )}
               {previewFile.webViewLink && (
-                <a
+                <a className="nxt-btn"
                   href={previewFile.webViewLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    padding: '8px 16px', borderRadius: '8px', border: 'none',
-                    background: 'var(--brand-gold, #E3A94A)', fontSize: '1rem', fontWeight: 600,
-                    color: '#fff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px',
-                  }}
                 >
                   <ExternalLinkIcon /> Open in Drive
                 </a>

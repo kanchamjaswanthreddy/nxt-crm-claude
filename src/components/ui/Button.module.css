@@ -132,3 +132,14 @@
 .secondary { border: 0; box-shadow: inset 0 0 0 1.5px var(--border-color); }
 .secondary:hover:not(:disabled) { box-shadow: inset 0 0 0 1.5px var(--brand-navy); }
 .gold { background: var(--brand-gold); box-shadow: 0 14px 26px -16px rgba(227, 169, 74, 0.9); }
+
+/* One button scale for the whole CRM (see globals.css .nxt-btn for the same numbers on plain buttons).
+   Page buttons 44px / 15px. Buttons inside rows and cards 34px / 14px. */
+.btn { font-size: 15px; font-weight: 600; line-height: 1; border-radius: 999px; }
+.medium { height: 44px; padding: 0 22px; border-radius: 999px; }
+.small { height: 34px; padding: 0 16px; font-size: 14px; border-radius: 999px; }
+.large { height: 50px; padding: 0 28px; font-size: 16px; border-radius: 999px; }
+.iconOnly { height: 44px; width: 44px; border-radius: 999px; }
+.danger { background: #fff; color: #B42318; box-shadow: inset 0 0 0 1.5px #F1B4AE; }
+.danger:hover:not(:disabled) { background: #FEF3F2; color: #912018; box-shadow: inset 0 0 0 1.5px #B42318; }
+.ghost { color: var(--brand-navy); }

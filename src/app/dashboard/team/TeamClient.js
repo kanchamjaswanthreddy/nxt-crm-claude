@@ -1279,24 +1279,14 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               <div style={{ display: 'flex', gap: '8px', marginTop: 'var(--space-3)', paddingTop: 'var(--space-2)', borderTop: '1px solid var(--border-color)' }}>
                 {isAdmin && (
                   <>
-                    <button
+                    <button className="nxt-btn nxt-btn-sm nxt-btn-primary"
                       onClick={() => router.push(`/dashboard/team/${m.id}`)}
-                      style={{
-                        flex: 1, padding: '10px', borderRadius: '10px', fontSize: '15px',
-                        border: '1.5px solid var(--border-color)', backgroundColor: 'transparent',
-                        cursor: 'pointer', color: 'var(--brand-navy)', fontWeight: 600,
-                      }}
                     >
                       Full Profile
                     </button>
                     {!m.is_owner && (
-                      <button
+                      <button className="nxt-btn nxt-btn-sm"
                         onClick={() => { setSelectedMember(null); setAssignManagerAgent(m); setSelectedManagerId(m.upline_id || ''); }}
-                        style={{
-                          flex: 1, padding: '10px', borderRadius: '10px', fontSize: '15px',
-                          border: '1.5px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.08)',
-                          cursor: 'pointer', color: 'var(--brand-navy)', fontWeight: 600,
-                        }}
                       >
                         Assign Upline
                       </button>
@@ -1445,12 +1435,8 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '4px 8px 8px', borderBottom: '1px solid var(--border-color)', marginBottom: '6px' }}>
                     <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--brand-navy)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Hidden Cards</span>
-                    <button
+                    <button className="nxt-btn nxt-btn-sm"
                       onClick={restoreAll}
-                      style={{
-                        background: 'none', border: 'none', cursor: 'pointer',
-                        fontSize: '13px', color: 'var(--brand-blue-accent)', fontWeight: 600,
-                      }}
                     >
                       Restore All
                     </button>
@@ -1477,13 +1463,8 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                           </span>
                         )}
                       </div>
-                      <button
+                      <button className="nxt-btn nxt-btn-sm"
                         onClick={() => toggleHide(item.id)}
-                        style={{
-                          background: 'none', border: 'none', cursor: 'pointer',
-                          fontSize: '13px', color: 'var(--brand-blue-accent)', fontWeight: 600,
-                          padding: '2px 6px', borderRadius: '4px', flexShrink: 0,
-                        }}
                       >
                         Restore
                       </button>
@@ -1763,16 +1744,9 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                           {log.undone && <span style={{ color: 'var(--status-warning)', fontWeight: 600 }}> · Undone</span>}
                         </div>
                         {!log.undone && (
-                          <button
+                          <button className="nxt-btn nxt-btn-sm"
                             onClick={() => handleUndo(log.id)}
                             disabled={undoingId === log.id}
-                            style={{
-                              marginTop: '6px', padding: '3px 10px', borderRadius: '999px',
-                              border: '1px solid var(--border-color)', backgroundColor: 'transparent',
-                              cursor: undoingId === log.id ? 'wait' : 'pointer',
-                              fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 600,
-                              opacity: undoingId === log.id ? 0.5 : 1,
-                            }}
                           >
                             {undoingId === log.id ? 'Undoing...' : 'Undo'}
                           </button>
@@ -1790,7 +1764,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
       {/* Backfill hierarchy paths (super-admin only) */}
       {userProfile?.email === 'kanchamjaswanthreddy@gmail.com' && (
         <div style={{ marginTop: 'var(--space-2)' }}>
-          <button
+          <button className="nxt-btn nxt-btn-sm"
             onClick={async () => {
               setBackfilling(true);
               setBackfillResult(null);
@@ -1804,12 +1778,6 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               setBackfilling(false);
             }}
             disabled={backfilling}
-            style={{
-              background: 'none', border: '1px solid var(--border-color)', cursor: backfilling ? 'wait' : 'pointer',
-              fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 600,
-              padding: '6px 14px', borderRadius: '8px',
-              opacity: backfilling ? 0.5 : 1,
-            }}
           >
             {backfilling ? 'Fixing hierarchy paths...' : <><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:4,verticalAlign:'middle'}}><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>Repair Hierarchy Paths</>}
           </button>
@@ -1836,7 +1804,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                 border: '1px solid var(--border-color)', width: '260px',
               }}
             />
-            <button
+            <button className="nxt-btn nxt-btn-sm"
               onClick={async () => {
                 if (!diagEmail.trim()) return;
                 setDiagLoading(true);
@@ -1850,12 +1818,6 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                 setDiagLoading(false);
               }}
               disabled={diagLoading || !diagEmail.trim()}
-              style={{
-                background: 'none', border: '1px solid var(--border-color)', cursor: diagLoading ? 'wait' : 'pointer',
-                fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 600,
-                padding: '6px 14px', borderRadius: '8px',
-                opacity: (diagLoading || !diagEmail.trim()) ? 0.5 : 1,
-              }}
             >
               {diagLoading ? 'Diagnosing...' : <><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:4,verticalAlign:'middle'}}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Diagnose</>}
             </button>
@@ -1870,7 +1832,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
             </pre>
           )}
           <div style={{ marginTop: '12px' }}>
-            <button
+            <button className="nxt-btn nxt-btn-sm"
               onClick={async () => {
                 setPaymentAuditLoading(true);
                 setPaymentAudit(null);
@@ -1883,16 +1845,10 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                 setPaymentAuditLoading(false);
               }}
               disabled={paymentAuditLoading}
-              style={{
-                background: 'none', border: '1px solid var(--border-color)', cursor: paymentAuditLoading ? 'wait' : 'pointer',
-                fontSize: '14px', color: 'var(--brand-navy)', fontWeight: 600,
-                padding: '6px 14px', borderRadius: '8px',
-                opacity: paymentAuditLoading ? 0.5 : 1,
-              }}
             >
               {paymentAuditLoading ? 'Auditing...' : <><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:4,verticalAlign:'middle'}}><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Audit Missing Card Details</>}
             </button>
-            <button
+            <button className="nxt-btn nxt-btn-sm"
               onClick={async () => {
                 setReminderLoading(true);
                 setReminderResult(null);
@@ -1905,12 +1861,6 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                 setReminderLoading(false);
               }}
               disabled={reminderLoading}
-              style={{
-                background: 'none', border: '1px solid #DC3545', cursor: reminderLoading ? 'wait' : 'pointer',
-                fontSize: '14px', color: '#DC3545', fontWeight: 600,
-                padding: '6px 14px', borderRadius: '8px',
-                opacity: reminderLoading ? 0.5 : 1,
-              }}
             >
               {reminderLoading ? 'Sending...' : <><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:4,verticalAlign:'middle'}}><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Send Payment Reminders</>}
             </button>
@@ -2343,30 +2293,14 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
             }}>
               {isAdmin && (
                 <>
-                  <button
+                  <button className="nxt-btn nxt-btn-sm nxt-btn-primary"
                     onClick={() => router.push(`/dashboard/team/${m.id}`)}
-                    style={{
-                      flex: 1, padding: '10px', borderRadius: '10px', fontSize: '14px',
-                      border: '1.5px solid var(--border-color)', backgroundColor: 'transparent',
-                      cursor: 'pointer', color: 'var(--brand-navy)', fontWeight: 600,
-                      transition: 'background-color 0.15s',
-                    }}
-                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.03)'}
-                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
                   >
                     Full Profile
                   </button>
                   {!m.is_owner && (
-                    <button
+                    <button className="nxt-btn nxt-btn-sm"
                       onClick={() => { setSelectedMember(null); setAssignManagerAgent(m); setSelectedManagerId(m.upline_id || ''); }}
-                      style={{
-                        flex: 1, padding: '10px', borderRadius: '10px', fontSize: '14px',
-                        border: '1.5px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.06)',
-                        cursor: 'pointer', color: 'var(--brand-navy)', fontWeight: 600,
-                        transition: 'background-color 0.15s',
-                      }}
-                      onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74, 0.12)'}
-                      onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74, 0.06)'}
                     >
                       Assign Upline
                     </button>
@@ -2374,16 +2308,8 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                 </>
               )}
               {(m.children?.length > 0 || agents.some(a => a.upline_id === m.id)) && (
-                <button
+                <button className="nxt-btn nxt-btn-sm"
                   onClick={() => { setSelectedMember(null); handleScopeIn(m.id); }}
-                  style={{
-                    flex: 1, padding: '10px', borderRadius: '10px', fontSize: '14px',
-                    border: '1.5px solid var(--brand-blue-accent)', backgroundColor: 'rgba(227, 169, 74, 0.04)',
-                    cursor: 'pointer', color: 'var(--brand-navy)', fontWeight: 600,
-                    transition: 'background-color 0.15s',
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74, 0.1)'}
-                  onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(227, 169, 74, 0.04)'}
                 >
                   View Team
                 </button>
@@ -2424,6 +2350,12 @@ export default function TeamDashboard() {
   const toast = useToast();
   const [activeTab, setActiveTab] = useState('hierarchy');
   const [isInviteOpen, setIsInviteOpen] = useState(false);
+  const [inviteEmail, setInviteEmail] = useState('');
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    if (q.get('filter') === 'invited' || q.get('tab') === 'invites') setActiveTab('invites');
+    if (q.get('inviteEmail') || q.get('inviteName')) { setInviteEmail(q.get('inviteEmail') || ''); setIsInviteOpen(true); }
+  }, []);
 
   // Data loaded via API route (not server actions) to avoid POST to current URL
   const [agents, setAgents] = useState([]);
@@ -2593,7 +2525,7 @@ export default function TeamDashboard() {
         </div>
         <div style={{ display: 'flex', gap: 'var(--space-1)' }}>
           {isAdmin && (
-            <button
+            <button className="nxt-btn"
               onClick={async () => {
                 setIsCleaning(true);
                 const res = await cleanupOrphanAgents(userProfile.agency_id, userProfile.uid);
@@ -2612,19 +2544,12 @@ export default function TeamDashboard() {
                 setTimeout(() => setResendResult(null), 5000);
               }}
               disabled={isCleaning}
-              style={{
-                padding: '8px 16px', borderRadius: '999px',
-                border: '1.5px solid var(--border-color)', backgroundColor: 'transparent',
-                color: 'var(--text-secondary)', fontSize: 'var(--text-caption)', fontWeight: 600,
-                cursor: isCleaning ? 'wait' : 'pointer', opacity: isCleaning ? 0.5 : 1,
-                transition: 'all 0.2s ease',
-              }}
             >
               {isCleaning ? 'Cleaning...' : 'Cleanup Orphans'}
             </button>
           )}
           {isAdmin && (
-            <button
+            <button className="nxt-btn"
               onClick={async () => {
                 setIsSendingWorkAuth(true);
                 const res = await sendWorkAuthorizationTasks(
@@ -2646,13 +2571,6 @@ export default function TeamDashboard() {
                 setTimeout(() => setResendResult(null), 5000);
               }}
               disabled={isSendingWorkAuth}
-              style={{
-                padding: '8px 16px', borderRadius: '999px',
-                border: '1.5px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.08)',
-                color: 'var(--brand-navy)', fontSize: 'var(--text-caption)', fontWeight: 600,
-                cursor: isSendingWorkAuth ? 'wait' : 'pointer', opacity: isSendingWorkAuth ? 0.5 : 1,
-                transition: 'all 0.2s ease',
-              }}
             >
               {isSendingWorkAuth ? 'Sending...' : 'Send Work Auth Task'}
             </button>
@@ -2790,13 +2708,8 @@ export default function TeamDashboard() {
                             <span style={{ fontSize: 'var(--text-caption)', fontWeight: '600', color: mProd > 0 ? 'var(--status-success)' : 'var(--text-secondary)' }}>
                               ${mProd.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                             </span>
-                            <button
+                            <button className="nxt-btn nxt-btn-sm"
                               onClick={() => router.push(`/dashboard/team/${m.id}`)}
-                              style={{
-                                padding: '2px 10px', borderRadius: '999px', border: '1px solid var(--border-color)',
-                                backgroundColor: 'transparent', cursor: 'pointer', fontSize: '13px',
-                                color: 'var(--brand-navy)', fontWeight: '500'
-                              }}
                             >
                               View
                             </button>
@@ -2840,24 +2753,14 @@ export default function TeamDashboard() {
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-1)' }}>
                           {(userProfile?.role === 'admin' || userProfile?.role === 'it_engineer') && !m.is_owner && (
-                            <button
+                            <button className="nxt-btn nxt-btn-sm nxt-btn-primary"
                               onClick={() => { setAssignManagerAgent(m); setSelectedManagerId(''); }}
-                              style={{
-                                padding: '2px 10px', borderRadius: '999px', border: '1px solid var(--brand-gold)',
-                                backgroundColor: 'rgba(227, 169, 74, 0.08)', cursor: 'pointer', fontSize: '13px',
-                                color: 'var(--brand-navy)', fontWeight: '500'
-                              }}
                             >
                               Assign
                             </button>
                           )}
-                          <button
+                          <button className="nxt-btn nxt-btn-sm"
                             onClick={() => router.push(`/dashboard/team/${m.id}`)}
-                            style={{
-                              padding: '2px 10px', borderRadius: '999px', border: '1px solid var(--border-color)',
-                              backgroundColor: 'transparent', cursor: 'pointer', fontSize: '13px',
-                              color: 'var(--brand-navy)', fontWeight: '500'
-                            }}
                           >
                             View
                           </button>
@@ -3013,14 +2916,8 @@ export default function TeamDashboard() {
                             );
                             if (matchedAgent) {
                               return (
-                                <button
+                                <button className="nxt-btn nxt-btn-sm"
                                   onClick={() => router.push(`/dashboard/team/${matchedAgent.id}`)}
-                                  style={{
-                                    padding: '4px 12px', borderRadius: '999px',
-                                    border: '1px solid var(--brand-navy)', backgroundColor: 'rgba(12, 16, 34, 0.06)',
-                                    cursor: 'pointer', fontSize: 'var(--text-caption)', color: 'var(--brand-navy)',
-                                    fontWeight: '600', transition: 'all 0.2s ease'
-                                  }}
                                 >
                                   View Profile
                                 </button>
@@ -3077,14 +2974,8 @@ export default function TeamDashboard() {
                                 );
                               }
                               return (
-                                <button
+                                <button className="nxt-btn nxt-btn-sm"
                                   onClick={() => { setLinkingInviteId(inv.id); setLinkAgentSearch(''); }}
-                                  style={{
-                                    padding: '4px 12px', borderRadius: '999px',
-                                    border: '1px solid var(--brand-gold)', backgroundColor: 'rgba(227, 169, 74, 0.08)',
-                                    cursor: 'pointer', fontSize: 'var(--text-caption)', color: 'var(--brand-navy)',
-                                    fontWeight: '600', transition: 'all 0.2s ease'
-                                  }}
                                 >
                                   Link Agent
                                 </button>
@@ -3093,7 +2984,7 @@ export default function TeamDashboard() {
                             return null;
                           })()}
                           {canResend && (
-                            <button
+                            <button className="nxt-btn nxt-btn-sm"
                               onClick={async () => {
                                 setResendingId(inv.id);
                                 setResendResult(null);
@@ -3112,20 +3003,12 @@ export default function TeamDashboard() {
                                 setTimeout(() => setResendResult(null), 8000);
                               }}
                               disabled={resendingId === inv.id}
-                              style={{
-                                padding: '4px 14px', borderRadius: '999px',
-                                border: '1px solid var(--border-color)', backgroundColor: 'transparent',
-                                cursor: resendingId === inv.id ? 'wait' : 'pointer',
-                                fontSize: 'var(--text-caption)', color: 'var(--brand-navy)',
-                                fontWeight: '500', transition: 'all 0.2s ease',
-                                opacity: resendingId === inv.id ? 0.5 : 1,
-                              }}
                             >
                               {resendingId === inv.id ? 'Sending...' : 'Resend'}
                             </button>
                           )}
                           {(userProfile?.role === 'admin' || userProfile?.role === 'it_engineer') && displayStatus === 'pending' && (
-                            <button
+                            <button className="nxt-btn nxt-btn-sm"
                               onClick={async () => {
                                 setResendingId(inv.id);
                                 const res = await markInviteAcceptedByEmail(inv.email);
@@ -3139,20 +3022,12 @@ export default function TeamDashboard() {
                                 setTimeout(() => setResendResult(null), 5000);
                               }}
                               disabled={resendingId === inv.id}
-                              style={{
-                                padding: '4px 10px', borderRadius: '999px',
-                                border: '1px solid var(--status-success)', backgroundColor: 'rgba(47, 168, 79, 0.08)',
-                                cursor: resendingId === inv.id ? 'wait' : 'pointer',
-                                fontSize: 'var(--text-caption)', color: 'var(--brand-navy)',
-                                fontWeight: '500', transition: 'all 0.2s ease',
-                                opacity: resendingId === inv.id ? 0.5 : 1,
-                              }}
                             >
                               Mark Accepted
                             </button>
                           )}
                           {(userProfile?.role === 'admin' || userProfile?.role === 'it_engineer') && (
-                            <button
+                            <button className="nxt-btn nxt-btn-sm nxt-btn-danger"
                               onClick={() => {
                                 setConfirmState({
                                   open: true,
@@ -3174,12 +3049,6 @@ export default function TeamDashboard() {
                                 });
                               }}
                               disabled={resendingId === inv.id}
-                              style={{
-                                padding: '4px 10px', borderRadius: '999px',
-                                border: '1px solid var(--status-error)', backgroundColor: 'rgba(220, 53, 69, 0.08)',
-                                cursor: 'pointer', fontSize: 'var(--text-caption)', color: 'var(--status-error)',
-                                fontWeight: '500', transition: 'all 0.2s ease',
-                              }}
                             >
                               Delete
                             </button>
@@ -3197,7 +3066,8 @@ export default function TeamDashboard() {
 
       <InviteAgentModal
         isOpen={isInviteOpen}
-        onClose={() => { setIsInviteOpen(false); loadAllData(); }}
+        initialEmail={inviteEmail}
+        onClose={() => { setIsInviteOpen(false); setInviteEmail(''); loadAllData(); }}
         userProfile={userProfile}
         agents={agents}
       />

@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { useToast } from '@/components/ui/Toast';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
+import SegTabs from '@/components/ui/SegTabs';
 const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 function CalendarView({ tasks, month, onMonthChange, onTaskClick, getPriorityColor, isOverdue, userUid }) {
@@ -49,11 +50,11 @@ function CalendarView({ tasks, month, onMonthChange, onTaskClick, getPriorityCol
       {/* Calendar header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-3)' }}>
         <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
-          <button onClick={prevMonth} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '4px 10px', cursor: 'pointer', color: 'var(--text-primary)', fontSize: '16px' }}>&larr;</button>
+          <button className="nxt-btn nxt-btn-sm nxt-btn-icon" onClick={prevMonth}>&larr;</button>
           <h3 style={{ margin: 0, color: 'var(--brand-navy)', fontSize: 'var(--text-body)', fontWeight: '600', minWidth: '180px', textAlign: 'center' }}>{monthLabel}</h3>
-          <button onClick={nextMonth} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '4px 10px', cursor: 'pointer', color: 'var(--text-primary)', fontSize: '16px' }}>&rarr;</button>
+          <button className="nxt-btn nxt-btn-sm nxt-btn-icon" onClick={nextMonth}>&rarr;</button>
         </div>
-        <button onClick={goToday} style={{ background: 'none', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '4px 14px', cursor: 'pointer', color: 'var(--brand-navy)', fontSize: 'var(--text-caption)', fontWeight: '500' }}>Today</button>
+        <button className="nxt-btn nxt-btn-sm" onClick={goToday}>Today</button>
       </div>
 
       {/* Day headers */}
@@ -292,64 +293,18 @@ export default function TasksPage() {
   return (
     <div>
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-3)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 'var(--space-3)' }}>
         <div>
           <h1 style={{ color: 'var(--brand-navy)', fontSize: 'var(--text-h1)', margin: 0 }}>Tasks</h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-caption)', margin: '4px 0 0 0' }}>
             {viewType === 'my' ? 'Your tasks' : 'All team tasks'}
           </p>
         </div>
-        <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center', flexWrap: 'wrap' }}>
           {isAdmin && (
-            <div style={{ display: 'flex', backgroundColor: 'var(--surface-card)', borderRadius: '999px', padding: '4px', border: '1px solid var(--border-color)' }}>
-              <button
-                onClick={() => setViewType('my')}
-                style={{
-                  padding: 'var(--space-1) 16px', borderRadius: '999px', border: 'none',
-                  backgroundColor: viewType === 'my' ? 'var(--brand-navy)' : 'transparent',
-                  color: viewType === 'my' ? 'white' : 'var(--text-secondary)',
-                  cursor: 'pointer', fontSize: 'var(--text-caption)', fontWeight: '500',
-                }}
-              >
-                My Tasks
-              </button>
-              <button
-                onClick={() => setViewType('team')}
-                style={{
-                  padding: 'var(--space-1) 16px', borderRadius: '999px', border: 'none',
-                  backgroundColor: viewType === 'team' ? 'var(--brand-navy)' : 'transparent',
-                  color: viewType === 'team' ? 'white' : 'var(--text-secondary)',
-                  cursor: 'pointer', fontSize: 'var(--text-caption)', fontWeight: '500',
-                }}
-              >
-                Team Tasks
-              </button>
-            </div>
+            <SegTabs label="Whose tasks" value={viewType} onChange={setViewType} tabs={[{ key: 'my', label: 'My Tasks' }, { key: 'team', label: 'Team Tasks' }]} />
           )}
-          <div style={{ display: 'flex', backgroundColor: 'var(--surface-card)', borderRadius: '999px', padding: '4px', border: '1px solid var(--border-color)' }}>
-            <button
-              onClick={() => setViewMode('list')}
-              style={{
-                padding: 'var(--space-1) 16px', borderRadius: '999px', border: 'none',
-                backgroundColor: viewMode === 'list' ? 'var(--brand-navy)' : 'transparent',
-                color: viewMode === 'list' ? 'white' : 'var(--text-secondary)',
-                cursor: 'pointer', fontSize: 'var(--text-caption)', fontWeight: '500',
-              }}
-            >
-              List
-            </button>
-            <button
-              onClick={() => setViewMode('calendar')}
-              style={{
-                padding: 'var(--space-1) 16px', borderRadius: '999px', border: 'none',
-                backgroundColor: viewMode === 'calendar' ? 'var(--brand-navy)' : 'transparent',
-                color: viewMode === 'calendar' ? 'white' : 'var(--text-secondary)',
-                cursor: 'pointer', fontSize: 'var(--text-caption)', fontWeight: '500',
-              }}
-            >
-              Calendar
-            </button>
-          </div>
+          <SegTabs label="Layout" value={viewMode} onChange={setViewMode} tabs={[{ key: 'list', label: 'List' }, { key: 'calendar', label: 'Calendar' }]} />
           <Button onClick={() => setIsTaskModalOpen(true)}>+ New Task</Button>
         </div>
       </div>
@@ -498,12 +453,12 @@ export default function TasksPage() {
 
                     {/* Linked lead/deal */}
                     {task.relatedDealId && (
-                      <Link href={`/dashboard/deals/${task.relatedDealId}`} style={{ color: 'var(--brand-blue-accent, #1B2A4E)', textDecoration: 'none', backgroundColor: 'rgba(227, 169, 74, 0.1)', padding: '2px 8px', borderRadius: '4px' }}>
+                      <Link className="nxt-btn nxt-btn-sm" href={`/dashboard/deals/${task.relatedDealId}`}>
                         Linked Deal
                       </Link>
                     )}
                     {task.relatedLeadId && !task.relatedDealId && (
-                      <Link href={`/dashboard/leads/${task.relatedLeadId}`} style={{ color: 'var(--brand-blue-accent, #1B2A4E)', textDecoration: 'none', backgroundColor: 'rgba(227, 169, 74, 0.1)', padding: '2px 8px', borderRadius: '4px' }}>
+                      <Link className="nxt-btn nxt-btn-sm" href={`/dashboard/leads/${task.relatedLeadId}`}>
                         Linked Lead
                       </Link>
                     )}
@@ -511,13 +466,8 @@ export default function TasksPage() {
                 </div>
 
                 {/* Delete */}
-                <button
+                <button className="nxt-btn nxt-btn-sm nxt-btn-danger"
                   onClick={() => handleDelete(task.id)}
-                  style={{
-                    background: 'none', border: 'none', color: 'var(--status-error)',
-                    cursor: 'pointer', opacity: 0.6, padding: 'var(--space-1)',
-                    fontSize: 'var(--text-caption)', fontWeight: '500', flexShrink: 0,
-                  }}
                 >
                   Delete
                 </button>
@@ -705,20 +655,12 @@ export default function TasksPage() {
             {!isEditing && (selectedTask.relatedDealId || selectedTask.relatedLeadId) && (
               <div style={{ marginBottom: 'var(--space-3)' }}>
                 {selectedTask.relatedDealId && (
-                  <Link href={`/dashboard/deals/${selectedTask.relatedDealId}`} style={{
-                    display: 'inline-block', padding: '6px 16px', borderRadius: '8px',
-                    backgroundColor: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-blue-accent, #1B2A4E)',
-                    textDecoration: 'none', fontWeight: '500', fontSize: 'var(--text-caption)', marginRight: 'var(--space-2)',
-                  }}>
+                  <Link className="nxt-btn nxt-btn-sm" href={`/dashboard/deals/${selectedTask.relatedDealId}`}>
                     View Linked Deal
                   </Link>
                 )}
                 {selectedTask.relatedLeadId && !selectedTask.relatedDealId && (
-                  <Link href={`/dashboard/leads/${selectedTask.relatedLeadId}`} style={{
-                    display: 'inline-block', padding: '6px 16px', borderRadius: '8px',
-                    backgroundColor: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-blue-accent, #1B2A4E)',
-                    textDecoration: 'none', fontWeight: '500', fontSize: 'var(--text-caption)',
-                  }}>
+                  <Link className="nxt-btn nxt-btn-sm" href={`/dashboard/leads/${selectedTask.relatedLeadId}`}>
                     View Linked Lead
                   </Link>
                 )}

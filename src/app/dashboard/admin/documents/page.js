@@ -234,17 +234,8 @@ export default function AdminDocumentsPage() {
               <option key={dt} value={dt}>{getDocTypeLabel(dt)}</option>
             ))}
           </select>
-          <button
+          <button className="nxt-btn"
             onClick={() => { setStatusFilter('all'); setDocTypeFilter('all'); setSearchQuery(''); }}
-            style={{
-              padding: '8px 12px',
-              border: '1px solid rgba(0,0,0,0.15)',
-              borderRadius: '6px',
-              fontSize: '15px',
-              background: '#fff',
-              cursor: 'pointer',
-              color: 'var(--text-secondary)',
-            }}
           >
             Clear Filters
           </button>
@@ -346,7 +337,7 @@ export default function AdminDocumentsPage() {
                           {formatDate(doc.uploadedAt)}
                         </td>
                         <td style={{ padding: '12px 16px', verticalAlign: 'top', textAlign: 'right' }}>
-                          <div style={{ display: 'flex', gap: '6px', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
+                          <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
                             <Button
                               size="small"
                               variant="secondary"
@@ -357,19 +348,17 @@ export default function AdminDocumentsPage() {
                             </Button>
                             {doc.status === 'pending_review' && (
                               <>
-                                <Button
-                                  size="small"
+                                <Button size="small"
+                                 
                                   onClick={() => handleApprove(doc.id)}
                                   disabled={actionLoading === doc.id}
-                                  style={{ backgroundColor: '#28a745', color: '#fff' }}
                                 >
                                   {actionLoading === doc.id ? '...' : 'Approve'}
                                 </Button>
-                                <Button
-                                  size="small"
-                                  variant="secondary"
+                                <Button size="small" variant="danger"
+                                 
+                                 
                                   onClick={() => { setRejectingId(isRejecting ? null : doc.id); setRejectReason(''); }}
-                                  style={{ color: '#dc3545', borderColor: '#dc3545' }}
                                 >
                                   Reject
                                 </Button>
@@ -397,11 +386,10 @@ export default function AdminDocumentsPage() {
                                 }}
                                 onKeyDown={e => { if (e.key === 'Enter') handleReject(doc.id); }}
                               />
-                              <Button
-                                size="small"
+                              <Button size="small" variant="danger"
+                               
                                 onClick={() => handleReject(doc.id)}
                                 disabled={actionLoading === doc.id}
-                                style={{ backgroundColor: '#dc3545', color: '#fff' }}
                               >
                                 {actionLoading === doc.id ? '...' : 'Confirm Reject'}
                               </Button>

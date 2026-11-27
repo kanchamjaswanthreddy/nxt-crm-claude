@@ -14,6 +14,7 @@ import {
 } from '@/app/actions/tracker';
 import { useToast } from '@/components/ui/Toast';
 
+import SegTabs from '@/components/ui/SegTabs';
 /* ── Constants ── */
 
 const CONTACT_TYPES = [
@@ -229,13 +230,13 @@ export default function BusinessPipelinePage() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 64px)', overflow: 'hidden' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 96px)', minHeight: 520, overflow: 'hidden' }}>
 
       {/* ── Top Bar ── */}
-      <div style={{ padding: '20px 28px 0', flexShrink: 0 }}>
+      <div style={{ flexShrink: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>Pipeline Tracker</h1>
+            <h1 style={{ margin: 0 }}>Pipeline Tracker</h1>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem', marginTop: '2px' }}>
               {filtered.length} contact{filtered.length !== 1 ? 's' : ''}
               {activeFilterCount > 0 && ` (${activeFilterCount} filter${activeFilterCount > 1 ? 's' : ''} active)`}
@@ -244,49 +245,22 @@ export default function BusinessPipelinePage() {
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
 
             {/* Stage Type Toggle */}
-            <div style={{ display: 'flex', background: '#F1EFEA', borderRadius: '8px', padding: '3px', gap: '2px' }}>
-              {['recruiting', 'sales'].map(t => (
-                <button key={t} onClick={() => setStageType(t)} style={{
-                  padding: '6px 14px', borderRadius: '6px', border: 'none', fontSize: '1rem', fontWeight: 600, cursor: 'pointer',
-                  background: stageType === t ? '#fff' : 'transparent',
-                  color: stageType === t ? 'var(--text-primary)' : 'var(--text-secondary)',
-                  boxShadow: stageType === t ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
-                }}>{t === 'recruiting' ? 'Recruiting' : 'Sales'}</button>
-              ))}
-            </div>
+            <SegTabs label="Pipeline type" value={stageType} onChange={setStageType} tabs={[{ key: 'recruiting', label: 'Recruiting' }, { key: 'sales', label: 'Sales' }]} />
 
             {/* View Toggle */}
-            <div style={{ display: 'flex', background: '#F1EFEA', borderRadius: '8px', padding: '3px', gap: '2px' }}>
-              {[{ v: 'board', label: 'Board' }, { v: 'table', label: 'Table' }].map(({ v, label }) => (
-                <button key={v} onClick={() => setView(v)} style={{
-                  padding: '6px 14px', borderRadius: '6px', border: 'none', fontSize: '1rem', fontWeight: 600, cursor: 'pointer',
-                  background: view === v ? '#fff' : 'transparent',
-                  color: view === v ? 'var(--text-primary)' : 'var(--text-secondary)',
-                  boxShadow: view === v ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
-                }}>{label}</button>
-              ))}
-            </div>
+            <SegTabs label="Layout" value={view} onChange={setView} tabs={[{ key: 'board', label: 'Board' }, { key: 'table', label: 'Table' }]} />
 
             {/* Filter Toggle */}
-            <button onClick={() => setShowFilters(!showFilters)} style={{
-              padding: '6px 14px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', fontSize: '0.9375rem', fontWeight: 500, cursor: 'pointer',
-              background: showFilters ? 'var(--brand-navy, #1B2A4A)' : '#fff',
-              color: showFilters ? '#fff' : 'var(--text-secondary)',
-            }}>
+            <button className="nxt-btn" onClick={() => setShowFilters(!showFilters)}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{flexShrink:0}}><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
               {' '}Filters {activeFilterCount > 0 && `(${activeFilterCount})`}
             </button>
 
             {/* Settings */}
-            <button onClick={() => setSettingsOpen(true)} style={{
-              padding: '6px 10px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', fontSize: '1rem', cursor: 'pointer', background: '#fff', color: 'var(--text-secondary)',
-            }} title="Customize stages & fields" aria-label="Pipeline settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+            <button className="nxt-btn nxt-btn-icon" onClick={() => setSettingsOpen(true)} title="Customize stages & fields" aria-label="Pipeline settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
 
             {/* Add Contact */}
-            <button onClick={() => setAddModalOpen(true)} style={{
-              padding: '8px 18px', borderRadius: '8px', border: 'none', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer',
-              background: 'var(--brand-gold, #E3A94A)', color: '#fff',
-            }}>+ Add Contact</button>
+            <button className="nxt-btn nxt-btn-primary" onClick={() => setAddModalOpen(true)}>+ Add Contact</button>
           </div>
         </div>
 
@@ -315,17 +289,14 @@ export default function BusinessPipelinePage() {
             <FilterSelect label="State" value={filterState} onChange={setFilterState} options={US_STATES.map(s => ({ value: s, label: s }))} />
             <FilterSelect label="Source" value={filterSource} onChange={setFilterSource} options={SOURCES} />
             {activeFilterCount > 0 && (
-              <button onClick={() => { setFilterType(''); setFilterPriority(''); setFilterState(''); setFilterSource(''); }} style={{
-                padding: '6px 12px', borderRadius: '6px', border: 'none', fontSize: '1rem', cursor: 'pointer',
-                background: '#fee2e2', color: '#DC2626', fontWeight: 600, alignSelf: 'flex-end',
-              }}>Clear All</button>
+              <button className="nxt-btn nxt-btn-sm" onClick={() => { setFilterType(''); setFilterPriority(''); setFilterState(''); setFilterSource(''); }}>Clear All</button>
             )}
           </div>
         )}
       </div>
 
       {/* ── Main Content ── */}
-      <div style={{ flex: 1, overflow: 'auto', padding: '0 28px 28px' }}>
+      <div style={{ flex: 1, overflow: 'auto', padding: '0 0 8px' }}>
         {view === 'board' ? (
           <BoardView
             stages={stages}
@@ -933,15 +904,8 @@ function AddContactModal({ stageType, stages, userProfile, onClose, onCreated })
 
         {/* Footer */}
         <div style={{ padding: '16px 24px', borderTop: '1px solid #F1EFEA', display: 'flex', justifyContent: 'flex-end', gap: '10px', flexShrink: 0 }}>
-          <button onClick={onClose} style={{
-            padding: '9px 20px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff',
-            fontSize: '1rem', fontWeight: 600, cursor: 'pointer', color: 'var(--text-secondary)',
-          }}>Cancel</button>
-          <button onClick={handleSubmit} disabled={saving} style={{
-            padding: '9px 24px', borderRadius: '8px', border: 'none',
-            background: 'var(--brand-gold, #E3A94A)', color: '#fff',
-            fontSize: '1rem', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.6 : 1,
-          }}>{saving ? 'Saving...' : 'Add Contact'}</button>
+          <button className="nxt-btn" onClick={onClose}>Cancel</button>
+          <button className="nxt-btn nxt-btn-primary" onClick={handleSubmit} disabled={saving}>{saving ? 'Saving...' : 'Add Contact'}</button>
         </div>
       </div>
     </div>
@@ -1055,7 +1019,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
             </div>
             <div style={{ display: 'flex', gap: '6px' }}>
               {!editing && (
-                <button onClick={() => setEditing(true)} style={{ padding: '6px 14px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', color: 'var(--text-primary)' }}>Edit</button>
+                <button className="nxt-btn nxt-btn-sm" onClick={() => setEditing(true)}>Edit</button>
               )}
               <button onClick={onClose} aria-label="Close" style={{ background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center' }}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             </div>
@@ -1142,18 +1106,18 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                 <textarea style={{ ...inputStyle, minHeight: '60px', resize: 'vertical' }} value={form.notes} onChange={e => set('notes', e.target.value)} />
               </div>
               <div style={{ display: 'flex', gap: '10px', justifyContent: 'space-between' }}>
-                <button onClick={() => setConfirmDelete(true)} style={{ padding: '8px 16px', borderRadius: '6px', border: '1px solid #fecaca', background: '#fef2f2', color: '#DC2626', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer' }}>Delete</button>
+                <button className="nxt-btn nxt-btn-danger" onClick={() => setConfirmDelete(true)}>Delete</button>
                 <div style={{ display: 'flex', gap: '8px' }}>
-                  <button onClick={() => setEditing(false)} style={{ padding: '8px 16px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer', color: 'var(--text-secondary)' }}>Cancel</button>
-                  <button onClick={handleSave} disabled={saving} style={{ padding: '8px 20px', borderRadius: '6px', border: 'none', background: 'var(--brand-gold, #E3A94A)', color: '#fff', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.6 : 1 }}>{saving ? 'Saving...' : 'Save'}</button>
+                  <button className="nxt-btn" onClick={() => setEditing(false)}>Cancel</button>
+                  <button className="nxt-btn nxt-btn-primary" onClick={handleSave} disabled={saving}>{saving ? 'Saving...' : 'Save'}</button>
                 </div>
               </div>
               {confirmDelete && (
                 <div style={{ marginTop: '12px', padding: '12px', background: '#fef2f2', borderRadius: '8px', border: '1px solid #fecaca' }}>
                   <p style={{ fontSize: '0.9375rem', color: '#DC2626', margin: '0 0 8px', fontWeight: 600 }}>Are you sure? This cannot be undone.</p>
                   <div style={{ display: 'flex', gap: '8px' }}>
-                    <button onClick={handleDelete} style={{ padding: '6px 14px', borderRadius: '6px', border: 'none', background: '#DC2626', color: '#fff', fontSize: '1rem', fontWeight: 600, cursor: 'pointer' }}>Yes, Delete</button>
-                    <button onClick={() => setConfirmDelete(false)} style={{ padding: '6px 14px', borderRadius: '6px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff', fontSize: '1rem', cursor: 'pointer' }}>Cancel</button>
+                    <button className="nxt-btn nxt-btn-danger" onClick={handleDelete}>Yes, Delete</button>
+                    <button className="nxt-btn" onClick={() => setConfirmDelete(false)}>Cancel</button>
                   </div>
                 </div>
               )}
@@ -1307,10 +1271,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                     onChange={e => setActivityNote(e.target.value)}
                     onKeyDown={e => { if (e.key === 'Enter') handleAddActivity(); }}
                   />
-                  <button onClick={handleAddActivity} disabled={addingActivity} style={{
-                    padding: '8px 16px', borderRadius: '8px', border: 'none', background: 'var(--brand-gold, #E3A94A)', color: '#fff',
-                    fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer', opacity: addingActivity ? 0.6 : 1, whiteSpace: 'nowrap',
-                  }}>{addingActivity ? '...' : 'Log'}</button>
+                  <button className="nxt-btn nxt-btn-primary" onClick={handleAddActivity} disabled={addingActivity}>{addingActivity ? '...' : 'Log'}</button>
                 </div>
               </div>
 
@@ -1445,13 +1406,13 @@ function SettingsModal({ settings, agencyId, stageType, onClose, onSaved }) {
               placeholder="New stage name..."
               style={{ flex: 1, padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', fontSize: '0.9375rem', outline: 'none' }}
             />
-            <button onClick={addStage} style={{ padding: '8px 16px', borderRadius: '8px', border: 'none', background: '#E3A94A', color: '#fff', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer' }}>Add</button>
+            <button className="nxt-btn nxt-btn-primary" onClick={addStage}>Add</button>
           </div>
         </div>
 
         <div style={{ padding: '16px 24px', borderTop: '1px solid #F1EFEA', display: 'flex', justifyContent: 'flex-end', gap: '10px', flexShrink: 0 }}>
-          <button onClick={onClose} style={{ padding: '8px 18px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.12)', background: '#fff', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer', color: 'var(--text-secondary)' }}>Cancel</button>
-          <button onClick={handleSave} disabled={saving} style={{ padding: '8px 22px', borderRadius: '8px', border: 'none', background: 'var(--brand-gold, #E3A94A)', color: '#fff', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer', opacity: saving ? 0.6 : 1 }}>{saving ? 'Saving...' : 'Save Changes'}</button>
+          <button className="nxt-btn" onClick={onClose}>Cancel</button>
+          <button className="nxt-btn nxt-btn-primary" onClick={handleSave} disabled={saving}>{saving ? 'Saving...' : 'Save Changes'}</button>
         </div>
       </div>
     </div>

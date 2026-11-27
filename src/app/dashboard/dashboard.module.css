@@ -987,7 +987,6 @@
    2026 redesign — dashboard layout and widgets
    ════════════════════════════════════════════════════════════════════ */
 .greetingText { font-size: clamp(34px, 3.4vw, 48px); font-weight: 400; letter-spacing: -0.05em; line-height: 1; }
-.greetingText::after { content: "."; color: var(--brand-gold); }
 .greetingDate { margin-top: 10px; font-size: 17px; }
 .quickPill { height: 46px; padding: 0 20px; border-radius: 999px; background: #fff; border: 0; font-size: 16px; font-weight: 550; box-shadow: var(--shadow-sm); transition: transform 0.5s var(--ease-out-expo), box-shadow 0.3s ease, background-color 0.3s ease; }
 .quickPill:hover { transform: translateY(-2px); background: var(--brand-navy); color: #fff; box-shadow: var(--shadow-md); }
@@ -1095,3 +1094,9 @@ button.miniTile:hover { transform: translateY(-3px); }
 @media (max-width: 760px) { .bottomRow3 { grid-template-columns: 1fr; } }
 .bottomRow3 .recruiterLabel { display: none; }
 .bottomRow3 .recruiterInfo { min-width: 0; flex: 1; }
+
+/* Same button scale as the rest of the CRM */
+.quickPill { height: 44px; padding: 0 20px; font-size: 15px; font-weight: 600; }
+.reviewLink { display: inline-flex; align-items: center; height: 34px; padding: 0 16px; border-radius: 999px; background: var(--brand-navy); color: #fff; font-size: 14px; font-weight: 600; white-space: nowrap; text-decoration: none; flex: none; }
+.reviewLink:hover { background: var(--brand-navy-light); text-decoration: none; }
+.headerLink, .emptyLink, .viewAll { white-space: nowrap; }

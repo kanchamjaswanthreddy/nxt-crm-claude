@@ -21,8 +21,8 @@
 .tileValue { margin: 18px 0 8px; font-size: clamp(32px, 3vw, 44px); font-weight: 350; letter-spacing: -0.05em; line-height: 1; color: var(--brand-navy); }
 .tileNote { margin: 0; font-size: 15px; color: var(--text-secondary); }
 
-.tabs { display: inline-flex; align-self: flex-start; gap: 4px; padding: 5px; margin-bottom: 16px; border-radius: 999px; background: #fff; box-shadow: var(--shadow-card); }
-.tab { display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 22px; border: 0; border-radius: 999px; background: transparent; font: inherit; font-size: 16px; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: background 0.25s, color 0.25s; }
+.tabs { display: inline-flex; align-self: flex-start; gap: 4px; padding: 4px; margin-bottom: 16px; border-radius: 999px; background: #fff; box-shadow: var(--shadow-card); }
+.tab { display: inline-flex; align-items: center; gap: 9px; min-height: 36px; padding: 0 18px; border: 0; border-radius: 999px; background: transparent; font: inherit; font-size: 15px; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: background 0.25s, color 0.25s; }
 .tab b { padding: 2px 9px; border-radius: 999px; background: var(--border-light); font-size: 13px; font-weight: 650; color: var(--text-secondary); }
 .tab[aria-selected="true"] { background: var(--brand-navy); color: #fff; }
 .tab[aria-selected="true"] b { background: #E3A94A; color: var(--brand-navy); }

@@ -1071,31 +1071,17 @@ export default function ProfilePage() {
                   </div>
                   <div style={{ display: 'flex', gap: '6px', flexShrink: 0 }}>
                     {complianceDocs.eo_certificate && (
-                      <button
+                      <button className="nxt-btn nxt-btn-sm"
                         type="button"
                         onClick={() => handleViewDoc(complianceDocs.eo_certificate.id)}
-                        style={{
-                          padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--border-color)',
-                          backgroundColor: 'var(--surface-card)', fontFamily: 'var(--font-base)',
-                          fontSize: 'var(--text-caption)', fontWeight: 600, color: 'var(--brand-navy)',
-                          cursor: 'pointer', transition: 'background-color 0.15s ease',
-                        }}
                       >
                         View
                       </button>
                     )}
-                    <button
+                    <button className="nxt-btn nxt-btn-sm"
                       type="button"
                       onClick={() => eoFileRef.current?.click()}
                       disabled={docUploading.eo_certificate}
-                      style={{
-                        padding: '6px 14px', borderRadius: '8px', border: 'none',
-                        backgroundColor: 'var(--brand-navy)', color: '#fff',
-                        fontFamily: 'var(--font-base)', fontSize: 'var(--text-caption)', fontWeight: 600,
-                        cursor: docUploading.eo_certificate ? 'not-allowed' : 'pointer',
-                        opacity: docUploading.eo_certificate ? 0.6 : 1,
-                        transition: 'opacity 0.15s ease',
-                      }}
                     >
                       {docUploading.eo_certificate ? `Uploading ${docUploadProgress.eo_certificate}%` : complianceDocs.eo_certificate ? 'Replace' : 'Upload'}
                     </button>
@@ -1187,31 +1173,17 @@ export default function ProfilePage() {
                   </div>
                   <div style={{ display: 'flex', gap: '6px', flexShrink: 0 }}>
                     {complianceDocs.anti_money_laundering && (
-                      <button
+                      <button className="nxt-btn nxt-btn-sm"
                         type="button"
                         onClick={() => handleViewDoc(complianceDocs.anti_money_laundering.id)}
-                        style={{
-                          padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--border-color)',
-                          backgroundColor: 'var(--surface-card)', fontFamily: 'var(--font-base)',
-                          fontSize: 'var(--text-caption)', fontWeight: 600, color: 'var(--brand-navy)',
-                          cursor: 'pointer', transition: 'background-color 0.15s ease',
-                        }}
                       >
                         View
                       </button>
                     )}
-                    <button
+                    <button className="nxt-btn nxt-btn-sm"
                       type="button"
                       onClick={() => amlFileRef.current?.click()}
                       disabled={docUploading.anti_money_laundering}
-                      style={{
-                        padding: '6px 14px', borderRadius: '8px', border: 'none',
-                        backgroundColor: 'var(--brand-navy)', color: '#fff',
-                        fontFamily: 'var(--font-base)', fontSize: 'var(--text-caption)', fontWeight: 600,
-                        cursor: docUploading.anti_money_laundering ? 'not-allowed' : 'pointer',
-                        opacity: docUploading.anti_money_laundering ? 0.6 : 1,
-                        transition: 'opacity 0.15s ease',
-                      }}
                     >
                       {docUploading.anti_money_laundering ? `Uploading ${docUploadProgress.anti_money_laundering}%` : complianceDocs.anti_money_laundering ? 'Replace' : 'Upload'}
                     </button>

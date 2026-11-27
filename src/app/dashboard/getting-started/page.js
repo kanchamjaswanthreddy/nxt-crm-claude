@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useUser } from '@/context/UserContext';
 import PageHeader from '@/components/ui/PageHeader';
 
+import SegTabs from '@/components/ui/SegTabs';
 /* ───── Reusable Primitives ───── */
 
 const Callout = ({ variant = 'note', children }) => {
@@ -123,13 +124,8 @@ function SetupChecklist({ agentData }) {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           {allDone && (
-            <button
+            <button className="nxt-btn nxt-btn-sm"
               onClick={handleDismiss}
-              style={{
-                padding: '6px 14px', borderRadius: '8px', border: '1px solid rgba(47,168,79,0.2)',
-                background: 'rgba(47,168,79,0.08)', color: 'var(--status-success)',
-                fontSize: 'var(--text-caption)', fontWeight: 600, cursor: 'pointer',
-              }}
             >
               Dismiss
             </button>
@@ -180,6 +176,12 @@ const TABS = [
   { key: 'launch', label: 'Launch', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13" /><path d="M22 2L15 22l-4-9-9-4 20-7z" /></svg> },
 ];
 
+// The dashboard panel scrolls, not the window (window is kept for phones).
+function scrollPageTop() {
+  document.getElementById('main-content')?.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 export default function GettingStartedPage() {
   const [tab, setTab] = useState('welcome');
   const { userProfile } = useUser();
@@ -196,38 +198,7 @@ export default function GettingStartedPage() {
       <div style={{ marginBottom: 'var(--space-4)' }}>
         <PageHeader title="Your Roadmap" subtitle={`Everything you need, in the order you need it. Step ${tabIdx + 1} of ${TABS.length}.`} />
 
-        <div style={{ display: 'flex', gap: '8px', borderBottom: '2px solid var(--border-color)', paddingBottom: '0' }}>
-          {TABS.map((t, i) => {
-            const active = tab === t.key;
-            return (
-              <button
-                key={t.key}
-                onClick={() => setTab(t.key)}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: '8px',
-                  padding: '12px 20px', border: 'none', cursor: 'pointer',
-                  fontSize: 'var(--text-secondary)', fontWeight: active ? '700' : '500',
-                  color: active ? 'var(--brand-navy)' : 'var(--text-secondary)',
-                  backgroundColor: 'transparent',
-                  borderBottom: active ? '3px solid var(--brand-gold)' : '3px solid transparent',
-                  marginBottom: '-2px', transition: 'all 0.2s',
-                }}
-              >
-                <span style={{ opacity: active ? 1 : 0.5 }}>{t.icon}</span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{
-                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                    width: '20px', height: '20px', borderRadius: '50%',
-                    fontSize: '13px', fontWeight: '700',
-                    backgroundColor: active ? 'var(--brand-gold)' : 'rgba(0,0,0,0.06)',
-                    color: active ? 'var(--brand-navy)' : 'var(--text-secondary)',
-                  }}>{i + 1}</span>
-                  {t.label}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+        <SegTabs label="Roadmap steps" value={tab} onChange={setTab} tabs={TABS.map((t, i) => ({ key: t.key, label: `${i + 1}. ${t.label}` }))} />
       </div>
 
       {/* ────────── TAB: WELCOME ────────── */}
@@ -271,12 +242,8 @@ export default function GettingStartedPage() {
             This is a genuine business, not a side hobby. The agents who thrive approach it with that mindset from the start.
           </p>
 
-          <button onClick={() => { setTab('foundation'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{
-            backgroundColor: 'var(--brand-gold)', color: 'var(--brand-navy)', border: 'none',
-            padding: '14px 40px', borderRadius: '10px', fontSize: 'var(--text-secondary)',
-            fontWeight: '700', cursor: 'pointer', letterSpacing: '0.04em',
-          }}>
-            BEGIN YOUR JOURNEY
+          <button className="nxt-btn nxt-btn-primary" onClick={() => { setTab('foundation'); scrollPageTop(); }}>
+            Begin Your Journey
           </button>
         </div>
       )}
@@ -327,8 +294,8 @@ export default function GettingStartedPage() {
               </ul>
 
               <p style={{ color: 'var(--brand-navy)', fontWeight: '600', marginBottom: '10px', fontSize: 'var(--text-secondary)' }}>Regulations differ from state to state.</p>
-              <button onClick={() => window.open('https://nipr.com/licensing-center/state-requirements', '_blank')} style={goldPillBtn}>
-                Look up your state&apos;s rules &rarr;
+              <button className="nxt-btn" onClick={() => window.open('https://nipr.com/licensing-center/state-requirements', '_blank')}>
+                Look Up Your State&apos;s Rules
               </button>
 
               <h4 style={{ fontWeight: 'bold', color: 'var(--brand-navy)', marginBottom: '10px', marginTop: 'var(--space-3)' }}>Plan ahead</h4>
@@ -417,8 +384,8 @@ export default function GettingStartedPage() {
               <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-3)', fontSize: 'var(--text-secondary)' }}>
                 Each US state governs insurance licensing independently. Understand your local requirements before spending anything.
               </p>
-              <button onClick={() => window.open('https://nipr.com/licensing-center/state-requirements', '_blank')} style={goldPillBtn}>
-                Check your state&apos;s requirements &rarr;
+              <button className="nxt-btn" onClick={() => window.open('https://nipr.com/licensing-center/state-requirements', '_blank')}>
+                Check Your State&apos;s Requirements
               </button>
               <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-3)', marginTop: '16px', fontSize: 'var(--text-secondary)', lineHeight: '1.6' }}>
                 <strong style={{ color: 'var(--brand-navy)' }}>Start with Life insurance.</strong> That is our primary line of business. Some states issue Accident &amp; Health as a separate license; others bundle it into a combined &quot;Life, Accident &amp; Health&quot; credential. Verify which structure your state uses before enrolling in anything.
@@ -464,8 +431,8 @@ export default function GettingStartedPage() {
                 </p>
               </div>
 
-              <button onClick={() => window.open('https://checkout.examfx.com/default.aspx?OrganizationId=shiv@nxtfinancialgroup.com', '_blank')} style={goldPillBtn}>
-                Enroll with NXT Discount &rarr;
+              <button className="nxt-btn nxt-btn-primary" onClick={() => window.open('https://checkout.examfx.com/default.aspx?OrganizationId=shiv@nxtfinancialgroup.com', '_blank')}>
+                Enroll With NXT Discount
               </button>
 
               <Expandable heading="What's included in the ExamFX course?">
@@ -564,8 +531,8 @@ export default function GettingStartedPage() {
               <p style={{ marginBottom: '12px' }}>
                 Check your state&apos;s CE requirements at <a href="https://www.examfx.com/ce-state-requirements" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-navy)', fontWeight: '600', textDecoration: 'underline' }}>ExamFX CE State Requirements</a>.
               </p>
-              <button onClick={() => window.open('https://checkout.examfx.com/default.aspx?OrganizationId=shiv@nxtfinancialgroup.com', '_blank')} style={goldPillBtn}>
-                Access CE Library &rarr;
+              <button className="nxt-btn" onClick={() => window.open('https://checkout.examfx.com/default.aspx?OrganizationId=shiv@nxtfinancialgroup.com', '_blank')}>
+                Access CE Library
               </button>
             </Expandable>
           </Card>
@@ -590,12 +557,8 @@ export default function GettingStartedPage() {
             <p style={{ fontSize: 'var(--text-body)', color: 'rgba(255,255,255,0.6)', maxWidth: '550px', margin: '0 auto 32px' }}>
               The toughest stretch is behind you. Next up: getting cleared to sell.
             </p>
-            <button onClick={() => { setTab('launch'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{
-              backgroundColor: 'var(--brand-gold)', color: 'var(--brand-navy)', border: 'none',
-              padding: '14px 36px', borderRadius: '10px', fontWeight: '700', cursor: 'pointer',
-              fontSize: 'var(--text-secondary)', letterSpacing: '0.04em',
-            }}>
-              CONTINUE TO LAUNCH &rarr;
+            <button className="nxt-btn nxt-btn-primary" onClick={() => { setTab('launch'); scrollPageTop(); }}>
+              Continue to Launch
             </button>
           </div>
 
@@ -632,13 +595,8 @@ export default function GettingStartedPage() {
                 <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-secondary)', lineHeight: '1.6', margin: '0 0 12px' }}>
                   Use the SuranceBay AML portal to complete your certification online. Once finished, download your certificate as a PDF.
                 </p>
-                <a href="https://aml.surancebay.com/" target="_blank" rel="noopener noreferrer" style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '6px',
-                  backgroundColor: 'var(--brand-navy)', color: '#fff', padding: '10px 20px',
-                  borderRadius: '8px', fontSize: '16px', fontWeight: 600, textDecoration: 'none',
-                  transition: 'opacity 0.15s',
-                }}>
-                  Start AML Certification &#x2192;
+                <a className="nxt-btn nxt-btn-primary" href="https://aml.surancebay.com/" target="_blank" rel="noopener noreferrer">
+                  Start AML Certification
                 </a>
               </div>
 
@@ -674,8 +632,8 @@ export default function GettingStartedPage() {
                 <li><Dot /><strong style={{ color: 'var(--brand-navy)' }}>Certificate available instantly</strong> — download your PDF right after purchase</li>
               </ul>
 
-              <button onClick={() => window.open('https://track.nextinsurance.com/links?agent_affiliation=hvgFpKsKeEKIC4Sz&serial=992855993&channel=affiliation', '_blank')} style={goldPillBtn}>
-                Get Your E&amp;O Quote &rarr;
+              <button className="nxt-btn nxt-btn-primary" onClick={() => window.open('https://track.nextinsurance.com/links?agent_affiliation=hvgFpKsKeEKIC4Sz&serial=992855993&channel=affiliation', '_blank')}>
+                Get Your E&amp;O Quote
               </button>
 
               <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-3)', fontSize: 'var(--text-secondary)', lineHeight: '1.6' }}>
@@ -820,20 +778,11 @@ export default function GettingStartedPage() {
               Three stages of real work — and you completed them all. From here, it is all about building: your clients, your team, your business.
             </p>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-3)' }}>
-              <button onClick={() => { setTab('licensing'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{
-                background: 'transparent', border: 'none', color: 'var(--brand-navy)',
-                fontSize: 'var(--text-secondary)', fontWeight: '600', cursor: 'pointer',
-              }}>
-                &larr; Previous
+              <button className="nxt-btn" onClick={() => { setTab('licensing'); scrollPageTop(); }}>
+                Previous
               </button>
-              <Link href="/dashboard" style={{
-                display: 'inline-flex', alignItems: 'center', gap: '8px',
-                backgroundColor: 'var(--brand-navy)', color: '#fff',
-                padding: '14px 32px', borderRadius: '10px',
-                fontWeight: 'bold', textDecoration: 'none',
-                fontSize: 'var(--text-secondary)', letterSpacing: '0.04em',
-              }}>
-                GO TO YOUR DASHBOARD &rarr;
+              <Link className="nxt-btn nxt-btn-primary" href="/dashboard">
+                Go to Your Dashboard
               </Link>
             </div>
           </div>
@@ -854,14 +803,8 @@ export default function GettingStartedPage() {
             Your manager is your first point of contact, but our onboarding team is also available.
           </p>
         </div>
-        <button
+        <button className="nxt-btn nxt-btn-primary"
           onClick={() => window.location.href = 'mailto:support@nxtfinancialgroup.com?subject=Onboarding%20Support%20Request'}
-          style={{
-            display: 'flex', alignItems: 'center', gap: '8px',
-            padding: '10px 20px', backgroundColor: 'var(--brand-navy)', color: '#fff',
-            border: 'none', borderRadius: '8px', cursor: 'pointer',
-            fontWeight: '600', fontSize: 'var(--text-caption)', flexShrink: 0,
-          }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
           Reach Out
@@ -881,15 +824,8 @@ function StepNav({ currentIdx, tabs, onChangeTab }) {
       borderTop: '2px solid var(--border-color)',
     }}>
       {hasPrev ? (
-        <button
-          onClick={() => { onChangeTab(tabs[currentIdx - 1].key); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          style={{
-            display: 'flex', alignItems: 'center', gap: '8px',
-            padding: '12px 24px', borderRadius: '10px',
-            border: '1.5px solid var(--border-color)', backgroundColor: 'transparent',
-            cursor: 'pointer', fontSize: 'var(--text-secondary)', fontWeight: '600',
-            color: 'var(--brand-navy)', transition: 'all 0.2s',
-          }}
+        <button className="nxt-btn"
+          onClick={() => { onChangeTab(tabs[currentIdx - 1].key); scrollPageTop(); }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
           {tabs[currentIdx - 1].label}
@@ -901,15 +837,8 @@ function StepNav({ currentIdx, tabs, onChangeTab }) {
       </span>
 
       {hasNext ? (
-        <button
-          onClick={() => { onChangeTab(tabs[currentIdx + 1].key); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          style={{
-            display: 'flex', alignItems: 'center', gap: '8px',
-            padding: '12px 24px', borderRadius: '10px',
-            border: 'none', backgroundColor: 'var(--brand-navy)',
-            cursor: 'pointer', fontSize: 'var(--text-secondary)', fontWeight: '600',
-            color: '#fff', transition: 'all 0.2s',
-          }}
+        <button className="nxt-btn nxt-btn-primary"
+          onClick={() => { onChangeTab(tabs[currentIdx + 1].key); scrollPageTop(); }}
         >
           {tabs[currentIdx + 1].label}
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>

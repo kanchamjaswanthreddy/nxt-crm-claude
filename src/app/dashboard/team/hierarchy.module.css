@@ -62,8 +62,8 @@
 .kpi[data-tone="navy"] b { color: #fff; font-size: clamp(36px, 3.6vw, 54px); font-weight: 300; }
 .kpi[data-tone="amber"] { background: var(--amber-soft); box-shadow: none; }
 
-.tabs { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 5px; margin-bottom: 18px; border-radius: 999px; background: #fff; box-shadow: var(--shadow-card); }
-.tab { min-height: 44px; padding: 0 22px; border: 0; border-radius: 999px; background: transparent; font: inherit; font-size: 16px; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: background 0.25s, color 0.25s; }
+.tabs { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; margin-bottom: 18px; border-radius: 999px; background: #fff; box-shadow: var(--shadow-card); }
+.tab { min-height: 36px; padding: 0 18px; border: 0; border-radius: 999px; background: transparent; font: inherit; font-size: 15px; white-space: nowrap; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: background 0.25s, color 0.25s; }
 .tab[aria-selected="true"] { background: var(--brand-navy); color: #fff; }
 .tab:focus-visible, .toggle:focus-visible, .ctrl:focus-visible { outline: 3px solid #E3A94A; outline-offset: 2px; }
 

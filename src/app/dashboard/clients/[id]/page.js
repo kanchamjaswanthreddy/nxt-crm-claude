@@ -11,6 +11,7 @@ import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
+import SegTabs from '@/components/ui/SegTabs';
 function CarrierCombobox({ value, onChange, carriers }) {
   const [open, setOpen] = useState(false);
   const filtered = carriers.filter(n => !value || n.toLowerCase().includes(value.toLowerCase()));
@@ -366,17 +367,10 @@ export default function ClientDetailPage({ params }) {
   return (
     <div>
       {/* Back button */}
-      <button
+      <button className="nxt-back"
         onClick={() => router.push('/dashboard/clients')}
-        style={{
-          background: 'none', border: 'none', color: 'var(--text-secondary)',
-          cursor: 'pointer', fontSize: '16px', display: 'flex', alignItems: 'center',
-          gap: '6px', marginBottom: '20px', padding: 0,
-        }}
-        onMouseEnter={(e) => e.currentTarget.style.color = 'var(--brand-navy)'}
-        onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
       >
-        <span style={{ fontSize: '18px' }}>&larr;</span> Back to Clients
+        Back to Clients
       </button>
 
       {/* Client Header Card */}
@@ -398,7 +392,7 @@ export default function ClientDetailPage({ params }) {
 
           {/* Name & contact */}
           <div style={{ flex: 1, minWidth: '200px' }}>
-            <h1 style={{ margin: '0 0 6px', color: 'var(--brand-navy)', fontSize: '24px', fontWeight: 800 }}>
+            <h1 data-plain style={{ margin: '0 0 6px', color: 'var(--brand-navy)', fontSize: '24px', fontWeight: 800 }}>
               {client.firstName} {client.lastName}
             </h1>
             <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', fontSize: '16px', color: 'var(--text-secondary)' }}>
@@ -447,26 +441,12 @@ export default function ClientDetailPage({ params }) {
       ]} />
 
       {/* Tab navigation */}
-      <div style={{
-        display: 'flex', gap: '0', borderBottom: '2px solid var(--border-color)',
-        marginBottom: '24px',
-      }}>
-        {['overview', 'policies', 'notes'].map(tab => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            style={{
-              padding: '12px 24px', border: 'none', background: 'none',
-              fontSize: '16px', fontWeight: 600, cursor: 'pointer',
-              color: activeTab === tab ? 'var(--brand-navy)' : 'var(--text-secondary)',
-              borderBottom: activeTab === tab ? '2px solid var(--brand-navy)' : '2px solid transparent',
-              marginBottom: '-2px', textTransform: 'capitalize',
-              transition: 'color 0.15s, border-color 0.15s',
-            }}
-          >
-            {tab === 'policies' ? `Policies (${policies.length})` : tab === 'notes' ? `Notes (${notes.length})` : tab}
-          </button>
-        ))}
+      <div style={{ marginBottom: '24px' }}>
+        <SegTabs label="Client sections" value={activeTab} onChange={setActiveTab} tabs={[
+          { key: 'overview', label: 'Overview' },
+          { key: 'policies', label: 'Policies', count: policies.length },
+          { key: 'notes', label: 'Notes', count: notes.length },
+        ]} />
       </div>
 
       {/* Overview Tab */}
@@ -601,8 +581,8 @@ export default function ClientDetailPage({ params }) {
 
                       {/* Actions */}
                       <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
-                        <button onClick={() => openEditPolicy(policy)} style={actionBtnStyle}>Edit</button>
-                        <button onClick={() => handleDeletePolicy(policy.id)} style={{ ...actionBtnStyle, color: 'var(--status-error)' }}>Delete</button>
+                        <button className="nxt-btn nxt-btn-sm" onClick={() => openEditPolicy(policy)}>Edit</button>
+                        <button className="nxt-btn nxt-btn-sm nxt-btn-danger" onClick={() => handleDeletePolicy(policy.id)}>Delete</button>
                       </div>
                     </div>
                   </Card>
@@ -757,7 +737,7 @@ export default function ClientDetailPage({ params }) {
                       marginBottom: '6px',
                     }}>
                       <span style={{ flex: 1 }}>{b.name} — {b.relationship} ({b.percentage}%)</span>
-                      <button onClick={() => removeBeneficiary(i)} style={{ ...actionBtnStyle, color: 'var(--status-error)', fontSize: '14px' }}>Remove</button>
+                      <button className="nxt-btn nxt-btn-sm nxt-btn-danger" onClick={() => removeBeneficiary(i)}>Remove</button>
                     </div>
                   ))}
                 </div>
@@ -775,7 +755,7 @@ export default function ClientDetailPage({ params }) {
                   <label style={fieldLabelStyle}>%</label>
                   <input type="number" value={beneficiaryPercent} onChange={(e) => setBeneficiaryPercent(e.target.value)} placeholder="100" style={fieldInputStyle} />
                 </div>
-                <Button variant="secondary" onClick={addBeneficiary} disabled={!beneficiaryName} type="button" style={{ marginBottom: '2px' }}>Add</Button>
+                <Button variant="secondary" onClick={addBeneficiary} disabled={!beneficiaryName} type="button">Add</Button>
               </div>
             </div>
 

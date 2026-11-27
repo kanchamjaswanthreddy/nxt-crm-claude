@@ -228,7 +228,7 @@ export default function ContractsPage() {
                     <td style={tdStyle}>{(c.productLines || []).join(', ') || '--'}</td>
                     {isAdmin && (
                       <td style={tdStyle}>
-                        <button onClick={() => openEdit(c)} style={{ background: 'none', border: 'none', color: 'var(--brand-blue-accent)', cursor: 'pointer', fontSize: '15px', fontWeight: '500' }}>Edit</button>
+                        <button className="nxt-btn nxt-btn-sm" onClick={() => openEdit(c)}>Edit</button>
                       </td>
                     )}
                   </tr>
