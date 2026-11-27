@@ -1,3 +1,4 @@
+import { getDisplayName } from '@/lib/constants';
 import { NextResponse } from 'next/server';
 import { requireUser, requireAdmin } from '@/lib/serverAuth';
 import { getAdminApp } from '@/lib/firebase/adminApp';
@@ -110,7 +111,7 @@ export async function GET() {
           const hasCard = !!(d.stripe_customer_id && d.stripe_subscription_id && d.payment?.cardLastFour);
           const info = {
             id: doc.id,
-            name: [d.first_name, d.last_name].filter(Boolean).join(' ') || d.email || 'Unknown',
+            name: getDisplayName(d) || d.email || 'Unknown',
             email: d.email || '',
             role: d.role || 'agent',
             status: d.status || 'unknown',
