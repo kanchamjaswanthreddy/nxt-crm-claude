@@ -1,0 +1,53 @@
+/* Sign-in backdrop: one continuous reel. --n = number of flyers, --total = one full loop. */
+.reelWrap { --pitch: 86vw; --lpitch: 118vw; position: absolute; inset: 0; overflow: hidden; background: #F1EFEA; }
+
+.reel { position: absolute; left: 44vw; top: -2vh; height: 104vh; animation: reelPan var(--total) linear infinite; will-change: transform; }
+@keyframes reelPan { to { transform: translateX(calc(var(--n) * var(--pitch) * -1)); } }
+.photo { position: absolute; top: 0; left: calc(var(--k) * var(--pitch) - 12vw); width: calc(var(--pitch) + 24vw); height: 100%; background-size: cover; filter: saturate(1.15) contrast(1.06);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 24%, #000 76%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 24%, #000 76%, transparent 100%); }
+
+.tint { position: absolute; inset: 0; background: linear-gradient(120deg, rgba(227, 169, 74, 0.42), rgba(245, 217, 160, 0.12) 60%, rgba(138, 90, 11, 0.28)); mix-blend-mode: multiply; }
+
+.letters { position: absolute; left: 0; top: -22vh; mix-blend-mode: multiply; animation: letterPan var(--total) linear infinite; will-change: transform; }
+@keyframes letterPan { to { transform: translateX(calc(var(--n) * var(--lpitch) * -1)); } }
+.letters span { position: absolute; top: 0; left: calc(var(--k) * var(--lpitch) + 32vw); font-size: 112vh; font-weight: 700; line-height: 1; opacity: 0.5; color: transparent;
+  background: linear-gradient(160deg, #F5D9A0, #E3A94A 55%, #8A5A0B); -webkit-background-clip: text; background-clip: text; }
+
+.wash { position: absolute; inset: 0; background:
+  linear-gradient(100deg, #F1EFEA 0%, #F1EFEA 24%, rgba(241, 239, 234, 0.9) 36%, rgba(241, 239, 234, 0.35) 52%, rgba(241, 239, 234, 0) 66%),
+  linear-gradient(0deg, rgba(241, 239, 234, 0.85) 0%, rgba(241, 239, 234, 0) 34%),
+  linear-gradient(180deg, rgba(241, 239, 234, 0.8) 0%, rgba(241, 239, 234, 0) 22%); }
+
+/* Headline for each flyer: stays in one place and changes as its photo passes. */
+.copy { position: absolute; left: clamp(28px, 5vw, 76px); bottom: clamp(96px, 14vh, 130px); width: min(46vw, calc(100vw - 640px)); }
+.tag { display: inline-block; padding: 8px 16px; border-radius: 999px; background: #E3A94A; color: #0C1022; font-size: 15px; font-weight: 700; animation: copyUp var(--total) cubic-bezier(0.2, 0.9, 0.2, 1) infinite both; }
+.headline { margin: 18px 0; font-size: clamp(40px, 5vw, 84px); white-space: nowrap; font-weight: 500; letter-spacing: -0.055em; line-height: 0.98; color: #0C1022; }
+.headline span { display: block; overflow: hidden; padding: 0.12em 0 0.1em; margin-top: -0.12em; }
+.headline b { display: inline-block; font-weight: 500; animation: copyRise var(--total) cubic-bezier(0.2, 0.9, 0.2, 1) infinite both; }
+.headline .gold { color: #8A5A0B; }
+.headline i { font-style: normal; color: #E3A94A; }
+.text { margin: 0; max-width: 30rem; font-size: clamp(17px, 1.5vw, 22px); font-weight: 500; line-height: 1.35; color: #26241F; animation: copyUp var(--total) cubic-bezier(0.2, 0.9, 0.2, 1) infinite both; }
+/* Each flyer owns 1/9 of the loop (11.1%): in by 1.6%, out from 9.6%. */
+@keyframes copyRise { 0% { transform: translateY(125%); } 1.6%, 9.6% { transform: none; } 11.1%, 100% { transform: translateY(-125%); } }
+@keyframes copyUp { 0% { opacity: 0; transform: translateY(26px); } 1.6%, 9.6% { opacity: 1; transform: none; } 11.1%, 100% { opacity: 0; transform: translateY(-18px); } }
+
+.dots i { position: absolute; bottom: -30px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #F5D9A0, #E3A94A); animation: dotFloat linear infinite; }
+@keyframes dotFloat { to { transform: translateY(-112vh) translateX(60px); } }
+
+.progress { position: absolute; left: clamp(28px, 5vw, 76px); bottom: clamp(44px, 7vh, 64px); width: 260px; height: 6px; border-radius: 6px; background: rgba(12, 16, 34, 0.16); overflow: hidden; }
+.progress i { display: block; height: 100%; border-radius: 6px; background: #0C1022; animation: reelProgress var(--total) linear infinite; }
+@keyframes reelProgress { from { width: 0; } to { width: 100%; } }
+
+/* Phones and narrow windows: keep the moving photos, drop the big type so the form has the screen. */
+@media (max-width: 900px) {
+  .copy, .progress, .letters { display: none; }
+  .reel { left: 10vw; }
+  .wash { background: linear-gradient(180deg, rgba(241, 239, 234, 0.92) 0%, rgba(241, 239, 234, 0.55) 30%, rgba(241, 239, 234, 0.75) 100%); }
+}
+
+/* Reduced motion: one still flyer, nothing moving. */
+@media (prefers-reduced-motion: reduce) {
+  .reel, .letters, .dots i, .progress i, .tag, .headline b, .text { animation: none; }
+  .copy:not(:first-of-type) { display: none; }
+  .dots, .progress { display: none; }
+}
