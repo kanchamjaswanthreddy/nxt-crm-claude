@@ -1,6 +1,7 @@
 'use server';
 
 import { getAdminApp, generateVerificationLinkREST } from '@/lib/firebase/adminApp';
+import { computeDocChecklist } from '@/lib/documentTypes';
 import { sendVerificationEmail } from '@/lib/email/resend';
 import { requireUser, requireAdmin, requireOwner, requireApprover, isInSubtree } from '@/lib/serverAuth';
 import { getDisplayName } from '@/lib/constants';
@@ -410,6 +411,9 @@ export async function rejectDocument(docId, reason) {
       reviewedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
+    // A rejected document means onboarding is no longer complete.
+    await updateAgentDocStatus(db, admin, docData.agentId);
+
     // Log activity
     const { logActivity } = await import('@/lib/activityLogger');
     logActivity({
@@ -448,32 +452,30 @@ export async function rejectDocument(docId, reason) {
 }
 
 async function updateAgentDocStatus(db, admin, agentId) {
-  const allDocs = await db.collection('agentDocuments').where('agentId', '==', agentId).get();
-  if (allDocs.empty) return;
+  const [allDocs, agentSnap] = await Promise.all([
+    db.collection('agentDocuments').where('agentId', '==', agentId).get(),
+    db.collection('agents').doc(agentId).get(),
+  ]);
+  if (allDocs.empty || !agentSnap.exists) return;
+  const agentData = agentSnap.data();
 
-  let uploaded = 0;
-  let approved = 0;
-  allDocs.forEach(d => {
-    uploaded++;
-    if (d.data().status === 'approved') approved++;
-  });
+  // Onboarding is complete when every document on the checklist (see lib/documentTypes.js)
+  // has been uploaded AND approved. This replaced "any five documents, all approved".
+  const docs = allDocs.docs.map(d => ({ docType: d.data().docType, status: d.data().status }));
+  const list = computeDocChecklist(agentData, docs);
 
-  const allApproved = uploaded >= 5 && approved === uploaded;
-
-  if (allApproved) {
-    const agentSnap = await db.collection('agents').doc(agentId).get();
-    if (agentSnap.exists) {
-      const agentData = agentSnap.data();
-      const hasLicense = agentData.npn && agentData.licensedStates?.length > 0;
-      await db.collection('agents').doc(agentId).update({
-        'onboardingProgress.documentsUploaded': true,
-        'onboardingProgress.documentsApproved': true,
-        status: hasLicense ? 'active' : 'pending_licensing',
-      });
-    }
+  if (list.complete) {
+    const hasLicense = agentData.npn && agentData.licensedStates?.length > 0;
+    await db.collection('agents').doc(agentId).update({
+      'onboardingProgress.documentsUploaded': true,
+      'onboardingProgress.documentsApproved': true,
+      'onboardingProgress.documentsApprovedAt': agentData.onboardingProgress?.documentsApprovedAt || new Date().toISOString(),
+      // Never move someone who is already active back a step.
+      ...(agentData.status === 'active' ? {} : { status: hasLicense ? 'active' : 'pending_licensing' }),
+    });
   } else {
     await db.collection('agents').doc(agentId).update({
-      'onboardingProgress.documentsUploaded': uploaded > 0,
+      'onboardingProgress.documentsUploaded': list.uploaded > 0,
       'onboardingProgress.documentsApproved': false,
     });
   }

@@ -54,9 +54,9 @@ export default function OnboardingDocsCard({ agent }) {
         <span className={s.text}>
           <span className={s.badge} data-wait={waiting || undefined}>{waiting ? 'Documents in review' : 'Onboarding pending'}</span>
           <span className={s.title}>
-            {waiting ? 'Everything is uploaded. We are reviewing your documents.' : `${todo.length} document${todo.length !== 1 ? 's' : ''} still to upload`}
+            {waiting ? 'Everything is uploaded. Your team head is reviewing your documents.' : `${todo.length} document${todo.length !== 1 ? 's' : ''} still to upload`}
           </span>
-          <span className={s.sub}>{waiting ? 'You will see each one turn to Approved here.' : 'Tap a document to upload it now, or open the full list.'}</span>
+          <span className={s.sub}>{waiting ? 'Onboarding is complete once every document is approved.' : 'Tap a document to upload it now, or open the full list.'}</span>
         </span>
         <span className={s.go}>Open documents</span>
       </Link>

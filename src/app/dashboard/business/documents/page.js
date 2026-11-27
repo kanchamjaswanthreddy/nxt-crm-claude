@@ -220,9 +220,9 @@ export default function DocumentsManagerPage() {
         <section className={ck.wrap} aria-label="Your onboarding documents">
           <header className={ck.head}>
             <div>
-              <h2 className={ck.title}>{checklist.complete ? 'Onboarding documents complete' : checklist.toUpload > 0 ? 'Onboarding pending' : 'Documents in review'}</h2>
+              <h2 className={ck.title}>{checklist.complete ? 'Onboarding complete' : checklist.toUpload > 0 ? 'Onboarding pending' : 'Documents in review'}</h2>
               <p className={ck.sub}>
-                {checklist.complete ? 'Every document is approved.' : checklist.toUpload > 0
+                {checklist.complete ? 'Every document is uploaded and approved.' : checklist.toUpload > 0
                   ? `${checklist.toUpload} of ${checklist.total} still to upload. Accepted files: PDF, JPG or PNG, up to 20 MB.`
                   : 'Everything is uploaded. Each one turns to Approved once it has been reviewed.'}
               </p>

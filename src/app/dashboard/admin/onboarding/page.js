@@ -74,7 +74,7 @@ export default function TeamOnboardingPage() {
       <StatTiles items={[
         { label: 'Still uploading documents', value: counts.todo, onClick: () => setFilter('todo'), active: filter === 'todo' },
         { label: 'Waiting for review', value: counts.review, tone: counts.review > 0 ? 'amber' : undefined, onClick: () => setFilter('review'), active: filter === 'review' },
-        { label: 'Documents complete', value: counts.done, tone: 'good', onClick: () => setFilter('done'), active: filter === 'done' },
+        { label: 'Onboarding complete', value: counts.done, tone: 'good', onClick: () => setFilter('done'), active: filter === 'done' },
         { label: 'No card on file', value: counts.noCard, tone: counts.noCard > 0 ? 'warn' : undefined },
       ]} />
 
@@ -95,7 +95,7 @@ export default function TeamOnboardingPage() {
                   <span className={st.who}><b>{p.name}</b><small>{ACCOUNT[p.status] || p.status}{p.uplineName ? `, under ${p.uplineName}` : ''}</small></span>
                   <span className={st.meter}><span><i style={{ width: `${pct}%` }} /></span><small>{p.uploaded} of {p.total} uploaded, {p.approved} approved</small></span>
                   <span className={st.tags}>
-                    <em data-tone={p.complete ? 'good' : p.toUpload > 0 ? 'todo' : 'wait'}>{p.complete ? 'Complete' : p.toUpload > 0 ? `${p.toUpload} to upload` : 'In review'}</em>
+                    <em data-tone={p.complete ? 'good' : p.toUpload > 0 ? 'todo' : 'wait'}>{p.complete ? 'Onboarding complete' : p.toUpload > 0 ? `${p.toUpload} to upload` : 'In review'}</em>
                     {!p.hasCard && !p.cardExempt && <em data-tone="bad">No card</em>}
                   </span>
                   <span className={st.chev} aria-hidden="true">{isOpen ? '−' : '+'}</span>
