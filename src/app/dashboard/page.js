@@ -7,6 +7,7 @@ import { fetchDashboardV2Data } from '@/app/actions/dashboard-v2';
 import { updateTaskStatus } from '@/app/actions/tasks';
 import Avatar from '@/components/Avatar';
 import InviteAgentModal from '@/components/InviteAgentModal';
+import FlyerCarousel from '@/components/FlyerCarousel';
 import s from './dashboard.module.css';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -913,6 +914,8 @@ export default function DashboardV2Page() {
         pendingApprovals={data.admin?.pendingApprovals || 0}
         onInvite={() => setIsInviteOpen(true)}
       />
+
+      <FlyerCarousel />
 
       {data.agent.isPrivileged ? (
         <AdminView data={data} onCompleteTask={handleCompleteTask} />

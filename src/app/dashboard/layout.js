@@ -14,7 +14,6 @@ import ErrorBoundary from '@/components/ErrorBoundary';
 import { ToastProvider } from '@/components/ui/Toast';
 // fetchMyGroups moved to API route to avoid server-action POST on every page load
 import { getMenuLinksForGroups } from '@/lib/groups';
-import FlyerSlider from '@/components/FlyerSlider';
 import s from './layout.module.css';
 
 export default function DashboardLayout({ children }) {
@@ -105,17 +104,9 @@ function DashboardLayoutInner({ children }) {
   const [isTeamLeader, setIsTeamLeader] = useState(false);
   const [isHelpDeskMember, setIsHelpDeskMember] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [showFlyers, setShowFlyers] = useState(false);
   const userMenuRef = useRef(null);
 
   const isAdmin = userProfile?.role === 'admin' || userProfile?.role === 'it_engineer';
-
-  // Show flyer slider once per session
-  useEffect(() => {
-    if (!sessionStorage.getItem('nxt_flyers_seen')) {
-      setShowFlyers(true);
-    }
-  }, []);
 
   // Global Cmd/Ctrl+K listener
   useEffect(() => {
@@ -202,10 +193,6 @@ function DashboardLayoutInner({ children }) {
     : userProfile?.role === 'admin' ? 'Admin'
     : userProfile?.role === 'it_engineer' ? 'IT'
     : '';
-
-  if (showFlyers) {
-    return <FlyerSlider onComplete={() => setShowFlyers(false)} />;
-  }
 
   return (
     <div className={s.shell}>
