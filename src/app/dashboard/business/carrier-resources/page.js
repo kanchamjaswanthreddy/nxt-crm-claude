@@ -2,7 +2,8 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 import PageHeader from '@/components/ui/PageHeader';
-import { fetchCarrierOptions, fetchCarrierContacts } from '@/app/actions/carrierDirectory';
+import SegTabs from '@/components/ui/SegTabs';
+import { fetchCarrierOptions, fetchCarrierContacts, fetchProcessingTimes } from '@/app/actions/carrierDirectory';
 import s from './carrierResources.module.css';
 
 const telHref = (v) => `tel:${String(v).split(/,|ext|option|x/i)[0].replace(/[^0-9+]/g, '')}`;
@@ -28,7 +29,45 @@ function Entry({ e }) {
   );
 }
 
+function ProcessingTimes({ kind }) {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState('');
+  const [q, setQ] = useState('');
+  useEffect(() => {
+    let live = true; setData(null); setError(''); setQ('');
+    fetchProcessingTimes(kind).then(r => { if (!live) return; if (r.success) setData(r); else setError(r.error || 'Could not load the list.'); }).catch(() => { if (live) setError('Could not load the list.'); });
+    return () => { live = false; };
+  }, [kind]);
+  if (error) return <p className={s.error} role="alert">{error}</p>;
+  if (!data) return <div className={s.empty}><p className={s.emptyText}>Loading…</p></div>;
+  const rows = data.rows.filter(r => r.carrier.toLowerCase().includes(q.trim().toLowerCase()));
+  const checked = new Date(`${data.checked}T00:00:00`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  return (
+    <section className={s.times}>
+      <div className={s.timesHead}>
+        <div>
+          <h2 className={s.timesTitle}>{kind === 'annuity' ? 'New annuity business' : 'New life business'}</h2>
+          <p className={s.timesSub}>How long each carrier takes to review an application once it is submitted. Last checked {checked}.</p>
+        </div>
+        <input type="search" className={s.search} placeholder="Search carrier" aria-label="Search carrier" value={q} onChange={(e) => setQ(e.target.value)} />
+      </div>
+      <div className={s.tableWrap}>
+        <table className={s.table}>
+          <thead><tr><th scope="col">Carrier</th><th scope="col">Review time</th><th scope="col">Details</th></tr></thead>
+          <tbody>
+            {rows.map(r => (
+              <tr key={r.carrier}><th scope="row">{r.carrier}</th><td><span className={s.time}>{r.time}</span></td><td className={s.detail}>{r.note || ''}</td></tr>
+            ))}
+            {rows.length === 0 && <tr><td colSpan={3} className={s.detail}>No carrier matches “{q}”.</td></tr>}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
+
 export default function CarrierResourcesPage() {
+  const [view, setView] = useState('contacts');
   const [options, setOptions] = useState(null);
   const [loadError, setLoadError] = useState('');
   const [category, setCategory] = useState('');
@@ -62,7 +101,18 @@ export default function CarrierResourcesPage() {
 
   return (
     <div>
-      <PageHeader title="Carrier Resources" subtitle="Find the right person at any carrier. Choose a category, a carrier and a department." />
+      <PageHeader title="Carrier Resources" subtitle="Carrier contacts and how long each carrier takes to review new business." />
+
+      <div className={s.viewTabs}>
+        <SegTabs label="Carrier resources" value={view} onChange={setView} tabs={[
+          { key: 'contacts', label: 'Carrier Contacts' },
+          { key: 'annuity', label: 'Annuity Processing Times' },
+          { key: 'life', label: 'Life Processing Times' },
+        ]} />
+      </div>
+
+      {view !== 'contacts' && <ProcessingTimes kind={view} />}
+      {view === 'contacts' && (<>
 
       <section className={s.filters} aria-label="Find a carrier contact">
         <label className={s.field} data-active={step === 1 || undefined} data-done={category ? 'true' : undefined}>
@@ -139,6 +189,7 @@ export default function CarrierResourcesPage() {
           )}
         </div>
       )}
+      </>)}
     </div>
   );
 }

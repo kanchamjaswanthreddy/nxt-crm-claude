@@ -48,3 +48,20 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%230C1022' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px; }
 .field select:focus-visible { outline: none; border-color: #E3A94A; box-shadow: 0 0 0 4px rgba(227, 169, 74, 0.22); }
 .field[data-active] select { border-color: #E3A94A; background-color: #fff; }
+
+/* Tabs and processing-time tables */
+.viewTabs { margin-bottom: 18px; overflow-x: auto; }
+.times { padding: 26px; border-radius: 26px; background: #fff; border: 1px solid var(--border-color); }
+.timesHead { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 18px; }
+.timesTitle { margin: 0 0 6px; font-size: 24px; font-weight: 500; letter-spacing: -0.03em; color: var(--brand-navy); }
+.timesSub { margin: 0; max-width: 44rem; color: var(--text-secondary); }
+.search { width: 260px; max-width: 100%; height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--border-color); background: #FAF8F4; font: inherit; font-size: 15px; }
+.search:focus-visible { outline: none; border-color: #E3A94A; box-shadow: 0 0 0 4px rgba(227, 169, 74, 0.22); }
+.tableWrap { overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; }
+.table thead th { padding: 10px 14px; text-align: left; font-size: 13px; font-weight: 600; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); }
+.table tbody th, .table tbody td { padding: 14px; text-align: left; vertical-align: middle; border-bottom: 1px solid #F1EFEA; font-size: 15px; }
+.table tbody th { font-weight: 600; color: var(--brand-navy); white-space: nowrap; }
+.table tbody tr:last-child th, .table tbody tr:last-child td { border-bottom: 0; }
+.time { display: inline-block; padding: 6px 12px; border-radius: 999px; background: #FBF1DC; color: #6B4408; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.detail { color: var(--text-secondary); }

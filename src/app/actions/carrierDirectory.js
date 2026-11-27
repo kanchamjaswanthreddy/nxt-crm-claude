@@ -2,6 +2,7 @@
 
 import { requireUser } from '@/lib/serverAuth';
 import DIRECTORY from '@/data/carrierDirectory.json';
+import TIMES from '@/data/carrierProcessingTimes.json';
 
 // Carrier Resources: who to call at each carrier. The list lives in src/data/carrierDirectory.json
 // and is only ever sent to signed-in users, one carrier department at a time.
@@ -35,4 +36,11 @@ export async function fetchCarrierContacts(category, carrier, department) {
     departments: entries.filter(e => e.type === 'Department'),
     contacts: entries.filter(e => e.type !== 'Department'),
   };
+}
+
+/** How long each carrier takes to review new business. kind = 'annuity' or 'life'. */
+export async function fetchProcessingTimes(kind) {
+  try { await requireUser(); } catch { return { success: false, error: 'Unauthorized' }; }
+  if (kind !== 'annuity' && kind !== 'life') return { success: false, error: 'Unknown list.' };
+  return { success: true, checked: TIMES.checked, rows: TIMES[kind] };
 }
