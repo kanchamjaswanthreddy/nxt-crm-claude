@@ -1085,3 +1085,13 @@ button.miniTile:hover { transform: translateY(-3px); }
 .bottomRow { gap: 16px; margin-bottom: 16px; }
 .producerItem, .taskItem, .activityItem, .attentionItem, .recruiterItem { padding-top: 13px; padding-bottom: 13px; }
 .taskCheckbox { width: 24px; height: 24px; border-radius: 8px; }
+
+/* last rows: no lone half-width card */
+.bottomRow3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 20px; align-items: stretch; }
+.bottomRowFull { display: grid; grid-template-columns: 1fr; margin-top: 20px; }
+.bottomRowFull .recruiterList { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.bottomRowFull .recruiterItem { margin: 0; }
+@media (max-width: 1180px) { .bottomRow3 { grid-template-columns: 1fr 1fr; } .bottomRow3 > :last-child { grid-column: 1 / -1; } }
+@media (max-width: 760px) { .bottomRow3 { grid-template-columns: 1fr; } }
+.bottomRow3 .recruiterLabel { display: none; }
+.bottomRow3 .recruiterInfo { min-width: 0; flex: 1; }

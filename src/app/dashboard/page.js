@@ -675,7 +675,7 @@ function AgentView({ data, onCompleteTask }) {
       </div>
 
       {/* Top Recruiters — visible to all agents */}
-      <div className={s.bottomRow} style={{ marginTop: '20px' }}>
+      <div className={s.bottomRowFull}>
         <div className={`${s.card} ${s.cardHover}`} onClick={() => router.push('/dashboard/recruitment')} role="button" tabIndex={0} style={{ cursor: 'pointer' }}>
           <div className={s.cardHeader}>
             <h3 className={s.cardHeaderTitle}>Top Recruiters</h3>
@@ -822,8 +822,8 @@ function AdminView({ data, onCompleteTask }) {
         <ActivityTimeline activity={admin.recentActivity || []} />
       </div>
 
-      {/* Row 4: Needs Attention + Action Items */}
-      <div className={s.bottomRow}>
+      {/* Row 4: Needs Attention, Action Items and Top Recruiters side by side */}
+      <div className={s.bottomRow3}>
         <div className={s.card}>
           <div className={s.cardHeader}>
             <h3 className={s.cardHeaderTitle}>Needs Attention</h3>
@@ -845,10 +845,7 @@ function AdminView({ data, onCompleteTask }) {
           </div>
           <TaskList tasks={tasks} onComplete={onCompleteTask} />
         </div>
-      </div>
 
-      {/* Row 5: Top Recruiters — visible to all */}
-      <div className={s.bottomRow}>
         <div className={`${s.card} ${s.cardHover}`} onClick={() => router.push('/dashboard/recruitment')} role="button" tabIndex={0} style={{ cursor: 'pointer' }}>
           <div className={s.cardHeader}>
             <h3 className={s.cardHeaderTitle}>Top Recruiters</h3>
