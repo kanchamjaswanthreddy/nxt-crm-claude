@@ -14,7 +14,11 @@ import { isRateLimited } from '@/lib/validation';
 // conversations/{id}/messages/{id}
 //
 // Privacy: a person can only read a conversation they are a member of. There is NO admin or owner
-// override anywhere in this file. Deleting a message removes it (and its file) for good.
+// override anywhere in this file. The one exception is the compliance review in messageReview.js:
+// the owner (and at most one person the owner names) can read a chat there, read-only, after giving a
+// reason, and every such access is logged.
+// Deleting or editing a message hides it from everyone in the chat straight away; the original is kept
+// in conversations/{id}/archive for the retention period, where only the compliance review can see it.
 // Everything is read and written here, on the server; the browser never touches these collections.
 
 const MAX_TEXT = 4000; const MAX_FILE = 25 * 1024 * 1024; const PAGE = 60;
@@ -94,7 +98,8 @@ export async function listConversations() {
       });
     });
     list.sort((a, b) => (b.lastAt || '').localeCompare(a.lastAt || '') || a.name.localeCompare(b.name));
-    return { success: true, me: caller.uid, conversations: list, unread: list.filter(x => x.unread).length };
+    const cs = await db.collection('chatCompliance').doc(caller.agencyId).get(); const comp = cs.exists ? cs.data() : {};
+    return { success: true, me: caller.uid, conversations: list, unread: list.filter(x => x.unread).length, retentionYears: comp.retentionYears || 7, canReview: caller.isOwner || (comp.reviewerIds || []).includes(caller.uid) };
   } catch (error) { return { success: false, error: error.message }; }
 }
 
@@ -249,12 +254,13 @@ export async function editMessage(id, messageId, body) {
     const next = text(body, MAX_TEXT);
     if (!next && !ms.data().file && !ms.data().card) return { success: false, error: 'A message cannot be empty.' };
     const now = new Date().toISOString();
+    if (next !== (ms.data().text || '')) await ref.collection('archive').add({ kind: 'edited', messageId: mref.id, at: now, authorId: ms.data().authorId, authorName: ms.data().authorName || '', text: ms.data().text || '', createdAt: ms.data().createdAt });
     await mref.update({ text: next, editedAt: now }); await ref.update({ changedAt: now });
     return { success: true };
   } catch (error) { return { success: false, error: error.message }; }
 }
 
-/** Delete your own message for good, including its file. */
+/** Delete your own message. It disappears for everyone in the chat; the original moves to the compliance archive. */
 export async function deleteMessage(id, messageId) {
   let c;
   try { c = await ctx(); } catch { return { success: false, error: 'Unauthorized' }; }
@@ -263,7 +269,8 @@ export async function deleteMessage(id, messageId) {
     if (!conv) return { success: false, error: 'Conversation not found.' };
     const mref = ref.collection('messages').doc(String(messageId)); const ms = await mref.get();
     if (!ms.exists || ms.data().authorId !== c.caller.uid) return { success: false, error: 'You can only delete your own messages.' };
-    if (ms.data().file?.path) await c.admin.storage().file(ms.data().file.path).delete().catch(() => {});
+    const m = ms.data();
+    await ref.collection('archive').add({ kind: 'deleted', messageId: mref.id, at: new Date().toISOString(), authorId: m.authorId, authorName: m.authorName || '', text: m.text || '', file: m.file || null, card: m.card || null, replyTo: m.replyTo || null, createdAt: m.createdAt });
     await mref.delete();
     // Keep the conversation list honest about what the latest message is.
     const last = await ref.collection('messages').orderBy('createdAt', 'desc').limit(1).get();

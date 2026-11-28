@@ -84,6 +84,7 @@ export default function MessagesPage() {
   const [filter, setFilter] = useState('');
   const [found, setFound] = useState(null);
   const [busy, setBusy] = useState(false);
+  const [policy, setPolicy] = useState({ years: 7, canReview: false });
 
   const scroller = useRef(null); const fileInput = useRef(null); const box = useRef(null);
   const stamp = useRef({ last: null, changed: null, id: '' });
@@ -99,7 +100,7 @@ export default function MessagesPage() {
   const loadList = useCallback(async () => {
     const r = await listConversations();
     if (!r.success) return;
-    setMe(r.me); setConvs(r.conversations);
+    setMe(r.me); setConvs(r.conversations); setPolicy({ years: r.retentionYears, canReview: r.canReview });
     window.dispatchEvent(new CustomEvent('nxt-unread-chats', { detail: r.conversations.filter(c => c.unread && c.id !== stamp.current.id).length }));
   }, []);
 
@@ -281,13 +282,14 @@ export default function MessagesPage() {
             </li>
           ))}
         </ul>
+        <p className={s.notice}>Messages may be reviewed by NXT compliance. Deleted and edited messages are kept for {policy.years} years for that purpose.{policy.canReview && <> <Link href="/dashboard/messages/review">Open message review</Link></>}</p>
       </aside>
 
       <section className={s.chat} aria-label="Conversation">
         {!active && (
           <div className={s.empty}>
             <p className={s.emptyTitle}>Pick a chat, or start one</p>
-            <p className={s.muted}>Message anyone in the agency, share files, and start group chats. Only the people in a chat can read it.</p>
+            <p className={s.muted}>Message anyone in the agency, share files, and start group chats. Admins and team heads cannot read your chats. Messages may be reviewed by NXT compliance when there is a recorded reason.</p>
             <button type="button" className="nxt-btn nxt-btn-primary" onClick={() => openNew('direct')}>New message</button>
           </div>
         )}
@@ -408,7 +410,7 @@ export default function MessagesPage() {
 
       <Modal isOpen={!!confirmDelete} onClose={() => setConfirmDelete(null)} title="Delete this message?" size="sm"
         footer={<div className="nxt-actions"><button type="button" className="nxt-btn" onClick={() => setConfirmDelete(null)}>Keep message</button><button type="button" className="nxt-btn nxt-btn-danger" disabled={busy} onClick={removeMessage}>Delete message</button></div>}>
-        <p className={s.muted}>It is removed for everyone in the chat{confirmDelete?.file ? ', along with its file,' : ''} and cannot be brought back.</p>
+        <p className={s.muted}>It is removed for everyone in the chat{confirmDelete?.file ? ', along with its file,' : ''} and cannot be brought back. A copy is kept for {policy.years} years for compliance review only.</p>
       </Modal>
     </div>
   );

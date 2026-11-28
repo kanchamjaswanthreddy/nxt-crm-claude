@@ -367,6 +367,16 @@ service cloud.firestore {
       match /messages/{messageId} {
         allow read, write: if false;
       }
+      match /archive/{archiveId} {
+        allow read, write: if false;
+      }
+    }
+    // Compliance review settings and the access log: server only. The log is never edited or deleted.
+    match /chatCompliance/{agencyId} {
+      allow read, write: if false;
+    }
+    match /chatReviewLog/{entryId} {
+      allow read, write: if false;
     }
   }
 }

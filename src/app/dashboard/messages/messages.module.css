@@ -7,7 +7,7 @@
 .headBtns > button { flex: 1; }
 .input { width: 100%; height: 42px; padding: 0 14px; border: 1px solid #E7E3DA; border-radius: 12px; background: #fff; font: inherit; font-size: 15px; color: #0C1022; min-width: 0; }
 .input:focus-visible, .box:focus-visible { outline: 2px solid #E3A94A; outline-offset: 1px; border-color: #E3A94A; }
-.convs { list-style: none; margin: 0 -6px; padding: 0 0 12px; overflow-y: auto; flex: 1; min-height: 0; }
+.convs { list-style: none; margin: 0 -6px; padding: 0 0 4px; overflow-y: auto; flex: 1; min-height: 0; }
 .conv { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px; border: 0; border-radius: 12px; background: transparent; text-align: left; cursor: pointer; font: inherit; color: inherit; }
 .conv:hover { background: #F1EFEA; }
 .conv:focus-visible, .person:focus-visible, .tool:focus-visible, .file:focus-visible, .reaction:focus-visible { outline: 2px solid #E3A94A; outline-offset: 1px; }
@@ -21,6 +21,8 @@
 .convLast { font-size: 13.5px; color: #5F5C56; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .dot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: #E3A94A; }
 .foundHead { padding: 12px 10px 4px; font-size: 13px; font-weight: 600; color: #8A5A0B; }
+.notice { margin: 0 -14px; padding: 10px 18px 12px; border-top: 1px solid #E7E3DA; font-size: 12.5px; line-height: 1.45; color: #5F5C56; }
+.notice a { color: #8A5A0B; font-weight: 600; }
 .muted { color: #5F5C56; font-size: 14px; line-height: 1.5; margin: 0; padding: 10px; }
 
 .chat { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
