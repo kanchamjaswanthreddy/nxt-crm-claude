@@ -350,5 +350,10 @@ service cloud.firestore {
       allow write: if false;
     }
 
+
+    // Shared calendar: read and written only by the server (src/app/actions/calendar.js), never by the browser.
+    match /calendarEvents/{eventId} {
+      allow read, write: if false;
+    }
   }
 }
