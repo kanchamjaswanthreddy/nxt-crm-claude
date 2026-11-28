@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import Modal from '@/components/ui/Modal';
+import Avatar from '@/components/Avatar';
 import { useToast } from '@/components/ui/Toast';
 import { getDisplayName } from '@/lib/constants';
 import { fetchAgentDirectory } from '@/app/actions/directory';
@@ -43,7 +44,7 @@ function PeoplePicker({ people, chosen, onToggle, single }) {
         {shown.map(p => (
           <li key={p.id}>
             <button type="button" className={`${s.person} ${chosen.includes(p.id) ? s.personOn : ''}`} onClick={() => onToggle(p.id)}>
-              <span className={s.avatar} aria-hidden="true">{initials(p.name)}</span>
+              <Avatar name={p.name} photoUrl={p.photo} size={40} />
               <span className={s.personName}>{p.name}</span>
               {!single && <span className={s.tick} aria-hidden="true">{chosen.includes(p.id) ? '✓' : ''}</span>}
             </button>
@@ -90,6 +91,7 @@ export default function MessagesPage() {
   const stamp = useRef({ last: null, changed: null, id: '' });
 
   const nameById = useMemo(() => Object.fromEntries(people.map(p => [p.id, p.name])), [people]);
+  const photoById = useMemo(() => Object.fromEntries(people.map(p => [p.id, p.photo])), [people]);
   const titleOf = useCallback((c) => {
     if (!c) return '';
     if (c.type === 'direct') return nameById[c.memberIds.find(x => x !== me)] || 'Direct message';
@@ -106,7 +108,7 @@ export default function MessagesPage() {
 
   useEffect(() => {
     loadList();
-    fetchAgentDirectory().then(r => { if (r.success) setPeople(r.agents.filter(a => a.status !== 'terminated').map(a => ({ id: a.id, name: getDisplayName(a) || a.email || 'Team member' })).sort((a, b) => a.name.localeCompare(b.name))); });
+    fetchAgentDirectory().then(r => { if (r.success) setPeople(r.agents.filter(a => a.status !== 'terminated').map(a => ({ id: a.id, name: getDisplayName(a) || a.email || 'Team member', photo: a.photo_url || '' })).sort((a, b) => a.name.localeCompare(b.name))); });
     const wanted = new URLSearchParams(window.location.search).get('c');
     if (wanted) setActiveId(wanted);
     const t = setInterval(() => { if (document.visibilityState === 'visible') loadList(); }, 15000);
@@ -260,7 +262,7 @@ export default function MessagesPage() {
           {shownConvs.map(c => (
             <li key={c.id}>
               <button type="button" className={`${s.conv} ${c.id === activeId ? s.convOn : ''}`} onClick={() => { setActiveId(c.id); setFound(null); }}>
-                <span className={`${s.avatar} ${c.type !== 'direct' ? s.avatarGroup : ''}`} aria-hidden="true">{c.type === 'direct' ? initials(titleOf(c)) : c.type === 'agency' ? 'All' : initials(titleOf(c))}</span>
+                {c.type === 'direct' ? <Avatar name={titleOf(c)} photoUrl={photoById[c.memberIds.find(x => x !== me)]} size={40} /> : <span className={`${s.avatar} ${s.avatarGroup}`} aria-hidden="true">{c.type === 'agency' ? 'All' : initials(titleOf(c))}</span>}
                 <span className={s.convText}>
                   <span className={s.convTop}><span className={s.convName}>{titleOf(c)}</span><span className={s.convTime}>{listTime(c.lastAt)}</span></span>
                   <span className={s.convLast}>{c.lastText ? `${c.lastBy && c.type !== 'direct' ? `${c.lastBy.split(' ')[0]}: ` : ''}${c.lastText}` : 'No messages yet'}</span>
@@ -297,6 +299,7 @@ export default function MessagesPage() {
           <>
             <header className={s.chatHead}>
               <button type="button" className={`nxt-btn nxt-btn-sm ${s.backBtn}`} onClick={() => setActiveId('')}>Chats</button>
+              {active.type === 'direct' && <Avatar name={titleOf(active)} photoUrl={photoById[active.memberIds.find(x => x !== me)]} size={40} />}
               <div className={s.chatTitle}>
                 <strong>{titleOf(active)}</strong>
                 <span>{subtitle}</span>
@@ -314,6 +317,7 @@ export default function MessagesPage() {
                   <React.Fragment key={m.id}>
                     {newDay && <div className={s.day}><span>{dayLabel(m.at)}</span></div>}
                     <div className={`${s.row} ${m.mine ? s.mine : ''}`}>
+                      {!m.mine && <span className={s.face}>{(newDay || prev.authorId !== m.authorId) && <Avatar name={m.authorName} photoUrl={photoById[m.authorId]} size={32} />}</span>}
                       <div className={s.bubbleWrap}>
                         {showName && <span className={s.author}>{m.authorName}</span>}
                         <div className={s.bubble}>

@@ -39,6 +39,7 @@
 .day span { font-size: 12.5px; color: #5F5C56; background: #F1EFEA; padding: 3px 12px; border-radius: 999px; }
 .row { display: flex; align-items: flex-start; gap: 6px; max-width: min(78%, 640px); }
 .mine { align-self: flex-end; flex-direction: row-reverse; }
+.face { flex: none; width: 32px; height: 32px; margin-top: 2px; }
 .bubbleWrap { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .mine .bubbleWrap { align-items: flex-end; }
 .author { font-size: 12.5px; font-weight: 600; color: #8A5A0B; padding-left: 4px; }
@@ -61,6 +62,7 @@
 .reactionOn { background: #FBF1DC; border-color: #E3A94A; }
 .seen { font-size: 11.5px; color: #5F5C56; padding-right: 4px; }
 .tools { position: relative; flex: none; align-self: center; }
+.conv > div:first-child, .person > div:first-child, .chatHead > div:first-child { flex: none; }
 .tool { border: 0; background: transparent; color: #5F5C56; width: 30px; height: 30px; border-radius: 8px; cursor: pointer; font-size: 13px; opacity: 0; }
 .row:hover .tool, .tool:focus-visible, .context .tool { opacity: 1; }
 .tool:hover { background: #F1EFEA; }
