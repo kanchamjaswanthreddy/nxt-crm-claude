@@ -101,3 +101,38 @@ span.chip { cursor: default; border-style: dashed; }
   .detail > div { grid-template-columns: 1fr; gap: 2px; }
 }
 .form input[type="datetime-local"], .form input[type="date"] { min-width: 0; padding-left: 12px; padding-right: 8px; font-size: 14.5px; }
+
+/* ── Added with repeating events, answers, records, notes, attendance, team view and booking ── */
+.chip[data-type="date"], .agendaRow[data-type="date"] { --c: #7A4FBF; }
+.datePill { display: flex; align-items: center; width: 100%; min-height: 24px; padding: 2px 8px; border-radius: 8px; background: #F1EAFB; color: #55318F; font-size: 12.5px; font-weight: 500; text-decoration: none; overflow: hidden; }
+.datePill:hover { filter: brightness(0.97); opacity: 1; }
+.weekBody .datePill { min-height: 34px; padding: 6px 10px; border-radius: 10px; }
+.weekBody .datePill .pillTitle { white-space: normal; }
+.pill[data-declined] { opacity: 0.5; text-decoration: line-through; }
+.repeatNote { display: block; margin-top: 4px; font-size: 14px; color: #8A5A0B; }
+.rsvp { display: inline-flex; gap: 6px; margin-right: 12px; }
+.rsvpBtn { height: 34px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--border-color); background: #fff; font: inherit; font-size: 14px; font-weight: 600; color: var(--brand-navy); cursor: pointer; }
+.rsvpBtn[aria-pressed="true"][data-answer="yes"] { background: #1D5A40; border-color: #1D5A40; color: #fff; }
+.rsvpBtn[aria-pressed="true"][data-answer="maybe"] { background: #E3A94A; border-color: #E3A94A; color: #0C1022; }
+.rsvpBtn[aria-pressed="true"][data-answer="no"] { background: #B42318; border-color: #B42318; color: #fff; }
+.rsvpCount { font-size: 14px; color: var(--text-secondary); }
+.rsvpNames { display: block; margin-top: 6px; font-size: 14px; color: var(--text-secondary); }
+.after { display: grid; gap: 18px; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border-color); }
+.after h3 { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 8px; font-size: 15px; font-weight: 600; color: var(--brand-navy); }
+.after h3 span { font-size: 13px; font-weight: 500; color: #8A5A0B; }
+.after textarea { width: 100%; padding: 10px 14px; border-radius: 14px; border: 1.5px solid var(--border-color); background: #FAF8F4; font: inherit; font-size: 15px; resize: vertical; }
+.afterBtns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.after .person { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 8px; cursor: pointer; font-size: 15px; }
+.busy { margin-left: auto; padding: 2px 8px; border-radius: 999px; background: #FEF3F2; color: #912018; font-size: 12px; font-weight: 600; }
+.linked { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0; padding: 10px 14px; border-radius: 14px; background: #FBF1DC; font-size: 15px; }
+.recordPick { display: grid; grid-template-columns: 130px 1fr; gap: 8px; }
+.recordPick .people { grid-column: 1 / -1; margin-top: 0; }
+.recordRow { display: block; width: 100%; padding: 8px 10px; border: 0; border-radius: 8px; background: none; font: inherit; font-size: 15px; text-align: left; color: var(--brand-navy); cursor: pointer; }
+.recordRow:hover { background: #FBF1DC; }
+.help { margin: 0; font-size: 15px; line-height: 1.45; color: var(--text-secondary); }
+.dayPick { display: flex; gap: 6px; flex-wrap: wrap; }
+.form .dayPick label { display: inline-flex; grid-template-columns: none; align-items: center; justify-content: center; height: 38px; min-width: 52px; padding: 0 12px; border-radius: 999px; border: 1.5px solid var(--border-color); background: #fff; font-size: 14px; font-weight: 600; cursor: pointer; }
+.form .dayPick label[data-on] { background: #0C1022; border-color: #0C1022; color: #fff; }
+.dayPick input { position: absolute; opacity: 0; pointer-events: none; }
+.shareLink { display: flex; align-items: center; gap: 10px; padding: 10px 12px 10px 14px; border-radius: 14px; background: #F1EFEA; }
+.shareLink code { flex: 1; font-size: 13px; overflow-wrap: anywhere; color: var(--brand-navy); }

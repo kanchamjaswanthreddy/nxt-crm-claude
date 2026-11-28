@@ -12,6 +12,7 @@ import Input from '@/components/ui/Input';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
 import SegTabs from '@/components/ui/SegTabs';
+import RecordMeetings from '@/components/RecordMeetings';
 function CarrierCombobox({ value, onChange, carriers }) {
   const [open, setOpen] = useState(false);
   const filtered = carriers.filter(n => !value || n.toLowerCase().includes(value.toLowerCase()));
@@ -450,6 +451,7 @@ export default function ClientDetailPage({ params }) {
       </div>
 
       {/* Overview Tab */}
+      {activeTab === 'overview' && <RecordMeetings type="client" id={id} name={`${client.firstName || ''} ${client.lastName || ''}`.trim()} />}
       {activeTab === 'overview' && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
           {/* Personal Info */}

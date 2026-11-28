@@ -8,6 +8,7 @@ import { updateTaskStatus } from '@/app/actions/tasks';
 import Avatar from '@/components/Avatar';
 import InviteAgentModal from '@/components/InviteAgentModal';
 import FlyerCarousel from '@/components/FlyerCarousel';
+import TodaySchedule from '@/components/TodaySchedule';
 import OnboardingDocsCard, { OnboardingDocsPill } from '@/components/OnboardingDocsCard';
 import { GoalBand, CountUp, Ticker, TrendWidget, RingWidget, Leaderboard, ActivityTimeline, FactGrid, useSpotlight } from './widgets';
 import w from './widgets.module.css';
@@ -1009,6 +1010,7 @@ export default function DashboardV2Page() {
       <FlyerCarousel />
 
       <OnboardingDocsCard agent={userProfile} />
+      <TodaySchedule />
 
       {data.agent.isPrivileged ? (
         <AdminView data={data} onCompleteTask={handleCompleteTask} />

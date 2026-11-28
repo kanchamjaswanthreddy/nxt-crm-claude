@@ -974,3 +974,31 @@ export async function sendVerificationEmail({ to, verificationLink, name }) {
     html,
   });
 }
+
+// ─── Today's schedule (calendar reminder) ─────────────────────
+const escHtml = (t) => String(t || '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+export async function sendScheduleEmail({ to, name, dayLabel, items }) {
+  const resend = getResend();
+  const firstName = name ? name.split(' ')[0] : null;
+  const rows = items.map(i => `
+        <tr>
+          <td style="padding: 14px 0; border-bottom: 1px solid #E7E3DA; width: 150px; font-size: 14px; color: #5F5C56; vertical-align: top;">${escHtml(i.when)}</td>
+          <td style="padding: 14px 0; border-bottom: 1px solid #E7E3DA; font-size: 16px; color: #0C1022; font-weight: 600;">${escHtml(i.title)}${i.link ? `<br><a href="${escHtml(i.link)}" style="font-size: 14px; font-weight: 500; color: #8A5A0B;">Join meeting</a>` : ''}</td>
+        </tr>`).join('');
+  const content = `
+    <tr>
+      <td style="background: #0C1022; padding: 40px 40px 34px 40px;">
+        <p style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600; color: #F5D9A0;">${escHtml(dayLabel)}</p>
+        <h1 style="margin: 0; font-size: 28px; font-weight: 400; color: #ffffff;">${firstName ? `${escHtml(firstName)}, here` : 'Here'} is your schedule</h1>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 26px 40px 34px 40px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" style="width: 100%;">${rows}</table>
+        <p style="margin: 26px 0 0 0;"><a href="${BASE_URL}/dashboard/calendar" style="display: inline-block; padding: 13px 26px; border-radius: 999px; background: #0C1022; color: #ffffff; font-size: 15px; font-weight: 600; text-decoration: none;">Open Calendar</a></p>
+      </td>
+    </tr>
+  `;
+  return await sendWithRetry(resend, { from: FROM_ADDRESS, to, subject: `Your schedule for ${dayLabel}: ${items.length} ${items.length === 1 ? 'event' : 'events'}`, html: emailLayout(content) });
+}

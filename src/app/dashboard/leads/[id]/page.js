@@ -17,6 +17,7 @@ import ActivityTimeline from '@/components/ui/ActivityTimeline';
 import { useToast } from '@/components/ui/Toast';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
+import RecordMeetings from '@/components/RecordMeetings';
 const dn = (a) => [a?.first_name, a?.middle_name, a?.last_name].filter(Boolean).join(' ') || a?.full_name || a?.name || a?.email || '';
 
 export default function LeadDetailPage({ params }) {
@@ -301,6 +302,7 @@ export default function LeadDetailPage({ params }) {
           </Button>
         </div>
       </div>
+      <RecordMeetings type="lead" id={id} name={`${lead.firstName || ''} ${lead.lastName || ''}`.trim()} />
 
       {isReassignModalOpen && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }}>

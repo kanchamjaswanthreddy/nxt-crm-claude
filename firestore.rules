@@ -355,5 +355,11 @@ service cloud.firestore {
     match /calendarEvents/{eventId} {
       allow read, write: if false;
     }
+    match /bookingSettings/{agentId} {
+      allow read, write: if false;
+    }
+    match /bookingLocks/{lockId} {
+      allow read, write: if false;
+    }
   }
 }
