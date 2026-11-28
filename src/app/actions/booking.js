@@ -1,5 +1,6 @@
 'use server';
 
+import { incrementAgentMetrics } from '@/app/actions/metrics';
 import { headers } from 'next/headers';
 import { getAdminApp } from '@/lib/firebase/adminApp';
 import { requireUser } from '@/lib/serverAuth';
@@ -139,11 +140,17 @@ export async function createBooking(agentId, input) {
     const dup = await db.collection('leads').where('agencyId', '==', page.agent.agency_id).where('email', '==', email).limit(1).get();
     if (!dup.empty) related = { type: 'lead', id: dup.docs[0].id, name };
     else {
-      const leadRef = await db.collection('leads').add({
+      // Created together with the agent's lead counter, the same way a lead added by hand is.
+      const leadRef = db.collection('leads').doc();
+      const ownerPath = page.agent.hierarchyPath || `/${page.id}`;
+      await db.runTransaction(async (transaction) => {
+        transaction.set(leadRef, {
         agencyId: page.agent.agency_id, ownerAgentId: page.id, ownerHierarchyPath: page.agent.hierarchyPath || `/${page.id}`,
         firstName, lastName, email, phone: phone || null, dateOfBirth: null, address: { street: '', city: '', state: '', zip: '' },
         source: 'booking_page', status: 'new', tags: ['booking'], duplicateOfLeadId: null, flagged: false,
         createdAt: admin.firestore.FieldValue.serverTimestamp(), updatedAt: admin.firestore.FieldValue.serverTimestamp(), lastContactedAt: null, createdByAgentId: page.id,
+      });
+        await incrementAgentMetrics(transaction, admin, db, page.agent.agency_id, page.id, ownerPath, { leadsAssignedCount: 1 });
       });
       related = { type: 'lead', id: leadRef.id, name };
     }

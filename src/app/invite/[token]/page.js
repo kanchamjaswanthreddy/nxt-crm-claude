@@ -6,16 +6,11 @@ import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 import styles from './page.module.css';
 import { auth } from '@/lib/firebase/clientApp';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase/clientApp';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { validateInviteToken, acceptInvite, cleanupOrphanAuthUser } from '@/app/actions/invite';
-import { setOverridesBulk } from '@/app/actions/overrides';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { validateInviteToken, completeInviteSignup, cleanupOrphanAuthUser } from '@/app/actions/invite';
 
-import { generateNxtId } from '@/app/actions/agents';
-import { AGENT_LEVELS } from '@/lib/constants';
 
-const ENFORCED_AGENCY_ID = process.env.NEXT_PUBLIC_DEFAULT_AGENCY_ID || 'JHdkqlkDcXFKzHl46FG7';
 
 export default function InvitePage() {
   const { token } = useParams();
@@ -68,77 +63,31 @@ export default function InvitePage() {
         userCredential = await createUserWithEmailAndPassword(auth, inviteData.email, password);
       } catch (authErr) {
         if (authErr.code === 'auth/email-already-in-use') {
-          // Try to clean up orphan auth user from a previously deleted account
-          const cleanup = await cleanupOrphanAuthUser(inviteData.email);
-          if (cleanup.success) {
-            // Retry after cleanup
-            userCredential = await createUserWithEmailAndPassword(auth, inviteData.email, password);
-          } else {
-            setError("This email is already associated with an active account. Try signing in instead.");
-            setIsSubmitting(false);
-            return;
+          // A sign-in for this email already exists. If an earlier attempt on this invite stopped half way,
+          // the same password signs in and the set-up simply carries on.
+          try {
+            userCredential = await signInWithEmailAndPassword(auth, inviteData.email, password);
+          } catch {
+            // Otherwise it may be left over from a deleted account: clear it and start fresh.
+            const cleanup = await cleanupOrphanAuthUser(inviteData.email);
+            if (cleanup.success) {
+              try { userCredential = await createUserWithEmailAndPassword(auth, inviteData.email, password); } catch { userCredential = null; }
+            }
+            if (!userCredential) {
+              setError('This email already has an account. Try signing in instead, or ask your admin for help.');
+              setIsSubmitting(false);
+              return;
+            }
           }
         } else {
           throw authErr;
         }
       }
 
+      // The server finishes the sign-up from the invite itself (role, upline, level, NXT ID, overrides).
       const user = userCredential.user;
-      const assignedLevel = inviteData.agentLevel || 1;
-      const levelInfo = AGENT_LEVELS.find(l => l.level === assignedLevel);
-
-      // Generate sequential NXT ID
-      const agencyId = ENFORCED_AGENCY_ID;
-      const idResult = await generateNxtId(agencyId);
-      const nxtId = idResult.success ? idResult.nxtId : null;
-
-      // Compute hierarchyPath from upline
-      let hierarchyPath = `/${user.uid}`;
-      if (inviteData.upline_id) {
-        const uplineSnap = await getDoc(doc(db, "agents", inviteData.upline_id));
-        const uplinePath = uplineSnap.exists() ? (uplineSnap.data().hierarchyPath || `/${inviteData.upline_id}`) : `/${inviteData.upline_id}`;
-        hierarchyPath = `${uplinePath}/${user.uid}`;
-      }
-
-      const nameParts = fullName.trim().split(/\s+/);
-      const firstName = nameParts[0] || '';
-      const middleName = nameParts.length > 2 ? nameParts.slice(1, -1).join(' ') : '';
-      const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
-
-      await setDoc(doc(db, "agents", user.uid), {
-        agency_id: agencyId,
-        upline_id: inviteData.upline_id,
-        hierarchyPath,
-        first_name: firstName,
-        middle_name: middleName || null,
-        last_name: lastName,
-        full_name: fullName.trim(),
-        email: inviteData.email,
-        role: inviteData.role,
-        is_owner: inviteData.is_owner || false,
-        status: "invited",
-        agentLevel: assignedLevel,
-        contractLevel: levelInfo?.title || 'Unlicensed Associate',
-        subscriptionStatus: 'trial',
-        subscriptionStartDate: new Date().toISOString(),
-        email_verified_at: new Date().toISOString(),
-        created_at: new Date().toISOString(),
-        ...(nxtId && { nxt_id: nxtId }),
-        ...(inviteData.inviter_name && { recruited_by: inviteData.inviter_name }),
-      });
-
-      await acceptInvite(token, { uid: user.uid, signupEmail: user.email });
-
-      // Create commission overrides if set during invite
-      if (inviteData.commissionOverrides?.length > 0) {
-        await setOverridesBulk({
-          agentId: user.uid,
-          agentName: fullName.trim(),
-          overrides: inviteData.commissionOverrides,
-          agencyId: agencyId,
-          actorUid: user.uid,
-        });
-      }
+      const done = await completeInviteSignup(token, await user.getIdToken(), fullName);
+      if (!done.success) throw new Error(done.error);
 
       router.push('/onboarding');
     } catch (err) {

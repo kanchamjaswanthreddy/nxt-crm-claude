@@ -1,8 +1,9 @@
 'use server';
 
+import { AGENT_LEVELS } from '@/lib/constants';
 import { getAdminApp } from '@/lib/firebase/adminApp';
 import { sendInviteEmail } from '@/lib/email/resend';
-import { requireAdmin, requireUser } from '@/lib/serverAuth';
+import { requireAdmin, requireUser, verifyFirebaseIdToken } from '@/lib/serverAuth';
 import crypto from 'crypto';
 import { validateEmail } from '@/lib/validation';
 
@@ -82,6 +83,100 @@ export async function validateInviteToken(token) {
     };
   } catch (err) {
     return { valid: false, error: 'Error validating invite. Please try again.' };
+  }
+}
+
+/**
+ * Finish an invited person's sign-up on the server.
+ *
+ * The browser only creates the sign-in (email + password). Everything that decides what the new person is allowed
+ * to do - role, owner flag, upline, level, NXT ID, commission overrides - is read here from the invite itself, never
+ * from what the browser sends. The caller proves who they are with their sign-in token, and it must be the same
+ * email the invite was sent to.
+ */
+export async function completeInviteSignup(token, idToken, fullName) {
+  if (!token || !idToken) return { success: false, error: 'This invite link is not valid.' };
+  const name = String(fullName || '').trim().replace(/\s+/g, ' ').slice(0, 120);
+  if (name.length < 2) return { success: false, error: 'Please enter your full name.' };
+
+  const admin = getAdminApp();
+  const db = admin.firestore();
+  try {
+    let decoded;
+    try { decoded = await verifyFirebaseIdToken(idToken); } catch { return { success: false, error: 'Your sign-in could not be confirmed. Please try again.' }; }
+    const uid = decoded.uid; const email = String(decoded.email || '').toLowerCase();
+
+    const snap = await db.collection('invites').where('token', '==', token).limit(1).get();
+    if (snap.empty) return { success: false, error: 'Invalid invite link. Please ask your admin to send a new one.' };
+    const inviteRef = snap.docs[0].ref;
+
+    const agencyDefault = process.env.NEXT_PUBLIC_DEFAULT_AGENCY_ID || 'JHdkqlkDcXFKzHl46FG7';
+    const agentRef = db.collection('agents').doc(uid);
+    const counterRef = db.collection('counters').doc('nxt_id_counter');
+
+    const result = await db.runTransaction(async (transaction) => {
+      const [inviteSnap, agentSnap, counterSnap] = await Promise.all([transaction.get(inviteRef), transaction.get(agentRef), transaction.get(counterRef)]);
+      const invite = inviteSnap.data();
+      if (invite.status === 'accepted') return { error: 'This invite has already been used. Try signing in instead.' };
+      if (invite.status !== 'pending') return { error: 'This invite is no longer valid. Please ask your admin to send a new one.' };
+      if (invite.expires_at && new Date(invite.expires_at) < new Date()) return { error: 'This invite has expired. Please ask your admin to send a new one.' };
+      if (String(invite.email || '').toLowerCase() !== email) return { error: 'This invite was sent to a different email address.' };
+      if (agentSnap.exists) return { error: 'This account is already set up. Try signing in instead.' };
+
+      const agencyId = invite.agency_id || agencyDefault;
+      let hierarchyPath = `/${uid}`;
+      if (invite.upline_id) {
+        const up = await transaction.get(db.collection('agents').doc(invite.upline_id));
+        hierarchyPath = `${(up.exists && up.data().hierarchyPath) || `/${invite.upline_id}`}/${uid}`;
+      }
+      const level = Number(invite.agentLevel) || 1;
+      const levelInfo = AGENT_LEVELS.find(l => l.level === level);
+      const next = ((counterSnap.exists && counterSnap.data().current) || 0) + 1;
+      const parts = name.split(' ');
+      const now = new Date().toISOString();
+
+      transaction.set(counterRef, { current: next, agency_id: agencyId }, { merge: true });
+      transaction.set(agentRef, {
+        agency_id: agencyId,
+        upline_id: invite.upline_id || null,
+        hierarchyPath,
+        first_name: parts[0] || '',
+        middle_name: parts.length > 2 ? parts.slice(1, -1).join(' ') : null,
+        last_name: parts.length > 1 ? parts[parts.length - 1] : '',
+        full_name: name,
+        email: invite.email,
+        role: invite.role || 'agent',
+        is_owner: invite.is_owner === true,
+        status: 'invited',
+        agentLevel: level,
+        contractLevel: levelInfo?.title || 'Unlicensed Associate',
+        subscriptionStatus: 'trial',
+        subscriptionStartDate: now,
+        email_verified_at: now,
+        created_at: now,
+        nxt_id: `NXT${String(next).padStart(4, '0')}`,
+        ...(invite.inviter_name && { recruited_by: invite.inviter_name }),
+      });
+      transaction.update(inviteRef, { status: 'accepted', accepted_at: now, accepted_by_uid: uid, signup_email: invite.email });
+
+      // Commission overrides chosen when the invite was sent.
+      const overrides = Array.isArray(invite.commissionOverrides) ? invite.commissionOverrides : [];
+      let total = 0; const clean = [];
+      for (const o of overrides) {
+        const pct = Number(o?.percent);
+        if (!o?.beneficiaryId || o.beneficiaryId === uid || !Number.isFinite(pct) || pct <= 0 || pct > 100) continue;
+        total += pct; if (total > 100) break;
+        clean.push({ beneficiaryId: String(o.beneficiaryId), beneficiaryName: String(o.beneficiaryName || ''), percent: pct });
+      }
+      const stamp = new Date();
+      clean.forEach(o => transaction.set(db.collection('commissionOverrides').doc(), { agentId: uid, agentName: name, ...o, agencyId, createdAt: stamp, createdBy: invite.invited_by_uid || uid, updatedAt: stamp, updatedBy: invite.invited_by_uid || uid }));
+      return { ok: true };
+    });
+    if (result.error) return { success: false, error: result.error };
+    return { success: true };
+  } catch (err) {
+    console.error('completeInviteSignup failed', err);
+    return { success: false, error: 'We could not finish setting up your account. Please try again.' };
   }
 }
 

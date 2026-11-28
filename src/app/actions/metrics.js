@@ -20,25 +20,28 @@ export async function incrementAgentMetrics(transaction, admin, db, agencyId, ag
     }
   }
 
-  // Common set payload for creating if missing
+  // Every counter must exist on the document (lists are sorted by them), but a counter that is not part of
+  // this update must keep its value. increment(0) does both: it creates the field at 0 when it is missing and
+  // leaves it untouched when it is there. (Writing a plain 0 here used to wipe the other counters on every call.)
+  const zero = admin.firestore.FieldValue.increment(0);
   const createPayload = {
     agencyId,
     agentId,
     agentHierarchyPath,
-    commissionPending: 0,
-    commissionConfirmed: 0,
-    commissionPaid: 0,
-    overrideEarnedPending: 0,
-    overrideEarnedConfirmed: 0,
-    overrideEarnedPaid: 0,
-    dealsWonCount: 0,
-    dealsWonPremiumTotal: 0,
-    dealsLostCount: 0,
-    dealsOpenCount: 0,
-    leadsAssignedCount: 0,
-    leadsConvertedCount: 0,
-    tasksCompletedCount: 0,
-    tasksOverdueCurrentCount: 0,
+    commissionPending: zero,
+    commissionConfirmed: zero,
+    commissionPaid: zero,
+    overrideEarnedPending: zero,
+    overrideEarnedConfirmed: zero,
+    overrideEarnedPaid: zero,
+    dealsWonCount: zero,
+    dealsWonPremiumTotal: zero,
+    dealsLostCount: zero,
+    dealsOpenCount: zero,
+    leadsAssignedCount: zero,
+    leadsConvertedCount: zero,
+    tasksCompletedCount: zero,
+    tasksOverdueCurrentCount: zero,
   };
 
   const setOptions = { merge: true };
