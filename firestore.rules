@@ -361,5 +361,12 @@ service cloud.firestore {
     match /bookingLocks/{lockId} {
       allow read, write: if false;
     }
+    // Messaging: read and written only by the server (src/app/actions/messages.js). No one reads another person's chats.
+    match /conversations/{conversationId} {
+      allow read, write: if false;
+      match /messages/{messageId} {
+        allow read, write: if false;
+      }
+    }
   }
 }
