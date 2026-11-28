@@ -13,8 +13,8 @@ import SegTabs from '@/components/ui/SegTabs';
 const STATUS_MAP = {
   open: { label: 'Submitted', color: '#1B2A4E', bg: 'rgba(227, 169, 74,0.08)' },
   pending: { label: 'Under Review', color: '#E08E2B', bg: 'rgba(224,142,43,0.08)' },
-  won: { label: 'Approved', color: '#2FA84F', bg: 'rgba(47,168,79,0.08)' },
-  lost: { label: 'Declined', color: '#D33F3F', bg: 'rgba(211,63,63,0.08)' },
+  won: { label: 'Approved', color: 'var(--status-success)', bg: 'rgba(47,168,79,0.08)' },
+  lost: { label: 'Declined', color: '#B42318', bg: 'rgba(211,63,63,0.08)' },
 };
 
 const POLICY_TYPES = [

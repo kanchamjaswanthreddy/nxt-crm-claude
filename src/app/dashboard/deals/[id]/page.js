@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect, useCallback, use } from 'react';
 import { fetchAgentDirectory } from '@/app/actions/directory';
 import { useRouter } from 'next/navigation';
@@ -131,7 +132,7 @@ export default function DealDetailPage({ params }) {
     });
   };
 
-  if (isLoading || !deal) return <div>Loading deal...</div>;
+  if (isLoading || !deal) return <LoadingSpinner label="Loading deal" />;
 
   return (
     <div>
@@ -183,7 +184,7 @@ export default function DealDetailPage({ params }) {
                 padding: '4px 12px', 
                 borderRadius: '999px', 
                 backgroundColor: deal.status === 'won' ? 'var(--status-success, #2FA84F)' : deal.status === 'lost' ? 'var(--status-error, #D33F3F)' : 'var(--brand-gold)',
-                color: 'white',
+                color: deal.status === 'won' || deal.status === 'lost' ? 'white' : '#0C1022',
                 fontSize: 'var(--text-caption)',
                 fontWeight: '600'
               }}>
@@ -216,7 +217,7 @@ export default function DealDetailPage({ params }) {
                 </div>
                 <div>
                   <label style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)' }}>Renewal</label>
-                  <div>{deal.isRenewal ? <span style={{ color: '#2FA84F', fontWeight: '500' }}>Yes — Renewal</span> : 'No'}</div>
+                  <div>{deal.isRenewal ? <span style={{ color: 'var(--status-success)', fontWeight: '500' }}>Yes — Renewal</span> : 'No'}</div>
                 </div>
                 {deal.status === 'lost' && (
                   <div>

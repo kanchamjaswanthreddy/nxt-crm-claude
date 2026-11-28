@@ -15,9 +15,9 @@ import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
 
 const STATUS_COLORS = {
-  active: { bg: 'rgba(47,168,79,0.1)', text: '#2FA84F' },
+  active: { bg: 'rgba(47,168,79,0.1)', text: '#166534' },
   pending: { bg: 'rgba(224,142,43,0.1)', text: '#E08E2B' },
-  terminated: { bg: 'rgba(211,63,63,0.1)', text: '#D33F3F' },
+  terminated: { bg: 'rgba(211,63,63,0.1)', text: '#B42318' },
   suspended: { bg: 'rgba(107,114,128,0.1)', text: '#5F5C56' },
 };
 

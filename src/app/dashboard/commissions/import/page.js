@@ -241,7 +241,7 @@ export default function CommissionImport() {
             </Card>
             <Card style={{ borderLeft: '4px solid var(--brand-gold)' }}>
               <h3 style={{ margin: '0 0 8px 0' }}>Unmatched Lines</h3>
-              <p style={{ fontSize: 'var(--text-display)', fontWeight: 'bold', color: 'var(--brand-gold)', margin: 0 }}>{unmatchedLines.length}</p>
+              <p style={{ fontSize: 'var(--text-display)', fontWeight: 'bold', color: 'var(--ink-gold)', margin: 0 }}>{unmatchedLines.length}</p>
             </Card>
           </div>
 

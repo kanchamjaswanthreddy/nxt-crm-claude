@@ -1,5 +1,6 @@
 'use client';
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useEffect, useMemo, useState } from 'react';
 import PageHeader from '@/components/ui/PageHeader';
 import SegTabs from '@/components/ui/SegTabs';
@@ -39,7 +40,7 @@ function ProcessingTimes({ kind }) {
     return () => { live = false; };
   }, [kind]);
   if (error) return <p className={s.error} role="alert">{error}</p>;
-  if (!data) return <div className={s.empty}><p className={s.emptyText}>Loading…</p></div>;
+  if (!data) return <LoadingSpinner label="Loading carrier resources" />;
   const rows = data.rows.filter(r => r.carrier.toLowerCase().includes(q.trim().toLowerCase()));
   const checked = new Date(`${data.checked}T00:00:00`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   return (

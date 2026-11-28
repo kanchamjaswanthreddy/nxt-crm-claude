@@ -361,7 +361,7 @@ export default function CommissionDistributionPage() {
             {hierarchyChain.length === 0 && <span style={{ opacity: 0.6 }}> (no upline found)</span>}
             {agentSplits.length > 0 && (
               <div style={{ marginTop: '6px' }}>
-                <strong style={{ color: 'var(--brand-gold)' }}>Commission splits:</strong>{' '}
+                <strong style={{ color: 'var(--ink-gold)' }}>Commission splits:</strong>{' '}
                 {agentSplits.map((s, i) => (
                   <span key={s.beneficiaryId}>
                     {i > 0 && ', '}
@@ -430,7 +430,7 @@ export default function CommissionDistributionPage() {
                     </td>
                     <td style={{ padding: '12px', color: 'var(--text-secondary)' }}>{distribution.selling.nxtId}</td>
                     <td style={{ padding: '12px' }}>
-                      <span style={{ display: 'inline-block', padding: '2px 10px', borderRadius: '20px', backgroundColor: 'var(--brand-gold)', color: '#fff', fontSize: '13px', fontWeight: 700 }}>
+                      <span style={{ display: 'inline-block', padding: '2px 10px', borderRadius: '20px', backgroundColor: 'var(--brand-gold)', color: '#0C1022', fontSize: '13px', fontWeight: 700 }}>
                         Selling Agent
                       </span>
                     </td>
@@ -442,7 +442,7 @@ export default function CommissionDistributionPage() {
                   {distribution.hasSplits && (
                     <>
                       <tr style={{ backgroundColor: 'rgba(227, 169, 74, 0.04)' }}>
-                        <td colSpan={6} style={{ padding: '8px 12px', fontSize: '13px', fontWeight: 700, color: 'var(--brand-gold)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                        <td colSpan={6} style={{ padding: '8px 12px', fontSize: '13px', fontWeight: 700, color: 'var(--ink-gold)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                           Commission Split Breakdown — {distribution.selling.name}&apos;s {fmt(distribution.selling.dollar)} splits as:
                         </td>
                       </tr>
@@ -453,7 +453,7 @@ export default function CommissionDistributionPage() {
                         </td>
                         <td style={{ padding: '10px 12px', color: 'var(--text-secondary)' }}>{distribution.selling.nxtId}</td>
                         <td style={{ padding: '10px 12px' }}>
-                          <span style={{ display: 'inline-block', padding: '2px 10px', borderRadius: '20px', backgroundColor: 'rgba(227, 169, 74, 0.15)', color: 'var(--brand-gold)', fontSize: '13px', fontWeight: 600 }}>
+                          <span style={{ display: 'inline-block', padding: '2px 10px', borderRadius: '20px', backgroundColor: 'rgba(227, 169, 74, 0.15)', color: 'var(--ink-gold)', fontSize: '13px', fontWeight: 600 }}>
                             Keeps {distribution.selling.keepPct}%
                           </span>
                         </td>
@@ -469,7 +469,7 @@ export default function CommissionDistributionPage() {
                           </td>
                           <td style={{ padding: '10px 12px', color: 'var(--text-secondary)' }}>{row.nxtId}</td>
                           <td style={{ padding: '10px 12px' }}>
-                            <span style={{ display: 'inline-block', padding: '2px 10px', borderRadius: '20px', backgroundColor: 'rgba(227, 169, 74, 0.15)', color: 'var(--brand-gold)', fontSize: '13px', fontWeight: 600 }}>
+                            <span style={{ display: 'inline-block', padding: '2px 10px', borderRadius: '20px', backgroundColor: 'rgba(227, 169, 74, 0.15)', color: 'var(--ink-gold)', fontSize: '13px', fontWeight: 600 }}>
                               {row.role}
                             </span>
                           </td>
@@ -560,7 +560,7 @@ export default function CommissionDistributionPage() {
                 <div><strong style={{ color: 'var(--brand-navy)' }}>State:</strong> {selectedProduct.state}</div>
                 <div><strong style={{ color: 'var(--brand-navy)' }}>Age Band:</strong> {selectedProduct.ageBand}</div>
               </div>
-              <p style={{ color: 'var(--brand-gold)', fontSize: 'var(--text-caption)', lineHeight: 1.6, margin: 'var(--space-3) 0 0 0', fontWeight: 600 }}>
+              <p style={{ color: 'var(--ink-gold)', fontSize: 'var(--text-caption)', lineHeight: 1.6, margin: 'var(--space-3) 0 0 0', fontWeight: 600 }}>
                 &#9888; This calculation is based on standard commission schedules. Actual payouts may vary based on carrier contracts and individual agent agreements. For Reference Only.
               </p>
             </Card>

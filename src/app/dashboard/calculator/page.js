@@ -216,26 +216,26 @@ export default function CommissionCalculatorPage() {
           <Card style={{ textAlign: 'center', border: '1px solid rgba(227, 169, 74, 0.15)' }}>
             <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Direct Commission</div>
             <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: 'var(--brand-navy)' }}>{fmt(selectedData.totalIncome)}</div>
-            <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: 600 }}>Net {fmtPct(selectedData.net)}</div>
+            <div style={{ fontSize: 'var(--text-caption)', color: 'var(--ink-gold)', fontWeight: 600 }}>Net {fmtPct(selectedData.net)}</div>
           </Card>
           <Card style={{ textAlign: 'center', border: '1px solid rgba(227, 169, 74, 0.15)' }}>
             <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Override per Level</div>
             <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: 'var(--brand-navy)' }}>{fmt(selectedData.override)}</div>
-            <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: 600 }}>Per downline level</div>
+            <div style={{ fontSize: 'var(--text-caption)', color: 'var(--ink-gold)', fontWeight: 600 }}>Per downline level</div>
           </Card>
           <Card style={{ textAlign: 'center', border: '1px solid rgba(227, 169, 74, 0.15)' }}>
             <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Success Bonus</div>
             <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: selectedData.successBonus ? 'var(--brand-navy)' : 'var(--text-secondary)' }}>
               {selectedData.successBonus ? fmt(selectedData.successBonus) : 'N/A'}
             </div>
-            <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: 600 }}>
+            <div style={{ fontSize: 'var(--text-caption)', color: 'var(--ink-gold)', fontWeight: 600 }}>
               {selectedData.successBonus ? 'Per qualifying sale' : 'RVP+ level'}
             </div>
           </Card>
           <Card style={{ textAlign: 'center', border: '1px solid rgba(0, 32, 91, 0.1)', backgroundColor: 'rgba(0, 32, 91, 0.03)' }}>
             <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Generation Income</div>
             <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: 'var(--brand-navy)' }}>{fmt(totalGenerationIncome)}</div>
-            <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: 600 }}>8 generations deep</div>
+            <div style={{ fontSize: 'var(--text-caption)', color: 'var(--ink-gold)', fontWeight: 600 }}>8 generations deep</div>
           </Card>
         </div>
       )}
@@ -360,7 +360,7 @@ export default function CommissionCalculatorPage() {
                   }}
                 >
                   <td style={{ padding: '10px 12px', color: r.key === selectedLevel ? 'var(--brand-navy)' : 'var(--text-primary)' }}>
-                    {r.key === selectedLevel && <span style={{ color: 'var(--brand-gold)', marginRight: '6px' }}>&#9654;</span>}
+                    {r.key === selectedLevel && <span style={{ color: 'var(--ink-gold)', marginRight: '6px' }}>&#9654;</span>}
                     {r.title}
                   </td>
                   <td style={{ textAlign: 'right', padding: '10px 12px', color: 'var(--text-secondary)' }}>{r.points.toLocaleString()}</td>

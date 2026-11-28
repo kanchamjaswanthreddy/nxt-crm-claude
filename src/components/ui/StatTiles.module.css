@@ -25,5 +25,6 @@ button.tile:focus-visible { outline: 3px solid #E3A94A; outline-offset: 2px; }
 @keyframes stRise { from { opacity: 0; transform: translateY(14px); } }
 @keyframes stGrow { from { transform: scaleX(0); } }
 @media (max-width: 1100px) { .row[data-lead] { grid-template-columns: 1fr 1fr !important; } .row[data-lead] .tile[data-lead] { grid-column: 1 / -1; } }
-@media (max-width: 560px) { .row[data-lead] { grid-template-columns: 1fr !important; } }
+/* Phones: the lead tile spans the row and the rest sit two to a row, so the page is half as long. */
+@media (max-width: 640px) { :global(#main-content) .row.row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; gap: 10px; } .row .tile[data-lead] { grid-column: 1 / -1; } .row .tile:not([data-lead]) { padding: 14px 16px; min-height: 0; border-radius: 20px; } .row .tile:not([data-lead]) .value { font-size: 24px; } }
 @media (prefers-reduced-motion: reduce) { .tile, .meter span { animation: none; } button.tile { transition: none; } }

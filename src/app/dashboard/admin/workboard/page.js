@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@/context/UserContext';
@@ -19,7 +20,7 @@ import {
 
 import SegTabs from '@/components/ui/SegTabs';
 const PRIORITIES = [
-  { value: 'urgent', label: 'Urgent', color: '#D33F3F', bg: 'rgba(211,63,63,0.08)' },
+  { value: 'urgent', label: 'Urgent', color: '#B42318', bg: 'rgba(211,63,63,0.08)' },
   { value: 'high', label: 'High', color: '#E08E2B', bg: 'rgba(224,142,43,0.08)' },
   { value: 'normal', label: 'Normal', color: '#1B2A4E', bg: 'rgba(227, 169, 74,0.08)' },
   { value: 'low', label: 'Low', color: '#5F5C56', bg: 'rgba(107,114,128,0.08)' },
@@ -28,7 +29,7 @@ const PRIORITIES = [
 const STATUSES = [
   { value: 'open', label: 'Open', color: '#1B2A4E', bg: 'rgba(227, 169, 74,0.08)' },
   { value: 'in_progress', label: 'In Progress', color: '#E08E2B', bg: 'rgba(224,142,43,0.08)' },
-  { value: 'done', label: 'Done', color: '#2FA84F', bg: 'rgba(47,168,79,0.08)' },
+  { value: 'done', label: 'Done', color: 'var(--status-success)', bg: 'rgba(47,168,79,0.08)' },
 ];
 
 const CATEGORIES = [
@@ -220,7 +221,7 @@ export default function WorkBoardPage() {
         <h1 style={{ color: 'var(--brand-navy)', fontSize: 'var(--text-h1)', margin: '0 0 var(--space-3)' }}>Work Board</h1>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{ width: '16px', height: '16px', border: '2px solid var(--brand-blue-accent)', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
-          <span style={{ color: 'var(--text-secondary)', fontSize: '16px' }}>Loading...</span>
+          <LoadingSpinner label="Loading" />
         </div>
         <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
       </div>
@@ -330,7 +331,7 @@ export default function WorkBoardPage() {
                         {tab === 'assigned_to_me' ? `From: ${task.assignedByName?.split(' ')[0]}` : `To: ${task.assignedToName?.split(' ')[0]}`}
                       </span>
                       {task.dueDate && (
-                        <span style={{ fontWeight: 500, color: isOverdue ? '#D33F3F' : 'var(--text-secondary)' }}>
+                        <span style={{ fontWeight: 500, color: isOverdue ? '#B42318' : 'var(--text-secondary)' }}>
                           Due: {new Date(task.dueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                         </span>
                       )}
@@ -407,7 +408,7 @@ export default function WorkBoardPage() {
                   {selectedTask.dueDate && (
                     <div>
                       <span style={{ color: 'var(--text-secondary)', fontWeight: 500 }}>Due date</span>
-                      <div style={{ fontWeight: 600, color: new Date(selectedTask.dueDate) < new Date() && selectedTask.status !== 'done' ? '#D33F3F' : 'var(--brand-navy)', marginTop: '2px' }}>
+                      <div style={{ fontWeight: 600, color: new Date(selectedTask.dueDate) < new Date() && selectedTask.status !== 'done' ? '#B42318' : 'var(--brand-navy)', marginTop: '2px' }}>
                         {new Date(selectedTask.dueDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                       </div>
                     </div>
@@ -623,7 +624,7 @@ export default function WorkBoardPage() {
                       <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 10px', borderRadius: '6px', backgroundColor: 'rgba(0,0,0,0.03)', fontSize: '14px' }}>
                         <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{f.name}</span>
                         <span style={{ color: 'var(--text-secondary)' }}>{(f.size / 1024).toFixed(0)} KB</span>
-                        <button onClick={() => setFormFiles(prev => prev.filter((_, j) => j !== i))} aria-label="Remove file" style={{ background: 'none', border: 'none', color: '#D33F3F', cursor: 'pointer', fontSize: '16px' }}>x</button>
+                        <button onClick={() => setFormFiles(prev => prev.filter((_, j) => j !== i))} aria-label="Remove file" style={{ background: 'none', border: 'none', color: '#B42318', cursor: 'pointer', fontSize: '16px' }}>x</button>
                       </div>
                     ))}
                   </div>

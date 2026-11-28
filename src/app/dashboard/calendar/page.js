@@ -5,6 +5,7 @@ import Link from 'next/link';
 import PageHeader from '@/components/ui/PageHeader';
 import SegTabs from '@/components/ui/SegTabs';
 import Modal from '@/components/ui/Modal';
+import Avatar from '@/components/Avatar';
 import { useToast } from '@/components/ui/Toast';
 import { getDisplayName } from '@/lib/constants';
 import { fetchCalendar, saveCalendarEvent, deleteCalendarEvent, respondToEvent, saveEventOutcome, saveEventAttendance, fetchBusy, searchRecords } from '@/app/actions/calendar';
@@ -107,7 +108,7 @@ export default function CalendarPage() {
   useEffect(() => { load(); }, [load]);
 
   useEffect(() => {
-    fetchAgentDirectory().then(r => { if (r.success) setPeople(r.agents.filter(a => a.status !== 'invited').map(a => ({ id: a.id, name: getDisplayName(a) })).sort((a, b) => a.name.localeCompare(b.name))); }).catch(() => {});
+    fetchAgentDirectory().then(r => { if (r.success) setPeople(r.agents.filter(a => a.status !== 'invited').map(a => ({ id: a.id, name: getDisplayName(a), photo: a.photo_url || '' })).sort((a, b) => a.name.localeCompare(b.name))); }).catch(() => {});
   }, []);
   const nameOf = useCallback((id) => people.find(p => p.id === id)?.name || 'Team member', [people]);
 
@@ -359,7 +360,7 @@ export default function CalendarPage() {
             <div><dt>Type</dt><dd><span className={s.tag} data-type={open.type}>{TYPES.find(t => t.key === open.type)?.label}</span></dd></div>
             <div><dt>Who sees it</dt><dd>{open.scope === 'private' ? (open.attendeeIds.length ? `${open.createdByName} and ${open.attendeeIds.length} invited` : 'Only the organiser') : SCOPE_LABEL[open.scope]}</dd></div>
             <div><dt>Organiser</dt><dd>{open.createdByName || 'Unknown'}</dd></div>
-            {open.attendeeIds.length > 0 && <div><dt>Invited</dt><dd>{open.attendeeIds.map(nameOf).join(', ')}</dd></div>}
+            {open.attendeeIds.length > 0 && <div><dt>Invited</dt><dd className={s.faces}>{open.attendeeIds.map(id => <span key={id}><Avatar name={nameOf(id)} photoUrl={people.find(p => p.id === id)?.photo} size={24} />{nameOf(id)}</span>)}</dd></div>}
             {open.location && <div><dt>Where</dt><dd>{open.location}</dd></div>}
             {open.link && <div><dt>Meeting link</dt><dd><a href={open.link} target="_blank" rel="noopener noreferrer">{open.link}</a></dd></div>}
             {open.notes && <div><dt>Notes</dt><dd className={s.notes}>{open.notes}</dd></div>}
@@ -386,7 +387,7 @@ export default function CalendarPage() {
                 <h3>Attendance <span>{attended.length} attended</span></h3>
                 <div className={s.people}>
                   {(open.scope === 'private' ? people.filter(p => open.attendeeIds.includes(p.id)) : people.filter(p => p.id !== data.me)).map(p => (
-                    <label key={p.id} className={s.person}><input type="checkbox" checked={attended.includes(p.id)} onChange={(e) => setAttended(e.target.checked ? [...attended, p.id] : attended.filter(x => x !== p.id))} /><span>{p.name}</span></label>
+                    <label key={p.id} className={s.person}><input type="checkbox" checked={attended.includes(p.id)} onChange={(e) => setAttended(e.target.checked ? [...attended, p.id] : attended.filter(x => x !== p.id))} /><Avatar name={p.name} photoUrl={p.photo} size={26} /><span>{p.name}</span></label>
                   ))}
                 </div>
                 <div className={s.afterBtns}><button type="button" className="nxt-btn nxt-btn-sm" onClick={saveAttendance}>Save Attendance</button></div>
@@ -429,7 +430,7 @@ export default function CalendarPage() {
                 <input type="search" value={peopleQuery} onChange={(e) => setPeopleQuery(e.target.value)} placeholder="Search by name" aria-label="Search people" />
                 <div className={s.people}>
                   {filteredPeople.map(p => (
-                    <label key={p.id} className={s.person}><input type="checkbox" checked={form.attendeeIds.includes(p.id)} onChange={(e) => setForm({ ...form, attendeeIds: e.target.checked ? [...form.attendeeIds, p.id] : form.attendeeIds.filter(x => x !== p.id) })} /><span>{p.name}</span>{busy.includes(p.id) && <b className={s.busy}>Busy then</b>}</label>
+                    <label key={p.id} className={s.person}><input type="checkbox" checked={form.attendeeIds.includes(p.id)} onChange={(e) => setForm({ ...form, attendeeIds: e.target.checked ? [...form.attendeeIds, p.id] : form.attendeeIds.filter(x => x !== p.id) })} /><Avatar name={p.name} photoUrl={p.photo} size={26} /><span>{p.name}</span>{busy.includes(p.id) && <b className={s.busy}>Busy then</b>}</label>
                   ))}
                   {filteredPeople.length === 0 && <p className={s.none}>No one matches.</p>}
                 </div>

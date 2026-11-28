@@ -46,11 +46,11 @@
   --border-focus: #C98A1E;
 
   /* ── Status ── */
-  --status-success: #15803D;
+  --status-success: #166534;
   --status-success-light: #DCFCE7;
   --status-warning: #B45309;
   --status-warning-light: #FCEFD2;
-  --status-error: #DC2626;
+  --status-error: #B42318;
   --status-error-light: #FEE2E2;
   --status-info: #1B2A4E;
   --status-info-light: #E8EAF2;
@@ -319,3 +319,31 @@ textarea:focus-visible {
 #main-content h1:not([data-plain]) { font-size: clamp(30px, 3vw, 42px) !important; font-weight: 400 !important; letter-spacing: -0.045em !important; line-height: 1.05 !important; color: var(--brand-navy) !important; }
 #main-content h1:not([data-plain])::after { content: "."; color: var(--brand-gold); }
 #main-content h1[data-plain] { font-size: clamp(26px, 2.4vw, 34px) !important; font-weight: 500 !important; letter-spacing: -0.03em !important; line-height: 1.1 !important; }
+
+/* ════════════════════════════════════════════════════════════════════
+   Phone layout (640px and under)
+   ════════════════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  /* Nothing in the content panel may push the page sideways. Many screens set layout inline, so these
+     rules catch rows, grids and fixed minimum widths wherever they are. */
+  #main-content [style*="min-width"] { min-width: 0 !important; }
+  #main-content [style*="display: flex"] { flex-wrap: wrap; }
+  #main-content [style*="display: flex"][style*="flex-shrink: 0"]:not([style*="width"]) { flex-shrink: 1 !important; }
+  #main-content [style*="grid-template-columns"]:not([style*="repeat(7"]) { grid-template-columns: minmax(0, 1fr) !important; }
+  #main-content img, #main-content svg, #main-content canvas { max-width: 100%; }
+  #main-content [class*="Card-module"], #main-content > div, #main-content > div > div { min-width: 0; max-width: 100%; }
+  #main-content [style*="white-space: nowrap"]:not(th):not(td):not(button):not(a):not(span) { white-space: normal !important; }
+  #main-content h1, #main-content h2, #main-content h3, #main-content p { overflow-wrap: anywhere; }
+
+  /* Phone: tables as cards. UiEnhancer marks tables with 4+ columns and labels each cell with its heading. */
+  #main-content table[data-cards] { display: block; width: 100% !important; min-width: 0 !important; border: 0 !important; background: transparent !important; }
+  #main-content table[data-cards] thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  #main-content table[data-cards] tbody { display: block; }
+  #main-content table[data-cards] tbody tr { display: block; margin: 0 0 12px; padding: 6px 0; border: 1px solid var(--border-color) !important; border-radius: 14px; background: #fff !important; }
+  #main-content table[data-cards] tbody td { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: auto !important; min-width: 0 !important; max-width: none !important; padding: 8px 14px !important; border: 0 !important; text-align: right !important; white-space: normal !important; position: static !important; }
+  #main-content table[data-cards] tbody td[data-label]::before { content: attr(data-label); flex: none; max-width: 42%; font-family: var(--font-base, inherit); font-size: 13.5px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--text-secondary); text-align: left; }
+  #main-content table[data-cards] tbody td[data-label=""]::before { content: none; }
+  #main-content table[data-cards] tbody td[data-label=""] { justify-content: flex-end; flex-wrap: wrap; }
+  #main-content table[data-cards] tbody td[colspan] { display: block; text-align: center !important; }
+  #main-content table[data-cards] tbody td > * { min-width: 0; }
+}

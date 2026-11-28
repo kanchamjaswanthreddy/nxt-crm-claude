@@ -93,10 +93,10 @@ export default function BillingPage() {
 
   const statusBadge = (status) => {
     const map = {
-      exempt: { bg: 'rgba(47, 168, 79, 0.1)', color: '#2FA84F', label: 'No Charge' },
-      trial: { bg: 'rgba(47, 168, 79, 0.1)', color: '#2FA84F', label: 'Free Trial' },
+      exempt: { bg: 'rgba(47, 168, 79, 0.1)', color: 'var(--status-success)', label: 'No Charge' },
+      trial: { bg: 'rgba(47, 168, 79, 0.1)', color: 'var(--status-success)', label: 'Free Trial' },
       active: { bg: 'rgba(10, 37, 64, 0.08)', color: 'var(--brand-navy)', label: 'Active' },
-      past_due: { bg: 'rgba(211, 63, 63, 0.1)', color: '#D33F3F', label: 'Past Due' },
+      past_due: { bg: 'rgba(211, 63, 63, 0.1)', color: '#B42318', label: 'Past Due' },
       cancelled: { bg: 'rgba(0,0,0,0.05)', color: 'var(--text-secondary)', label: 'Cancelled' },
       none: { bg: 'rgba(0,0,0,0.05)', color: 'var(--text-secondary)', label: 'Not Set' },
     };
@@ -137,7 +137,7 @@ export default function BillingPage() {
           </div>
           {statusBadge(subStatus)}
           {isExempt && (
-            <p style={{ margin: '8px 0 0 0', fontSize: '14px', color: '#2FA84F', fontWeight: '500' }}>
+            <p style={{ margin: '8px 0 0 0', fontSize: '14px', color: 'var(--status-success)', fontWeight: '500' }}>
               {userProfile.is_owner ? 'Owners are not charged a subscription fee.' : 'IT Engineer accounts are not charged a subscription fee.'}
             </p>
           )}
@@ -194,16 +194,16 @@ export default function BillingPage() {
         {/* Agency Total (admin only) */}
         {isAdmin && agencySummary && (
           <Card style={{ backgroundColor: 'var(--brand-navy)', color: '#fff' }}>
-            <p style={{ margin: '0 0 4px 0', fontSize: '13px', color: 'var(--brand-silver)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.5px' }}>
+            <p style={{ margin: '0 0 4px 0', fontSize: '13px', color: '#C9C5BC', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.5px' }}>
               Agency Monthly Total
             </p>
             <p style={{ margin: '0 0 8px 0', fontSize: '28px', fontWeight: '800', color: 'var(--brand-gold)' }}>
               {formatCurrency(agencyMonthlyTotal)}
             </p>
             <div style={{ display: 'flex', gap: '16px', fontSize: '14px' }}>
-              <span><strong style={{ color: '#fff' }}>{agencySummary.activeCount}</strong> <span style={{ color: 'var(--brand-silver)' }}>active</span></span>
-              <span><strong style={{ color: '#fff' }}>{agencySummary.trialCount}</strong> <span style={{ color: 'var(--brand-silver)' }}>trial</span></span>
-              <span><strong style={{ color: '#fff' }}>{agencySummary.totalAgents}</strong> <span style={{ color: 'var(--brand-silver)' }}>total</span></span>
+              <span><strong style={{ color: '#fff' }}>{agencySummary.activeCount}</strong> <span style={{ color: '#C9C5BC' }}>active</span></span>
+              <span><strong style={{ color: '#fff' }}>{agencySummary.trialCount}</strong> <span style={{ color: '#C9C5BC' }}>trial</span></span>
+              <span><strong style={{ color: '#fff' }}>{agencySummary.totalAgents}</strong> <span style={{ color: '#C9C5BC' }}>total</span></span>
             </div>
           </Card>
         )}
@@ -275,7 +275,7 @@ export default function BillingPage() {
                     <span style={{
                       padding: '3px 10px', borderRadius: '999px', fontSize: '13px', fontWeight: '600',
                       backgroundColor: t.status === 'paid' ? 'rgba(47, 168, 79, 0.1)' : 'rgba(211, 63, 63, 0.1)',
-                      color: t.status === 'paid' ? '#2FA84F' : '#D33F3F',
+                      color: t.status === 'paid' ? 'var(--status-success)' : '#B42318',
                     }}>
                       {(t.status || 'pending').toUpperCase()}
                     </span>
@@ -362,7 +362,7 @@ export default function BillingPage() {
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
               <div style={{ fontSize: '24px', lineHeight: 1 }}>&#9888;</div>
               <div style={{ flex: 1 }}>
-                <h3 style={{ margin: '0 0 4px 0', color: '#D33F3F', fontSize: '17px', fontWeight: '700' }}>
+                <h3 style={{ margin: '0 0 4px 0', color: '#B42318', fontSize: '17px', fontWeight: '700' }}>
                   {noSub.length} Agent{noSub.length !== 1 ? 's' : ''} Without Subscription
                 </h3>
                 <p style={{ margin: '0 0 12px 0', fontSize: '15px', color: 'var(--text-secondary)' }}>
@@ -433,7 +433,7 @@ export default function BillingPage() {
                   {reminderResult && (
                     <span style={{
                       fontSize: '14px', fontWeight: 500,
-                      color: reminderResult.type === 'success' ? '#2FA84F' : '#D33F3F',
+                      color: reminderResult.type === 'success' ? 'var(--status-success)' : '#B42318',
                     }}>
                       {reminderResult.message}
                     </span>
@@ -478,13 +478,13 @@ export default function BillingPage() {
                         <div>
                           <span style={{ fontWeight: '500' }}>{agent.name}</span>
                           {agent.is_owner && (
-                            <span style={{ marginLeft: '6px', fontSize: '13px', fontWeight: '700', color: 'var(--brand-gold)' }}>OWNER</span>
+                            <span style={{ marginLeft: '6px', fontSize: '13px', fontWeight: '700', color: 'var(--ink-gold)' }}>OWNER</span>
                           )}
                           {agent.role === 'it_engineer' && (
                             <span style={{ marginLeft: '6px', fontSize: '13px', fontWeight: '700', color: '#1B2A4E' }}>IT</span>
                           )}
                           {agent.billingExempt && !agent.is_owner && agent.role !== 'it_engineer' && (
-                            <span style={{ marginLeft: '6px', fontSize: '13px', fontWeight: '700', color: '#2FA84F' }}>EXEMPT</span>
+                            <span style={{ marginLeft: '6px', fontSize: '13px', fontWeight: '700', color: 'var(--status-success)' }}>EXEMPT</span>
                           )}
                           <div style={{ fontSize: '13px', color: 'var(--text-secondary)', textTransform: 'capitalize' }}>{agent.role === 'it_engineer' ? 'IT Engineer' : agent.role}</div>
                         </div>
@@ -499,7 +499,7 @@ export default function BillingPage() {
                       </td>
                       <td style={{ ...tdStyle, fontWeight: '600' }}>
                         {agentExempt ? (
-                          <span style={{ color: '#2FA84F', fontSize: '14px', fontWeight: '600' }}>FREE</span>
+                          <span style={{ color: 'var(--status-success)', fontSize: '14px', fontWeight: '600' }}>FREE</span>
                         ) : formatCurrency(lvl?.price)}
                       </td>
                       <td style={tdStyle}>{statusBadge(agentExempt ? 'exempt' : (agent.subscriptionStatus || 'none'))}</td>
@@ -582,7 +582,7 @@ export default function BillingPage() {
                     color: isCurrent ? 'var(--brand-navy)' : 'var(--text-primary)',
                   }}>
                     {lvl.title}
-                    {isCurrent && <span style={{ marginLeft: '8px', fontSize: '13px', color: '#2FA84F', fontWeight: '700' }}>YOUR PLAN</span>}
+                    {isCurrent && <span style={{ marginLeft: '8px', fontSize: '13px', color: 'var(--status-success)', fontWeight: '700' }}>YOUR PLAN</span>}
                   </span>
                 </div>
                 <span style={{
@@ -613,7 +613,7 @@ const CARD_ELEMENT_OPTIONS = {
       iconColor: '#0C1022',
     },
     invalid: {
-      color: '#D33F3F',
+      color: '#B42318',
       iconColor: '#D33F3F',
     },
   },

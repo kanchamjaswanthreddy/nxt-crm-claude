@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useUser } from '@/context/UserContext';
@@ -124,9 +125,7 @@ export default function GroupDetailPage() {
 
   if (isLoading) {
     return (
-      <div style={{ padding: 'var(--space-4)', textAlign: 'center', color: 'var(--text-secondary)' }}>
-        Loading group...
-      </div>
+      <LoadingSpinner label="Loading group" />
     );
   }
 
@@ -367,7 +366,7 @@ export default function GroupDetailPage() {
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                 </svg>
                 <div>
-                  <div style={{ fontWeight: 600, color: '#E3A94A', fontSize: '15px' }}>
+                  <div style={{ fontWeight: 600, color: 'var(--ink-gold)', fontSize: '15px' }}>
                     Team Leader (Sub-Admin)
                   </div>
                   <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
@@ -391,7 +390,7 @@ export default function GroupDetailPage() {
                   <path d="M9 12l2 2 4-4" />
                 </svg>
                 <div>
-                  <div style={{ fontWeight: 600, color: '#2FA84F', fontSize: '15px' }}>
+                  <div style={{ fontWeight: 600, color: 'var(--status-success)', fontSize: '15px' }}>
                     Billing Exemption
                   </div>
                   <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>

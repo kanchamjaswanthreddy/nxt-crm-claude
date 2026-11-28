@@ -228,17 +228,17 @@ export default function LifeCalculator() {
             <Card style={{ textAlign: 'center', border: '1px solid rgba(227, 169, 74, 0.15)' }}>
               <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Your Commission %</div>
               <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: 'var(--brand-navy)' }}>{commissionPct}%</div>
-              <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: 600 }}>{LIFE_TITLE_LEVELS.find(l => l.key === selectedLevel)?.title}</div>
+              <div style={{ fontSize: 'var(--text-caption)', color: 'var(--ink-gold)', fontWeight: 600 }}>{LIFE_TITLE_LEVELS.find(l => l.key === selectedLevel)?.title}</div>
             </Card>
             <Card style={{ textAlign: 'center', border: '1px solid rgba(227, 169, 74, 0.15)' }}>
               <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Commission $ Amount</div>
               <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: 'var(--brand-navy)' }}>{fmt(commissionDollar)}</div>
-              <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: 600 }}>On {fmt(premium)} annual premium</div>
+              <div style={{ fontSize: 'var(--text-caption)', color: 'var(--ink-gold)', fontWeight: 600 }}>On {fmt(premium)} annual premium</div>
             </Card>
             <Card style={{ textAlign: 'center', border: '1px solid rgba(227, 169, 74, 0.15)' }}>
               <div style={{ fontSize: 'var(--text-caption)', color: 'var(--text-secondary)', marginBottom: '4px' }}>Gen Override Total</div>
               <div style={{ fontSize: 'var(--text-h1)', fontWeight: 800, color: 'var(--brand-navy)' }}>{fmt(genOverrideDollar)}</div>
-              <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: 600 }}>{genOverrideTotal.toFixed(4)}% across 8 gens</div>
+              <div style={{ fontSize: 'var(--text-caption)', color: 'var(--ink-gold)', fontWeight: 600 }}>{genOverrideTotal.toFixed(4)}% across 8 gens</div>
             </Card>
           </div>
 
@@ -271,7 +271,7 @@ export default function LifeCalculator() {
                         }}
                       >
                         <td style={{ padding: '10px 12px', color: isSelected ? 'var(--brand-navy)' : 'var(--text-primary)' }}>
-                          {isSelected && <span style={{ color: 'var(--brand-gold)', marginRight: '6px' }}>&#9654;</span>}
+                          {isSelected && <span style={{ color: 'var(--ink-gold)', marginRight: '6px' }}>&#9654;</span>}
                           {lvl.title}
                         </td>
                         <td style={{ textAlign: 'right', padding: '10px 12px', color: 'var(--text-secondary)' }}>{lvl.pct}</td>
@@ -420,7 +420,7 @@ export default function LifeCalculator() {
         <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-caption)', lineHeight: 1.6, margin: '0 0 var(--space-2) 0' }}>
           Note: All compensation figures are applicable to Non-New York (Non-NY) business only and are for professional use. Compensation may vary for New York business and is subject to the applicable carrier contract, product, state regulations, and underwriting requirements.
         </p>
-        <p style={{ color: 'var(--brand-gold)', fontSize: 'var(--text-caption)', lineHeight: 1.6, margin: 0, fontWeight: 600 }}>
+        <p style={{ color: 'var(--ink-gold)', fontSize: 'var(--text-caption)', lineHeight: 1.6, margin: 0, fontWeight: 600 }}>
           &#9888; Information subject to change based on carrier updates. This grid does not serve as a binding contract &mdash; for Reference Only. Contact your NXT Financial Group Sales Consultant with questions.
         </p>
       </Card>

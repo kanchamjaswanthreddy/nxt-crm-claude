@@ -94,7 +94,7 @@ export async function listConversations() {
       list.push({
         id: d.id, type: v.type, name: v.name || '', memberIds: v.memberIds || [], leaderId: v.leaderId || null,
         lastAt: v.lastAt || null, lastText: v.lastText || '', lastBy: v.lastBy || '',
-        unread: !!v.lastAt && v.lastAt > lastRead && v.lastById !== caller.uid,
+        unread: !!v.lastAt && v.lastAt > lastRead && v.lastById !== caller.uid, lastReadAt: lastRead,
       });
     });
     list.sort((a, b) => (b.lastAt || '').localeCompare(a.lastAt || '') || a.name.localeCompare(b.name));
@@ -103,10 +103,28 @@ export async function listConversations() {
   } catch (error) { return { success: false, error: error.message }; }
 }
 
-/** Just the number for the menu badge. */
+/** The number for the menu badge and the newest unread chat (for the alert). A light check: it reads only the
+ *  caller's own chats and channels and changes nothing. */
 export async function unreadMessageCount() {
-  const r = await listConversations();
-  return r.success ? { success: true, unread: r.unread } : r;
+  let c;
+  try { c = await ctx(); } catch { return { success: false, error: 'Unauthorized' }; }
+  const { caller, db, path } = c;
+  try {
+    const above = path.split('/').filter(Boolean);
+    const [mine, ...chans] = await Promise.all([
+      db.collection('conversations').where('memberIds', 'array-contains', caller.uid).get(),
+      db.collection('conversations').doc(`everyone_${caller.agencyId}`).get(),
+      ...above.map(id => db.collection('conversations').doc(`team_${id}`).get()),
+    ]);
+    const seen = new Set(); let unread = 0; let latest = null;
+    [...mine.docs, ...chans.filter(d => d.exists)].forEach(d => {
+      const v = d.data(); if (seen.has(d.id) || !isMember(v, caller, path)) return; seen.add(d.id);
+      if (!v.lastAt || v.lastById === caller.uid || v.lastAt <= ((v.lastRead || {})[caller.uid] || '')) return;
+      unread += 1;
+      if (!latest || v.lastAt > latest.at) latest = { id: d.id, at: v.lastAt, by: v.lastBy || 'Someone', in: v.type === 'direct' ? '' : (v.name || '') };
+    });
+    return { success: true, unread, latest };
+  } catch (error) { return { success: false, error: error.message }; }
 }
 
 /** Open (or start) a one-to-one chat. */

@@ -38,7 +38,7 @@ const Expandable = ({ heading, children }) => (
       fontSize: 'var(--text-secondary)', backgroundColor: 'rgba(0,0,0,0.015)',
     }}>
       {heading}
-      <span style={{ fontSize: '20px', color: 'var(--brand-gold)', fontWeight: '700' }}>+</span>
+      <span style={{ fontSize: '20px', color: 'var(--ink-gold)', fontWeight: '700' }}>+</span>
     </summary>
     <div style={{ padding: '4px 20px 20px', color: 'var(--text-secondary)', lineHeight: '1.6', fontSize: 'var(--text-secondary)' }}>
       {children}
@@ -138,7 +138,7 @@ function SetupChecklist({ agentData }) {
             <div style={{
               width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#fff',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 'var(--text-caption)', fontWeight: '800', color: allDone ? 'var(--status-success)' : 'var(--brand-gold)',
+              fontSize: 'var(--text-caption)', fontWeight: '800', color: allDone ? 'var(--status-success)' : 'var(--ink-gold)',
             }}>{pct}%</div>
           </div>
         </div>
@@ -270,7 +270,7 @@ export default function GettingStartedPage() {
               </p>
 
               <Callout variant="critical">
-                <strong style={{ color: '#D33F3F' }}>Enter your name exactly as printed on your government-issued ID — include your middle name if it appears there.</strong>{' '}
+                <strong style={{ color: '#B42318' }}>Enter your name exactly as printed on your government-issued ID — include your middle name if it appears there.</strong>{' '}
                 This name must stay consistent across every document in the licensing process, so accuracy here prevents delays later.
               </Callout>
 
@@ -319,7 +319,7 @@ export default function GettingStartedPage() {
               </p>
 
               <Callout variant="note">
-                <strong style={{ color: 'var(--brand-navy)' }}>Save for reference:</strong> The <span style={{ color: 'var(--brand-gold)', fontWeight: '600' }}>Sales Force Guidelines (PDF)</span> details the standards, protocols, and operational procedures for conducting business. Read it now and keep it bookmarked.
+                <strong style={{ color: 'var(--brand-navy)' }}>Save for reference:</strong> The <span style={{ color: 'var(--ink-gold)', fontWeight: '600' }}>Sales Force Guidelines (PDF)</span> details the standards, protocols, and operational procedures for conducting business. Read it now and keep it bookmarked.
               </Callout>
 
               <h4 style={{ fontWeight: 'bold', color: 'var(--brand-navy)', marginTop: 'var(--space-4)', marginBottom: '12px', fontSize: 'var(--text-body)' }}>Your subscription includes</h4>
@@ -517,7 +517,7 @@ export default function GettingStartedPage() {
               </p>
 
               <Callout variant="critical">
-                <strong style={{ color: '#D33F3F' }}>Use your full legal name — it must match everywhere.</strong>{' '}
+                <strong style={{ color: '#B42318' }}>Use your full legal name — it must match everywhere.</strong>{' '}
                 Apply using the exact name on your government ID, and ensure it matches your CRM profile precisely. Name mismatches are the most frequent reason documents get rejected, causing downstream delays. If you have not already, verify your profile name before your application is processed.
               </Callout>
             </StepCard>

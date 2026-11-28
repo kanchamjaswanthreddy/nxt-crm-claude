@@ -1,5 +1,6 @@
 'use client';
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useCallback, useEffect, useState } from 'react';
 import PageHeader from '@/components/ui/PageHeader';
 import SegTabs from '@/components/ui/SegTabs';
@@ -55,7 +56,7 @@ export default function MessageReviewPage() {
     toast.success(done); loadAccess();
   };
 
-  if (access === null) return <p className={s.muted}>Loading…</p>;
+  if (access === null) return <LoadingSpinner label="Loading message review" />;
   if (!access.allowed) {
     return (
       <div>

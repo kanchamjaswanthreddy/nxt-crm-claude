@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import BackLink from '@/components/ui/BackLink';
@@ -10,6 +10,15 @@ import s from '../clientEducation.module.css';
 export default function BrochurePage() {
   const { slug } = useParams();
   const b = BROCHURES.find(x => x.slug === slug);
+
+  // Measure the spare room between the columns and the bottom boxes once; show the extra strip only if it fits.
+  const stepsRef = useRef(null);
+  const [roomy, setRoomy] = useState(false);
+  useLayoutEffect(() => {
+    const el = stepsRef.current; const cols = el?.previousElementSibling; const lower = el?.nextElementSibling;
+    if (!el || !cols || !lower) return;
+    setRoomy(lower.getBoundingClientRect().top - cols.getBoundingClientRect().bottom >= 110);
+  }, [slug]);
 
   if (!b) {
     return (
@@ -54,6 +63,15 @@ export default function BrochurePage() {
             ))}
           </div>
 
+          {/* Shown only when the page has spare room, so short brochures do not leave an empty band. */}
+          <div ref={stepsRef} className={s.steps} data-show={roomy ? '' : undefined} aria-hidden={roomy ? undefined : true}>
+            <h2>How we work through this together</h2>
+            <ol>
+              <li><strong>Talk it through</strong><span>We start with your goals, your budget and what you already have.</span></li>
+              <li><strong>Compare the options</strong><span>You see the choices side by side, with costs explained plainly.</span></li>
+              <li><strong>Decide in your own time</strong><span>No pressure. Afterwards we review it with you as life changes.</span></li>
+            </ol>
+          </div>
           <div className={s.lower}>
             <section className={s.questions}>
               <h2>Questions to bring to our conversation</h2>

@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetchAgents, updateAgentContractLevel } from '@/app/actions/agents';
@@ -65,7 +66,7 @@ export default function AgentLevelsSettings() {
     setIsSaving(false);
   };
 
-  if (isLoading) return <div style={{ padding: 'var(--space-4)', textAlign: 'center', color: 'var(--text-secondary)' }}>Loading...</div>;
+  if (isLoading) return <LoadingSpinner label="Loading" />;
 
   return (
     <div>

@@ -79,7 +79,7 @@ export default function TrailCommissionsPage() {
                     <span style={{
                       padding: '3px 10px', borderRadius: '999px', fontSize: '14px', fontWeight: '600',
                       backgroundColor: c.status === 'paid' ? 'rgba(47,168,79,0.1)' : 'rgba(224,142,43,0.1)',
-                      color: c.status === 'paid' ? '#2FA84F' : '#E08E2B',
+                      color: c.status === 'paid' ? 'var(--status-success)' : '#E08E2B',
                     }}>{c.status}</span>
                   </td>
                   <td style={tdStyle}>{c.createdAt ? new Date(c.createdAt).toLocaleDateString('en-US') : '—'}</td>

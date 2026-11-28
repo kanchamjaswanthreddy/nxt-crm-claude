@@ -275,10 +275,10 @@ export default function MarketingDataPage() {
         <div style={{
           padding: '16px 20px', borderRadius: '12px', marginBottom: '20px',
           background: 'rgba(220,38,38,0.06)', border: '1px solid rgba(220,38,38,0.15)',
-          color: '#DC2626', fontSize: '1rem',
+          color: '#B42318', fontSize: '1rem',
         }}>
           <strong>Error:</strong> {error}
-          <div style={{ marginTop: '8px', fontSize: '0.9375rem', color: '#8A857B' }}>
+          <div style={{ marginTop: '8px', fontSize: '0.9375rem', color: 'var(--text-secondary)' }}>
             Make sure the Google Drive folder is shared with the Firebase service account email.
           </div>
         </div>

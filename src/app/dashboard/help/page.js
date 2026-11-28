@@ -576,7 +576,7 @@ export default function HelpPage() {
                   <div style={{
                     width: 26, height: 26, borderRadius: '50%', backgroundColor: 'rgba(227, 169, 74,0.15)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-                    fontSize: 15, fontWeight: 700, color: 'var(--brand-gold)',
+                    fontSize: 15, fontWeight: 700, color: 'var(--ink-gold)',
                   }}>
                     {item.step}
                   </div>

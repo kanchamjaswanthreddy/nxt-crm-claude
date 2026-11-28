@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect, useCallback } from 'react';
 import StatTiles from '@/components/ui/StatTiles';
 import { useRouter } from 'next/navigation';
@@ -70,7 +71,7 @@ const POLICY_TYPES = [
 const POLICY_STATUSES = [
   { value: 'active', label: 'Active', color: '#16a34a', bg: 'rgba(22,163,74,0.08)' },
   { value: 'pending', label: 'Pending', color: '#ca8a04', bg: 'rgba(202,138,4,0.08)' },
-  { value: 'lapsed', label: 'Lapsed', color: '#dc2626', bg: 'rgba(220,38,38,0.08)' },
+  { value: 'lapsed', label: 'Lapsed', color: '#B42318', bg: 'rgba(220,38,38,0.08)' },
   { value: 'cancelled', label: 'Cancelled', color: '#5F5C56', bg: 'rgba(107,114,128,0.08)' },
   { value: 'expired', label: 'Expired', color: '#5F5C56', bg: 'rgba(107,114,128,0.08)' },
 ];
@@ -352,7 +353,7 @@ export default function ClientDetailPage({ params }) {
             borderTopColor: 'transparent', borderRadius: '50%',
             animation: 'spin 0.8s linear infinite',
           }} />
-          <span style={{ color: 'var(--text-secondary)', fontSize: '17px' }}>Loading client...</span>
+          <LoadingSpinner label="Loading client" />
         </div>
         <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
       </div>

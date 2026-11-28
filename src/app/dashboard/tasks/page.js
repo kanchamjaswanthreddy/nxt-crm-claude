@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect } from 'react';
 import StatTiles from '@/components/ui/StatTiles';
 import { useRouter } from 'next/navigation';
@@ -80,7 +81,7 @@ function CalendarView({ tasks, month, onMonthChange, onTaskClick, getPriorityCol
                   <div style={{
                     fontSize: 'var(--text-xs)',
                     fontWeight: isToday(day) ? '700' : '400',
-                    color: isToday(day) ? 'var(--brand-gold)' : 'var(--text-secondary)',
+                    color: isToday(day) ? 'var(--ink-gold)' : 'var(--text-secondary)',
                     marginBottom: '2px',
                     width: '22px',
                     height: '22px',
@@ -280,9 +281,9 @@ export default function TasksPage() {
   const getPriorityColor = (priority) => {
     switch (priority) {
       case 'high': return 'var(--status-error, #D33F3F)';
-      case 'medium': return 'var(--brand-gold)';
-      case 'low': return 'var(--brand-silver, #A9ACB1)';
-      default: return 'var(--brand-silver, #A9ACB1)';
+      case 'medium': return 'var(--ink-gold)';
+      case 'low': return 'var(--text-tertiary)';
+      default: return 'var(--text-tertiary)';
     }
   };
 
@@ -364,9 +365,7 @@ export default function TasksPage() {
 
       {/* Task List */}
       {isLoading && tasks.length === 0 ? (
-        <Card style={{ textAlign: 'center', padding: 'var(--space-5)', color: 'var(--text-secondary)' }}>
-          Loading tasks...
-        </Card>
+        <LoadingSpinner label="Loading tasks" />
       ) : filteredTasks.length === 0 ? (
         <Card style={{ textAlign: 'center', padding: 'var(--space-5)', color: 'var(--text-secondary)' }}>
           <p style={{ fontSize: 'var(--text-body)', marginBottom: 'var(--space-2)' }}>

@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect, useCallback } from 'react';
 import { fetchCarrierUpdates, createCarrierUpdate, deleteCarrierUpdate } from '@/app/actions/carrierUpdates';
 import { fetchCarriers } from '@/app/actions/commissions';
@@ -11,12 +12,12 @@ import ConfirmDialog from '@/components/ui/ConfirmDialog';
 const CATEGORY_STYLES = {
   product_update: { bg: 'rgba(227, 169, 74,0.1)', text: '#1B2A4E', label: 'Product Update' },
   rate_change: { bg: 'rgba(224,142,43,0.1)', text: '#E08E2B', label: 'Rate Change' },
-  compliance: { bg: 'rgba(211,63,63,0.1)', text: '#D33F3F', label: 'Compliance' },
+  compliance: { bg: 'rgba(211,63,63,0.1)', text: '#B42318', label: 'Compliance' },
   announcement: { bg: 'rgba(107,114,128,0.1)', text: '#5F5C56', label: 'Announcement' },
 };
 
 const PRIORITY_STYLES = {
-  urgent: { color: '#D33F3F', icon: '' },
+  urgent: { color: '#B42318', icon: '' },
   important: { color: '#E08E2B', icon: '' },
   normal: { color: 'var(--text-secondary)', icon: '' },
 };
@@ -97,7 +98,7 @@ export default function CarrierUpdatesPage() {
     });
   };
 
-  if (isLoading) return <div style={{ padding: '24px' }}>Loading Carrier Updates...</div>;
+  if (isLoading) return <LoadingSpinner label="Loading carrier updates" />;
 
   return (
     <div>

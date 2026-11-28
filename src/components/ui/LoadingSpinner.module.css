@@ -62,3 +62,10 @@
   flex-direction: column;
   gap: var(--space-3);
 }
+
+/* Page-level placeholder: a title bar and a few rows where the content will appear. */
+.page { width: 100%; max-width: 980px; align-self: flex-start; padding: 8px 0 24px; }
+.pageHead { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 22px; }
+.pageRow { display: flex; align-items: center; gap: 14px; padding: 14px 16px; margin-bottom: 10px; border: 1px solid var(--border-color); border-radius: 14px; background: #fff; }
+.page .skeleton { display: block; }
+@media (prefers-reduced-motion: reduce) { .skeleton, .skeletonText, .skeletonHeading, .skeletonCircle { animation: none; } }

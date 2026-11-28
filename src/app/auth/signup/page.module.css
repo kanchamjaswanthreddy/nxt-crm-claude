@@ -26,7 +26,7 @@
 .validationList {
   list-style: none;
   font-size: var(--text-caption);
-  color: var(--brand-silver);
+  color: var(--text-tertiary);
   margin-top: -8px;
   margin-bottom: var(--space-2);
   padding-left: var(--space-1);

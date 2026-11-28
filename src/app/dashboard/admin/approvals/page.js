@@ -167,7 +167,7 @@ export default function AdminApprovalsPage() {
                     marginTop: '12px', padding: '16px', borderRadius: '10px',
                     backgroundColor: 'rgba(211, 63, 63, 0.04)', border: '1px solid rgba(211, 63, 63, 0.15)',
                   }}>
-                    <p style={{ margin: '0 0 8px 0', fontSize: '15px', fontWeight: '600', color: '#D33F3F' }}>Rejection Reason</p>
+                    <p style={{ margin: '0 0 8px 0', fontSize: '15px', fontWeight: '600', color: '#B42318' }}>Rejection Reason</p>
                     <textarea
                       value={rejectReason}
                       onChange={e => setRejectReason(e.target.value)}

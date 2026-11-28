@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Card from '@/components/ui/Card';
 import Input from '@/components/ui/Input';
@@ -111,7 +112,7 @@ function StatusBadge({ status }) {
   const config = {
     active: { bg: 'rgba(47, 168, 79, 0.1)', color: 'var(--status-success)', label: 'Active' },
     invited: { bg: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-blue-accent)', label: 'Invited' },
-    pending: { bg: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-gold)', label: 'Pending' },
+    pending: { bg: 'rgba(227, 169, 74, 0.1)', color: 'var(--ink-gold)', label: 'Pending' },
     suspended: { bg: 'rgba(211, 63, 63, 0.1)', color: 'var(--status-error)', label: 'Suspended' },
   };
   const c = config[status] || config.pending;
@@ -476,7 +477,7 @@ export default function ProfilePage() {
   if (isLoading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px' }}>
-        <p style={{ color: 'var(--text-secondary)' }}>Loading profile...</p>
+        <LoadingSpinner label="Loading profile" />
       </div>
     );
   }
@@ -610,7 +611,7 @@ export default function ProfilePage() {
               {profile.is_owner ? (
                 <span style={{
                   padding: '3px 12px', borderRadius: '999px', fontSize: 'var(--text-caption)',
-                  fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A',
+                  fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: 'var(--brand-gold)',
                   letterSpacing: '0.03em',
                 }}>
                   Agency Owner

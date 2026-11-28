@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect } from 'react';
 import { fetchAgentDirectory } from '@/app/actions/directory';
 import { useRouter } from 'next/navigation';
@@ -213,7 +214,7 @@ export default function LeadDetailPage({ params }) {
     });
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingSpinner label="Loading lead" />;
   if (loadError || !lead) return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '40vh', gap: '12px', padding: '32px' }}>
       <h2 style={{ color: 'var(--brand-navy)', fontSize: '20px' }}>Unable to load lead</h2>

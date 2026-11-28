@@ -147,7 +147,7 @@ export default function ScoreboardPage() {
   }
 
   const summaryCards = [
-    { label: 'Total Production', value: '$' + totalPremium.toLocaleString(), accent: 'var(--brand-gold)' },
+    { label: 'Total Production', value: '$' + totalPremium.toLocaleString(), accent: 'var(--ink-gold)' },
     { label: 'Total Deals', value: totalDeals.toLocaleString(), accent: 'var(--brand-blue-accent)' },
     { label: 'Avg Premium', value: '$' + avgPremium.toLocaleString(), accent: 'var(--status-success)' },
     { label: 'Top Agent', value: topAgentName, accent: 'var(--brand-navy)' },
@@ -212,7 +212,7 @@ export default function ScoreboardPage() {
           marginBottom: 'var(--space-3)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)',
         }}>
           <span style={{
-            fontSize: '26px', fontWeight: 800, color: 'var(--brand-gold)',
+            fontSize: '26px', fontWeight: 800, color: 'var(--ink-gold)',
             lineHeight: 1,
           }}>#{myRank}</span>
           <span style={{ color: 'var(--text-primary)', fontWeight: 500, fontSize: '17px' }}>Your current rank</span>
@@ -273,14 +273,14 @@ export default function ScoreboardPage() {
                     {isMe && (
                       <span style={{
                         position: 'absolute', top: '8px', right: '8px',
-                        fontSize: '13px', fontWeight: 600, color: 'var(--brand-gold)',
+                        fontSize: '13px', fontWeight: 600, color: 'var(--ink-gold)',
                         backgroundColor: 'rgba(227, 169, 74,0.1)', padding: '2px 8px',
                         borderRadius: '4px',
                       }}>YOU</span>
                     )}
                     <div style={{
                       width: '44px', height: '44px', borderRadius: '50%',
-                      backgroundColor: PODIUM_COLORS[i], color: '#fff',
+                      backgroundColor: PODIUM_COLORS[i], color: '#0C1022',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       fontWeight: 800, fontSize: '17px',
                       boxShadow: i === 0 ? '0 4px 14px rgba(227, 169, 74,0.35)' : 'none',
@@ -294,7 +294,7 @@ export default function ScoreboardPage() {
                       {agent.agentName}
                     </div>
                     <div style={{
-                      fontSize: '24px', fontWeight: 800, color: PODIUM_COLORS[i], lineHeight: 1,
+                      fontSize: '24px', fontWeight: 800, color: 'var(--brand-navy)', lineHeight: 1,
                     }}>
                       {formatValue(agent[rankBy], rankBy)}
                     </div>
@@ -347,7 +347,7 @@ export default function ScoreboardPage() {
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: 'var(--space-3)', fontSize: '15px' }}>
-                    <span>Premium: <strong style={{ color: 'var(--brand-gold)' }}>${totals.premium.toLocaleString()}</strong></span>
+                    <span>Premium: <strong style={{ color: 'var(--ink-gold)' }}>${totals.premium.toLocaleString()}</strong></span>
                     <span>Deals: <strong style={{ color: 'var(--brand-navy)' }}>{totals.deals}</strong></span>
                     <span>Commission: <strong style={{ color: 'var(--status-success)' }}>${totals.commission.toLocaleString()}</strong></span>
                   </div>
@@ -422,7 +422,7 @@ export default function ScoreboardPage() {
                           </span>
                           {isMe && (
                             <span style={{
-                              color: 'var(--brand-gold)', fontSize: '13px', fontWeight: 600,
+                              color: 'var(--ink-gold)', fontSize: '13px', fontWeight: 600,
                               marginLeft: '6px',
                             }}>(You)</span>
                           )}

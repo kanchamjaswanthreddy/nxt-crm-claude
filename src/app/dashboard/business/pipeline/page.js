@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useUser } from '@/context/UserContext';
 import {
@@ -19,7 +20,7 @@ import SegTabs from '@/components/ui/SegTabs';
 
 const CONTACT_TYPES = [
   { value: 'recruit', label: 'Recruit', color: '#8B5CF6' },
-  { value: 'prospect', label: 'Prospect', color: '#E3A94A' },
+  { value: 'prospect', label: 'Prospect', color: 'var(--ink-gold)' },
   { value: 'client', label: 'Client', color: '#16A34A' },
   { value: 'referral', label: 'Referral', color: '#F59E0B' },
   { value: 'dual', label: 'Dual (Recruit + Client)', color: '#EC4899' },
@@ -222,10 +223,7 @@ export default function BusinessPipelinePage() {
 
   if (isLoading) {
     return (
-      <div style={{ padding: '60px', textAlign: 'center', color: 'var(--text-secondary)' }}>
-        <div style={{ width: 36, height: 36, border: '3px solid rgba(0,0,0,0.1)', borderTopColor: 'var(--brand-gold, #E3A94A)', borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto 16px' }} />
-        Loading pipeline...
-      </div>
+      <LoadingSpinner label="Loading pipeline" />
     );
   }
 
@@ -424,7 +422,7 @@ function BoardView({ stages, contacts, draggedId, dragOverStage, onDragStart, on
                 />
               ))}
               {stageContacts.length === 0 && (
-                <div style={{ padding: '24px 12px', textAlign: 'center', color: '#cbd5e1', fontSize: '1rem' }}>
+                <div style={{ padding: '24px 12px', textAlign: 'center', color: 'var(--text-tertiary)', fontSize: '1rem' }}>
                   Drop contacts here
                 </div>
               )}
@@ -496,10 +494,10 @@ function ContactCard({ contact, onDragStart, onClick, isDragging }) {
       {(contact.lastContactedAt || contact.nextFollowupAt) && (
         <div style={{ marginTop: '8px', paddingTop: '6px', borderTop: '1px solid #F1EFEA', display: 'flex', justifyContent: 'space-between' }}>
           {contact.lastContactedAt && (
-            <span style={{ fontSize: '1rem', color: '#94a3b8' }}>Last: {timeAgo(contact.lastContactedAt)}</span>
+            <span style={{ fontSize: '1rem', color: 'var(--text-tertiary)' }}>Last: {timeAgo(contact.lastContactedAt)}</span>
           )}
           {contact.nextFollowupAt && (
-            <span style={{ fontSize: '1rem', color: new Date(contact.nextFollowupAt) < new Date() ? '#EF4444' : '#E3A94A', fontWeight: 600 }}>
+            <span style={{ fontSize: '1rem', color: new Date(contact.nextFollowupAt) < new Date() ? '#EF4444' : 'var(--ink-gold)', fontWeight: 600 }}>
               Follow-up: {formatDate(contact.nextFollowupAt)}
             </span>
           )}
@@ -1114,7 +1112,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
               </div>
               {confirmDelete && (
                 <div style={{ marginTop: '12px', padding: '12px', background: '#fef2f2', borderRadius: '8px', border: '1px solid #fecaca' }}>
-                  <p style={{ fontSize: '0.9375rem', color: '#DC2626', margin: '0 0 8px', fontWeight: 600 }}>Are you sure? This cannot be undone.</p>
+                  <p style={{ fontSize: '0.9375rem', color: '#B42318', margin: '0 0 8px', fontWeight: 600 }}>Are you sure? This cannot be undone.</p>
                   <div style={{ display: 'flex', gap: '8px' }}>
                     <button className="nxt-btn nxt-btn-danger" onClick={handleDelete}>Yes, Delete</button>
                     <button className="nxt-btn" onClick={() => setConfirmDelete(false)}>Cancel</button>
@@ -1259,7 +1257,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                       padding: '4px 10px', borderRadius: '6px', border: '2px solid', fontSize: '0.9375rem', fontWeight: 600, cursor: 'pointer',
                       borderColor: activityType === a.value ? '#E3A94A' : 'transparent',
                       background: activityType === a.value ? 'rgba(227, 169, 74,0.1)' : '#fff',
-                      color: activityType === a.value ? '#E3A94A' : 'var(--text-secondary)',
+                      color: activityType === a.value ? 'var(--ink-gold)' : 'var(--text-secondary)',
                     }}>{a.label}</button>
                   ))}
                 </div>
@@ -1281,7 +1279,7 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                 {loadingActivities ? (
                   <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)' }}>Loading...</p>
                 ) : activities.length === 0 ? (
-                  <p style={{ fontSize: '0.9375rem', color: '#94a3b8' }}>No activities yet. Log your first interaction above.</p>
+                  <p style={{ fontSize: '0.9375rem', color: 'var(--text-tertiary)' }}>No activities yet. Log your first interaction above.</p>
                 ) : (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1px' }}>
                     {activities.map(a => {
@@ -1292,10 +1290,10 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
                           <div style={{ flex: 1 }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2px' }}>
                               <span style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{atInfo.label}</span>
-                              <span style={{ fontSize: '1rem', color: '#94a3b8' }}>{timeAgo(a.createdAt)}</span>
+                              <span style={{ fontSize: '1rem', color: 'var(--text-tertiary)' }}>{timeAgo(a.createdAt)}</span>
                             </div>
                             {a.note && <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', margin: 0 }}>{a.note}</p>}
-                            {a.createdByName && <span style={{ fontSize: '1rem', color: '#94a3b8' }}>by {a.createdByName}</span>}
+                            {a.createdByName && <span style={{ fontSize: '1rem', color: 'var(--text-tertiary)' }}>by {a.createdByName}</span>}
                           </div>
                         </div>
                       );
@@ -1314,15 +1312,15 @@ function ContactDetailPanel({ contact, stages, stageType, userProfile, onClose, 
 function InfoField({ label, value, link }) {
   if (!value) return (
     <div>
-      <span style={{ fontSize: '1rem', fontWeight: 600, color: '#94a3b8', display: 'block', marginBottom: '2px' }}>{label}</span>
-      <span style={{ fontSize: '0.9375rem', color: '#cbd5e1' }}>—</span>
+      <span style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-tertiary)', display: 'block', marginBottom: '2px' }}>{label}</span>
+      <span style={{ fontSize: '0.9375rem', color: 'var(--text-tertiary)' }}>—</span>
     </div>
   );
   return (
     <div>
-      <span style={{ fontSize: '1rem', fontWeight: 600, color: '#94a3b8', display: 'block', marginBottom: '2px' }}>{label}</span>
+      <span style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-tertiary)', display: 'block', marginBottom: '2px' }}>{label}</span>
       {link ? (
-        <a href={link} style={{ fontSize: '0.9375rem', color: '#E3A94A', textDecoration: 'none' }}>{value}</a>
+        <a href={link} style={{ fontSize: '0.9375rem', color: 'var(--ink-gold)', textDecoration: 'none' }}>{value}</a>
       ) : (
         <span style={{ fontSize: '0.9375rem', color: 'var(--text-primary)' }}>{value}</span>
       )}

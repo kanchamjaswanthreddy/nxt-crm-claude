@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetchCarriers, fetchCommissionRates, createOrUpdateCarrier, createOrUpdateRate } from '@/app/actions/commissions';
@@ -131,7 +132,7 @@ export default function CommissionsSettings() {
     setRateModalOpen(true);
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingSpinner label="Loading" />;
 
   return (
     <div>
@@ -219,7 +220,7 @@ export default function CommissionsSettings() {
                     <td style={{ padding: 'var(--space-2)', fontWeight: '500' }}>{carrier ? carrier.name : 'Unknown'}</td>
                     <td style={{ padding: 'var(--space-2)' }}>{r.policyType}</td>
                     <td style={{ padding: 'var(--space-2)' }}>
-                      <span style={{ backgroundColor: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-gold)', padding: '4px 12px', borderRadius: '999px', fontWeight: '600', fontSize: 'var(--text-caption)' }}>
+                      <span style={{ backgroundColor: 'rgba(227, 169, 74, 0.1)', color: 'var(--ink-gold)', padding: '4px 12px', borderRadius: '999px', fontWeight: '600', fontSize: 'var(--text-caption)' }}>
                         {r.agentLevel}
                       </span>
                     </td>

@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetchTaskTemplates, createOrUpdateTemplate } from '@/app/actions/tasks';
@@ -77,7 +78,7 @@ export default function TaskAutomationSettings() {
     setIsSaving(false);
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingSpinner label="Loading" />;
 
   const getStageName = (id) => {
     const stage = stages.find(s => s.id === id);

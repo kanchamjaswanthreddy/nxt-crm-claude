@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -200,7 +201,7 @@ export default function PipelinePage() {
     setPendingMove(null);
   };
 
-  if (isLoading) return <div>Loading pipeline...</div>;
+  if (isLoading) return <LoadingSpinner label="Loading pipeline" />;
 
   return (
     <div style={{ height: 'calc(100vh - 100px)', display: 'flex', flexDirection: 'column' }}>
@@ -287,7 +288,7 @@ export default function PipelinePage() {
                     {stageDeals.length}
                   </span>
                 </div>
-                <div style={{ fontSize: 'var(--text-caption)', color: 'var(--brand-gold)', fontWeight: '500' }}>
+                <div style={{ fontSize: 'var(--text-caption)', color: 'var(--ink-gold)', fontWeight: '500' }}>
                   ${totalPremium.toLocaleString()}
                 </div>
               </div>

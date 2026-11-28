@@ -19,8 +19,8 @@ const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20 MB
 
 const STATUS_STYLES = {
   pending_review: { bg: 'rgba(224,142,43,0.1)', text: '#E08E2B', label: 'Pending Review' },
-  approved: { bg: 'rgba(47,168,79,0.1)', text: '#2FA84F', label: 'Approved' },
-  rejected: { bg: 'rgba(211,63,63,0.1)', text: '#D33F3F', label: 'Rejected' },
+  approved: { bg: 'rgba(47,168,79,0.1)', text: '#166534', label: 'Approved' },
+  rejected: { bg: 'rgba(211,63,63,0.1)', text: '#B42318', label: 'Rejected' },
 };
 
 export default function DocumentsManagerPage() {
@@ -365,7 +365,7 @@ export default function DocumentsManagerPage() {
                     <td style={tdStyle}>{d.uploadedAt ? new Date(d.uploadedAt).toLocaleDateString('en-US') : '—'}</td>
                     <td style={{ ...tdStyle, maxWidth: '200px' }}>
                       {d.status === 'rejected' && d.rejectionReason ? (
-                        <span style={{ color: '#D33F3F', fontSize: '15px' }}>{d.rejectionReason}</span>
+                        <span style={{ color: '#B42318', fontSize: '15px' }}>{d.rejectionReason}</span>
                       ) : '—'}
                     </td>
                   </tr>
@@ -401,14 +401,14 @@ export default function DocumentsManagerPage() {
 
               {/* Error message */}
               {uploadError && (
-                <div style={{ marginTop: 'var(--space-2)', padding: '8px 12px', borderRadius: '8px', backgroundColor: 'rgba(211,63,63,0.08)', color: '#D33F3F', fontSize: '15px' }}>
+                <div style={{ marginTop: 'var(--space-2)', padding: '8px 12px', borderRadius: '8px', backgroundColor: 'rgba(211,63,63,0.08)', color: '#B42318', fontSize: '15px' }}>
                   {uploadError}
                 </div>
               )}
 
               {/* Success message */}
               {uploadSuccess && (
-                <div style={{ marginTop: 'var(--space-2)', padding: '8px 12px', borderRadius: '8px', backgroundColor: 'rgba(47,168,79,0.08)', color: '#2FA84F', fontSize: '15px' }}>
+                <div style={{ marginTop: 'var(--space-2)', padding: '8px 12px', borderRadius: '8px', backgroundColor: 'rgba(47,168,79,0.08)', color: 'var(--status-success)', fontSize: '15px' }}>
                   {uploadSuccess}
                 </div>
               )}

@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect } from 'react';
 import { fetchAgentDirectory } from '@/app/actions/directory';
 import { useParams, useRouter } from 'next/navigation';
@@ -27,9 +28,9 @@ function StatusBadge({ status, size = 'default' }) {
   const config = {
     active: { bg: 'rgba(47, 168, 79, 0.1)', color: 'var(--status-success)', label: 'Active' },
     invited: { bg: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-blue-accent)', label: 'Invited' },
-    onboarding: { bg: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-gold)', label: 'Onboarding' },
+    onboarding: { bg: 'rgba(227, 169, 74, 0.1)', color: 'var(--ink-gold)', label: 'Onboarding' },
     docs_pending_review: { bg: 'rgba(224, 142, 43, 0.1)', color: 'var(--status-warning)', label: 'Docs Pending Review' },
-    pending_licensing: { bg: 'rgba(227, 169, 74, 0.1)', color: 'var(--brand-gold)', label: 'Pending License' },
+    pending_licensing: { bg: 'rgba(227, 169, 74, 0.1)', color: 'var(--ink-gold)', label: 'Pending License' },
     suspended: { bg: 'rgba(211, 63, 63, 0.1)', color: 'var(--status-error)', label: 'Suspended' },
     inactive: { bg: 'rgba(0, 0, 0, 0.06)', color: 'var(--text-secondary)', label: 'Inactive' },
   };
@@ -76,7 +77,7 @@ function ComplianceIndicator({ label, isComplete, detail }) {
       </div>
       <span style={{
         fontSize: 'var(--text-caption)', fontWeight: 600,
-        color: isComplete ? 'var(--status-success)' : 'var(--brand-gold)',
+        color: isComplete ? 'var(--status-success)' : 'var(--ink-gold)',
       }}>
         {isComplete ? 'Complete' : 'Pending'}
       </span>
@@ -489,7 +490,7 @@ export default function AgentDetailPage() {
   if (isLoading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px' }}>
-        <p style={{ color: 'var(--text-secondary)' }}>Loading agent profile...</p>
+        <LoadingSpinner label="Loading agent profile" />
       </div>
     );
   }
@@ -570,7 +571,7 @@ export default function AgentDetailPage() {
               {agentIsOwner ? (
                 <span style={{
                   padding: '2px 10px', borderRadius: '999px', fontSize: 'var(--text-caption)',
-                  fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A',
+                  fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: 'var(--brand-gold)',
                   letterSpacing: '0.03em',
                 }}>
                   Agency Owner
@@ -826,7 +827,7 @@ export default function AgentDetailPage() {
                     <span style={{
                       padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: 600,
                       backgroundColor: hasEO ? 'rgba(47, 168, 79, 0.1)' : 'rgba(227, 169, 74, 0.1)',
-                      color: hasEO ? 'var(--status-success)' : 'var(--brand-gold)',
+                      color: hasEO ? 'var(--status-success)' : 'var(--ink-gold)',
                     }}>
                       {hasEO ? 'Active' : 'Missing'}
                     </span>
@@ -849,7 +850,7 @@ export default function AgentDetailPage() {
                     <span style={{
                       padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: 600,
                       backgroundColor: hasAML ? 'rgba(47, 168, 79, 0.1)' : 'rgba(227, 169, 74, 0.1)',
-                      color: hasAML ? 'var(--status-success)' : 'var(--brand-gold)',
+                      color: hasAML ? 'var(--status-success)' : 'var(--ink-gold)',
                     }}>
                       {hasAML ? 'Certified' : 'Missing'}
                     </span>
@@ -1342,7 +1343,7 @@ export default function AgentDetailPage() {
                 };
                 const statusColors = {
                   pending: { bg: 'rgba(224, 142, 43, 0.1)', color: '#E08E2B', label: 'Pending' },
-                  completed: { bg: 'rgba(47, 168, 79, 0.1)', color: '#2FA84F', label: 'Completed' },
+                  completed: { bg: 'rgba(47, 168, 79, 0.1)', color: 'var(--status-success)', label: 'Completed' },
                 };
                 const st = statusColors[req.status] || statusColors.pending;
                 return (

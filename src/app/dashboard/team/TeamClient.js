@@ -48,22 +48,22 @@ const STATUS_LABELS = {
   invited: { label: 'Invited', color: 'var(--brand-blue-accent)', bg: 'rgba(227, 169, 74, 0.1)' },
   active: { label: 'Active', color: 'var(--status-success)', bg: 'rgba(47, 168, 79, 0.08)' },
   onboarding: { label: 'Onboarding', color: 'var(--status-warning)', bg: 'rgba(224, 142, 43, 0.1)' },
-  pending_licensing: { label: 'Pending License', color: 'var(--brand-gold)', bg: 'rgba(227, 169, 74, 0.1)' },
+  pending_licensing: { label: 'Pending License', color: 'var(--ink-gold)', bg: 'rgba(227, 169, 74, 0.1)' },
   docs_pending_review: { label: 'Docs Pending Review', color: 'var(--status-warning)', bg: 'rgba(224, 142, 43, 0.1)' },
-  docs_pending: { label: 'Docs Pending', color: 'var(--brand-gold)', bg: 'rgba(227, 169, 74, 0.1)' },
+  docs_pending: { label: 'Docs Pending', color: 'var(--ink-gold)', bg: 'rgba(227, 169, 74, 0.1)' },
   licensed: { label: 'Licensed', color: 'var(--status-success)', bg: 'rgba(47, 168, 79, 0.08)' },
   contracted: { label: 'Contracted', color: 'var(--brand-navy)', bg: 'rgba(12, 16, 34, 0.08)' },
-  inactive: { label: 'Inactive', color: 'var(--brand-silver)', bg: 'rgba(169, 172, 177, 0.15)' }
+  inactive: { label: 'Inactive', color: 'var(--text-tertiary)', bg: 'rgba(169, 172, 177, 0.15)' }
 };
 
 const INVITE_STATUS = {
   pending: { label: 'Pending', color: 'var(--status-warning)', bg: 'rgba(224, 142, 43, 0.1)' },
   accepted: { label: 'Accepted', color: 'var(--status-success)', bg: 'rgba(47, 168, 79, 0.08)' },
-  expired: { label: 'Expired', color: 'var(--brand-silver)', bg: 'rgba(169, 172, 177, 0.15)' }
+  expired: { label: 'Expired', color: 'var(--text-tertiary)', bg: 'rgba(169, 172, 177, 0.15)' }
 };
 
 function StatusBadge({ status, map }) {
-  const s = map[status] || { label: status, color: 'var(--brand-silver)', bg: 'rgba(169, 172, 177, 0.15)' };
+  const s = map[status] || { label: status, color: 'var(--text-tertiary)', bg: 'rgba(169, 172, 177, 0.15)' };
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center',
@@ -320,7 +320,7 @@ function MobileTreeList({ nodes, depth, onSelect, selectedId }) {
                 </div>
               </div>
               {node.is_owner ? (
-                <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '12px', fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A', whiteSpace: 'nowrap' }}>
+                <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '12px', fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: 'var(--brand-gold)', whiteSpace: 'nowrap' }}>
                   Owner
                 </span>
               ) : (
@@ -1144,7 +1144,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               </h3>
               <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: 'var(--space-3)' }}>
                 {m.is_owner && (
-                  <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '13px', fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A' }}>Owner</span>
+                  <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '13px', fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: 'var(--brand-gold)' }}>Owner</span>
                 )}
                 <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '13px', fontWeight: 600, backgroundColor: 'rgba(10, 37, 64, 0.06)', color: 'var(--brand-navy)' }}>
                   L{lvl.level} — {lvl.title}
@@ -2017,7 +2017,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
           {/* Completed card table */}
           {paymentTracker?.success && paymentTracker.withCard.length > 0 && (
             <div style={{ marginTop: '16px' }}>
-              <p style={{ margin: '0 0 8px', fontSize: '14px', fontWeight: 700, color: '#2FA84F' }}>
+              <p style={{ margin: '0 0 8px', fontSize: '14px', fontWeight: 700, color: 'var(--status-success)' }}>
                 Completed ({paymentTracker.withCard.length})
               </p>
               <div style={{ borderRadius: '10px', border: '1px solid rgba(47,168,79,0.15)', overflow: 'hidden' }}>
@@ -2042,7 +2042,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                           <span style={{
                             display: 'inline-block', padding: '2px 10px', borderRadius: '999px',
                             fontSize: '13px', fontWeight: 600,
-                            background: 'rgba(47,168,79,0.08)', color: '#2FA84F',
+                            background: 'rgba(47,168,79,0.08)', color: 'var(--status-success)',
                           }}>
                             Done
                           </span>
@@ -2064,7 +2064,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2FA84F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: '8px' }}>
                 <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
               </svg>
-              <p style={{ margin: 0, fontSize: '16px', fontWeight: 600, color: '#2FA84F' }}>
+              <p style={{ margin: 0, fontSize: '16px', fontWeight: 600, color: 'var(--status-success)' }}>
                 All agents have added their payment details
               </p>
               <p style={{ margin: '4px 0 0', fontSize: '14px', color: 'var(--text-secondary)' }}>
@@ -2129,7 +2129,7 @@ function HierarchyChart({ agents, allOverrides = [], selectedMember, setSelected
                   </h3>
                   <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginTop: '8px' }}>
                     {m.is_owner && (
-                      <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '13px', fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: '#E3A94A' }}>Owner</span>
+                      <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '13px', fontWeight: 700, background: 'linear-gradient(135deg, #0C1022, #1B2A4E)', color: 'var(--brand-gold)' }}>Owner</span>
                     )}
                     <span style={{ padding: '3px 12px', borderRadius: '999px', fontSize: '13px', fontWeight: 600, backgroundColor: 'rgba(10, 37, 64, 0.06)', color: 'var(--brand-navy)' }}>
                       L{lvl.level} · {lvl.title}

@@ -71,7 +71,7 @@ export default function ClientsPage() {
 
       {error && (
         <div style={{
-          backgroundColor: 'rgba(220,38,38,0.06)', color: '#dc2626',
+          backgroundColor: 'rgba(220,38,38,0.06)', color: '#B42318',
           padding: '12px 16px', borderRadius: '10px', marginBottom: '20px',
           fontSize: '16px', border: '1px solid rgba(220,38,38,0.15)',
         }}>

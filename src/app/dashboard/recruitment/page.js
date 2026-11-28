@@ -85,7 +85,7 @@ function PodiumCard({ recruiter, rank, total }) {
             background: isChamp
               ? 'conic-gradient(from 0deg, #FFD700, #F0C040, #DAA520, #F0C040, #FFD700)'
               : isSecond
-                ? 'conic-gradient(from 0deg, #D1D5DB, #8A857B, #B0B5BC, #8A857B, #D1D5DB)'
+                ? 'conic-gradient(from 0deg, #D1D5DB, #5F5C56, #B0B5BC, #5F5C56, #D1D5DB)'
                 : 'conic-gradient(from 0deg, #CD7F32, #D4943C, #A0612B, #D4943C, #CD7F32)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             boxShadow: isChamp
@@ -153,7 +153,7 @@ function PodiumCard({ recruiter, rank, total }) {
         {recruiter.nxtId && (
           <p style={{
             fontSize: '13px', margin: '0 0 16px 0', fontWeight: '500',
-            color: isChamp ? 'rgba(255,255,255,0.4)' : '#8A857B',
+            color: isChamp ? 'rgba(255,255,255,0.4)' : '#5F5C56',
             letterSpacing: '0.5px',
           }}>
             {recruiter.nxtId}
@@ -174,7 +174,7 @@ function PodiumCard({ recruiter, rank, total }) {
         </div>
         <p style={{
           fontSize: '14px', fontWeight: '600', margin: '0 0 12px 0',
-          color: isChamp ? 'rgba(255,255,255,0.4)' : '#8A857B',
+          color: isChamp ? 'rgba(255,255,255,0.4)' : '#5F5C56',
           textTransform: 'uppercase', letterSpacing: '1.5px',
         }}>
           Recruits
@@ -207,7 +207,7 @@ function PodiumCard({ recruiter, rank, total }) {
             }} />
             <span style={{
               fontSize: '14px', fontWeight: '600',
-              color: isChamp ? '#2FA84F' : '#2FA84F',
+              color: isChamp ? '#4ADE80' : 'var(--status-success)',
             }}>
               {recruiter.activeRecruits} active
             </span>
@@ -319,7 +319,7 @@ export default function RecruitmentLeaderboardPage() {
             {[
               { value: data.totalAgents || 0, label: 'Total Team', color: '#E3A94A' },
               { value: list.length, label: 'Recruiters', color: '#fff' },
-              { value: totalRecruits, label: tab === 'thisMonth' ? 'This Month' : 'Total Recruits', color: '#2FA84F' },
+              { value: totalRecruits, label: tab === 'thisMonth' ? 'This Month' : 'Total Recruits', color: '#4ADE80' },
             ].map((stat, i) => (
               <div key={i}>
                 <p style={{ fontSize: '26px', fontWeight: '800', color: stat.color, margin: 0, lineHeight: 1 }}>
@@ -356,7 +356,7 @@ export default function RecruitmentLeaderboardPage() {
               <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#0C1022', margin: 0 }}>
                 Your Invite Link
               </h3>
-              <p style={{ fontSize: '14px', color: '#8A857B', margin: '2px 0 0' }}>
+              <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: '2px 0 0' }}>
                 Share this link to recruit new agents — they&apos;ll be automatically linked to you
               </p>
             </div>
@@ -468,10 +468,10 @@ export default function RecruitmentLeaderboardPage() {
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '16px' }}>
                 <thead>
                   <tr style={{ borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
-                    <th scope="col" style={{ padding: '12px 24px', textAlign: 'left', fontWeight: '600', color: '#8A857B', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '60px' }}>Rank</th>
-                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontWeight: '600', color: '#8A857B', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.8px' }}>Agent</th>
-                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'center', fontWeight: '600', color: '#8A857B', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '100px' }}>Recruits</th>
-                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'center', fontWeight: '600', color: '#8A857B', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '100px' }}>Active</th>
+                    <th scope="col" style={{ padding: '12px 24px', textAlign: 'left', fontWeight: '600', color: 'var(--text-secondary)', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '60px' }}>Rank</th>
+                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'left', fontWeight: '600', color: 'var(--text-secondary)', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.8px' }}>Agent</th>
+                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'center', fontWeight: '600', color: 'var(--text-secondary)', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '100px' }}>Recruits</th>
+                    <th scope="col" style={{ padding: '12px 16px', textAlign: 'center', fontWeight: '600', color: 'var(--text-secondary)', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.8px', width: '100px' }}>Active</th>
                     <th scope="col" style={{ padding: '12px 24px', width: '48px' }}></th>
                   </tr>
                 </thead>
@@ -522,7 +522,7 @@ export default function RecruitmentLeaderboardPage() {
                           <td style={{ padding: '14px 16px', textAlign: 'center' }}>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
                               <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#2FA84F' }} />
-                              <span style={{ fontWeight: '600', color: '#2FA84F', fontSize: '16px' }}>
+                              <span style={{ fontWeight: '600', color: 'var(--status-success)', fontSize: '16px' }}>
                                 {recruiter.activeRecruits}
                               </span>
                             </div>
@@ -533,7 +533,7 @@ export default function RecruitmentLeaderboardPage() {
                               width: '24px', height: '24px', borderRadius: '6px',
                               background: isExpanded ? 'rgba(12, 16, 34,0.06)' : 'transparent',
                               transition: 'all 200ms',
-                              color: '#8A857B', fontSize: '13px',
+                              color: 'var(--text-secondary)', fontSize: '13px',
                               transform: isExpanded ? 'rotate(180deg)' : 'none',
                             }}>
                               &#9660;
@@ -558,15 +558,15 @@ export default function RecruitmentLeaderboardPage() {
                                   }}>
                                     <span style={{
                                       width: '7px', height: '7px', borderRadius: '50%',
-                                      background: STATUS_DOT[r.status] || '#8A857B', flexShrink: 0,
-                                      boxShadow: `0 0 4px ${STATUS_DOT[r.status] || '#8A857B'}44`,
+                                      background: STATUS_DOT[r.status] || '#5F5C56', flexShrink: 0,
+                                      boxShadow: `0 0 4px ${STATUS_DOT[r.status] || '#5F5C56'}44`,
                                     }} />
                                     <span style={{ fontWeight: '500', color: '#0C1022', flex: 1 }}>{r.name}</span>
                                     <span style={{ color: '#B0B5BC', fontSize: '14px' }}>{formatDate(r.joinedAt)}</span>
                                     <span style={{
                                       fontSize: '13px', padding: '2px 8px', borderRadius: '999px',
                                       background: r.status === 'active' ? 'rgba(47,168,79,0.08)' : 'rgba(227, 169, 74,0.08)',
-                                      color: r.status === 'active' ? '#2FA84F' : '#E3A94A',
+                                      color: r.status === 'active' ? 'var(--status-success)' : 'var(--ink-gold)',
                                       fontWeight: '600', textTransform: 'capitalize',
                                     }}>
                                       {r.status?.replace(/_/g, ' ')}

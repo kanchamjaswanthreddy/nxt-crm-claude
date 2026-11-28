@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useUser } from '@/context/UserContext';
 import { fetchLearningResources, createLearningResource, deleteLearningResource, updateLearningResource } from '@/app/actions/learn';
@@ -173,7 +174,7 @@ export default function LearnPage() {
         <h1 style={{ color: 'var(--brand-navy)', fontSize: 'var(--text-h1)', margin: '0 0 var(--space-3)' }}>NXT University</h1>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{ width: '16px', height: '16px', border: '2px solid var(--brand-blue-accent)', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
-          <span style={{ color: 'var(--text-secondary)', fontSize: '16px' }}>Loading...</span>
+          <LoadingSpinner label="Loading" />
         </div>
         <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
       </div>
@@ -212,7 +213,7 @@ export default function LearnPage() {
                     <span style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-secondary)' }}>{CONTENT_TYPE_ICONS[r.contentType] || 'Link'}</span>
                     <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: '600', backgroundColor: `${accentColor}14`, color: accentColor, textTransform: 'capitalize' }}>{r.category}</span>
                     {r.requiredForOnboarding && (
-                      <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: '600', backgroundColor: 'rgba(211,63,63,0.1)', color: '#D33F3F' }}>Required</span>
+                      <span style={{ padding: '2px 8px', borderRadius: '999px', fontSize: '13px', fontWeight: '600', backgroundColor: 'rgba(211,63,63,0.1)', color: '#B42318' }}>Required</span>
                     )}
                   </div>
                   <h3 style={{ margin: '0 0 6px', color: 'var(--brand-navy)', fontSize: '17px', fontWeight: '600' }}>{r.title}</h3>

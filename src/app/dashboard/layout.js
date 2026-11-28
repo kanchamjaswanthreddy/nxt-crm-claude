@@ -11,12 +11,13 @@ import KeyboardShortcuts from '@/components/ui/KeyboardShortcuts';
 import NotificationBell from '@/components/ui/NotificationBell';
 import Avatar from '@/components/Avatar';
 import ErrorBoundary from '@/components/ErrorBoundary';
-import { ToastProvider } from '@/components/ui/Toast';
+import { ToastProvider, useToast } from '@/components/ui/Toast';
 // fetchMyGroups moved to API route to avoid server-action POST on every page load
 import { getMenuLinksForGroups } from '@/lib/groups';
 import { unreadMessageCount } from '@/app/actions/messages';
 import s from './layout.module.css';
 import CardRequiredGate from '@/components/CardRequiredGate';
+import UiEnhancer from '@/components/UiEnhancer';
 import { isSubscriptionExempt } from '@/lib/constants';
 
 export default function DashboardLayout({ children }) {
@@ -101,6 +102,7 @@ function NavSection({ label, icon, children, defaultOpen = false, pathname, acti
 
 function DashboardLayoutInner({ children }) {
   const pathname = usePathname();
+  const toast = useToast();
   // The panel is the scroll area now, so a new screen must start at its top.
   useEffect(() => { document.getElementById('main-content')?.scrollTo({ top: 0 }); }, [pathname]);
   const { userProfile, firebaseUser, isLoading, refreshProfile } = useUser();
@@ -129,17 +131,39 @@ function DashboardLayoutInner({ children }) {
 
   const closeSearch = useCallback(() => setIsSearchOpen(false), []);
 
-  // Unread chats for the menu badge. Checked now and then; the Messages screen also reports its own count.
+  // Unread chats: the menu badge, the count in the browser tab, and an alert when a new message arrives
+  // while the person is on another screen. Checked every 30 seconds; the Messages screen reports its own count.
   const [unreadChats, setUnreadChats] = useState(0);
+  const lastAlert = useRef(null);
+  const pathRef = useRef(pathname);
+  useEffect(() => { pathRef.current = pathname; }, [pathname]);
   useEffect(() => {
     if (!userProfile?.uid) return;
     let alive = true;
-    const check = () => { if (document.visibilityState === 'visible') unreadMessageCount().then(r => { if (alive && r?.success) setUnreadChats(r.unread); }).catch(() => {}); };
+    const check = () => unreadMessageCount().then(r => {
+      if (!alive || !r?.success) return;
+      setUnreadChats(r.unread);
+      const at = r.latest?.at || null;
+      if (lastAlert.current === null) { lastAlert.current = at || ''; return; }   // first check: nothing to announce
+      if (at && at > lastAlert.current) {
+        lastAlert.current = at;
+        if (pathRef.current?.startsWith('/dashboard/messages')) return;
+        const line = r.latest.in ? `${r.latest.by} in ${r.latest.in}` : r.latest.by;
+        toast.info('New message', line);
+        try {
+          if (typeof Notification !== 'undefined' && Notification.permission === 'granted' && document.visibilityState !== 'visible') {
+            const n = new Notification('New message in NXT', { body: line, tag: 'nxt-chat' });
+            n.onclick = () => { window.focus(); window.location.assign(`/dashboard/messages?c=${r.latest.id}`); };
+          }
+        } catch { /* alerts are a nicety; ignore browsers that refuse */ }
+      }
+    }).catch(() => {});
     const onCount = (e) => setUnreadChats(Number(e.detail) || 0);
-    check(); const t = setInterval(check, 45000);
+    check(); const t = setInterval(check, 30000);
     window.addEventListener('nxt-unread-chats', onCount);
     return () => { alive = false; clearInterval(t); window.removeEventListener('nxt-unread-chats', onCount); };
-  }, [userProfile?.uid]);
+  }, [userProfile?.uid]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { document.title = `${unreadChats > 0 ? `(${unreadChats}) ` : ''}${document.title.replace(/^\(\d+\)\s/, '')}`; }, [unreadChats, pathname]);
 
   useEffect(() => {
     if (!userProfile?.uid) return;
@@ -443,6 +467,7 @@ function DashboardLayoutInner({ children }) {
         </header>
 
         <main id="main-content" className={s.content} onClick={() => { if (isMobileNavOpen) setIsMobileNavOpen(false); }}>
+          <UiEnhancer />
           {isLoading ? (
             <div className={s.loading}>
               <div className={s.loadingSpinner} />

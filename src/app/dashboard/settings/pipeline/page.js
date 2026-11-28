@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetchPipelineStages, createPipelineStage, updatePipelineStage, archivePipelineStage } from '@/app/actions/pipeline';
@@ -108,7 +109,7 @@ export default function PipelineSettingsPage() {
     await updatePipelineStage(stage.id, { [flagField]: newValue });
   };
 
-  if (isLoading) return <div>Loading settings...</div>;
+  if (isLoading) return <LoadingSpinner label="Loading settings" />;
 
   return (
     <div>

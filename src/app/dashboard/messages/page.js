@@ -34,6 +34,19 @@ function listTime(isoStr) {
 }
 const sizeText = (n) => (n > 1048576 ? `${(n / 1048576).toFixed(1)} MB` : `${Math.max(1, Math.round(n / 1024))} KB`);
 
+/** A picture shared in a chat, shown in place. The link is fetched only when the message is on screen. */
+function ChatImage({ load, name, onOpen }) {
+  const [url, setUrl] = useState('');
+  const [failed, setFailed] = useState(false);
+  useEffect(() => { let alive = true; load().then(r => { if (!alive) return; if (r.success) setUrl(r.url); else setFailed(true); }).catch(() => alive && setFailed(true)); return () => { alive = false; }; }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  if (failed) return null;
+  return (
+    <button type="button" className={s.photo} onClick={onOpen} aria-label={`Open ${name}`}>
+      {url ? <img src={url} alt={name} onError={() => setFailed(true)} /> : <span className={s.photoWait} aria-hidden="true" />}
+    </button>
+  );
+}
+
 function PeoplePicker({ people, chosen, onToggle, single }) {
   const [q, setQ] = useState('');
   const shown = people.filter(p => !q || p.name.toLowerCase().includes(q.toLowerCase())).slice(0, 60);
@@ -86,6 +99,9 @@ export default function MessagesPage() {
   const [found, setFound] = useState(null);
   const [busy, setBusy] = useState(false);
   const [policy, setPolicy] = useState({ years: 7, canReview: false });
+  const [markerAt, setMarkerAt] = useState(null);
+  const [dragging, setDragging] = useState(false);
+  const [alerts, setAlerts] = useState('default');
 
   const scroller = useRef(null); const fileInput = useRef(null); const box = useRef(null);
   const stamp = useRef({ last: null, changed: null, id: '' });
@@ -98,6 +114,9 @@ export default function MessagesPage() {
     return c.name || 'Group';
   }, [nameById, me]);
   const active = useMemo(() => (convs || []).find(c => c.id === activeId) || null, [convs, activeId]);
+  const convsRef = useRef(null);
+  useEffect(() => { convsRef.current = convs; }, [convs]);
+  useEffect(() => { if (typeof Notification !== 'undefined') setAlerts(Notification.permission); else setAlerts('unsupported'); }, []);
 
   const loadList = useCallback(async () => {
     const r = await listConversations();
@@ -133,6 +152,8 @@ export default function MessagesPage() {
     stamp.current = { last: null, changed: null, id: activeId };
     setMessages([]); setReplyTo(null); setEditing(null); setDraft(''); setMenuFor(''); setSeenAt(null);
     if (!activeId) return undefined;
+    const before = (convsRef.current || []).find(c => c.id === activeId);
+    setMarkerAt(before?.unread ? (before.lastReadAt || '0') : null);
     loadChat(activeId).then(loadList);
     const t = setInterval(async () => {
       if (document.visibilityState !== 'visible') return;
@@ -284,10 +305,14 @@ export default function MessagesPage() {
             </li>
           ))}
         </ul>
-        <p className={s.notice}>Messages may be reviewed by NXT compliance. Deleted and edited messages are kept for {policy.years} years for that purpose.{policy.canReview && <> <Link href="/dashboard/messages/review">Open message review</Link></>}</p>
+        <p className={s.notice}>Messages may be reviewed by NXT compliance. Deleted and edited messages are kept for {policy.years} years for that purpose.{policy.canReview && <> <Link href="/dashboard/messages/review">Open message review</Link></>}{alerts === 'default' && <> <button type="button" className={s.inlineBtn} onClick={() => Notification.requestPermission().then(setAlerts)}>Turn on desktop alerts</button></>}{alerts === 'granted' && <> Desktop alerts are on.</>}</p>
       </aside>
 
-      <section className={s.chat} aria-label="Conversation">
+      <section className={`${s.chat} ${dragging ? s.dropping : ''}`} aria-label="Conversation"
+        onDragOver={(e) => { if (active && e.dataTransfer?.types?.includes('Files')) { e.preventDefault(); setDragging(true); } }}
+        onDragLeave={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setDragging(false); }}
+        onDrop={(e) => { if (!active) return; e.preventDefault(); setDragging(false); attach(e.dataTransfer?.files?.[0]); }}>
+        {dragging && active && <div className={s.dropHint} aria-hidden="true">Drop the file to send it to {titleOf(active)}</div>}
         {!active && (
           <div className={s.empty}>
             <p className={s.emptyTitle}>Pick a chat, or start one</p>
@@ -313,9 +338,11 @@ export default function MessagesPage() {
               {messages.map((m, i) => {
                 const prev = messages[i - 1]; const newDay = !prev || !sameDay(prev.at, m.at);
                 const showName = !m.mine && active.type !== 'direct' && (newDay || prev.authorId !== m.authorId);
+                const firstNew = markerAt !== null && !m.mine && m.at > markerAt && !messages.slice(0, i).some(x => !x.mine && x.at > markerAt);
                 return (
                   <React.Fragment key={m.id}>
                     {newDay && <div className={s.day}><span>{dayLabel(m.at)}</span></div>}
+                    {firstNew && <div className={s.newMark}><span>New messages</span></div>}
                     <div className={`${s.row} ${m.mine ? s.mine : ''}`}>
                       {!m.mine && <span className={s.face}>{(newDay || prev.authorId !== m.authorId) && <Avatar name={m.authorName} photoUrl={photoById[m.authorId]} size={32} />}</span>}
                       <div className={s.bubbleWrap}>
@@ -323,6 +350,7 @@ export default function MessagesPage() {
                         <div className={s.bubble}>
                           {m.replyTo && <div className={s.quote}><strong>{m.replyTo.authorName}</strong><span>{m.replyTo.text}</span></div>}
                           {m.text && <p className={s.text}>{m.text}</p>}
+                          {m.file && /^image\//.test(m.file.type || '') && <ChatImage load={() => getChatFileUrl(activeId, m.id)} name={m.file.name} onOpen={() => openFile(m)} />}
                           {m.file && (
                             <button type="button" className={s.file} onClick={() => openFile(m)}>
                               <span className={s.fileIcon} aria-hidden="true">{(m.file.name.split('.').pop() || 'file').slice(0, 4).toUpperCase()}</span>
@@ -373,7 +401,7 @@ export default function MessagesPage() {
                 <button type="button" className="nxt-btn nxt-btn-sm" onClick={() => fileInput.current?.click()} disabled={!!uploading || !!editing}>Attach file</button>
                 <button type="button" className="nxt-btn nxt-btn-sm" onClick={() => { setShareQ(''); setShareOpen(true); }} disabled={!!editing}>Share record</button>
                 <textarea ref={box} className={s.box} rows={1} maxLength={4000} placeholder={`Message ${titleOf(active)}`} value={draft} aria-label="Write a message"
-                  onChange={e => setDraft(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }} />
+                  onChange={e => setDraft(e.target.value)} onPaste={e => { const f = [...(e.clipboardData?.files || [])][0]; if (f) { e.preventDefault(); attach(f); } }} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }} />
                 <button type="button" className="nxt-btn nxt-btn-primary nxt-btn-sm" onClick={() => send()} disabled={sending || !draft.trim()}>{editing ? 'Save' : 'Send'}</button>
               </div>
             </footer>
